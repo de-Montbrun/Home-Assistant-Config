@@ -203,10 +203,10 @@ sensor:
     host: localhost
     api_key: !secret sabnzbd_api_key
     monitored_variables:
-      - 'current_status'
-      - 'speed'
-      - 'queue_size'
-      - 'queue_remaining'
+      - current_status
+      - speed
+      - queue_size
+      - queue_remaining
 
   - platform: sonarr
     api_key: !secret sonarr_api_key
