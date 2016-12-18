@@ -189,23 +189,6 @@ http:
     - 192.168.2.0/24
   use_x_forwarded_for:
     - 127.0.0.1
-#  ip_ban_enabled: True
-#  login_attempts_threshold: 10
-
-# }}}
-# {{{ notify
-#notify:
-#  - name: notifimications
-#    platform: html5
-
-#    platform: group
-#    services:
-#      - service: html5
-#        data:
-#          target: "macbook"
-
-#notify:
-#  - platform: ios
 
 # }}}
 # {{{ Sensors
@@ -319,5 +302,3 @@ input_slider:
 group: !include groups.yml
 scene: !include scenes.yml
 automation: !include automations.yml
-# Need to srt this out
-#automation: !include_dir_merge_list includes/automation

@@ -316,9 +316,6 @@
       - condition: state
         entity_id: 'device_tracker.jen_tv'
         state: 'home'
-#      - condition: state
-#        entity_id: 'media_player.jens_chromeo'
-#        state: 'idle'
       - condition: time
         weekday:
           - mon
@@ -331,28 +328,3 @@
     entity_id: media_player.jens_chromeo
     data:
       message: 'Time to turn off your TV!'
-
-- alias: 'Test message'
-  initial_state: false
-  trigger:
-    platform: time
-    seconds: 30
-  action:
-    service: notify.zulip
-    data_template:
-#      variables:
-#        title: 'State change'
-      message: '"Test from HA"'
-
-#  - alias: 'Presence notifier'
-#    hide_entity: False
-#    initial_state: True
-#    trigger:
-#      - platform: state
-#        entity_id: device_tracker.jenphone, device_tracker.camphone, device_tracker.dgrabbsiphone, device_tracker.iphone
-#        from: 'not_home'
-#        to: 'home'
-#    action:
-#      service: notify.zulip
-#      data_template:
-#        message: '"ifttt-bot@demontbrun.com" "-key-" "Test" "Test" ":question:" "someone has arrived home."'

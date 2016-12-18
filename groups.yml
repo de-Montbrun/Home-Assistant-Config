@@ -27,7 +27,6 @@ gervais_tracker:
 settings:
   name: Settings
   entities:
-#     - group.all_devices
     - group.all_scripts
     - group.all_automations
     - group.livingroom_knobs
@@ -37,7 +36,6 @@ settings:
 
 lights_and_switches:
   entities:
-#     - group.all_lights
     - group.all_switches
     - group.bedroom_lights
     - group.livingroom_lights
@@ -141,7 +139,6 @@ media_players:
   icon: mdi:play-circle-outline
   entities:
     - media_player.living_room
-#need to fix name     - media_player.kid-tv
     - media_player.jens_chromeo
     - media_player.gandg
     - media_player.roku_1gn389022289
