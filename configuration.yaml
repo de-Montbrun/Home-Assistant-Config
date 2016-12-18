@@ -32,7 +32,7 @@ homeassistant:
 # {{{ misc
 
 # Checks for available updates
-#updater:
+updater:
 
 # Discover some devices automatically
 discovery:
@@ -277,8 +277,6 @@ device_tracker:
     username: !secret icloud_username
     password: !secret icloud_password
     account_name: !secret icloud_account_name
-
-#  - platform: bluetooth_tracker
 
 # }}}
 # {{{ Toggles
