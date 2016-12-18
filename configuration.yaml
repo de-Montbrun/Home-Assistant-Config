@@ -1,0 +1,323 @@
+# vim: set expandtab tabstop=2 shiftwidth=2 softtabstop=2:
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 25
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/Halifax
+
+# {{{ customizations
+
+  customize:
+    group.all_devices:
+      hidden: false
+    group.all_scripts:
+      hidden: false
+    group.all_automations:
+      hidden: false
+    group.all_booleans:
+      hidden: false
+    group.all_lights:
+      hidden: false
+    group.all_switches:
+      hidden: false
+
+# }}}
+# {{{ misc
+
+# Checks for available updates
+#updater:
+
+# Discover some devices automatically
+discovery:
+
+# Wemo switches are not always being discovered automatically.
+wemo:
+  static:
+    - 192.168.2.80
+    - 192.168.2.81
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time.
+history:
+
+# View all events in a logbook
+logbook:
+
+# Track the sun
+sun:
+
+ifttt:
+  key: !secret ifttt_key
+
+ffmpeg:
+
+# Enable text-to-speech
+tts:
+  - platform: google
+
+# }}}
+# {{{ zones
+
+zone:
+  name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: 50
+  icon: mdi:home
+
+zone silverorange:
+  name: silverorange
+  latitude: !secret silverorange_latitude
+  longitude: !secret silverorange_longitude
+  radius: 50
+  icon: mdi:domain
+
+zone upstreet:
+  name: Upstreet
+  latitude: !secret upstreet_latitude
+  longitude: !secret upstreet_longitude
+  radius: 50
+  icon: mdi:beer
+
+zone innovatia:
+  name: Innovatia
+  latitude: !secret innovatia_latitude
+  longitude: !secret innovatia_longitude
+  radius: 100
+  icon: mdi:domain
+
+zone walmart:
+  name: "Walmart"
+  latitude: !secret walmart_latitude
+  longitude: !secret walmart_longitude
+  radius: 100
+  icon: mdi:shopping
+
+zone churchill_arms:
+  name: "Churchill Arms"
+  latitude: !secret churchill_arms_latitude
+  longitude: !secret churchill_arms_longitude
+  radius: 50
+  icon: mdi:beer
+
+zone yyc:
+  name: "Calgary Airport"
+  latitude: 51.125061
+  longitude: -114.016889
+  radius: 100
+  icon: mdi:airplane
+
+zone yyg:
+  name: "Charlottetown Airport"
+  latitude: 46.285705
+  longitude: -63.129078
+  radius: 100
+  icon: mdi:airplane
+
+zone yeg:
+  name: "Edmonton Airport"
+  latitude: 53.327848
+  longitude: -113.566524
+  radius: 100
+  icon: mdi:airplane
+
+zone yhz:
+  name: "Halifax Airport"
+  latitude: 44.887088
+  longitude: -63.515278
+  radius: 400
+  icon: mdi:airplane
+
+zone yul:
+  name: "Montreal Airport"
+  latitude: 45.469738
+  longitude: -73.744919
+  radius: 400
+  icon: mdi:airplane
+
+zone yyz:
+  name: "Pearson Airport"
+  latitude: 43.682520
+  longitude: -79.612877
+  radius: 400
+  icon: mdi:airplane
+
+zone ytz:
+  name: "Toronto City Central Airport"
+  latitude: 43.628482
+  longitude: -79.395958
+  radius: 400
+  icon: mdi:airplane
+
+zone yjz:
+  name: "Saint John Airport"
+  latitude: 45.326501
+  longitude: -65.888867
+  radius: 400
+  icon: mdi:airplane
+
+zone yyt:
+  name: "St. John's Airport"
+  latitude: 47.621210
+  longitude: -52.742443
+  radius: 400
+  icon: mdi:airplane
+
+# }}}
+# {{{ frontend
+
+# Enables the frontend
+frontend:
+
+http:
+  api_password: !secret http_api_password
+  ssl_certificate: !secret http_ssl_certificate
+  ssl_key: !secret http_ssl_key
+  cors_allowed_origins:
+    - https://google.com
+    - https://home-assistant.io
+  trusted_networks:
+    - 192.168.2.0/24
+  use_x_forwarded_for:
+    - 127.0.0.1
+#  ip_ban_enabled: True
+#  login_attempts_threshold: 10
+
+# }}}
+# {{{ notify
+#notify:
+#  - name: notifimications
+#    platform: html5
+
+#    platform: group
+#    services:
+#      - service: html5
+#        data:
+#          target: "macbook"
+
+#notify:
+#  - platform: ios
+
+# }}}
+# {{{ Sensors
+
+sensor:
+  - platform: yr
+    monitored_conditions:
+      - temperature
+      - symbol
+
+  - platform: sabnzbd
+    host: localhost
+    api_key: !secret sabnzbd_api_key
+    monitored_variables:
+      - 'current_status'
+      - 'speed'
+      - 'queue_size'
+      - 'queue_remaining'
+
+  - platform: sonarr
+    api_key: !secret sonarr_api_key
+    host: localhost
+    port: 8084
+    monitored_conditions:
+      - upcoming
+      - queue
+      - commands
+      - diskspace
+    unit: GB
+    include_paths:
+      - /Volumes/Grapes
+
+  - platform: speedtest
+    hour:
+      - 4
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+  - platform: wunderground
+    api_key: !secret wunderground_api_key
+    monitored_conditions:
+      - alerts
+      - feelslike_c
+      - heat_index_c
+      - pressure_trend
+      - relative_humidity
+      - solarradiation
+      - temp_c
+      - UV
+      - visibility_km
+      - weather
+      - wind_degrees
+      - wind_gust_kph
+      - wind_kph
+
+  - platform: yweather
+    monitored_conditions:
+      - weather
+      - weather_current
+      - temp_min
+      - temp_max
+      - wind_speed
+      - pressure
+      - visibility
+      - humidity
+      - temperature
+
+# }}}
+# {{{ Presence Trackers
+
+device_tracker:
+  - platform: asuswrt
+    host: 192.168.2.249
+    username: admin
+    mode: ap
+    protocol: ssh
+    ssh_key: /Users/gervais/.ssh/id_rsa
+
+  - platform: nmap_tracker
+    hosts: 192.168.2.1-254
+    home_interval: 3
+
+  - platform: icloud
+    username: !secret icloud_username
+    password: !secret icloud_password
+    account_name: !secret icloud_account_name
+
+#  - platform: bluetooth_tracker
+
+# }}}
+# {{{ Toggles
+
+input_boolean:
+  loop_livingcolours:
+    name: Loop Livingroom Colours
+    initial: off
+    icon: mdi:spotlight
+
+input_slider:
+  livingroom_brightness:
+    name: Livingroom Brightness
+    initial: 255
+    min: 0
+    max: 255
+    step: 1
+
+# }}}
+
+group: !include groups.yml
+scene: !include scenes.yml
+automation: !include automations.yml
+# Need to srt this out
+#automation: !include_dir_merge_list includes/automation

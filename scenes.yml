@@ -1,0 +1,69 @@
+#################################################################
+#### Scenes
+#################################################################
+#
+#scene:
+- name: Livingroom normal
+  entities:
+    light.fireplace0:
+      state: on
+      transition: 2
+      brightness: 255
+      xy_color: [ 0.4097, 0.3929 ]
+    light.fireplace1:
+      state: on
+      transition: 2
+      brightness: 255
+      xy_color: [ 0.4448, 0.4066 ]
+    light.fireplace2:
+      state: on
+      transition: 2
+      brightness: 255
+      xy_color: [ 0.4448, 0.4066 ]
+    light.fireplace3:
+      state: on
+      transition: 2
+      brightness: 255
+      xy_color: [ 0.4448, 0.4066 ]
+    light.living_standing:
+      state: on
+      transition: 2
+      brightness: 255
+      xy_color: [ 0.4448, 0.4066 ]
+    light.living_table:
+      state: on
+      transition: 2
+      brightness: 255
+      xy_color: [ 0.4448, 0.4066 ]
+- name: Livingroom dim
+  entities:
+    light.fireplace0:
+      state: on
+      transition: 2
+      brightness: 200
+      xy_color: [ 0.167, 0.045 ]
+    light.fireplace1:
+      state: on
+      transition: 2
+      brightness: 50
+      xy_color: [ 0.167, 0.045 ]
+    light.fireplace2:
+      state: on
+      transition: 2
+      brightness: 50
+      xy_color: [ 0.167, 0.045 ]
+    light.fireplace3:
+      state: on
+      transition: 2
+      brightness: 200
+      xy_color: [ 0.167, 0.045 ]
+    light.living_standing:
+      state: on
+      transition: 2
+      brightness: 200
+      xy_color: [ 0.167, 0.045 ]
+    light.living_table:
+      state: on
+      transition: 2
+      brightness: 200
+      xy_color: [ 0.167, 0.045 ]

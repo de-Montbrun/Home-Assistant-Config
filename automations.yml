@@ -1,0 +1,358 @@
+#################################################################
+#### Automations
+#################################################################
+
+- alias: 'Media player paused/stopped'
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: media_player.living_room
+    from: 'playing'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: state
+        entity_id: group.livingroom_lights
+        state: 'on'
+  action:
+    service: scene.turn_on
+    entity_id: scene.livingroom_normal
+
+- alias: 'Media player playing'
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: media_player.living_room
+    to: 'playing'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: state
+        entity_id: group.livingroom_lights
+        state: 'on'
+  action:
+    service: scene.turn_on
+    entity_id: scene.livingroom_dim
+
+- alias: 'Roku Idle'
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: media_player.roku_1gn389022289
+    from: 'playing'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: state
+        entity_id: group.livingroom_lights
+        state: 'on'
+  action:
+    service: scene.turn_on
+    entity_id: scene.livingroom_normal
+
+- alias: 'Roku Playing'
+  hide_entity: False
+  trigger:
+    platform: state
+    entity_id: media_player.roku_1gn389022289
+    to: 'playing'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: state
+        entity_id: group.livingroom_lights
+        state: 'on'
+      - condition: template
+        value_template: "{{ is_state_attr('media_player.roku_1gn389022289', 'app_name', 'Netflix') }}"
+  action:
+    service: scene.turn_on
+    entity_id: scene.livingroom_dim
+
+- alias: 'Everyone home and gone to bed - Lights out'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    - platform: time
+      after: '23:59:59'
+    - platform: time
+      after: '00:29:59'
+    - platform: time
+      after: '00:59:59'
+    - platform: time
+      after: '01:29:59'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.livingroomtv
+        state: 'not_home'
+      - condition: state
+        entity_id: device_tracker.camphone
+        state: 'home'
+      - condition: state
+        entity_id: device_tracker.jenphone
+        state: 'home'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.gail_tracker
+            state: 'home'
+          - condition: template
+            value_template: '{{ distance(states.device_tracker.dgrabbsiphone) > 10 }}'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.gervais_tracker
+            state: 'home'
+          - condition: template
+            value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
+  action:
+    - service: light.turn_off
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.loop_livingcolour
+
+- alias: 'Midnight - Livingroom Lights out'
+  hide_entity: False
+  initial_state: False
+  trigger:
+    platform: time
+    after: '23:59:59'
+  action:
+    - service: light.turn_off
+      entity_id: group.livingroom_lights
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.loop_livingcolour
+
+- alias: '2am - Lights out'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    platform: time
+    after: '01:59:00'
+  action:
+    - service: light.turn_off
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.loop_livingcolour
+
+- alias: '6pm - heater off'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    platform: time
+    after: '17:59:00'
+  action:
+    service: switch.turn_off
+    entity_id: switch.office_heater
+
+- alias: 'Sunrise - Lights out'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    platform: sun
+    event: sunrise
+    offset: '+00:10:00'
+  action:
+    service: light.turn_off
+
+- alias: 'Sunset - Lights on'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    platform: sun
+    event: sunset
+    offset: '-00:10:00'
+  action:
+    - service: light.turn_on
+      entity_id: group.outdoor_lights
+      data:
+        brightness: 255
+        transition: 300
+    - service: scene.turn_on
+      entity_id: scene.livingroom_normal
+
+- alias: 'Livingroom to random colours'
+  hide_entity: False
+  trigger:
+    platform: time
+    minutes: '/2'
+    seconds: 0
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.loop_livingcolours
+        state: 'on'
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: time
+        before: '23:50:00'
+  action:
+    service: light.turn_on
+    entity_id:
+      - light.fireplace0
+      - light.fireplace3
+      - light.living_standing
+      - light.living_table
+    data:
+      effect: random
+      transition: 5
+
+- alias: 'Livingroom brightness'
+  trigger:
+    platform: state
+    entity_id: input_slider.livingroom_brightness
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: group.livingroom_lights
+        brightness: '{{ trigger.to_state.state | int }}'
+
+- alias: 'Gail away - turn off heater'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: group.gail_tracker
+    state: 'not_home'
+  action:
+    service: switch.turn_off
+    entity_id: switch.office_heater
+
+- alias: 'Gail home - turn on heater'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: group.gail_tracker
+    state: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states.sensor.yr_temperature.state < "10" }}'
+      - condition: time
+        after: '09:00:00'
+      - condition: time
+        before: '17:30:00'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action:
+    service: switch.turn_on
+    entity_id:
+      - switch.office_heater
+
+- alias: 'Bedtime'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: device_tracker.livingroomtv
+    state: 'not_home'
+  condition:
+    - condition: time
+      after: '22:30:00'
+  action:
+    - service: homeassistant.turn_off
+      entity_id: input_boolean.loop_livingcolours
+    - service: light.turn_on
+      entity_id: group.bedroom_lights
+    - service: light.turn_off
+      entity_id:
+        - group.livingroom_lights
+        - light.bathroom
+      data:
+        transition: 300
+
+- alias: 'GandG not home - turn off bedroom lights'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    - platform: state
+      entity_id: group.gail_tracker
+      state: 'not_home'
+    - platform: state
+      entity_id: group.gervais_tracker
+      state: 'not_home'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.gail_tracker
+        state: 'not_home'
+      - condition: state
+        entity_id: group.gervais_tracker
+        state: 'not_home'
+  action:
+    service: light.turn_off
+    entity_id: group.bedroom_lights
+
+- alias: 'Tell Jen to turn off her TV'
+  hide_entity: False
+  initial_state: True
+  trigger:
+    platform: time
+    after: '08:09:59'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: 'device_tracker.jen_tv'
+        state: 'home'
+#      - condition: state
+#        entity_id: 'media_player.jens_chromeo'
+#        state: 'idle'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+  action:
+    service: tts.platform_say
+    entity_id: media_player.jens_chromeo
+    data:
+      message: 'Time to turn off your TV!'
+
+- alias: 'Test message'
+  initial_state: false
+  trigger:
+    platform: time
+    seconds: 30
+  action:
+    service: notify.zulip
+    data_template:
+#      variables:
+#        title: 'State change'
+      message: '"Test from HA"'
+
+#  - alias: 'Presence notifier'
+#    hide_entity: False
+#    initial_state: True
+#    trigger:
+#      - platform: state
+#        entity_id: device_tracker.jenphone, device_tracker.camphone, device_tracker.dgrabbsiphone, device_tracker.iphone
+#        from: 'not_home'
+#        to: 'home'
+#    action:
+#      service: notify.zulip
+#      data_template:
+#        message: '"ifttt-bot@demontbrun.com" "-key-" "Test" "Test" ":question:" "someone has arrived home."'

@@ -1,0 +1,161 @@
+#################################################################
+### Groups
+#################################################################
+
+family:
+  name: Family
+  entities:
+    - device_tracker.dgrabbsiphone
+    - device_tracker.iphone
+    - device_tracker.camphone
+    - device_tracker.jenphone
+  view: yes
+  icon: mdi:account-multiple
+
+gail_tracker:
+  name: Gail_tracker
+  entities:
+    - device_tracker.dgrabbsiphone
+    - device_tracker.dgrabbsiphone_2
+
+gervais_tracker:
+  name: Gervais_tracker
+  entities:
+    - device_tracker.iphone
+    - device_tracker.iphone_2
+
+settings:
+  name: Settings
+  entities:
+#     - group.all_devices
+    - group.all_scripts
+    - group.all_automations
+    - group.livingroom_knobs
+    - group.all_scenes
+  view: yes
+  icon: mdi:settings
+
+lights_and_switches:
+  entities:
+#     - group.all_lights
+    - group.all_switches
+    - group.bedroom_lights
+    - group.livingroom_lights
+    - group.misc_lights
+    - group.outdoor_lights
+  view: yes
+  icon: mdi:lightbulb
+
+sensors:
+  name: Sensors
+  entities:
+    - group.weather
+    - group.sabnzbd
+    - group.speedtest
+    - group.sonarr
+  view: yes
+  icon: mdi:timer
+
+livingroom_knobs:
+  name: Livingroom Knobs
+  entities:
+    - input_boolean.loop_livingcolours
+    - input_slider.livingroom_brightness
+
+sabnzbd:
+  name: SABnzbd
+  entities:
+    - sensor.sabnzbd_left
+    - sensor.sabnzbd_queue
+    - sensor.sabnzbd_speed
+    - sensor.sabnzbd_status
+
+speedtest:
+  name: Speedtest
+  entities:
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
+
+sonarr:
+  name: Sonarr
+  entities:
+    - sensor.sonarr_upcoming
+    - sensor.sonarr_queue
+    - sensor.sonarr_commands
+    - sensor.sonarr_disk_space
+
+weather:
+  name: Weather
+  entities:
+    - sun.sun
+    - sensor.yr_symbol
+    - sensor.yr_temperature
+    - sensor.pws_alerts
+    - sensor.pws_feelslike_c
+    - sensor.pws_heat_index_c
+    - sensor.pws_pressure_trend
+    - sensor.pws_relative_humidity
+    - sensor.pws_solarradiation
+    - sensor.pws_temp_c
+    - sensor.pws_UV
+    - sensor.pws_visibility_km
+    - sensor.pws_weather
+    - sensor.pws_wind_degrees
+    - sensor.pws_wind_gust_kph
+    - sensor.pws_wind_kph
+    - sensor.yweather_condition
+    - sensor.yweather_current
+    - sensor.yweather_temperature
+    - sensor.yweather_temperature_min
+    - sensor.yweather_temperature_max
+    - sensor.yweather_wind_speed
+    - sensor.yweather_pressure
+    - sensor.yweather_visibility
+    - sensor.yweather_humidity
+
+bedroom_lights:
+  name: bedroom lights
+  entities:
+    - light.bedroom
+    - light.bedroom2
+
+livingroom_lights:
+  name: livingroom lights
+  entities:
+    - light.fireplace0
+    - light.fireplace1
+    - light.fireplace2
+    - light.fireplace3
+    - light.living_standing
+    - light.living_table
+
+misc_lights:
+  name: misc lights
+  entities:
+    - light.bathroom
+
+media_players:
+  name: Media Players
+  view: yes
+  icon: mdi:play-circle-outline
+  entities:
+    - media_player.living_room
+#need to fix name     - media_player.kid-tv
+    - media_player.jens_chromeo
+    - media_player.gandg
+    - media_player.roku_1gn389022289
+    - media_player.plex_web_safari
+
+outdoor_lights:
+  name: outdoor lights
+  entities:
+    - light.front_door
+    - light.back_door
+
+all_scenes:
+  name: all scenes
+  icon: mdi:home-variant
+  entities:
+    - scene.livingroom_normal
+    - scene.livingroom_dim
