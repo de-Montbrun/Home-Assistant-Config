@@ -15,9 +15,9 @@ logs
 *.xml
 *.backup
 *.google.token
+*.swp
 .google.token
 .HA_VERSION
-home-assistant.env
 home-assistant.*
 known_devices.yaml
 secrets.yaml
