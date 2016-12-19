@@ -143,6 +143,7 @@ media_players:
     - media_player.gandg
     - media_player.roku_1gn389022289
     - media_player.plex_web_safari
+    - media_player.kidtv
 
 outdoor_lights:
   name: outdoor lights
