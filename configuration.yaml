@@ -43,6 +43,12 @@ wemo:
     - 192.168.2.80
     - 192.168.2.81
 
+# Hue lights are not being discovered automaically.
+light:
+  platform: hue
+  host: 192.168.2.120
+  allow_unreachable:
+
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
