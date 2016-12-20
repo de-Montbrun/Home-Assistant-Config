@@ -179,6 +179,7 @@ zone yyt:
 frontend:
 
 http:
+  base_url: ha.demontbrun.com
   api_password: !secret http_api_password
   ssl_certificate: !secret http_ssl_certificate
   ssl_key: !secret http_ssl_key
