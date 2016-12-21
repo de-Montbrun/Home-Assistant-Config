@@ -277,7 +277,8 @@ device_tracker:
     ssh_key: /Users/gervais/.ssh/id_rsa
 
   - platform: nmap_tracker
-    hosts: 192.168.2.1-254
+    hosts: 192.168.2.1/24
+    home_interval: 10
 
   - platform: icloud
     username: !secret icloud_username
