@@ -255,8 +255,6 @@ device_tracker:
     password: !secret icloud_password
     account_name: !secret icloud_account_name
 
-  - platform: bluetooth_tracker
-
 # }}}
 # {{{ Toggles
 
