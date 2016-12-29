@@ -2,8 +2,9 @@
 #### Automations
 #################################################################
 
-- alias: 'Media player paused/stopped'
-  hide_entity: False
+- alias: 'Plex paused/stopped - normal lights'
+  hide_entity: false
+  initial_state: false
   trigger:
     platform: state
     entity_id: media_player.living_room
@@ -21,8 +22,9 @@
     service: scene.turn_on
     entity_id: scene.livingroom_normal
 
-- alias: 'Media player playing'
-  hide_entity: False
+- alias: 'Plex playing - Dimm lights'
+  hide_entity: false
+  initial_state: false
   trigger:
     platform: state
     entity_id: media_player.living_room
@@ -41,7 +43,7 @@
     entity_id: scene.livingroom_dim
 
 - alias: 'Roku Idle'
-  hide_entity: False
+  hide_entity: True
   trigger:
     platform: state
     entity_id: media_player.roku_1gn389022289
@@ -60,7 +62,7 @@
     entity_id: scene.livingroom_normal
 
 - alias: 'Roku Playing'
-  hide_entity: False
+  hide_entity: True
   trigger:
     platform: state
     entity_id: media_player.roku_1gn389022289
@@ -81,7 +83,7 @@
     entity_id: scene.livingroom_dim
 
 - alias: 'Everyone home and gone to bed - Lights out'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     - platform: time
@@ -136,7 +138,7 @@
       entity_id: input_boolean.loop_livingcolour
 
 - alias: '2am - Lights out'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     platform: time
@@ -147,7 +149,7 @@
       entity_id: input_boolean.loop_livingcolour
 
 - alias: '6pm - heater off'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     platform: time
@@ -157,7 +159,7 @@
     entity_id: switch.office_heater
 
 - alias: 'Sunrise - Lights out'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     platform: sun
@@ -167,7 +169,7 @@
     service: light.turn_off
 
 - alias: 'Sunset - Lights on'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     platform: sun
@@ -183,7 +185,7 @@
       entity_id: scene.livingroom_normal
 
 - alias: 'Livingroom to random colours'
-  hide_entity: False
+  hide_entity: True
   trigger:
     platform: time
     minutes: '/2'
@@ -211,6 +213,7 @@
       transition: 5
 
 - alias: 'Livingroom brightness'
+  hide_entity: True
   trigger:
     platform: state
     entity_id: input_slider.livingroom_brightness
@@ -221,7 +224,7 @@
         brightness: '{{ trigger.to_state.state | int }}'
 
 - alias: 'Gail away - turn off heater'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     platform: state
@@ -232,7 +235,7 @@
     entity_id: switch.office_heater
 
 - alias: 'Gail home - turn on heater'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     platform: state
@@ -241,6 +244,9 @@
   condition:
     condition: and
     conditions:
+      - condition: state
+        entity_id: device_tracker.yoga
+        state: 'home'
       - condition: template
         value_template: '{{ states.sensor.yr_temperature.state < "10" }}'
       - condition: time
@@ -260,7 +266,7 @@
       - switch.office_heater
 
 - alias: 'Bedtime'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     platform: state
@@ -282,7 +288,7 @@
         transition: 300
 
 - alias: 'GandG not home - turn off bedroom lights'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     - platform: state
@@ -305,7 +311,7 @@
     entity_id: group.bedroom_lights
 
 - alias: 'Tell Jen to turn off her TV'
-  hide_entity: False
+  hide_entity: True
   initial_state: True
   trigger:
     platform: time
