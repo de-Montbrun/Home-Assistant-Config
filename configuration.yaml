@@ -247,10 +247,19 @@ device_tracker:
     ssh_key: /Users/gervais/.ssh/id_rsa
 
   - platform: nmap_tracker
-    hosts: 192.168.2.1/24
-    home_interval: 1
-    interval_seconds: 30
-    consider_home: 600
+    hosts: 192.168.2.1-50
+
+  - platform: nmap_tracker
+    hosts: 192.168.2.51-100
+
+  - platform: nmap_tracker
+    hosts: 192.168.2.101-150
+
+  - platform: nmap_tracker
+    hosts: 192.168.2.151-200
+
+  - platform: nmap_tracker
+    hosts: 192.168.2.201-254
 
   - platform: icloud
     username: !secret icloud_username
