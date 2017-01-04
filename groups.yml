@@ -48,9 +48,8 @@ sensors:
   name: Sensors
   entities:
     - group.weather
-    - group.sabnzbd
+    - group.motion
     - group.speedtest
-    - group.sonarr
   view: yes
   icon: mdi:timer
 
@@ -60,13 +59,10 @@ livingroom_knobs:
     - input_boolean.loop_livingcolours
     - input_slider.livingroom_brightness
 
-sabnzbd:
-  name: SABnzbd
+motion:
+  name: Motion Detectors
   entities:
-    - sensor.sabnzbd_left
-    - sensor.sabnzbd_queue
-    - sensor.sabnzbd_speed
-    - sensor.sabnzbd_status
+    - binary_sensor.front_door
 
 speedtest:
   name: Speedtest
@@ -74,14 +70,6 @@ speedtest:
     - sensor.speedtest_download
     - sensor.speedtest_upload
     - sensor.speedtest_ping
-
-sonarr:
-  name: Sonarr
-  entities:
-    - sensor.sonarr_upcoming
-    - sensor.sonarr_queue
-    - sensor.sonarr_commands
-    - sensor.sonarr_disk_space
 
 weather:
   name: Weather

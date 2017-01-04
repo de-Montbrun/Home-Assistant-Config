@@ -235,6 +235,12 @@ sensor:
       - humidity
       - temperature
 
+binary_sensor:
+  - platform: ffmpeg
+    name: Front Door
+    tool: motion
+    input: http://192.168.2.92:8080/video
+
 # }}}
 # {{{ Presence Trackers
 
