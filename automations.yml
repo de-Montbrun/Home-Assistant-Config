@@ -273,8 +273,12 @@
     entity_id: device_tracker.livingroomtv
     state: 'not_home'
   condition:
-    - condition: time
-      after: '22:30:00'
+    condition: or
+    conditions:
+      - condition: time
+        after: '22:30:00'
+      - condition: time
+        before: '02:00:00'
   action:
     - service: homeassistant.turn_off
       entity_id: input_boolean.loop_livingcolours
