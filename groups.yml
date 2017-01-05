@@ -138,9 +138,7 @@ security_cams:
   view: yes
   icon: mdi:video
   entities:
-    #- camera.back_door
     - camera.front_door
-    #- camera.office
 
 outdoor_lights:
   name: outdoor lights

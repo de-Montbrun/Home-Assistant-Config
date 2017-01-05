@@ -290,20 +290,12 @@ input_slider:
     step: 1
 
 # }}}
-# {{{ Security
+# {{{ Security Cams
 
 camera:
-#  - name: 'Back Door'
-#    platform: ffmpeg
-#    input: http://192.168.2.91:8020/videoView
-
   - name: 'Front Door'
     platform: ffmpeg
     input: http://192.168.2.92:8080/video
-
-#  - name: 'Office'
-#    platform: ffmpeg
-#    input: http://192.168.2.93:8020/videoView
 
 # }}}
 
