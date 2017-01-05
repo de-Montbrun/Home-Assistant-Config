@@ -65,6 +65,7 @@ ifttt:
   key: !secret ifttt_key
 
 ffmpeg:
+  run_test: false
 
 # Enable text-to-speech
 tts:
