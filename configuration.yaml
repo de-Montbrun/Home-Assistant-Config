@@ -153,9 +153,9 @@ zone yul:
 
 zone yyz:
   name: "Pearson Airport"
-  latitude: 43.682520
-  longitude: -79.612877
-  radius: 400
+  latitude: 43.679232
+  longitude: -79.620109
+  radius: 1000
   icon: mdi:airplane
 
 zone ytz:
