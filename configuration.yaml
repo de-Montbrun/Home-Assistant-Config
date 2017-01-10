@@ -242,11 +242,6 @@ binary_sensor:
     tool: motion
     input: http://192.168.2.92:8080/video
 
-  - platform: ffmpeg
-    name: Office
-    tool: motion
-    input: http://192.168.2.93:8020/videoView
-
 # }}}
 # {{{ Presence Trackers
 
@@ -317,10 +312,6 @@ camera:
   - name: 'Front Door'
     platform: ffmpeg
     input: http://192.168.2.92:8080/video
-
-  - name: 'Office'
-    platform: ffmpeg
-    input: http://192.168.2.93:8020/videoView
 
 # }}}
 

@@ -140,7 +140,6 @@ security_cams:
   icon: mdi:video
   entities:
     - camera.front_door
-    - camera.office
 
 outdoor_lights:
   name: outdoor lights
