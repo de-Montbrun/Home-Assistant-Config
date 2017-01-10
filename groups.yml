@@ -104,8 +104,8 @@ weather:
 bedroom_lights:
   name: bedroom lights
   entities:
-    - light.bedroom
-    - light.bedroom2
+    - light.bedroom0
+    - light.bedroom1
 
 livingroom_lights:
   name: livingroom lights
