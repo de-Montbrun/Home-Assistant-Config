@@ -4,7 +4,7 @@
 
 - alias: 'Plex paused/stopped - normal lights'
   hide_entity: false
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: media_player.living_room
@@ -24,7 +24,7 @@
 
 - alias: 'Plex playing - Dimm lights'
   hide_entity: false
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: media_player.living_room
@@ -127,7 +127,7 @@
 
 - alias: 'Midnight - Livingroom Lights out'
   hide_entity: False
-  initial_state: False
+  initial_state: true
   trigger:
     platform: time
     after: '23:59:59'
