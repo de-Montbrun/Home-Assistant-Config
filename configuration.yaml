@@ -288,6 +288,11 @@ device_tracker:
     password: !secret icloud_password
     account_name: !secret icloud_account_name
 
+  - platform: ping
+    hosts:
+      Jennifer: jen-phone
+      Cameron: cam-phone
+
 # }}}
 # {{{ Toggles
 
@@ -310,8 +315,8 @@ input_slider:
 
 camera:
   - name: 'Front Door'
-    platform: ffmpeg
-    input: http://192.168.2.92:8080/video
+    platform: mjpeg
+    mjpeg_url: http://192.168.2.92:8080/video
 
 # }}}
 

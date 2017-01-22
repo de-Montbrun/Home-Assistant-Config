@@ -24,6 +24,18 @@ gervais_tracker:
     - device_tracker.iphone
     - device_tracker.iphone_2
 
+cam_tracker:
+  name: Cam_tracker
+  entities:
+    - device_tracker.cameron
+    - device_tracker.camphone
+
+jen_tracker:
+  name: Jen_tracker
+  entities:
+    - device_tracker.jennifer
+    - device_tracker.jenphone
+
 settings:
   name: Settings
   entities:
