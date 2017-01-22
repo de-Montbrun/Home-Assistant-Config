@@ -223,6 +223,27 @@
         entity_id: group.livingroom_lights
         brightness: '{{ trigger.to_state.state | int }}'
 
+- alias: 'Jennifer Away - turn off heater'
+  hide_entity: True
+  initial_state: True
+  trigger:
+    platform: state
+    entity_id: group.jen_tracker
+    state: 'not_home'
+  action:
+    service: switch.turn_off
+    entity_id: switch.3rd_floor_heater
+
+- alias: 'Midnight - heater off'
+  hide_entity: True
+  initial_state: True
+  trigger:
+    platform: time
+    after: '23:59:59'
+  action:
+    service: switch.turn_off
+    entity_id: switch.3rd_floor_heater
+
 - alias: 'Gail away - turn off heater'
   hide_entity: True
   initial_state: True
