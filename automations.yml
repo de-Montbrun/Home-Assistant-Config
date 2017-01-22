@@ -238,8 +238,14 @@
   hide_entity: True
   initial_state: True
   trigger:
-    platform: time
-    after: '23:59:59'
+    - platform: time
+      after: '23:59:59'
+    - platform: time
+      after: '00:29:59'
+    - platform: time
+      after: '00:59:59'
+    - platform: time
+      after: '01:29:59'
   action:
     service: switch.turn_off
     entity_id: switch.3rd_floor_heater
