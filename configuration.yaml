@@ -236,6 +236,11 @@ sensor:
       - humidity
       - temperature
 
+  - platform: plex
+    host: plex
+    username: !secret plex_username
+    password: !secret plex_password
+
 binary_sensor:
   - platform: ffmpeg
     name: Front Door
@@ -248,10 +253,17 @@ binary_sensor:
 device_tracker:
   - platform: asuswrt
     host: 192.168.2.249
-    username: admin
+    username: !secret router_username
     mode: ap
     protocol: ssh
     ssh_key: /Users/gervais/.ssh/id_rsa
+
+  - platform: asuswrt
+    host: 192.168.2.252
+    username: !secret router_username
+    password: !secret router_password
+    mode: ap
+    protocol: telnet
 
   - platform: nmap_tracker
     hosts: 192.168.2.1-25
