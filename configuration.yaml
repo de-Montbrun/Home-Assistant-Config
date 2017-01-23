@@ -71,6 +71,9 @@ ffmpeg:
 tts:
   - platform: google
 
+  - platform: voicerss
+    api_key: !secret voicerss_api_key
+
 # }}}
 # {{{ zones
 
@@ -186,7 +189,7 @@ zone yyt:
 frontend:
 
 http:
-  base_url: ha.demontbrun.com
+  base_url: !secret http_base_url
   api_password: !secret http_api_password
   ssl_certificate: !secret http_ssl_certificate
   ssl_key: !secret http_ssl_key

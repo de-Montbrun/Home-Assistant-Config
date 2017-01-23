@@ -361,7 +361,7 @@
           - thu
           - fri
   action:
-    service: tts.google_say
+    service: tts.voicerss_say
     entity_id: media_player.jens_chromeo
     data:
       message: 'Time to turn off your TV!'
