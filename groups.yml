@@ -61,6 +61,7 @@ sensors:
   entities:
     - group.weather
     - group.motion
+    - group.livingroom_sensors
     - group.speedtest
   view: yes
   icon: mdi:timer
@@ -71,10 +72,17 @@ livingroom_knobs:
     - input_boolean.loop_livingcolours
     - input_slider.livingroom_brightness
 
+livingroom_sensors:
+  name: Livingroom Sensors
+  entities:
+    - sensor.living_room_lux
+    - sensor.living_room_temp
+
 motion:
   name: Motion Detectors
   entities:
     - binary_sensor.front_door
+    - binary_sensor.livingroom
     - binary_sensor.office
 
 speedtest:

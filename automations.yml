@@ -232,7 +232,7 @@
     state: 'not_home'
   action:
     service: switch.turn_off
-    entity_id: switch.3rd_floor_heater
+    entity_id: 'switch.3rd_floor_heater'
 
 - alias: 'Midnight - heater off'
   hide_entity: True
@@ -248,7 +248,7 @@
       after: '01:29:59'
   action:
     service: switch.turn_off
-    entity_id: switch.3rd_floor_heater
+    entity_id: 'switch.3rd_floor_heater'
 
 - alias: 'Gail away - turn off heater'
   hide_entity: True

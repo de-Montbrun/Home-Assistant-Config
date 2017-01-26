@@ -205,6 +205,26 @@ http:
 # {{{ Sensors
 
 sensor:
+  - platform: speedtest
+    hour:
+      - 4
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+  - platform: rest
+    resource: !secret hue_livingroom_lightlevel
+    value_template: '{{ value_json.state.lightlevel }}'
+    unit_of_measurement: Lux
+    name: 'Living Room Lux'
+
+  - platform: rest
+    resource: !secret hue_livingroom_temp
+    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Living Room Temp'
+
   - platform: yr
     monitored_conditions:
       - temperature
@@ -249,6 +269,12 @@ binary_sensor:
     name: Front Door
     tool: motion
     input: http://192.168.2.92:8080/video
+    changes: '05'
+
+  - platform: rest
+    name: Livingroom
+    resource: !secret hue_livingroom_status
+    value_template: '{{ value_json.state.status }}'
 
 # }}}
 # {{{ Presence Trackers
@@ -261,12 +287,12 @@ device_tracker:
     protocol: ssh
     ssh_key: /Users/gervais/.ssh/id_rsa
 
-  - platform: asuswrt
-    host: 192.168.2.252
-    username: !secret router_username
-    password: !secret router_password
-    mode: ap
-    protocol: telnet
+#  - platform: asuswrt
+#    host: 192.168.2.252
+#    username: !secret router_username
+#    password: !secret router_password
+#    mode: ap
+#    protocol: telnet
 
   - platform: nmap_tracker
     hosts: 192.168.2.1-25
