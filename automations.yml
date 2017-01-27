@@ -123,7 +123,7 @@
   action:
     - service: light.turn_off
     - service: homeassistant.turn_off
-      entity_id: input_boolean.loop_livingcolour
+      entity_id: input_boolean.loop_livingcolours
 
 - alias: 'Midnight - Livingroom Lights out'
   hide_entity: False
@@ -135,7 +135,7 @@
     - service: light.turn_off
       entity_id: group.livingroom_lights
     - service: homeassistant.turn_off
-      entity_id: input_boolean.loop_livingcolour
+      entity_id: input_boolean.loop_livingcolours
 
 - alias: '2am - Lights out'
   hide_entity: True
@@ -146,7 +146,7 @@
   action:
     - service: light.turn_off
     - service: homeassistant.turn_off
-      entity_id: input_boolean.loop_livingcolour
+      entity_id: input_boolean.loop_livingcolours
 
 - alias: '6pm - heater off'
   hide_entity: True
