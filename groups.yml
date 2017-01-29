@@ -82,8 +82,8 @@ motion:
   name: Motion Detectors
   entities:
     - binary_sensor.front_door
-    - binary_sensor.livingroom
-    - binary_sensor.office
+    - binary_sensor.livingroom_motion
+    - binary_sensor.livingroom_status
 
 speedtest:
   name: Speedtest

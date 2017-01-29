@@ -269,12 +269,18 @@ binary_sensor:
     name: Front Door
     tool: motion
     input: http://192.168.2.92:8080/video
-    changes: '05'
+    changes: 1
 
   - platform: rest
-    name: Livingroom
+    name: Livingroom Status
     resource: !secret hue_livingroom_status
     value_template: '{{ value_json.state.status }}'
+    scan_interval: 2
+
+  - platform: rest
+    name: Livingroom Motion
+    resource: !secret hue_livingroom_presence
+    value_template: '{{ value_json.state.presence }}'
 
 # }}}
 # {{{ Presence Trackers
