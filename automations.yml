@@ -254,9 +254,14 @@
   hide_entity: True
   initial_state: True
   trigger:
-    platform: state
-    entity_id: group.gail_tracker
-    state: 'not_home'
+    - platform: state
+      entity_id: group.gail_tracker
+      state: 'not_home'
+    - platform: state
+      entity_id: device_tracker.yoga
+      state: 'not_home'
+      for:
+        minutes: 10
   action:
     service: switch.turn_off
     entity_id: switch.office_heater
