@@ -1,0 +1,52 @@
+#################################################################
+#### Scripts
+##################################################################
+
+timed_outdoor:
+  alias: "Turn on outdoor lights and set timer"
+  sequence:
+    # Cancel ev. old timers
+    - service: script.turn_off
+      data:
+         entity_id: script.timer_outdoor_off
+    - service: light.turn_on
+      data:
+        entity_id: group.outdoor_light
+        brightness: 255
+    # Set new timer
+    - service: script.turn_on
+      data:
+        entity_id: script.timer_outdoor_off
+
+timer_outdoor_off:
+  alias: "Turn off outdoor lights after 10 minutes"
+  sequence:
+    - delay:
+        minutes: 10
+    - service: light.turn_off
+      data:
+        entity_id: group.outdoor_lights
+
+timed_livingroom:
+  alias: "Turn on livingroom lights and set timer"
+  sequence:
+    # Cancel ev. old timers
+    - service: script.turn_off
+      data:
+         entity_id: script.timer_livingroom_off
+    - service: light.turn_on
+      data:
+        entity_id: group.livingroom_lights
+    # Set new timer
+    - service: script.turn_on
+      data:
+        entity_id: script.timer_livingroom_off
+
+timer_livingroom_off:
+  alias: "Turn off livingroom lights after 10 minutes"
+  sequence:
+    - delay:
+        minutes: 10
+    - service: light.turn_off
+      data:
+        entity_id: group.livingroom_lights
