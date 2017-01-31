@@ -369,4 +369,40 @@
     service: tts.voicerss_say
     entity_id: media_player.jens_chromeo
     data:
-      message: 'Time to turn off your TV!'
+      message: 'Time to turn off your TV.'
+
+- alias: 'Timed lights - Movement Front Door'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.front_door
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.livingroomtv
+        state: 'not_home'
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.timed_front_door
+
+- alias: 'Timed lights - Movement in Livingroom'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.livingroom_motion
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.livingroomtv
+        state: 'not_home'
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+  action:
+    service: homeassistant.turn_on
+    entity_id: script.timed_livingroom

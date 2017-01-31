@@ -367,6 +367,7 @@ camera:
 
 # }}}
 
-group: !include groups.yml
-scene: !include scenes.yml
-automation: !include automations.yml
+group: !include groups.yaml
+scene: !include scenes.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
