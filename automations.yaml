@@ -7,7 +7,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: media_player.living_room_2
+    entity_id: media_player.living_room_roku
     from: 'playing'
   condition:
     condition: and
@@ -27,7 +27,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: media_player.living_room
+    entity_id: media_player.living_room_roku
     to: 'playing'
   condition:
     condition: and
@@ -46,7 +46,7 @@
   hide_entity: true
   trigger:
     platform: state
-    entity_id: media_player.living_room
+    entity_id: media_player.living_room_roku_2
     from: 'playing'
   condition:
     condition: and
@@ -65,7 +65,7 @@
   hide_entity: true
   trigger:
     platform: state
-    entity_id: media_player.living_room
+    entity_id: media_player.living_room_roku_2
     to: 'playing'
   condition:
     condition: and
@@ -77,7 +77,7 @@
         entity_id: group.livingroom_lights
         state: 'on'
       - condition: template
-        value_template: "{{ is_state_attr('media_player.living_room', 'app_name', 'Netflix') }}"
+        value_template: "{{ is_state_attr('media_player.living_room_roku_2', 'app_name', 'Netflix') }}"
   action:
     service: scene.turn_on
     entity_id: scene.livingroom_dim
