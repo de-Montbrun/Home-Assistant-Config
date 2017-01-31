@@ -65,7 +65,7 @@ ifttt:
   key: !secret ifttt_key
 
 ffmpeg:
-  run_test: False
+  run_test: false
 
 # Enable text-to-speech
 tts:
@@ -196,7 +196,7 @@ http:
   cors_allowed_origins:
     - https://google.com
     - https://home-assistant.io
-  use_x_forwarded_for: True
+  use_x_forwarded_for: true
   trusted_networks:
     - 192.168.2.0/24
     - 127.0.0.1
