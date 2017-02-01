@@ -33,9 +33,9 @@ timed_livingroom:
     - service: script.turn_off
       data:
          entity_id: script.timer_livingroom_off
-    - service: light.turn_on
+    - service: scene.turn_on
       data:
-        entity_id: group.livingroom_lights
+        entity_id: scene.livingroom_nightlight
     # Set new timer
     - service: script.turn_on
       data:
