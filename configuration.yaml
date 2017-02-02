@@ -214,6 +214,13 @@ sensor:
       - upload
 
   - platform: rest
+    resource: !secret hue_livingroom_battery
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 86400
+    name: 'Living Room Battery Level'
+
+  - platform: rest
     resource: !secret hue_livingroom_lightlevel
     value_template: '{{ value_json.state.lightlevel }}'
     unit_of_measurement: Lux
@@ -301,34 +308,19 @@ device_tracker:
 #    protocol: telnet
 
   - platform: nmap_tracker
-    hosts: 192.168.2.1-25
+    hosts: 192.168.2.1-50
 
   - platform: nmap_tracker
-    hosts: 192.168.2.26-50
+    hosts: 192.168.2.51-100
 
   - platform: nmap_tracker
-    hosts: 192.168.2.51-75
+    hosts: 192.168.2.101-150
 
   - platform: nmap_tracker
-    hosts: 192.168.2.76-100
+    hosts: 192.168.2.151-200
 
   - platform: nmap_tracker
-    hosts: 192.168.2.101-125
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.126-150
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.151-175
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.176-200
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.201-225
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.226-254
+    hosts: 192.168.2.201-254
 
   - platform: icloud
     username: !secret icloud_username

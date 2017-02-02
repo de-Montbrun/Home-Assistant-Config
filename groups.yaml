@@ -75,6 +75,7 @@ livingroom_knobs:
 livingroom_sensors:
   name: Livingroom Sensors
   entities:
+    - sensor.living_room_battery_level
     - sensor.living_room_lux
     - sensor.living_room_temp
 
