@@ -11,7 +11,7 @@ timed_outdoor:
          entity_id: script.timer_outdoor_off
     - service: light.turn_on
       data:
-        entity_id: group.outdoor_light
+        entity_id: group.outdoor_lights
     # Set new timer
     - service: script.turn_on
       data:
