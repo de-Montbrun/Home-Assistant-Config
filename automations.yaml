@@ -368,7 +368,7 @@
         state: 'below_horizon'
   action:
     service: homeassistant.turn_on
-    entity_id: script.timed_front_door
+    entity_id: script.timed_outdoor
 
 - alias: 'Timed lights - Movement in Livingroom'
   trigger:
