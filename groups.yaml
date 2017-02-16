@@ -97,6 +97,7 @@ weather:
   name: Weather
   entities:
     - sun.sun
+    - sensor.moon
     - sensor.yr_symbol
     - sensor.yr_temperature
     - sensor.pws_alerts

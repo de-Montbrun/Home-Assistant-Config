@@ -206,6 +206,8 @@ http:
 # {{{ Sensors
 
 sensor:
+  - platform: moon
+
   - platform: speedtest
     hour:
       - 4
@@ -273,9 +275,8 @@ sensor:
     password: !secret plex_password
 
 binary_sensor:
-  - platform: ffmpeg
+  - platform: ffmpeg_motion
     name: Front Door
-    tool: motion
     input: http://192.168.2.92:8080/video
     changes: 1
 
@@ -326,7 +327,6 @@ device_tracker:
   - platform: icloud
     username: !secret icloud_username
     password: !secret icloud_password
-    account_name: !secret icloud_account_name
 
   - platform: ping
     hosts:
