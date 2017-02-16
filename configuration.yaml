@@ -359,6 +359,16 @@ camera:
     mjpeg_url: http://192.168.2.92:8080/video
 
 # }}}
+## {{{ Notify
+
+notify:
+  - name: zulip
+    platform: rest
+    resource: !secret zulip_notify_resource
+    method: POST_JSON
+    title_param_name: topic
+
+## }}}
 
 group: !include groups.yaml
 scene: !include scenes.yaml
