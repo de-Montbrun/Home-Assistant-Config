@@ -121,7 +121,7 @@
       entity_id: input_boolean.loop_livingcolours
 
 - alias: 'Midnight - Livingroom Lights out'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: time
     after: '23:59:59'
@@ -164,7 +164,7 @@
   trigger:
     platform: sun
     event: sunset
-    offset: '-00:10:00'
+    offset: '-00:20:00'
   action:
     - service: light.turn_on
       entity_id: group.outdoor_lights
@@ -387,3 +387,4 @@
   action:
     service: homeassistant.turn_on
     entity_id: script.timed_livingroom
+
