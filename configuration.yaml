@@ -31,11 +31,21 @@ homeassistant:
 # }}}
 # {{{ misc
 
+# Enable web configs
+config:
+
 # Checks for available updates
 updater:
 
 # Discover some devices automatically
 discovery:
+
+# Set logging level
+logger:
+  default: error
+  logs:
+    homeassistant.components.camera: fatal
+    homeassistant.components.media_player.plex: fatal
 
 # Wemo switches are not always being discovered automatically.
 wemo:
