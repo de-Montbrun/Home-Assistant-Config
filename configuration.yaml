@@ -139,9 +139,9 @@ zone yyc:
 
 zone yyg:
   name: "Charlottetown Airport"
-  latitude: 46.285705
-  longitude: -63.129078
-  radius: 100
+  latitude: 46.286076
+  longitude: -63.131658
+  radius: 200
   icon: mdi:airplane
 
 zone yeg:
