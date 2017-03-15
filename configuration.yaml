@@ -160,8 +160,8 @@ zone yhz:
 
 zone yul:
   name: "Montreal Airport"
-  latitude: 45.469738
-  longitude: -73.744919
+  latitude: 45.458942
+  longitude: -73.750330
   radius: 400
   icon: mdi:airplane
 
@@ -310,7 +310,7 @@ device_tracker:
     username: !secret router_username
     mode: ap
     protocol: ssh
-    ssh_key: /Users/gervais/.ssh/id_rsa
+    ssh_key: /home/homeassistant/.ssh/id_rsa
 
 #  - platform: asuswrt
 #    host: 192.168.2.252
