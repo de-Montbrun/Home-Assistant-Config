@@ -312,27 +312,16 @@ device_tracker:
     protocol: ssh
     ssh_key: /home/homeassistant/.ssh/id_rsa
 
-#  - platform: asuswrt
-#    host: 192.168.2.252
-#    username: !secret router_username
-#    password: !secret router_password
-#    mode: ap
-#    protocol: telnet
+  - platform: asuswrt
+    host: 192.168.2.252
+    username: !secret router_username
+    password: !secret router_password
+    mode: ap
+    protocol: telnet
 
   - platform: nmap_tracker
-    hosts: 192.168.2.1-50
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.51-100
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.101-150
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.151-200
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.201-254
+    hosts: 192.168.2.0/24
+    home_interval: 5
 
   - platform: icloud
     username: !secret icloud_username
@@ -340,8 +329,10 @@ device_tracker:
 
   - platform: ping
     hosts:
-      Jennifer: jen-phone
-      Cameron: cam-phone
+      Jennifer2: jen-phone
+      Cameron2: cam-phone
+      Gervais3: iphone
+      Gail3: Gail-iPhone
 
 # }}}
 # {{{ Toggles
@@ -363,10 +354,15 @@ input_slider:
 # }}}
 # {{{ Security Cams
 
-camera:
+#camera:
+android_ip_webcam:
   - name: 'Front Door'
-    platform: mjpeg
-    mjpeg_url: http://192.168.2.92:8080/video
+    host: 192.168.2.92
+    sensors:
+      - light
+      - motion
+    switches:
+      - overlay
 
 # }}}
 ## {{{ Notify
