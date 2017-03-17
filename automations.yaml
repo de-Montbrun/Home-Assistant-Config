@@ -167,6 +167,8 @@
     offset: '-00:20:00'
   action:
     - service: light.turn_on
+      entity_id: light.bathroom
+    - service: light.turn_on
       entity_id: group.outdoor_lights
       data:
         brightness: 255
