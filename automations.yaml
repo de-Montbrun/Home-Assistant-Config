@@ -348,7 +348,7 @@
           - fri
   action:
     service: tts.voicerss_say
-    entity_id: media_player.jens_chromeo
+    entity_id: media_player.jens_broken_chromecast
     data:
       message: 'Time to turn off your TV.'
 
@@ -388,3 +388,46 @@
     service: homeassistant.turn_on
     entity_id: script.timed_livingroom
 
+- alias: 'set sabnzb speed limit'
+  trigger:
+    platform: state
+    entity_id: group.family
+    state: 'home'
+  action:
+    service: rest_command.sabnzb_api
+    data_template:
+      payload: >
+        {%- if is_state("device_tracker.gail3", "home") and
+        ( now().strftime("%H") > "10" or now().strftime("%H") < "18" ) and
+        now().strftime("%u") < "5" -%}
+
+        {% set sabnzb_api_payload = "&name=speedlimit&value=1024K" %}
+
+        {%- else -%}
+
+        {% set sabnzb_api_payload = "&name=speedlimit&value=5120K" %}
+
+        {%- endif %}
+
+- alias: 'remove sabnzb speed limit'
+  trigger:
+    platform: state
+    entity_id: group.family
+    state: 'not_home'
+  action:
+    service: rest_command.sabnzb_api
+    data_template:
+      payload: >
+        {% set sabnzb_api_payload = "&name=speedlimit&value=0" %}
+
+- alias: 'test notifications'
+  initial_state: false
+  trigger:
+    platform: time
+    minutes: '/2'
+    seconds: 0
+  action:
+    service: notify.zulip
+    data:
+      message: ':bright_button: test'
+      title: 'test'
