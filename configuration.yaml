@@ -44,6 +44,7 @@ discovery:
 logger:
   default: error
   logs:
+    homeassistant.components.rest_command: info
     homeassistant.components.camera: fatal
     homeassistant.components.media_player.plex: fatal
 
@@ -312,12 +313,12 @@ device_tracker:
     protocol: ssh
     ssh_key: /home/homeassistant/.ssh/id_rsa
 
-  - platform: asuswrt
-    host: 192.168.2.252
-    username: !secret router_username
-    password: !secret router_password
-    mode: ap
-    protocol: telnet
+#  - platform: asuswrt
+#    host: 192.168.2.252
+#    username: !secret router_username
+#    password: !secret router_password
+#    mode: ap
+#    protocol: telnet
 
   - platform: nmap_tracker
     hosts: 192.168.2.0/24
@@ -365,7 +366,7 @@ android_ip_webcam:
       - overlay
 
 # }}}
-## {{{ Notify
+# {{{ Notify
 
 notify:
   - name: zulip
@@ -373,6 +374,14 @@ notify:
     resource: !secret zulip_notify_resource
     method: POST_JSON
     title_param_name: topic
+
+# }}}
+## {{{ Rest Commands
+
+rest_command:
+  sabnzb_api:
+    url: !secret sabnzbd_rest_url
+    payload: '{{ sabnzb_api_payload }}'
 
 ## }}}
 
