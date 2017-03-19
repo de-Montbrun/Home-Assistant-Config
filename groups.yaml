@@ -17,24 +17,26 @@ gail_tracker:
   entities:
     - device_tracker.dgrabbsiphone
     - device_tracker.dgrabbsiphone_2
+    - device_tracker.gail3
 
 gervais_tracker:
   name: Gervais_tracker
   entities:
     - device_tracker.iphone
     - device_tracker.iphone_2
+    - device_tracker.gervais3
 
 cam_tracker:
   name: Cam_tracker
   entities:
-    - device_tracker.cameron
     - device_tracker.camphone
+    - device_tracker.cameron2
 
 jen_tracker:
   name: Jen_tracker
   entities:
-    - device_tracker.jennifer
     - device_tracker.jenphone
+    - device_tracker.jennifer2
 
 settings:
   name: Settings
@@ -48,7 +50,7 @@ settings:
 
 lights_and_switches:
   entities:
-    - group.all_switches
+    - group.wemo_switches
     - group.bedroom_lights
     - group.livingroom_lights
     - group.misc_lights
@@ -164,6 +166,20 @@ security_cams:
   entities:
     - camera.front_door
 
+security_cam_sensors_switches:
+  entities:
+    - sensor.front_door_audio_connections
+    - sensor.front_door_video_connections
+    - switch.front_door_exposure_lock
+    - switch.front_door_focus
+    - switch.front_door_frontfacing_camera
+    - switch.front_door_gps_active
+    - switch.front_door_night_vision
+    - switch.front_door_overlay
+    - switch.front_door_torch
+    - switch.front_door_video_recording
+    - switch.front_door_white_balance_lock
+
 outdoor_lights:
   name: outdoor lights
   entities:
@@ -182,3 +198,9 @@ plex:
   name: Plex
   entities:
     - sensor.plex
+
+wemo_switches:
+  name: Switches
+  entities:
+    - switch.3rd_floor_heater
+    - switch.office_heater
