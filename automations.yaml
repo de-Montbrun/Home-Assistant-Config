@@ -401,11 +401,11 @@
         ( now().strftime("%H") > "10" or now().strftime("%H") < "18" ) and
         now().strftime("%u") < "5" -%}
 
-        {% set sabnzb_api_payload = "&name=speedlimit&value=1024K" %}
+        '&name=speedlimit&value=1024K'
 
         {%- else -%}
 
-        {% set sabnzb_api_payload = "&name=speedlimit&value=5120K" %}
+        '&name=speedlimit&value=5120K'
 
         {%- endif %}
 
@@ -417,8 +417,7 @@
   action:
     service: rest_command.sabnzb_api
     data_template:
-      payload: >
-        {% set sabnzb_api_payload = "&name=speedlimit&value=0" %}
+      payload: '&name=speedlimit&value=0'
 
 - alias: 'test notifications'
   initial_state: false

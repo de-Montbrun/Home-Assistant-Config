@@ -44,6 +44,7 @@ discovery:
 logger:
   default: error
   logs:
+    homeassistant.components.notify: info
     homeassistant.components.rest_command: info
     homeassistant.components.camera: fatal
     homeassistant.components.media_player.plex: fatal
@@ -381,7 +382,6 @@ notify:
 rest_command:
   sabnzb_api:
     url: !secret sabnzbd_rest_url
-    payload: '{{ sabnzb_api_payload }}'
 
 ## }}}
 
