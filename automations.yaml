@@ -271,13 +271,9 @@
         after: '09:00:00'
       - condition: time
         before: '17:30:00'
-      - condition: time
-        weekday:
-          - mon
-          - tue
-          - wed
-          - thu
-          - fri
+      - condition: state
+        entity_id: 'binary_sensor.workday_sensor'
+        state: 'on'
   action:
     service: switch.turn_on
     entity_id:
@@ -339,13 +335,9 @@
       - condition: state
         entity_id: 'device_tracker.jen_tv'
         state: 'home'
-      - condition: time
-        weekday:
-          - mon
-          - tue
-          - wed
-          - thu
-          - fri
+      - condition: state
+        entity_id: 'binary_sensor.workday_sensor'
+        state: 'on'
   action:
     service: tts.voicerss_say
     entity_id: media_player.jens_broken_chromecast
