@@ -45,6 +45,7 @@ settings:
     - group.all_automations
     - group.livingroom_knobs
     - group.all_scenes
+    - group.security_cam_sensors_switches
   view: yes
   icon: mdi:settings
 
@@ -62,7 +63,7 @@ sensors:
   name: Sensors
   entities:
     - group.weather
-    - group.motion
+    - group.security_detectors
     - group.livingroom_sensors
     - group.speedtest
   view: yes
@@ -81,12 +82,14 @@ livingroom_sensors:
     - sensor.living_room_lux
     - sensor.living_room_temp
 
-motion:
-  name: Motion Detectors
+security_detectors:
+  name: Security Detectors
   entities:
     - binary_sensor.front_door
     - binary_sensor.livingroom_motion
     - binary_sensor.livingroom_status
+    - sensor.front_door_light_level
+    - sensor.front_door_motion
 
 speedtest:
   name: Speedtest
@@ -167,6 +170,7 @@ security_cams:
     - camera.front_door
 
 security_cam_sensors_switches:
+  name: Cam Switches
   entities:
     - sensor.front_door_audio_connections
     - sensor.front_door_video_connections
