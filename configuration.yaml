@@ -290,7 +290,11 @@ binary_sensor:
   - platform: ffmpeg_motion
     name: Front Door
     input: http://192.168.2.92:8080/video
-    changes: 1
+    changes: 2
+
+  - platform: workday
+    country: CA
+    province: PE
 
   - platform: rest
     name: Livingroom Status
@@ -360,11 +364,16 @@ input_slider:
 android_ip_webcam:
   - name: 'Front Door'
     host: 192.168.2.92
-    sensors:
-      - light
-      - motion
     switches:
+      - exposure_lock
+      - ffc
+      - focus
+      - gps_active
+      - night_vision
       - overlay
+      - torch
+      - whitebalance_lock
+      - video_recording
 
 # }}}
 # {{{ Notify
