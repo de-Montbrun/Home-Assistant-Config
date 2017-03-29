@@ -311,13 +311,15 @@ binary_sensor:
 # {{{ Presence Trackers
 
 device_tracker:
-  - platform: asuswrt
-    host: 192.168.2.249
-    username: !secret router_username
-    mode: ap
-    protocol: ssh
-    ssh_key: /home/homeassistant/.ssh/id_rsa
+# New router should work, but doesn't update properly
+#  - platform: asuswrt
+#    host: 192.168.2.249
+#    username: !secret router_username
+#    mode: ap
+#    protocol: ssh
+#    ssh_key: /home/homeassistant/.ssh/id_rsa
 
+# Old router is missing a command necessary for this component to work
 #  - platform: asuswrt
 #    host: 192.168.2.252
 #    username: !secret router_username
