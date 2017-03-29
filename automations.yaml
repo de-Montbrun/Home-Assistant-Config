@@ -82,16 +82,13 @@
   initial_state: true
   trigger:
     - platform: time
-      after: '23:59:59'
-    - platform: time
-      after: '00:29:59'
-    - platform: time
-      after: '00:59:59'
-    - platform: time
-      after: '01:29:59'
+      minutes: '/15'
+      seconds: 0
   condition:
     condition: and
     conditions:
+      - condition: time
+        after: '22:00:00'
       - condition: state
         entity_id: device_tracker.livingroomtv
         state: 'not_home'
@@ -382,34 +379,20 @@
 
 - alias: 'set sabnzb speed limit'
   trigger:
-    platform: state
-    entity_id: group.family
-    state: 'home'
+    - platform: state
+      entity_id: group.family
+      state: 'home'
+    - platform: state
+      entity_id: group.family
+      state: 'not_home'
+    - platform: 'time'
+      after: '10:00:00'
+    - platform: 'time'
+      after: '18:00:00'
+    - platform: 'time'
+      after: '02:00:00'
   action:
     service: rest_command.sabnzb_api
-    data_template:
-      payload: >
-        {%- if is_state("device_tracker.gail3", "home") and
-        ( now().strftime("%H") > "10" or now().strftime("%H") < "18" ) and
-        now().strftime("%u") < "5" -%}
-
-        '&name=speedlimit&value=1024K'
-
-        {%- else -%}
-
-        '&name=speedlimit&value=5120K'
-
-        {%- endif %}
-
-- alias: 'remove sabnzb speed limit'
-  trigger:
-    platform: state
-    entity_id: group.family
-    state: 'not_home'
-  action:
-    service: rest_command.sabnzb_api
-    data_template:
-      payload: '&name=speedlimit&value=0'
 
 - alias: 'test notifications'
   initial_state: false
