@@ -218,6 +218,17 @@ http:
 # {{{ Sensors
 
 sensor:
+
+  - platform: command_line
+    name: 'HASS uptime'
+    command: echo "$(($(date +%s) - $(date --date="`systemctl show home-assistant.service -p ActiveEnterTimestamp | awk -F'=' '{print $2}'`" "+%s")))"
+    scan_interval: 60
+    unit_of_measurement: minutes
+    value_template: >-
+      {% set uptime = value | int %}
+      {% set minutes = ((uptime % 3600) / 60) | int %}
+      {{ minutes }}
+
   - platform: moon
 
   - platform: speedtest
