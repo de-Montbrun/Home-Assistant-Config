@@ -381,10 +381,6 @@
   trigger:
     - platform: state
       entity_id: group.family
-      state: 'home'
-    - platform: state
-      entity_id: group.family
-      state: 'not_home'
     - platform: 'time'
       after: '10:00:00'
     - platform: 'time'
@@ -394,14 +390,78 @@
   action:
     service: rest_command.sabnzb_api
 
-- alias: 'test notifications'
-  initial_state: false
+- alias: 'Cam presence'
   trigger:
-    platform: time
-    minutes: '/2'
-    seconds: 0
+    platform: state
+    entity_id: group.cam_tracker
+  condition:
+    condition: numeric_state
+    entity_id: 'sensor.hass_uptime'
+    above: '5'
   action:
     service: notify.zulip
     data:
-      message: ':bright_button: test'
-      title: 'test'
+      message: ':boy: Cameron has
+        {%- if is_state("group.cam_tracker", "not_home") %}
+             exited
+        {%- else %}
+             entered
+        {% endif %} home.'
+      title: 'Family Location'
+
+- alias: 'Jen presence'
+  trigger:
+    platform: state
+    entity_id: group.jen_tracker
+  condition:
+    condition: numeric_state
+    entity_id: 'sensor.hass_uptime'
+    above: '5'
+  action:
+    service: notify.zulip
+    data:
+      message: ':princess: Jennifer has
+        {%- if is_state("group.jen_tracker", "not_home") %}
+             exited
+        {%- else %}
+             entered
+        {% endif %} home.'
+      title: 'Family Location'
+
+- alias: 'Gail presence - Home'
+  trigger:
+    platform: state
+    entity_id: group.gail_tracker
+  condition:
+    condition: numeric_state
+    entity_id: 'sensor.hass_uptime'
+    above: '5'
+  action:
+    service: notify.zulip
+    data:
+      message: ':house_with_garden: Gail has
+        {%- if is_state("group.gail_tracker", "not_home") %}
+             exited
+        {%- else %}
+             entered
+        {% endif %} home.'
+      title: 'Family Location'
+
+- alias: 'Gervais presence - Home'
+  trigger:
+    platform: state
+    entity_id: group.gervais_tracker
+  condition:
+    condition: numeric_state
+    entity_id: 'sensor.hass_uptime'
+    above: '5'
+  action:
+    service: notify.zulip
+    data:
+      message: ':house: Gervais has
+        {%- if is_state("group.gervais_tracker", "not_home") %}
+             exited
+        {%- else %}
+             entered
+        {% endif %} home.'
+      title: 'Family Location'
