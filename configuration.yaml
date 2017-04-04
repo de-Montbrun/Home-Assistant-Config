@@ -226,7 +226,7 @@ sensor:
     unit_of_measurement: minutes
     value_template: >-
       {% set uptime = value | int %}
-      {% set minutes = ((uptime % 3600) / 60) | int %}
+      {% set minutes = (uptime / 60 ) | int %}
       {{ minutes }}
 
   - platform: moon
