@@ -6,7 +6,7 @@ logs
 # Other
 *.uuid
 *.conf
-*.db
+*.db*
 *.db-journal
 *.log
 *.noload
