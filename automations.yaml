@@ -465,3 +465,53 @@
              entered
         {% endif %} home.'
       title: 'Family Location'
+
+- alias: 'current weather notification'
+  trigger:
+    platform: state
+    entity_id: sensor.yweather_current
+  condition:
+    condition: numeric_state
+    entity_id: 'sensor.hass_uptime'
+    above: '5'
+  action:
+    service: notify.zulip
+    data:
+      message: >
+        **Current Weather Condition:** {{ states.sensor.yweather_current.state }}
+
+        **Current Tempurature:** {{ states.sensor.yr_temperature.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
+         {{ states.sensor.yweather_current.attributes['entity_picture'] }}
+      title: 'Weather'
+
+- alias: 'current UV index notification'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.pws_uv
+    above: '5'
+  condition:
+    condition: numeric_state
+    entity_id: 'sensor.hass_uptime'
+    above: '5'
+  action:
+    service: notify.zulip
+    data:
+      message: >
+        :smiling_face_with_sunglasses: UV Index is {{ states.sensor.pws_uv.state }}. You better put on some sunscreen!
+      title: 'Weather'
+
+- alias: 'weather forecast notification'
+  trigger:
+    platform: time
+    after: '07:59:00'
+  action:
+    service: notify.zulip
+    data:
+      message: >
+        :globe_with_meridians:
+            **Today's Forecast:**
+            {{ states.sensor.pws_weather.state }}
+            **High:** {{ states.sensor.yweather_temperature_max.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
+            **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
+            {{ states.sensor.pws_weather.attributes['entity_picture'] }}
+      title: 'Weather'
