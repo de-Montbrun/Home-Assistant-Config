@@ -390,81 +390,55 @@
   action:
     service: rest_command.sabnzb_api
 
-- alias: 'Cam presence'
+- alias: 'home presence notification'
   trigger:
     platform: state
-    entity_id: group.cam_tracker
+    entity_id: group.cam_tracker, group.gail_tracker, group.gervais_tracker, group.jen_tracker
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'
     above: '5'
   action:
     service: notify.zulip
-    data:
-      message: ':boy: Cameron has
-        {%- if is_state("group.cam_tracker", "not_home") %}
-             exited
-        {%- else %}
-             entered
-        {% endif %} home.'
+    data_template:
+      message: >
+        {%- if trigger.to_state.attributes.friendly_name  == 'Cameron' -%}:boy: {% endif %}
+        {%- if trigger.to_state.attributes.friendly_name  == 'Gail' -%}:house_with_garden: {% endif %}
+        {%- if trigger.to_state.attributes.friendly_name  == 'Gervais' -%}:house: {% endif %}
+        {%- if trigger.to_state.attributes.friendly_name  == 'Jennifer' -%}:princess: {% endif %}
+        {{ trigger.to_state.attributes.friendly_name }} has
+        {%- if trigger.to_state.state == 'not_home' %} exited
+        {%- else %} entered
+        {%- endif %} home.
       title: 'Family Location'
 
-- alias: 'Jen presence'
-  trigger:
-    platform: state
-    entity_id: group.jen_tracker
-  condition:
-    condition: numeric_state
-    entity_id: 'sensor.hass_uptime'
-    above: '5'
-  action:
-    service: notify.zulip
-    data:
-      message: ':princess: Jennifer has
-        {%- if is_state("group.jen_tracker", "not_home") %}
-             exited
-        {%- else %}
-             entered
-        {% endif %} home.'
-      title: 'Family Location'
-
-- alias: 'Gail presence - Home'
-  trigger:
-    platform: state
-    entity_id: group.gail_tracker
-  condition:
-    condition: numeric_state
-    entity_id: 'sensor.hass_uptime'
-    above: '5'
-  action:
-    service: notify.zulip
-    data:
-      message: ':house_with_garden: Gail has
-        {%- if is_state("group.gail_tracker", "not_home") %}
-             exited
-        {%- else %}
-             entered
-        {% endif %} home.'
-      title: 'Family Location'
-
-- alias: 'Gervais presence - Home'
-  trigger:
-    platform: state
-    entity_id: group.gervais_tracker
-  condition:
-    condition: numeric_state
-    entity_id: 'sensor.hass_uptime'
-    above: '5'
-  action:
-    service: notify.zulip
-    data:
-      message: ':house: Gervais has
-        {%- if is_state("group.gervais_tracker", "not_home") %}
-             exited
-        {%- else %}
-             entered
-        {% endif %} home.'
-      title: 'Family Location'
+#- alias: 'iCloud presence notification'
+#  trigger:
+#      - platform: state
+#        entity_id: device_tracker.iphone
+#      - platform: state
+#        entity_id: device_tracker.dgrabbsiphone
+#  condition:
+#    condition: or
+#    conditions:
+##      - condition: numeric_state
+##        entity_id: 'sensor.hass_uptime'
+##        above: '5'
+#      - condition: template
+#        value_template: '{{ trigger.from_state.state != "home" }}'
+#      - condition: template
+#        value_template: '{{ trigger.to_state.state != "home" }}'
+#  action:
+#    service: notify.zulip
+#    data_template:
+#      message: >
+#        {%- if trigger.to_state.attributes.friendly_name  == 'Gail' -%}:house_with_garden: {% endif %}
+#        {%- if trigger.to_state.attributes.friendly_name  == 'Gervais' -%}:house: {% endif %}
+#        {{ trigger.to_state.attributes.friendly_name }} has
+#        {%- if trigger.from_state.state == 'not_home' %} entered {{ trigger.to_state.state }}.
+#        {%- else %} exited {{ trigger.from_state.state }}
+#        {%- endif %}
+#      title: 'Family Location'
 
 - alias: 'current weather notification'
   trigger:
@@ -476,12 +450,12 @@
     above: '5'
   action:
     service: notify.zulip
-    data:
+    data_template:
       message: >
+        []({{ states.sensor.yweather_current.attributes['entity_picture'] }})
         **Current Weather Condition:** {{ states.sensor.yweather_current.state }}
 
         **Current Tempurature:** {{ states.sensor.yr_temperature.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
-         {{ states.sensor.yweather_current.attributes['entity_picture'] }}
       title: 'Weather'
 
 - alias: 'current UV index notification'
@@ -508,10 +482,8 @@
     service: notify.zulip
     data:
       message: >
-        :globe_with_meridians:
-            **Today's Forecast:**
-            {{ states.sensor.pws_weather.state }}
-            **High:** {{ states.sensor.yweather_temperature_max.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
-            **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
-            {{ states.sensor.pws_weather.attributes['entity_picture'] }}
+        []({{ states.sensor.pws_weather.attributes['entity_picture'] }})
+        **Today's Forecast:** {{ states.sensor.pws_weather.state }}
+        **High:** {{ states.sensor.yweather_temperature_max.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
+        **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
       title: 'Weather'
