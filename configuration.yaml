@@ -67,6 +67,10 @@ conversation:
 # Enables support for tracking state changes over time.
 history:
 
+# Setup db
+recorder:
+  purge_days: 10
+
 # View all events in a logbook
 logbook:
 
@@ -119,70 +123,77 @@ zone innovatia:
   icon: mdi:domain
 
 zone walmart:
-  name: "Walmart"
+  name: Walmart
   latitude: !secret walmart_latitude
   longitude: !secret walmart_longitude
   radius: 100
   icon: mdi:shopping
 
 zone churchill_arms:
-  name: "Churchill Arms"
+  name: Churchill Arms
   latitude: !secret churchill_arms_latitude
   longitude: !secret churchill_arms_longitude
   radius: 50
   icon: mdi:beer
 
+zone delta_calgary_downtown:
+  name: Calgary Delta
+  latitude: 51.048800
+  longitude: -114.059662
+  radius: 50
+  icon: mdi:hotel
+
 zone yyc:
-  name: "Calgary Airport"
+  name: Calgary Airport
   latitude: 51.125061
   longitude: -114.016889
   radius: 100
   icon: mdi:airplane
 
 zone yyg:
-  name: "Charlottetown Airport"
+  name: Charlottetown Airport
   latitude: 46.286076
   longitude: -63.131658
   radius: 200
   icon: mdi:airplane
 
 zone yeg:
-  name: "Edmonton Airport"
+  name: Edmonton Airport
   latitude: 53.327848
   longitude: -113.566524
   radius: 100
   icon: mdi:airplane
 
 zone yhz:
-  name: "Halifax Airport"
+  name: Halifax Airport
   latitude: 44.887088
   longitude: -63.515278
   radius: 400
   icon: mdi:airplane
 
 zone yul:
-  name: "Montreal Airport"
+  name: Montreal Airport
   latitude: 45.458942
   longitude: -73.750330
   radius: 400
   icon: mdi:airplane
 
 zone yyz:
-  name: "Pearson Airport"
+  name: Pearson Airport
   latitude: 43.679232
   longitude: -79.620109
   radius: 1000
   icon: mdi:airplane
 
 zone ytz:
-  name: "Toronto City Central Airport"
+  name: Toronto City Central Airport
   latitude: 43.628482
   longitude: -79.395958
   radius: 400
   icon: mdi:airplane
 
 zone yjz:
-  name: "Saint John Airport"
+  name: Saint John Airport
   latitude: 45.326501
   longitude: -65.888867
   radius: 400
