@@ -13,27 +13,27 @@ family:
   icon: mdi:account-multiple
 
 gail_tracker:
-  name: Gail_tracker
+  name: Gail
   entities:
     - device_tracker.dgrabbsiphone
     - device_tracker.dgrabbsiphone_2
     - device_tracker.gail3
 
 gervais_tracker:
-  name: Gervais_tracker
+  name: Gervais
   entities:
     - device_tracker.iphone
     - device_tracker.iphone_2
     - device_tracker.gervais3
 
 cam_tracker:
-  name: Cam_tracker
+  name: Cameron
   entities:
     - device_tracker.camphone
     - device_tracker.cameron2
 
 jen_tracker:
-  name: Jen_tracker
+  name: Jennifer
   entities:
     - device_tracker.jenphone
     - device_tracker.jennifer2
