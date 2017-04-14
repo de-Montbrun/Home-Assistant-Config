@@ -165,6 +165,8 @@
   action:
     - service: light.turn_on
       entity_id: light.bathroom
+      data:
+        brightness: 255
     - service: light.turn_on
       entity_id: group.outdoor_lights
       data:
