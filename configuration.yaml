@@ -28,6 +28,39 @@ homeassistant:
     group.all_switches:
       hidden: false
 
+    zone.home:
+      track_ios: true
+    zone.silverorange:
+      track_ios: true
+    zone.upstreet:
+      track_ios: true
+    zone.innovatia:
+      track_ios: true
+    zone.walmart:
+      track_ios: true
+    zone.calgary_airport:
+      track_ios: true
+    zone.calgary_delta:
+      track_ios: true
+    zone.charlottetown_airport:
+      track_ios: true
+    zone.churchill_arms:
+      track_ios: true
+    zone.edmonton_airport:
+      track_ios: true
+    zone.halifax_airport:
+      track_ios: true
+    zone.montreal_airport:
+      track_ios: true
+    zone.pearson_airport:
+      track_ios: true
+    zone.saint_john_airport:
+      track_ios: true
+#    zone.st._john's_airport:
+#      track_ios: true
+    zone.toronto_city_central_airport:
+      track_ios: true
+
 # }}}
 # {{{ misc
 
@@ -82,6 +115,9 @@ ifttt:
 
 ffmpeg:
   run_test: false
+
+# Enable IOS component
+ios:
 
 # }}}
 # {{{ text-to-speech
@@ -307,6 +343,10 @@ sensor:
     host: plex
     username: !secret plex_username
     password: !secret plex_password
+
+  - platform: crimereports
+    name: Crime Reports
+    radius: 5000
 
 binary_sensor:
   - platform: ffmpeg_motion

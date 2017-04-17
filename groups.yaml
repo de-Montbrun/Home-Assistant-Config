@@ -18,6 +18,7 @@ gail_tracker:
     - device_tracker.dgrabbsiphone
     - device_tracker.dgrabbsiphone_2
     - device_tracker.gail3
+    - device_tracker.dgrabbs_iphonehass
 
 gervais_tracker:
   name: Gervais
@@ -25,6 +26,7 @@ gervais_tracker:
     - device_tracker.iphone
     - device_tracker.iphone_2
     - device_tracker.gervais3
+    - device_tracker.iphonehass
 
 cam_tracker:
   name: Cameron
@@ -215,3 +217,4 @@ misc_sensors:
   entities:
     - sensor.hass_uptime
     - binary_sensor.workday_sensor
+    - sensor.crime_reports
