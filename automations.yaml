@@ -132,7 +132,7 @@
   initial_state: true
   trigger:
     platform: time
-    after: '01:59:00'
+    after: '01:59:59'
   action:
     - service: light.turn_off
     - service: homeassistant.turn_off
@@ -142,7 +142,7 @@
   initial_state: true
   trigger:
     platform: time
-    after: '17:59:00'
+    after: '17:59:59'
   action:
     service: switch.turn_off
     entity_id: switch.office_heater
@@ -243,11 +243,6 @@
     - platform: state
       entity_id: group.gail_tracker
       state: 'not_home'
-    - platform: state
-      entity_id: device_tracker.yoga
-      state: 'not_home'
-      for:
-        minutes: 10
   action:
     service: switch.turn_off
     entity_id: switch.office_heater
@@ -261,9 +256,6 @@
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: device_tracker.yoga
-        state: 'home'
       - condition: template
         value_template: '{{ states.sensor.yr_temperature.state < "10" }}'
       - condition: time
@@ -291,6 +283,12 @@
         after: '22:30:00'
       - condition: time
         before: '02:00:00'
+      - condition: state
+        entity_id: group.gail_tracker
+        state: 'home'
+      - condition: state
+        entity_id: group.gervais_tracker
+        state: 'home'
   action:
     - service: homeassistant.turn_off
       entity_id: input_boolean.loop_livingcolours
@@ -395,7 +393,7 @@
 - alias: 'home presence notification'
   trigger:
     platform: state
-    entity_id: group.cam_tracker, group.gail_tracker, group.gervais_tracker, group.jen_tracker
+    entity_id: group.cam_tracker,group.gail_tracker,group.gervais_tracker,group.jen_tracker
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'
@@ -404,22 +402,19 @@
     service: notify.zulip
     data_template:
       message: >
-        {%- if trigger.to_state.attributes.friendly_name  == 'Cameron' -%}:boy: {% endif %}
-        {%- if trigger.to_state.attributes.friendly_name  == 'Gail' -%}:house_with_garden: {% endif %}
-        {%- if trigger.to_state.attributes.friendly_name  == 'Gervais' -%}:house: {% endif %}
-        {%- if trigger.to_state.attributes.friendly_name  == 'Jennifer' -%}:princess: {% endif %}
+        :{{ trigger.to_state.attributes.friendly_name }}:
         {{ trigger.to_state.attributes.friendly_name }} has
         {%- if trigger.to_state.state == 'not_home' %} exited
         {%- else %} entered
         {%- endif %} home.
       title: 'Family Location'
 
-- alias: 'iCloud presence notification'
+- alias: 'Home Assistant presence notification'
   trigger:
       - platform: state
-        entity_id: device_tracker.iphonehass,device_tracker.dgrabbsiphonehass
+        entity_id: device_tracker.iphonehass,device_tracker.dgrabbs_iphonehass
   condition:
-    condition: or
+    condition: and
     conditions:
       - condition: numeric_state
         entity_id: 'sensor.hass_uptime'
@@ -432,11 +427,10 @@
     service: notify.zulip
     data_template:
       message: >
-        {%- if trigger.to_state.attributes.friendly_name  == 'Gail' -%}:house_with_garden: {% endif %}
-        {%- if trigger.to_state.attributes.friendly_name  == 'Gervais' -%}:house: {% endif %}
+        :{{ trigger.to_state.attributes.friendly_name }}:
         {{ trigger.to_state.attributes.friendly_name }} has
         {%- if trigger.from_state.state == 'not_home' %} entered {{ trigger.to_state.state }}.
-        {%- else %} exited {{ trigger.from_state.state }}
+        {%- else %} exited {{ trigger.from_state.state }}.
         {%- endif %}
       title: 'Family Location'
 
@@ -484,6 +478,9 @@
       message: >
         []({{ states.sensor.pws_weather.attributes['entity_picture'] }})
         **Today's Forecast:** {{ states.sensor.pws_weather.state }}
+
         **High:** {{ states.sensor.yweather_temperature_max.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
+
         **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
       title: 'Weather'
+
