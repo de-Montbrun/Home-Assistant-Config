@@ -28,6 +28,7 @@ homeassistant:
     group.all_switches:
       hidden: false
 
+# IOS app zoning needs to be enabled.
     zone.home:
       track_ios: true
     zone.silverorange:
