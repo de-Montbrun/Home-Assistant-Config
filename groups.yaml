@@ -5,8 +5,8 @@
 family:
   name: Family
   entities:
-    - device_tracker.dgrabbsiphone
-    - device_tracker.iphone
+    - device_tracker.dgrabbs_iphonehass
+    - device_tracker.iphonehass
     - device_tracker.camphone
     - device_tracker.jenphone
   view: yes
