@@ -423,6 +423,8 @@
         value_template: '{{ trigger.from_state.state != "home" }}'
       - condition: template
         value_template: '{{ trigger.to_state.state != "home" }}'
+      - condition: template
+        value_template: '{{ trigger.from_state.state != trigger.to_state.state }}'
   action:
     service: notify.zulip
     data_template:
