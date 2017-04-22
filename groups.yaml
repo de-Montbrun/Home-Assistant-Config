@@ -55,6 +55,7 @@ lights_and_switches:
   entities:
     - group.wemo_switches
     - group.bedroom_lights
+    - group.kitchen_lights
     - group.livingroom_lights
     - group.misc_lights
     - group.outdoor_lights
@@ -137,6 +138,14 @@ bedroom_lights:
   entities:
     - light.bedroom0
     - light.bedroom1
+
+kitchen_lights:
+  name: kitchen lights
+  entities:
+    - light.kitchen_island
+    - light.kitchen_oven
+    - light.kitchen_table
+    - light.kitchen_window
 
 livingroom_lights:
   name: livingroom lights
