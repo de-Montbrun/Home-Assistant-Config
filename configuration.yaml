@@ -44,8 +44,6 @@ discovery:
 logger:
   default: error
   logs:
-    homeassistant.components.notify: info
-    homeassistant.components.rest_command: info
     homeassistant.components.camera: fatal
     homeassistant.components.media_player.plex: fatal
 
