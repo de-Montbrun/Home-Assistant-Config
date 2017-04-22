@@ -69,6 +69,7 @@ sensors:
     - group.livingroom_sensors
     - group.speedtest
     - group.misc_sensors
+    - group.phone_sensors
   view: yes
   icon: mdi:timer
 
@@ -218,3 +219,12 @@ misc_sensors:
     - sensor.hass_uptime
     - binary_sensor.workday_sensor
     - sensor.crime_reports
+
+phone_sensors:
+  name: phone sensors
+  entities:
+    - sensor.dgrabbs_iphone_battery_level
+    - sensor.dgrabbs_iphone_battery_state
+    - sensor.iphone_battery_level
+    - sensor.iphone_battery_state
+
