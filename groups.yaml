@@ -168,12 +168,14 @@ media_players:
   icon: mdi:play-circle-outline
   entities:
     - group.plex
-    - media_player.jens_chromeo
     - media_player.gandg
+    - media_player.gandg
+    - media_player.jens_chromeo
+    - media_player.kidtv
     - media_player.living_room_roku
     - media_player.living_room_roku_2
     - media_player.plex_web_safari
-    - media_player.kidtv
+    - media_player.spotify
 
 security_cams:
   name: Security
