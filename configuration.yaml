@@ -372,10 +372,6 @@ device_tracker:
     hosts: 192.168.2.0/24
     home_interval: 5
 
-  - platform: icloud
-    username: !secret icloud_username
-    password: !secret icloud_password
-
   - platform: ping
     hosts:
       Jennifer2: jen-phone

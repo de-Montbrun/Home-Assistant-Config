@@ -15,7 +15,6 @@ family:
 gail_tracker:
   name: Gail
   entities:
-    - device_tracker.dgrabbsiphone
     - device_tracker.dgrabbsiphone_2
     - device_tracker.gail3
     - device_tracker.dgrabbs_iphonehass
@@ -23,7 +22,6 @@ gail_tracker:
 gervais_tracker:
   name: Gervais
   entities:
-    - device_tracker.iphone
     - device_tracker.iphone_2
     - device_tracker.gervais3
     - device_tracker.iphonehass
