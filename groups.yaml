@@ -183,7 +183,7 @@ security_cams:
     - camera.front_door
 
 security_cam_sensors_switches:
-  name: cam switches
+  name: camera switches
   entities:
     - sensor.front_door_audio_connections
     - sensor.front_door_video_connections
