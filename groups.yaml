@@ -88,11 +88,11 @@ livingroom_sensors:
 security_detectors:
   name: Security Detectors
   entities:
-    - binary_sensor.front_door
     - binary_sensor.livingroom_motion
     - binary_sensor.livingroom_status
-    - sensor.front_door_light_level
     - sensor.front_door_motion
+    - sensor.front_door_light_level
+    - sensor.front_door_battery_voltage
 
 speedtest:
   name: Speedtest

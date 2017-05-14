@@ -328,11 +328,6 @@ sensor:
     radius: 5000
 
 binary_sensor:
-  - platform: ffmpeg_motion
-    name: Front Door
-    input: http://192.168.2.92:8080/video
-    changes: 2
-
   - platform: workday
     country: CA
     province: PE
@@ -403,6 +398,11 @@ input_slider:
 android_ip_webcam:
   - name: 'Front Door'
     host: 192.168.2.92
+    scan_interval: 1
+    sensors:
+      - battery_voltage
+      - light
+      - motion
     switches:
       - exposure_lock
       - ffc

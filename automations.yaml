@@ -175,6 +175,28 @@
     - service: scene.turn_on
       entity_id: scene.livingroom_normal
 
+- alias: 'Living room lux low - lights on'
+  initial_state: true
+  trigger:
+    platform: numeric_state
+    entity_id: 'sensor.living_room_lux'
+    below: '1000'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.livingroomtv
+        state: 'home'
+      - condition: state
+        entity_id: group.livingroom_lights
+        state: 'off'
+  action:
+    service: light.turn_on
+    entity_id: group.livingroom_lights
+    data:
+      brightness: 175
+      transition: 600
+
 - alias: 'Livingroom to random colours'
   trigger:
     platform: time
@@ -343,9 +365,9 @@
 
 - alias: 'Timed lights - Movement Front Door'
   trigger:
-    platform: state
-    entity_id: binary_sensor.front_door
-    to: 'on'
+    platform: numeric_state
+    entity_id: sensor.front_door_motion
+    above: '200'
   condition:
     condition: and
     conditions:
