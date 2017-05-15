@@ -180,7 +180,7 @@
   trigger:
     platform: numeric_state
     entity_id: 'sensor.living_room_lux'
-    below: '1000'
+    below: '4000'
   condition:
     condition: and
     conditions:
