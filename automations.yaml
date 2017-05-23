@@ -191,11 +191,8 @@
         entity_id: group.livingroom_lights
         state: 'off'
   action:
-    service: light.turn_on
-    entity_id: group.livingroom_lights
-    data:
-      brightness: 175
-      transition: 600
+    service: scene.turn_on
+    entity_id: scene.livingroom_normal
 
 - alias: 'Livingroom to random colours'
   trigger:
@@ -318,6 +315,8 @@
       entity_id: group.bedroom_lights
     - service: light.turn_off
       entity_id: light.bathroom
+    - service: light.turn_off
+      entity_id: group.kitchen_lights
     - service: homeassistant.turn_on
       entity_id: script.timer_livingroom_off
 
