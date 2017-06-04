@@ -121,7 +121,7 @@
   initial_state: false
   trigger:
     platform: time
-    after: '23:59:59'
+    at: '23:59:59'
   action:
     - service: light.turn_off
       entity_id: group.livingroom_lights
@@ -132,7 +132,7 @@
   initial_state: true
   trigger:
     platform: time
-    after: '01:59:59'
+    at: '02:00:00'
   action:
     - service: light.turn_off
     - service: homeassistant.turn_off
@@ -142,7 +142,7 @@
   initial_state: true
   trigger:
     platform: time
-    after: '17:59:59'
+    at: '18:00:00'
   action:
     service: switch.turn_off
     entity_id: switch.office_heater
@@ -245,13 +245,13 @@
   initial_state: true
   trigger:
     - platform: time
-      after: '23:59:59'
+      at: '23:59:59'
     - platform: time
-      after: '00:29:59'
+      at: '00:29:59'
     - platform: time
-      after: '00:59:59'
+      at: '00:59:59'
     - platform: time
-      after: '01:29:59'
+      at: '01:29:59'
   action:
     service: switch.turn_off
     entity_id: 'switch.3rd_floor_heater'
@@ -346,7 +346,7 @@
   initial_state: true
   trigger:
     platform: time
-    after: '08:09:59'
+    at: '08:10:00'
   condition:
     condition: and
     conditions:
@@ -403,11 +403,11 @@
     - platform: state
       entity_id: group.family
     - platform: 'time'
-      after: '10:00:00'
+      at: '10:00:00'
     - platform: 'time'
-      after: '18:00:00'
+      at: '18:00:00'
     - platform: 'time'
-      after: '02:00:00'
+      at: '02:00:00'
   action:
     service: rest_command.sabnzb_api
 
@@ -429,7 +429,7 @@
         {%- endif %} home.
       title: 'Family Location'
 
-- alias: 'Home Assistant presence notification'
+- alias: 'phones presence notification'
   trigger:
       - platform: state
         entity_id: device_tracker.iphonehass,device_tracker.dgrabbs_iphonehass
@@ -492,7 +492,7 @@
 - alias: 'weather forecast notification'
   trigger:
     platform: time
-    after: '07:59:00'
+    at: '08:00:00'
   action:
     service: notify.zulip
     data:
