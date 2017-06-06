@@ -423,6 +423,7 @@
     service: notify.zulip
     data_template:
       message: >
+        :{{ trigger.to_state.attributes.friendly_name | lower }}:
         {{ trigger.to_state.attributes.friendly_name }} has
         {%- if trigger.to_state.state == 'not_home' %} exited
         {%- else %} entered
@@ -449,6 +450,7 @@
     service: notify.zulip
     data_template:
       message: >
+        :{{ trigger.to_state.attributes.friendly_name | lower }}:
         {{ trigger.to_state.attributes.friendly_name }} has
         {%- if trigger.from_state.state == 'not_home' %} entered {{ trigger.to_state.state }}.
         {%- else %} exited {{ trigger.from_state.state }}.
