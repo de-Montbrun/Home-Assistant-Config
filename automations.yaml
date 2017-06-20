@@ -364,9 +364,12 @@
 
 - alias: 'Timed lights - Movement Front Door'
   trigger:
-    platform: numeric_state
-    entity_id: sensor.front_door_motion
-    above: '200'
+    - platform: state
+      entity_id: binary_sensor.ring_front_door_motion
+      state: 'on'
+    - platform: state
+      entity_id: binary_sensor.ring_front_door_ding
+      state: 'on'
   condition:
     condition: and
     conditions:

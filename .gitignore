@@ -18,6 +18,7 @@ logs
 *.swp
 .google.token
 .HA_VERSION
+.ring_cache.pickle
 .spotify-token-cache
 home-assistant.*
 known_devices.yaml
