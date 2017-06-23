@@ -450,6 +450,9 @@ rest_command:
   sabnzb_api:
     url: !secret sabnzbd_rest_url
 
+  take_a_picture:
+    url: http://192.168.2.92:8080/photo_save_only.jpg
+
 ## }}}
 
 group: !include groups.yaml

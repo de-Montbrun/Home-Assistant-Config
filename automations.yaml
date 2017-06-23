@@ -383,6 +383,25 @@
     service: homeassistant.turn_on
     entity_id: script.timed_outdoor
 
+- alias: 'Doorbell notify'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.ring_front_door_motion
+      state: 'on'
+    - platform: state
+      entity_id: binary_sensor.ring_front_door_ding
+      state: 'on'
+  action:
+    - service: notify.zulip
+      data_template:
+        message: >
+          :door: {{ trigger.to_state.attributes.friendly_name }}
+          {% if trigger.to_state.attributes.device_class == 'motion' %} :wave:
+          {% elif trigger.to_state.attributes.device_class == 'occupancy' %} :bell:
+          {% endif %}
+        title: 'Security Alert'
+    - service: rest_command.take_a_picture
+
 - alias: 'Timed lights - Movement in Livingroom'
   trigger:
     platform: state
