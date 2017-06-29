@@ -9,6 +9,7 @@ family:
     - device_tracker.iphonehass
     - device_tracker.camphone
     - device_tracker.jenphone
+    - device_tracker.grant
   view: yes
   icon: mdi:account-multiple
 
