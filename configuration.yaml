@@ -390,6 +390,7 @@ device_tracker:
     hosts:
       Jennifer2: jen-phone
       Cameron2: cam-phone
+      Grant2: grant-phone
       Gervais3: iphone
       Gail3: Gail-iPhone
 

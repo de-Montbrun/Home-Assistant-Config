@@ -436,7 +436,7 @@
 - alias: 'home presence notification'
   trigger:
     platform: state
-    entity_id: group.cam_tracker,group.gail_tracker,group.gervais_tracker,group.jen_tracker,device_tracker.grant
+    entity_id: group.cam_tracker,group.gail_tracker,group.gervais_tracker,group.jen_tracker,group.grant_tracker
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'

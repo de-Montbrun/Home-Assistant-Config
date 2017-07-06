@@ -33,6 +33,12 @@ cam_tracker:
     - device_tracker.camphone
     - device_tracker.cameron2
 
+grant_tracker:
+  name: Grant
+  entities:
+    - device_tracker.grantphone
+    - device_tracker.grant2
+
 jen_tracker:
   name: Jennifer
   entities:
