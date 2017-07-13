@@ -139,13 +139,13 @@
       entity_id: input_boolean.loop_livingcolours
 
 - alias: '6pm - heater off'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: time
     at: '18:00:00'
   action:
     service: switch.turn_off
-    entity_id: switch.office_heater
+    entity_id: switch.switch0
 
 - alias: 'Sunrise - Lights out'
   initial_state: true
@@ -256,18 +256,36 @@
     service: switch.turn_off
     entity_id: 'switch.switch1'
 
-- alias: 'Gail away - turn off heater'
+- alias: 'Window fan on when hotter inside'
   initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.yr_temperature.state < states.sensor.living_room_temp.state }}'
+  action:
+    service: switch.turn_on
+    entity_id: switch.switch0
+
+- alias: 'Window fan off when hotter outside'
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.yr_temperature.state > states.sensor.living_room_temp.state }}'
+  action:
+    service: switch.turn_off
+    entity_id: switch.switch0
+
+- alias: 'Gail away - turn off heater'
+  initial_state: false
   trigger:
     - platform: state
       entity_id: group.gail_tracker
       state: 'not_home'
   action:
     service: switch.turn_off
-    entity_id: switch.office_heater
+    entity_id: switch.switch0
 
 - alias: 'Gail home - turn on heater'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: group.gail_tracker
@@ -287,7 +305,7 @@
   action:
     service: switch.turn_on
     entity_id:
-      - switch.office_heater
+      - switch.switch0
 
 - alias: 'Bedtime'
   initial_state: true
