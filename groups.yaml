@@ -237,8 +237,8 @@ plex:
 wemo_switches:
   name: Switches
   entities:
-    - switch.3rd_floor_heater
-    - switch.office_heater
+    - switch.switch0
+    - switch.switch1
 
 misc_sensors:
   name: misc sensors
