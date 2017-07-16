@@ -416,7 +416,7 @@ input_slider:
 
 #camera:
 android_ip_webcam:
-  - name: 'Front Door'
+  - name: 'Front Door Camera'
     host: 192.168.2.92
     scan_interval: 1
     sensors:
