@@ -108,9 +108,9 @@ security_detectors:
   entities:
     - binary_sensor.livingroom_motion
     - binary_sensor.livingroom_status
-    - sensor.front_door_motion
-    - sensor.front_door_light_level
-    - sensor.front_door_battery_voltage
+    - sensor.front_door_camera_motion
+    - sensor.front_door_camera_light_level
+    - sensor.front_door_camera_battery_voltage
 
 speedtest:
   name: Speedtest
