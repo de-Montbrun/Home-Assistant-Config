@@ -266,23 +266,25 @@
     service: switch.turn_off
     entity_id: 'switch.switch1'
 
-- alias: 'Window fan on when hotter inside'
+- alias: 'Window fan on'
   initial_state: true
   trigger:
     platform: template
     value_template: '{{ states.sensor.yr_temperature.state < states.sensor.living_room_temp.state }}'
   condition:
     condition: template
-    value_template: '{{ states.sensor.living_room_temp.state > 18 }}'
+    value_template: '{{ states.sensor.living_room_temp.state  | int > 17 }}'
   action:
     service: switch.turn_on
     entity_id: switch.switch0
 
-- alias: 'Window fan off when hotter outside'
+- alias: 'Window fan off'
   initial_state: true
   trigger:
-    platform: template
-    value_template: '{{ states.sensor.yr_temperature.state > states.sensor.living_room_temp.state }}'
+    - platform: template
+      value_template: '{{ states.sensor.yr_temperature.state > states.sensor.living_room_temp.state }}'
+    - platform: template
+      value_template: '{{ states.sensor.living_room_temp.state  | int < 18 }}'
   action:
     service: switch.turn_off
     entity_id: switch.switch0
