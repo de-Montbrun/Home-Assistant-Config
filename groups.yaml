@@ -198,7 +198,7 @@ security_cams:
   view: yes
   icon: mdi:video
   entities:
-    - camera.front_door
+    - camera.front_door_camera
 
 security_cam_sensors_switches:
   name: camera switches
