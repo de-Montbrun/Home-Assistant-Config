@@ -366,19 +366,19 @@ binary_sensor:
 # {{{ Presence Trackers
 
 device_tracker:
-  - platform: asuswrt
-    host: 192.168.2.249
-    username: !secret router_username
-    mode: ap
-    protocol: ssh
-    ssh_key: /home/homeassistant/.ssh/id_rsa
-
-  - platform: asuswrt
-    host: 192.168.2.252
-    username: !secret router_username
-    password: !secret router_password
-    mode: ap
-    protocol: telnet
+#  - platform: asuswrt
+#    host: 192.168.2.249
+#    username: !secret router_username
+#    mode: ap
+#    protocol: ssh
+#    ssh_key: /home/homeassistant/.ssh/id_rsa
+#
+#  - platform: asuswrt
+#    host: 192.168.2.252
+#    username: !secret router_username
+#    password: !secret router_password
+#    mode: ap
+#    protocol: telnet
 
   - platform: nmap_tracker
     hosts: 192.168.2.0/24
