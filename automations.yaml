@@ -428,8 +428,8 @@
     entity_id: binary_sensor.ring_front_door_ding
     state: 'on'
   action:
-    service: homeassistant.media_pause
-    entity_id: media_player.living_room_roku_2
+    service: media_player.media_play_pause
+    entity_id: media_player.living_room_roku
 
 - alias: 'Doorbell notify'
   trigger:
