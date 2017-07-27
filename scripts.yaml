@@ -28,6 +28,8 @@ timer_outdoor_off:
     - service: light.turn_off
       data:
         entity_id: group.outdoor_lights
+    - delay:
+        seconds: 10
     - service: homeassistant.turn_on
       data:
         entity_id: automation.timed_lights__movement_front_door
