@@ -248,7 +248,7 @@
     entity_id: 'switch.switch1'
 
 - alias: 'Jennifer Away - turn off'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: group.jen_tracker
