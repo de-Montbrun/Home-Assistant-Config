@@ -9,7 +9,7 @@
       state: on
       transition: 2
       brightness: 255
-      xy_color: [ 0.4097, 0.3929 ]
+      xy_color: [ 0.4448, 0.4066 ]
     light.fireplace1:
       state: on
       transition: 2
@@ -58,13 +58,12 @@
     light.living_standing:
       state: on
       transition: 2
-      brightness: 255
+      brightness: 100
       xy_color: [ 0.169, 0.044 ]
     light.living_table:
       state: on
       transition: 2
       brightness: 255
-      xy_color: [ 0.169, 0.044 ]
 - name: Livingroom nightlight
   entities:
     light.fireplace0:
