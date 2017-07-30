@@ -242,7 +242,7 @@
   trigger:
     platform: state
     entity_id: group.jen_tracker
-    state: 'home'
+    to: 'home'
   action:
     service: switch.turn_on
     entity_id: 'switch.switch1'
@@ -252,7 +252,7 @@
   trigger:
     platform: state
     entity_id: group.jen_tracker
-    state: 'not_home'
+    to: 'not_home'
   action:
     service: switch.turn_off
     entity_id: 'switch.switch1'
@@ -300,7 +300,7 @@
   trigger:
     - platform: state
       entity_id: group.gail_tracker
-      state: 'not_home'
+      from: 'home'
   action:
     service: switch.turn_off
     entity_id: switch.switch0
@@ -310,7 +310,7 @@
   trigger:
     platform: state
     entity_id: group.gail_tracker
-    state: 'home'
+    to: 'home'
   condition:
     condition: and
     conditions:
@@ -333,7 +333,7 @@
   trigger:
     platform: state
     entity_id: device_tracker.livingroomtv
-    state: 'not_home'
+    to: 'not_home'
   condition:
     condition: or
     conditions:
@@ -364,10 +364,10 @@
   trigger:
     - platform: state
       entity_id: group.gail_tracker
-      state: 'not_home'
+      from: 'home'
     - platform: state
       entity_id: group.gervais_tracker
-      state: 'not_home'
+      from: 'home'
   condition:
     condition: and
     conditions:
@@ -405,10 +405,10 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.ring_front_door_motion
-      state: 'on'
+      to: 'on'
     - platform: state
       entity_id: binary_sensor.ring_front_door_ding
-      state: 'on'
+      to: 'on'
   condition:
     condition: and
     conditions:
@@ -426,7 +426,7 @@
   trigger:
     platform: state
     entity_id: binary_sensor.ring_front_door_ding
-    state: 'on'
+    to: 'on'
   action:
     service: media_player.media_play_pause
     entity_id: media_player.living_room_roku
@@ -435,10 +435,10 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.ring_front_door_motion
-      state: 'on'
+      to: 'on'
     - platform: state
       entity_id: binary_sensor.ring_front_door_ding
-      state: 'on'
+      to: 'on'
   action:
     - service: notify.zulip
       data_template:
