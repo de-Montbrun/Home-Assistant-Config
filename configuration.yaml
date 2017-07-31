@@ -356,6 +356,7 @@ binary_sensor:
     name: Livingroom Motion
     resource: !secret hue_livingroom_presence
     value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
 
   - platform: ring
     monitored_conditions:
@@ -382,7 +383,7 @@ device_tracker:
 
   - platform: nmap_tracker
     hosts: 192.168.2.0/24
-    home_interval: 15
+    home_interval: 5
 
   - platform: ping
     hosts:
