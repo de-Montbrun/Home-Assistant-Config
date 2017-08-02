@@ -251,6 +251,8 @@ ring:
 # {{{ Sensors
 
 sensor:
+  - platform: pi_hole
+    host: pi.hole
 
   - platform: command_line
     name: 'HASS uptime'
