@@ -251,6 +251,18 @@ ring:
 # {{{ Sensors
 
 sensor:
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /media/cracker
+      - type: disk_use_percent
+        arg: /media/grapes
+      - type: memory_use_percent
+      - type: load_1m
+      - type: load_5m
+      - type: load_15m
+      - type: processor_use
+
   - platform: pi_hole
     host: pi.hole
 
