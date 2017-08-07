@@ -251,6 +251,9 @@ ring:
 # {{{ Sensors
 
 sensor:
+  - platform: cert_expiry
+    host: !secret http_base_url
+
   - platform: systemmonitor
     resources:
       - type: disk_use_percent
