@@ -106,10 +106,10 @@ zone:
   radius: 50
   icon: mdi:home
 
-zone silverorange:
-  name: silverorange
-  latitude: !secret silverorange_latitude
-  longitude: !secret silverorange_longitude
+zone discoverygarden:
+  name: discoverygarden
+  latitude: !secret discoverygarden_latitude
+  longitude: !secret discoverygarden_longitude
   radius: 50
   icon: mdi:domain
 
