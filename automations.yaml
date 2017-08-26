@@ -81,16 +81,23 @@
     entity_id: scene.livingroom_dim
 
 - alias: 'Everyone home and gone to bed - Lights out'
-  initial_state: false
+  initial_state: true
   trigger:
-    - platform: time
-      minutes: '/15'
-      seconds: 0
+    - platform: state
+      entity_id: device_tracker.livingroomtv
+      to: 'not_home'
+      for:
+        minutes: 15
+    - platform: state
+      entity_id: group.cam_tracker,group.gail_tracker,group.gervais_tracker,group.jen_tracker
+      to: 'home'
+      for:
+        minutes: 30
   condition:
     condition: and
     conditions:
       - condition: time
-        after: '22:00:00'
+        after: '23:00:00'
       - condition: state
         entity_id: device_tracker.livingroomtv
         state: 'not_home'
