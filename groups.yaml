@@ -150,6 +150,7 @@ weather:
     - sensor.yweather_pressure
     - sensor.yweather_visibility
     - sensor.yweather_humidity
+    - sensor.worldtidesinfo
 
 bedroom_lights:
   name: bedroom lights
