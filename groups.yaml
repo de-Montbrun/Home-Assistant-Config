@@ -169,12 +169,13 @@ kitchen_lights:
 livingroom_lights:
   name: livingroom lights
   entities:
+    - light.couch0
+    - light.couch1
     - light.fireplace0
     - light.fireplace1
     - light.fireplace2
     - light.fireplace3
     - light.living_standing
-    - light.living_table
 
 misc_lights:
   name: misc lights
