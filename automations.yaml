@@ -92,7 +92,7 @@
       entity_id: group.cam_tracker,group.gail_tracker,group.gervais_tracker,group.jen_tracker
       to: 'home'
       for:
-        minutes: 30
+        minutes: 15
   condition:
     condition: and
     conditions:
