@@ -15,6 +15,7 @@ timed_outdoor:
     - service: light.turn_on
       data:
         entity_id: group.outdoor_lights
+        brightness: 255
     # Set new timer
     - service: script.turn_on
       data:
