@@ -407,7 +407,7 @@ device_tracker:
 
   - platform: nmap_tracker
     hosts: 192.168.2.10-14
-    home_interval: 15
+    home_interval: 17
 
   - platform: nmap_tracker
     hosts: 192.168.2.15-100
