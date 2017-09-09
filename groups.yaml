@@ -126,6 +126,7 @@ weather:
   entities:
     - sun.sun
     - sensor.moon
+    - sensor.season
     - sensor.yr_symbol
     - sensor.yr_temperature
     - sensor.pws_alerts

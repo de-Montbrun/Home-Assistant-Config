@@ -251,6 +251,8 @@ ring:
 # {{{ Sensors
 
 sensor:
+  - platform: season
+
   - platform: cert_expiry
     host: !secret http_base_url
 
