@@ -158,6 +158,9 @@
   trigger:
     platform: time
     at: '18:00:00'
+  condition:
+    condition: template
+    value_template: '{{ states("sensor.season") != "Summer" }}'
   action:
     service: switch.turn_off
     entity_id: switch.switch0
@@ -279,6 +282,9 @@
       at: '00:59:59'
     - platform: time
       at: '01:29:59'
+  condition:
+    condition: template
+    value_template: '{{ states("sensor.season") != "Summer" }}'
   action:
     service: switch.turn_off
     entity_id: 'switch.switch1'
@@ -289,8 +295,13 @@
     platform: template
     value_template: '{{ states.sensor.yr_temperature.state < states.sensor.living_room_temp.state }}'
   condition:
-    condition: template
-    value_template: '{{ states.sensor.living_room_temp.state | int >= 20 }}'
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states.sensor.living_room_temp.state | int >= 20 }}'
+      - condition: state
+        entity_id: sensor.season
+        state: 'Summer'
   action:
     service: switch.turn_on
     entity_id: switch.switch0
@@ -302,6 +313,10 @@
       value_template: '{{ states.sensor.yr_temperature.state > states.sensor.living_room_temp.state }}'
     - platform: template
       value_template: '{{ states.sensor.living_room_temp.state | int < 20 }}'
+  condition:
+    condition: state
+    entity_id: sensor.season
+    state: 'Summer'
   action:
     service: switch.turn_off
     entity_id: switch.switch0
@@ -312,6 +327,9 @@
     - platform: state
       entity_id: group.gail_tracker
       from: 'home'
+  condition:
+    condition: template
+    value_template: '{{ states("sensor.season") != "Summer" }}'
   action:
     service: switch.turn_off
     entity_id: switch.switch0
@@ -334,6 +352,8 @@
       - condition: state
         entity_id: 'binary_sensor.workday_sensor'
         state: 'on'
+      - condition: template
+        value_template: '{{ states("sensor.season") != "Summer" }}'
   action:
     service: switch.turn_on
     entity_id:
