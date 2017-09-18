@@ -87,17 +87,15 @@
       entity_id: device_tracker.livingroomtv
       to: 'not_home'
       for:
-        minutes: 15
+        minutes: 5
     - platform: state
       entity_id: group.cam_tracker,group.gail_tracker,group.gervais_tracker,group.jen_tracker
       to: 'home'
-      for:
-        minutes: 15
   condition:
     condition: and
     conditions:
       - condition: time
-        after: '23:00:00'
+        after: '22:30:00'
       - condition: state
         entity_id: device_tracker.livingroomtv
         state: 'not_home'
@@ -198,7 +196,7 @@
   trigger:
     platform: numeric_state
     entity_id: 'sensor.living_room_lux'
-    below: '5000'
+    below: '6500'
   condition:
     condition: and
     conditions:
@@ -232,10 +230,11 @@
   action:
     service: light.turn_on
     entity_id:
+      - light.couch0
+      - light.couch1
       - light.fireplace0
       - light.fireplace3
       - light.living_standing
-      - light.living_table
     data:
       effect: random
       transition: 5
@@ -290,7 +289,7 @@
     entity_id: 'switch.switch1'
 
 - alias: 'Window fan on'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: template
     value_template: '{{ states.sensor.yr_temperature.state < states.sensor.living_room_temp.state }}'
@@ -307,7 +306,7 @@
     entity_id: switch.switch0
 
 - alias: 'Window fan off'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: template
       value_template: '{{ states.sensor.yr_temperature.state > states.sensor.living_room_temp.state }}'
@@ -370,11 +369,13 @@
   condition:
     condition: and
     conditions:
-      - condition: time
-        after: '22:30:00'
-      - condition: time
-        before: '02:00:00'
       - condition: or
+        conditions:
+        - condition: time
+          after: '22:00:00'
+        - condition: time
+          before: '02:00:00'
+     - condition: or
         conditions:
           - condition: state
             entity_id: group.gail_tracker

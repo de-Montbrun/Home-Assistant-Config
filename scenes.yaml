@@ -40,11 +40,6 @@
       transition: 2
       brightness: 255
       xy_color: [ 0.4448, 0.4066 ]
-    light.living_table:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
 - name: Livingroom dim
   entities:
     light.couch0:
@@ -80,10 +75,6 @@
       transition: 2
       brightness: 100
       xy_color: [ 0.169, 0.044 ]
-    light.living_table:
-      state: on
-      transition: 2
-      brightness: 255
 - name: Livingroom nightlight
   entities:
     light.couch0:
@@ -117,11 +108,6 @@
       brightness: 50
       xy_color: [ 0.5424, 0.4197 ]
     light.living_standing:
-      state: on
-      transition: 2
-      brightness: 50
-      xy_color: [ 0.5424, 0.4197 ]
-    light.living_table:
       state: on
       transition: 2
       brightness: 50
