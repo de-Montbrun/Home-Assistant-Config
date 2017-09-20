@@ -375,7 +375,7 @@
           after: '22:00:00'
         - condition: time
           before: '02:00:00'
-     - condition: or
+      - condition: or
         conditions:
           - condition: state
             entity_id: group.gail_tracker
