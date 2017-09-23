@@ -99,9 +99,9 @@
       - condition: state
         entity_id: device_tracker.livingroomtv
         state: 'not_home'
-#      - condition: state
-#        entity_id: group.cam_tracker
-#        state: 'home'
+      - condition: state
+        entity_id: group.cam_tracker
+        state: 'home'
       - condition: state
         entity_id: group.jen_tracker
         state: 'home'
