@@ -113,6 +113,9 @@ security_detectors:
     - sensor.front_door_camera_motion
     - sensor.front_door_camera_light_level
     - sensor.front_door_camera_battery_voltage
+    - sensor.computer_camera_motion
+    - sensor.computer_camera_light_level
+    - sensor.computer_camera_battery_voltage
 
 speedtest:
   name: Speedtest
@@ -204,6 +207,7 @@ security_cams:
   icon: mdi:video
   entities:
     - camera.front_door_camera
+    - camera.computer_camera
 
 security_cam_sensors_switches:
   name: camera switches
