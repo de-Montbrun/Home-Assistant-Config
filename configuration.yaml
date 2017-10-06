@@ -408,17 +408,21 @@ device_tracker:
     home_interval: 5
 
   - platform: nmap_tracker
-    hosts: 192.168.2.10-14
-    home_interval: 17
+    hosts: 192.168.2.10-15
+    home_interval: 20
 
   - platform: nmap_tracker
-    hosts: 192.168.2.15-100
+    hosts: 192.168.2.16-100
     home_interval: 5
     exclude:
       - 192.168.2.150
 
   - platform: nmap_tracker
-    hosts: 192.168.2.101-254
+    hosts: 192.168.2.101-120
+    home_interval: 5
+
+  - platform: nmap_tracker
+    hosts: 192.168.2.121-254
     home_interval: 5
 
   - platform: ping
