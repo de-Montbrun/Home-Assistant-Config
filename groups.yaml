@@ -241,6 +241,8 @@ all_scenes:
   name: all scenes
   icon: mdi:home-variant
   entities:
+    - scene.kitchen_off
+    - scene.kitchen_one_percent
     - scene.livingroom_normal
     - scene.livingroom_dim
     - scene.livingroom_nightlight
