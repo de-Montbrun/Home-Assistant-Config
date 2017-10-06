@@ -513,6 +513,27 @@ rest_command:
     url: http://192.168.2.92:8080/photo_save_only.jpg
 
 ## }}}
+# {{{ WiFi remote
+
+switch:
+  - platform: broadlink
+    host: 192.168.2.7
+    mac: '34:EA:34:CC:E7:DF'
+    timeout: 15
+    switches:
+      ceiling_fan_power:
+        friendly_name: 'Ceiling Name'
+        command_on: ''
+        command_off: ''
+      tv_power:
+        friendly_name: 'TV Power'
+        command_on: 'JgBQAAABJ5USExITEjgRFBEUERQRFBETEjgSOBITEzcSOBI4ETkROBIUERMSExI4EhMSExITERQRORI4ETgTEhI4EjgSOBI4EQAFLQABKEsRAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABKpISExITEjgSExITEhMSExITETkROREUETgSOBI4EjgSOBE4EhQSEhI4EhMSExITEhMSExI4ETkRFBE4EjgSOBI4EQAFLAABKkgSAA0FAAAAAAAAAAA='
+      tv_source:
+        command_on: 'JgBQAAABK5ISExITEjgRFBEUERQSEhITEjgSOBITEjgRORE4EjgSOBI4EjgSExE5ERQRFBITERMSExITEjgSExI4EjgRORE4EgAFKwABKkkSAA0FAAAAAAAAAAA='
+        command_off: 'JgBQAAABK5ISExITEjgRFBEUERQSEhITEjgSOBITEjgRORE4EjgSOBI4EjgSExE5ERQRFBITERMSExITEjgSExI4EjgRORE4EgAFKwABKkkSAA0FAAAAAAAAAAA='
+
+# }}}
 
 group: !include groups.yaml
 scene: !include scenes.yaml
