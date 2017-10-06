@@ -2,6 +2,14 @@
 ### Groups
 #################################################################
 
+devices:
+  name: Devices
+  entities:
+    - group.family
+    - group.all_devices
+  view: yes
+  icon: mdi:network
+
 family:
   name: Family
   entities:
@@ -10,7 +18,6 @@ family:
     - device_tracker.camphone
     - device_tracker.jenphone
     - device_tracker.grant
-  view: yes
   icon: mdi:account-multiple
 
 gail_tracker:
