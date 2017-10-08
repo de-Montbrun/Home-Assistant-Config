@@ -46,6 +46,7 @@ logger:
   logs:
     homeassistant.components.camera: fatal
     homeassistant.components.media_player.plex: fatal
+    homeassistant.components.media_player.roku: fatal
 
 # Wemo switches are not always being discovered automatically.
 wemo:
