@@ -400,6 +400,8 @@
       entity_id: group.kitchen_lights
     - service: homeassistant.turn_on
       entity_id: script.timer_livingroom_off
+    - service: ifttt.trigger
+      data: {"event":"kitchen_lights_off"}
 
 - alias: 'GandG not home - turn off bedroom lights'
   initial_state: true
