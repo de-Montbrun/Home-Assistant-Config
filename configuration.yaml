@@ -60,9 +60,9 @@ light:
   host: 192.168.2.120
   allow_unreachable:
 
-# Lutron Dimmers in Kitchen
-lutron_caseta:
-  host: 192.168.2.121
+## Lutron Dimmers in Kitchen
+#lutron_caseta:
+#  host: 192.168.2.121
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -440,6 +440,21 @@ device_tracker:
 # {{{ Toggles
 
 input_boolean:
+  bathroom:
+    name: bathroom
+    icon: mdi:lightbulb
+  kitchen_island:
+    name: kitchen_island
+    icon: mdi:lightbulb
+  kitchen_oven:
+    name: kitchen_oven
+    icon: mdi:lightbulb
+  kitchen_table:
+    name: kitchen_table
+    icon: mdi:lightbulb
+  kitchen_window:
+    name: kitchen_window
+    icon: mdi:lightbulb
   loop_livingcolours:
     name: Loop Livingroom Colours
     initial: off

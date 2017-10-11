@@ -121,6 +121,8 @@
             value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
   action:
     - service: light.turn_off
+    - service: ifttt.trigger
+      data: {"event":"kitchen_lights_off"}
     - service: homeassistant.turn_off
       entity_id: input_boolean.loop_livingcolours
 
@@ -147,6 +149,8 @@
     - service: homeassistant.turn_off
       entity_id: input_boolean.loop_livingcolours
     - service: light.turn_off
+    - service: ifttt.trigger
+      data: {"event":"kitchen_lights_off"}
     - service: homeassistant.turn_on
       data:
         entity_id: automation.timed_lights__movement_front_door
@@ -170,7 +174,9 @@
     event: sunrise
     offset: '+00:10:00'
   action:
-    service: light.turn_off
+    - service: light.turn_off
+    - service: ifttt.trigger
+      data: {"event":"kitchen_lights_off"}
 
 - alias: 'Sunset - Lights on'
   initial_state: true
@@ -396,8 +402,6 @@
       entity_id: group.bedroom_lights
     - service: light.turn_off
       entity_id: light.bathroom
-    - service: light.turn_off
-      entity_id: group.kitchen_lights
     - service: homeassistant.turn_on
       entity_id: script.timer_livingroom_off
     - service: ifttt.trigger
@@ -648,3 +652,20 @@
         {% endif %}
         drive is almost full.
       title: 'Alert'
+
+- alias: 'kitchen lights'
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: input_boolean.bathroom
+    - platform: state
+      entity_id: input_boolean.kitchen_island
+    - platform: state
+      entity_id: input_boolean.kitchen_oven
+    - platform: state
+      entity_id: input_boolean.kitchen_table
+    - platform: state
+      entity_id: input_boolean.kitchen_window
+  action:
+    service: ifttt.trigger
+    data_template: {"event": "{{ trigger.to_state.attributes.friendly_name }}_{{ trigger.to_state.state }}"}
