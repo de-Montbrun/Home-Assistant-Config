@@ -456,7 +456,6 @@ input_number:
 # }}}
 # {{{ Security Cams
 
-#camera:
 android_ip_webcam:
   - name: 'Front Door Camera'
     host: 192.168.2.92
