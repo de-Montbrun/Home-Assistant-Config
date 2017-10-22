@@ -273,15 +273,9 @@ sensor:
   - platform: pi_hole
     host: pi.hole
 
-  - platform: command_line
+  - platform: uptime
     name: 'HASS uptime'
-    command: echo "$(($(date +%s) - $(date --date="`systemctl show home-assistant.service -p ActiveEnterTimestamp | awk -F'=' '{print $2}'`" "+%s")))"
-    scan_interval: 60
-    unit_of_measurement: minutes
-    value_template: >-
-      {% set uptime = value | int %}
-      {% set minutes = (uptime / 60 ) | int %}
-      {{ minutes }}
+    unit_of_measurement: hours
 
   - platform: moon
 
