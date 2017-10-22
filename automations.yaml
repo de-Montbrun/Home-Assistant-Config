@@ -542,7 +542,7 @@
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'
-    above: '1'
+    above: '.01'
   action:
     service: notify.zulip
     data_template:
@@ -564,7 +564,7 @@
     conditions:
       - condition: numeric_state
         entity_id: 'sensor.hass_uptime'
-        above: '1'
+        above: '.01'
       - condition: template
         value_template: '{{ trigger.from_state.state != "home" }}'
       - condition: template
@@ -590,7 +590,7 @@
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'
-    above: '1'
+    above: '.01'
   action:
     service: notify.zulip
     data_template:
@@ -610,7 +610,7 @@
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'
-    above: '1'
+    above: '.01'
   action:
     service: notify.zulip
     data:
