@@ -353,11 +353,6 @@ sensor:
       - humidity
       - temperature
 
-  - platform: plex
-    host: plex
-    username: !secret plex_username
-    password: !secret plex_password
-
   - platform: crimereports
     name: Crime Reports
     radius: 5000
