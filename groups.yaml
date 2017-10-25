@@ -116,7 +116,7 @@ security_detectors:
   name: Security Detectors
   entities:
     - binary_sensor.livingroom_motion
-    - binary_sensor.livingroom_status
+    - binary_sensor.livingroom_presence
     - sensor.front_door_camera_motion
     - sensor.front_door_camera_light_level
     - sensor.front_door_camera_battery_voltage

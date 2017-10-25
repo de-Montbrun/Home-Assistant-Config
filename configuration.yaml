@@ -363,13 +363,13 @@ binary_sensor:
     province: PE
 
   - platform: rest
-    name: Livingroom Status
+    name: Livingroom Motion
     resource: !secret hue_livingroom_status
     value_template: '{{ value_json.state.status }}'
     scan_interval: 2
 
   - platform: rest
-    name: Livingroom Motion
+    name: Livingroom Presence
     resource: !secret hue_livingroom_presence
     value_template: '{{ value_json.state.presence }}'
     scan_interval: 2
