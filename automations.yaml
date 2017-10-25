@@ -479,7 +479,7 @@
     to: 'on'
   action:
     service: media_player.media_play_pause
-    entity_id: media_player.living_room_roku
+    entity_id: media_player.plex_81cd37e4b6139e46a9735a145c08213c
 
 - alias: 'Doorbell notify'
   initial_state: true
