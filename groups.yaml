@@ -60,6 +60,7 @@ settings:
     - group.livingroom_knobs
     - group.all_scenes
     - group.security_cam_sensors_switches
+    - group.all_switches
   view: yes
   icon: mdi:settings
 
@@ -295,3 +296,4 @@ systemmonitor_sensors:
     - sensor.disk_used_mediacracker
     - sensor.disk_used_mediagrapes
     - sensor.ssl_certificate_expiry
+    - sensor.filesize_db

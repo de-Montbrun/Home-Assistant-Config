@@ -28,6 +28,10 @@ homeassistant:
     group.all_switches:
       hidden: false
 
+    sensor.filesize_db:
+      friendly_name: SQLite DB size
+      icon: mdi:database
+
 # }}}
 # {{{ misc
 
@@ -367,6 +371,13 @@ sensor:
   - platform: crimereports
     name: Crime Reports
     radius: 5000
+
+  - platform: command_line
+    name: 'filesize_db'
+    command: 'stat -c %s "/etc/homeassistant/home-assistant_v2.db"'
+    unit_of_measurement: 'MB'
+    value_template: '{{ (value|int / 1024 / 1024)|round(1) }}'
+    scan_interval: 900
 
 binary_sensor:
   - platform: workday
