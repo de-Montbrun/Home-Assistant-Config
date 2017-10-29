@@ -89,7 +89,7 @@
       for:
         minutes: 5
     - platform: state
-      entity_id: group.cam_tracker,group.gail_tracker,group.gervais_tracker,group.jen_tracker
+      entity_id: sensor.gail,sensor.gervais,group.cam_tracker,group.jen_tracker
       to: 'home'
   condition:
     condition: and
@@ -108,14 +108,14 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: group.gail_tracker
+            entity_id: sensor.gail
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.dgrabbs_iphonehass) > 10 }}'
       - condition: or
         conditions:
           - condition: state
-            entity_id: group.gervais_tracker
+            entity_id: sensor.gervais
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
@@ -330,7 +330,7 @@
   initial_state: false
   trigger:
     - platform: state
-      entity_id: group.gail_tracker
+      entity_id: sensor.gail
       from: 'home'
   condition:
     condition: template
@@ -343,7 +343,7 @@
   initial_state: false
   trigger:
     platform: state
-    entity_id: group.gail_tracker
+    entity_id: sensor.gail
     to: 'home'
   condition:
     condition: and
@@ -384,14 +384,14 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: group.gail_tracker
+            entity_id: sensor.gail
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.dgrabbs_iphonehass) > 10 }}'
       - condition: or
         conditions:
           - condition: state
-            entity_id: group.gervais_tracker
+            entity_id: sensor.gervais
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
@@ -411,20 +411,20 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: group.gail_tracker
+      entity_id: sensor.gail
       from: 'home'
     - platform: state
-      entity_id: group.gervais_tracker
+      entity_id: sensor.gervais
       from: 'home'
   condition:
     condition: and
     conditions:
       - condition: state
-        entity_id: group.gail_tracker
-        state: 'not_home'
+        entity_id: binary_sensor.gail_home
+        state: 'off'
       - condition: state
-        entity_id: group.gervais_tracker
-        state: 'not_home'
+        entity_id: binary_sensor.gervais_home
+        state: 'off'
   action:
     service: light.turn_off
     entity_id: group.bedroom_lights
@@ -538,7 +538,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: group.cam_tracker,group.gail_tracker,group.gervais_tracker,group.jen_tracker,group.grant_tracker
+    entity_id: sensor.gail,sensor.gervais,group.cam_tracker,group.jen_tracker,group.grant_tracker
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'

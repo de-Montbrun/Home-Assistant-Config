@@ -13,26 +13,12 @@ devices:
 family:
   name: Family
   entities:
-    - device_tracker.dgrabbs_iphonehass
-    - device_tracker.iphonehass
+    - sensor.gail
+    - sensor.gervais
     - device_tracker.camphone
     - device_tracker.jenphone
     - device_tracker.grant
   icon: mdi:account-multiple
-
-gail_tracker:
-  name: Gail
-  entities:
-    - device_tracker.dgrabbsiphone_2
-    - device_tracker.gail3
-    - device_tracker.dgrabbs_iphonehass
-
-gervais_tracker:
-  name: Gervais
-  entities:
-    - device_tracker.iphone_2
-    - device_tracker.gervais3
-    - device_tracker.iphonehass
 
 cam_tracker:
   name: Cameron

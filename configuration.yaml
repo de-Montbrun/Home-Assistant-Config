@@ -32,6 +32,16 @@ homeassistant:
       friendly_name: SQLite DB size
       icon: mdi:database
 
+    binary_sensor.gail_home:
+      hidden: true
+    sensor.gail:
+      entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
+
+    binary_sensor.gervais_home:
+      hidden: true
+    sensor.gervais:
+      entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
+
 # }}}
 # {{{ misc
 
@@ -379,6 +389,28 @@ sensor:
     value_template: '{{ (value|int / 1024 / 1024)|round(1) }}'
     scan_interval: 900
 
+  - platform: 'template'
+    sensors:
+      gail:
+        friendly_name: 'Gail'
+        value_template: >-
+          {% if is_state("binary_sensor.gail_home", "on") %}
+            home
+          {% else %}
+            {{ states("device_tracker.dgrabbs_iphonehass") }}
+          {% endif %}
+
+  - platform: 'template'
+    sensors:
+      gervais:
+        friendly_name: 'Gervais'
+        value_template: >-
+          {% if is_state("binary_sensor.gervais_home", "on") %}
+            home
+          {% else %}
+            {{ states("device_tracker.device_tracker.iphonehass") }}
+          {% endif %}
+
 binary_sensor:
   - platform: workday
     country: CA
@@ -400,6 +432,42 @@ binary_sensor:
     monitored_conditions:
       - ding
       - motion
+
+  - platform: 'bayesian'
+    name: gail_home
+    prior: 0.25
+    probability_threshold: 0.95
+    observations:
+      - entity_id: 'device_tracker.dgrabbs_iphonehass'
+        prob_given_true: 1
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.dgrabbsiphone_2'
+        prob_given_true: 1
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.gail3'
+        prob_given_true: 1
+        platform: 'state'
+        to_state: 'home'
+
+  - platform: 'bayesian'
+    name: gervais_home
+    prior: 0.25
+    probability_threshold: 0.95
+    observations:
+      - entity_id: 'device_tracker.iphonehass'
+        prob_given_true: 1
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.iphone_2'
+        prob_given_true: 1
+        platform: 'state'
+        to_state: 'home'
+      - entity_id: 'device_tracker.gervais3'
+        prob_given_true: 1
+        platform: 'state'
+        to_state: 'home'
 
 # }}}
 # {{{ Presence Trackers
