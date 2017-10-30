@@ -240,7 +240,7 @@
       - light.couch1
       - light.fireplace0
       - light.fireplace3
-      - light.living_standing
+      - light.table
     data:
       effect: random
       transition: 5

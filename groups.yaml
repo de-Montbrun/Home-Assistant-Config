@@ -173,7 +173,7 @@ livingroom_lights:
     - light.fireplace1
     - light.fireplace2
     - light.fireplace3
-    - light.living_standing
+    - light.table
 
 misc_lights:
   name: misc lights

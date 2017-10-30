@@ -35,7 +35,7 @@
       transition: 2
       brightness: 255
       xy_color: [ 0.4448, 0.4066 ]
-    light.living_standing:
+    light.table:
       state: on
       transition: 2
       brightness: 255
@@ -70,7 +70,7 @@
       transition: 2
       brightness: 255
       xy_color: [ 0.169, 0.044 ]
-    light.living_standing:
+    light.table:
       state: on
       transition: 2
       brightness: 100
@@ -107,7 +107,7 @@
       transition: 2
       brightness: 50
       xy_color: [ 0.5424, 0.4197 ]
-    light.living_standing:
+    light.table:
       state: on
       transition: 2
       brightness: 50
