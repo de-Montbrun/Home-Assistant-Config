@@ -408,7 +408,7 @@ sensor:
           {% if is_state("binary_sensor.gervais_home", "on") %}
             home
           {% else %}
-            {{ states("device_tracker.device_tracker.iphonehass") }}
+            {{ states("device_tracker.iphonehass") }}
           {% endif %}
 
 binary_sensor:
@@ -492,11 +492,11 @@ device_tracker:
     home_interval: 5
 
   - platform: nmap_tracker
-    hosts: 192.168.2.10-15
+    hosts: 192.168.2.10-13
     home_interval: 20
 
   - platform: nmap_tracker
-    hosts: 192.168.2.16-100
+    hosts: 192.168.2.14-100
     home_interval: 5
     exclude:
       - 192.168.2.150
