@@ -497,9 +497,7 @@ device_tracker:
 
   - platform: nmap_tracker
     hosts: 192.168.2.14-100
-    home_interval: 5
-    exclude:
-      - 192.168.2.150
+    home_interval: 2
 
   - platform: nmap_tracker
     hosts: 192.168.2.101-120
@@ -508,6 +506,8 @@ device_tracker:
   - platform: nmap_tracker
     hosts: 192.168.2.121-254
     home_interval: 5
+    exclude:
+      - 192.168.2.150
 
   - platform: ping
     count: 10
