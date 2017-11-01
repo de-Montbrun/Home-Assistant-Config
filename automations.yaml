@@ -678,9 +678,14 @@
       for:
         minutes: 30
   condition:
-    condition: state
-    entity_id: device_tracker.retropiedem
-    state: 'not_home'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.retropie
+        state: 'not_home'
+      - condition: state
+        entity_id: device_tracker.livingroomtv
+        state: 'home'
   action:
     service: switch.turn_off
     entity_id: switch.tv_power
