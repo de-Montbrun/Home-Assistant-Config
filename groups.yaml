@@ -90,7 +90,7 @@ livingroom_knobs:
   name: Livingroom Knobs
   entities:
     - input_boolean.loop_livingcolours
-    - input_slider.livingroom_brightness
+    - input_number.livingroom_brightness
 
 livingroom_sensors:
   name: Livingroom Sensors
