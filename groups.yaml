@@ -199,6 +199,7 @@ security_cams:
   entities:
     - camera.front_door_camera
     - camera.computer_camera
+    - camera.front_door
 
 security_cam_sensors_switches:
   name: camera switches

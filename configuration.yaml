@@ -597,8 +597,8 @@ android_ip_webcam:
       - whitebalance_lock
       - video_recording
 
-#camera:
-#  - platform: ring
+camera:
+  - platform: ring
 
 # }}}
 # {{{ Notify
