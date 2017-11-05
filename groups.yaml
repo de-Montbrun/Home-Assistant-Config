@@ -282,4 +282,5 @@ systemmonitor_sensors:
     - sensor.disk_used_mediacracker
     - sensor.disk_used_mediagrapes
     - sensor.ssl_certificate_expiry
+    - sensor.deMontbrun_DNS_Expiry
     - sensor.filesize_db
