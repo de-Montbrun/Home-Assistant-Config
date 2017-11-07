@@ -159,10 +159,10 @@ bedroom_lights:
 kitchen_lights:
   name: kitchen lights
   entities:
-    - input_boolean.kitchen_island
-    - input_boolean.kitchen_oven
-    - input_boolean.kitchen_table
-    - input_boolean.kitchen_window
+    - light.kitchen_island
+    - light.kitchen_oven
+    - light.kitchen_table
+    - light.kitchen_window
 
 livingroom_lights:
   name: livingroom lights
@@ -178,7 +178,7 @@ livingroom_lights:
 misc_lights:
   name: misc lights
   entities:
-    - input_boolean.bathroom
+    - light.bathroom
 
 media_players:
   name: Media Players
