@@ -18,6 +18,8 @@ homeassistant:
 # {{{ customizations
 
   customize:
+    group.all_scenes:
+      hidden: false
     group.all_devices:
       hidden: false
     group.all_scripts:
