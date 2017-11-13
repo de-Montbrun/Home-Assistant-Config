@@ -494,6 +494,19 @@
           {% endif %}
         title: 'Security Alert'
     - service: rest_command.take_a_picture
+    - service: camera.snapshot
+      data:
+        entity_id: camera.front_door_camera
+        filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door1.jpg'
+    - delay: '00:02:00'
+    - service: downloader.download_file
+      data_template:
+        url: '{{ states.camera.front_door.attributes.video_url }}'
+        filename: '{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door2.mp4'
+    - service: camera.snapshot
+      data_template:
+        entity_id: camera.front_door
+        filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door2.jpg'
 
 - alias: 'Timed lights - Movement in Livingroom'
   initial_state: true
