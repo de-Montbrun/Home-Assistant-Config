@@ -600,6 +600,7 @@ android_ip_webcam:
 
 camera:
   - platform: ring
+    scan_interval: 90
 
 # }}}
 # {{{ Notify
