@@ -466,11 +466,11 @@ binary_sensor:
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.dgrabbsiphone_2'
-        prob_given_true: 0.5
+        prob_given_true: 1
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.gail3'
-        prob_given_true: 0.5
+        prob_given_true: 1
         platform: 'state'
         to_state: 'home'
 
@@ -484,11 +484,11 @@ binary_sensor:
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.iphone_2'
-        prob_given_true: 0.5
+        prob_given_true: 1
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.gervais3'
-        prob_given_true: 0.5
+        prob_given_true: 1
         platform: 'state'
         to_state: 'home'
 
@@ -515,11 +515,11 @@ device_tracker:
     home_interval: 5
 
   - platform: nmap_tracker
-    hosts: 192.168.2.10-15
+    hosts: 192.168.2.10-13
     home_interval: 20
 
   - platform: nmap_tracker
-    hosts: 192.168.2.16-100
+    hosts: 192.168.2.14-100
     home_interval: 2
 
   - platform: nmap_tracker
