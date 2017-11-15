@@ -498,7 +498,7 @@
       data:
         entity_id: camera.front_door_camera
         filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door1.jpg'
-    - delay: '00:02:00'
+    - delay: '00:05:30'
     - service: downloader.download_file
       data_template:
         url: '{{ states.camera.front_door.attributes.video_url }}'
