@@ -343,6 +343,25 @@ sensor:
       - upload
 
   - platform: rest
+    resource: !secret hue_bedroom_battery
+    value_template: '{{ value_json.config.battery }}'
+    unit_of_measurement: '%'
+    scan_interval: 86400
+    name: 'Bed Room Battery Level'
+
+  - platform: rest
+    resource: !secret hue_bedroom_lightlevel
+    value_template: '{{ value_json.state.lightlevel }}'
+    unit_of_measurement: Lux
+    name: 'Bed Room Lux'
+
+  - platform: rest
+    resource: !secret hue_bedroom_temp
+    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
+    unit_of_measurement: °C
+    name: 'Bed Room Temp'
+
+  - platform: rest
     resource: !secret hue_livingroom_battery
     value_template: '{{ value_json.config.battery }}'
     unit_of_measurement: '%'
@@ -432,6 +451,18 @@ binary_sensor:
   - platform: workday
     country: CA
     province: PE
+
+  - platform: rest
+    name: Bedroom Motion
+    resource: !secret hue_bedroom_status
+    value_template: '{{ value_json.state.status }}'
+    scan_interval: 2
+
+  - platform: rest
+    name: Bedroom Presence
+    resource: !secret hue_bedroom_presence
+    value_template: '{{ value_json.state.presence }}'
+    scan_interval: 2
 
   - platform: rest
     name: Livingroom Motion
