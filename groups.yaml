@@ -66,6 +66,7 @@ sensors:
   entities:
     - group.weather
     - group.security_detectors
+    - group.bedroom_sensors
     - group.livingroom_sensors
     - group.speedtest
     - group.misc_sensors
@@ -86,6 +87,13 @@ doorbell:
     - sensor.ring_front_door_last_motion
     - sensor.ring_front_door_volume
 
+bedroom_sensors:
+  name: Bedroom Sensors
+  entities:
+    - sensor.bed_room_battery_level
+    - sensor.bed_room_lux
+    - sensor.bed_room_temp
+
 livingroom_knobs:
   name: Livingroom Knobs
   entities:
@@ -102,6 +110,8 @@ livingroom_sensors:
 security_detectors:
   name: Security Detectors
   entities:
+    - binary_sensor.bedroom_motion
+    - binary_sensor.bedroom_presence
     - binary_sensor.livingroom_motion
     - binary_sensor.livingroom_presence
     - sensor.front_door_camera_motion
