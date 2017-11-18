@@ -152,7 +152,7 @@
         entity_id: automation.timed_lights__movement_front_door
 
 - alias: '6pm - heater off'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: time
     at: '18:00:00'
@@ -321,7 +321,7 @@
     entity_id: switch.switch0
 
 - alias: 'Gail away - turn off heater'
-  initial_state: false
+  initial_state: true
   trigger:
     - platform: state
       entity_id: sensor.gail
@@ -334,7 +334,7 @@
     entity_id: switch.switch0
 
 - alias: 'Gail home - turn on heater'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: sensor.gail
