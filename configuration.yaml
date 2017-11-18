@@ -75,12 +75,6 @@ logger:
     homeassistant.components.media_player.plex: fatal
     homeassistant.components.media_player.roku: fatal
 
-# Wemo switches are not always being discovered automatically.
-wemo:
-  static:
-    - 192.168.2.80
-    - 192.168.2.81
-
 # Hue lights are not being discovered automaically.
 light:
   platform: hue
@@ -623,9 +617,19 @@ rest_command:
     url: http://192.168.2.92:8080/photo_save_only.jpg
 
 ## }}}
-# {{{ WiFi remote
+# {{{ Switches
+
+# Wemo switches are not always being discovered automatically.
+wemo:
+  static:
+    - 192.168.2.80
+    - 192.168.2.81
 
 switch:
+  - platform: tplink
+    host:  192.168.2.82
+    name: Switch2
+
   - platform: broadlink
     host: 192.168.2.7
     mac: '34:EA:34:CC:E7:DF'
