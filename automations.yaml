@@ -261,7 +261,7 @@
     entity_id: 'switch.switch1'
 
 - alias: 'Jennifer Away - turn off'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: group.jen_tracker
@@ -271,7 +271,7 @@
     entity_id: 'switch.switch1'
 
 - alias: 'Midnight - heater off'
-  initial_state: false
+  initial_state: true
   trigger:
     - platform: time
       at: '23:59:59'
