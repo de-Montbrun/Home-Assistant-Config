@@ -85,8 +85,8 @@ light:
 lutron_caseta:
   host: 192.168.2.121
   keyfile: 'lutron/caseta.key'
-  certfile: 'lutron/caseta.cert'
-  ca_certs: 'lutron/ca_certs'
+  certfile: 'lutron/caseta.crt'
+  ca_certs: 'lutron/caseta-bridge.crt'
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
