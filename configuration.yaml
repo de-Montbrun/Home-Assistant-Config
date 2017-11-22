@@ -245,6 +245,7 @@ zone yyt:
 
 # Enables the frontend
 frontend:
+  javascript_version: latest
 
 http:
   base_url: !secret http_base_url
