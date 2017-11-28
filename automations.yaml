@@ -462,8 +462,21 @@
         entity_id: sun.sun
         state: 'below_horizon'
   action:
-    service: homeassistant.turn_on
-    entity_id: script.timed_outdoor
+    - service: homeassistant.turn_off
+      entity_id: automation.timed_lights__movement_front_door
+    - service: light.turn_on
+      data:
+        entity_id:
+          - group.outdoor_lights
+          - light.computer_room
+        brightness: 255
+    - delay: '00:10:00'
+    - service: light.turn_off
+      entity_id:
+        - group.outdoor_lights
+        - light.computer_room
+    - service: homeassistant.turn_on
+      entity_id: automation.timed_lights__movement_front_door
 
 - alias: 'Doorbell rang - pause tv'
   initial_state: true

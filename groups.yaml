@@ -189,6 +189,7 @@ misc_lights:
   name: misc lights
   entities:
     - light.bathroom
+    - light.computer_room
 
 media_players:
   name: Media Players
