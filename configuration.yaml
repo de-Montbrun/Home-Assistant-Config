@@ -279,6 +279,7 @@ media_player:
   - platform: roku
     host: 192.168.2.21
 
+
 ## Spotify
 #  - platform: spotify
 #    client_id: !secret spotify_client_id
@@ -525,13 +526,13 @@ binary_sensor:
 # {{{ Presence Trackers
 
 device_tracker:
-#  - platform: asuswrt
-#    host: 192.168.2.249
-#    username: !secret router_username
-#    mode: ap
-#    protocol: ssh
-#    ssh_key: /home/homeassistant/.ssh/id_rsa
-#
+  - platform: asuswrt
+    host: 192.168.2.249
+    username: !secret router_username
+    mode: ap
+    protocol: ssh
+    ssh_key: /home/homeassistant/.ssh/id_rsa
+
 #  - platform: asuswrt
 #    host: 192.168.2.252
 #    username: !secret router_username
