@@ -154,11 +154,24 @@
 - alias: '6pm - heater off'
   initial_state: true
   trigger:
-    platform: time
-    at: '18:00:00'
+    - platform: time
+      at: '18:00:00'
+    - platform: time
+      at: '18:30:00'
+    - platform: time
+      at: '19:00:00'
   condition:
-    condition: template
-    value_template: '{{ states("sensor.season") != "Summer" }}'
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("sensor.season") != "Summer" }}'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: sensor.gervais
+            state: 'home'
+          - condition: template
+            value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
   action:
     service: switch.turn_off
     entity_id: switch.switch0
@@ -330,20 +343,22 @@
     condition: template
     value_template: '{{ states("sensor.season") != "Summer" }}'
   action:
-    service: switch.turn_off
+    service: switch.toggle
     entity_id: switch.switch0
 
 - alias: 'Gail home - turn on heater'
   initial_state: true
   trigger:
-    platform: state
-    entity_id: sensor.gail
-    to: 'home'
+    platform: time
+    at: '09:00:01'
   condition:
     condition: and
     conditions:
       - condition: template
         value_template: '{{ states.sensor.yr_temperature.state < "10" }}'
+      - condition: state
+        entity_id: sensor.gail
+        state: 'home'
       - condition: time
         after: '09:00:00'
       - condition: time
