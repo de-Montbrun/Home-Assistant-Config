@@ -490,6 +490,7 @@
       entity_id:
         - group.outdoor_lights
         - light.computer_room
+    - delay: ' 00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights__movement_front_door
 
