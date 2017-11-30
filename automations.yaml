@@ -730,3 +730,17 @@
   action:
     service: media_player.sonos_clear_sleep_timer
     entity_id: media_player.office
+
+- alias: 'Pause sonos every 2 minutes if Gail away'
+  initial_state: true
+  trigger:
+    platform: time
+    minutes: '/2'
+    seconds: 0
+  condition:
+    condition: state
+    entity_id: sensor.gail
+    state: 'not_home'
+  action:
+    service: media_player.media_pause
+    entity_id: media_player.office
