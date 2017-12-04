@@ -193,7 +193,9 @@
     offset: '-00:20:00'
   action:
     - service: light.turn_on
-      entity_id: light.bathroom
+      entity_id:
+        - light.bathroom
+        - light.kitchen_oven
       data:
         brightness: 255
     - service: light.turn_on
