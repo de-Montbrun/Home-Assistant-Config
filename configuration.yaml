@@ -39,10 +39,22 @@ homeassistant:
 
     binary_sensor.gail_home:
       hidden: true
+    device_tracker.dgrabbs_iphonehass:
+      hidden: true
+    device_tracker.dgrabbsiphone_2:
+      hidden: true
+    device_tracker.gail3:
+      hidden: true
     sensor.gail:
       entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
 
     binary_sensor.gervais_home:
+      hidden: true
+    device_tracker.iphone_2:
+      hidden: true
+    device_tracker.iphonehass:
+      hidden: true
+    device_tracker.gervais3:
       hidden: true
     sensor.gervais:
       entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
