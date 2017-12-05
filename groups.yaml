@@ -15,8 +15,8 @@ family:
   entities:
     - sensor.gail
     - sensor.gervais
-    - device_tracker.camphone
-    - device_tracker.jenphone
+    - group.cam_tracker
+    - group.jen_tracker
     - device_tracker.grant
   icon: mdi:account-multiple
 
