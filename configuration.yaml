@@ -473,7 +473,7 @@ sensor:
         friendly_name: 'Gail'
         value_template: >-
           {% if is_state("binary_sensor.gail_home", "on") %}
-            home
+            Home
           {% else %}
             {{ states("device_tracker.dgrabbs_iphonehass") }}
           {% endif %}
@@ -484,7 +484,7 @@ sensor:
         friendly_name: 'Gervais'
         value_template: >-
           {% if is_state("binary_sensor.gervais_home", "on") %}
-            home
+            Home
           {% else %}
             {{ states("device_tracker.iphonehass") }}
           {% endif %}
