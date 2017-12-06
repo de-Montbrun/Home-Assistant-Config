@@ -83,6 +83,10 @@ homeassistant:
     sensor.deMontbrun_DNS_Expiry:
       icon: mdi:dns
 
+  customize_glob:
+    "switch.tv_*":
+      assumed_state: false
+
 # }}}
 # {{{ misc
 
