@@ -51,7 +51,7 @@ settings:
 
 lights_and_switches:
   entities:
-    - group.wemo_switches
+    - group.switches
     - group.bedroom_lights
     - group.kitchen_lights
     - group.livingroom_lights
@@ -244,7 +244,7 @@ plex:
     - media_player.plex_81cd37e4b6139e46a9735a145c08213c
     - media_player.plex_znzbgfmho5u9bh7kcmwijm7v
 
-wemo_switches:
+switches:
   name: Switches
   entities:
     - switch.switch0
