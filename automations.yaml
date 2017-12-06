@@ -254,17 +254,6 @@
       effect: random
       transition: 5
 
-- alias: 'Livingroom brightness'
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: input_slider.livingroom_brightness
-  action:
-    - service: light.turn_on
-      data_template:
-        entity_id: group.livingroom_lights
-        brightness: '{{ trigger.to_state.state | int }}'
-
 - alias: 'Jennifer Home - turn on'
   initial_state: false
   trigger:
