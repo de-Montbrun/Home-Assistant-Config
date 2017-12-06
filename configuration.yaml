@@ -605,23 +605,6 @@ device_tracker:
       Gail3: Gail-iPhone
 
 # }}}
-# {{{ Toggles
-
-input_boolean:
-  loop_livingcolours:
-    name: Loop Livingroom Colours
-    initial: off
-    icon: mdi:spotlight
-
-input_number:
-  livingroom_brightness:
-    name: Livingroom Brightness
-    initial: 255
-    min: 0
-    max: 255
-    step: 1
-
-# }}}
 # {{{ Security Cams
 
 android_ip_webcam:
