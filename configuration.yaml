@@ -207,6 +207,13 @@ zone churchill_arms:
   radius: 50
   icon: mdi:beer
 
+zone qeh:
+  name: Queen Elizabeth Hospital
+  latitude: !secret qeh_latitude
+  longitude: !secret qeh_longitude
+  radius: 200
+  icon: mdi:hospital-building
+
 zone delta_calgary_downtown:
   name: Calgary Delta
   latitude: 51.048800
