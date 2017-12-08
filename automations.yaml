@@ -683,12 +683,12 @@
       entity_id: media_player.plex_81cd37e4b6139e46a9735a145c08213c
       to: 'idle'
       for:
-        minutes: 30
+        minutes: 20
     - platform: state
       entity_id: media_player.living_room_roku
       to: 'idle'
       for:
-        minutes: 30
+        minutes: 20
   condition:
     condition: and
     conditions:
