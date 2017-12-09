@@ -382,6 +382,8 @@ sensor:
       - last_ding
       - last_motion
       - volume
+      - wifi_signal_category
+      - wifi_signal_strength
 
   - platform: speedtest
     hour:
