@@ -592,6 +592,7 @@ device_tracker:
 #    mode: ap
 #    protocol: ssh
 #    ssh_key: /home/homeassistant/.ssh/id_rsa
+#    consider_home: 00:05:00
 
 #  - platform: asuswrt
 #    host: 192.168.2.252
@@ -602,23 +603,23 @@ device_tracker:
 
   - platform: nmap_tracker
     hosts: 192.168.2.1-9
-    home_interval: 5
+    consider_home: 00:05:00
 
   - platform: nmap_tracker
     hosts: 192.168.2.10-13
-    home_interval: 20
+    consider_home: 00:20:00
 
   - platform: nmap_tracker
     hosts: 192.168.2.14-100
-    home_interval: 2
+    consider_home: 00:02:00
 
   - platform: nmap_tracker
     hosts: 192.168.2.101-120
-    home_interval: 5
+    consider_home: 00:05:00
 
   - platform: nmap_tracker
     hosts: 192.168.2.121-254
-    home_interval: 5
+    consider_home: 00:05:00
     exclude:
       - 192.168.2.150
 
