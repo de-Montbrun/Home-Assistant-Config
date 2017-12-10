@@ -52,7 +52,7 @@ homeassistant:
 
     binary_sensor.gervais_home:
       hidden: true
-    device_tracker.gervais_iphonetrack:
+    device_tracker.gervais_iphonetracks:
       hidden: true
     device_tracker.iphone_2:
       hidden: true
@@ -567,7 +567,7 @@ binary_sensor:
         prob_given_true: 1
         platform: 'state'
         to_state: 'home'
-      - entity_id: 'device_tracker.gervais_iphonetrack'
+      - entity_id: 'device_tracker.gervais_iphonetracks'
         prob_given_true: 1
         platform: 'state'
         to_state: 'home'
