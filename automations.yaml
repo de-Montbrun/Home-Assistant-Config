@@ -602,7 +602,7 @@
       message: >
         :{{ trigger.to_state.attributes.friendly_name | lower }}:
         {{ trigger.to_state.attributes.friendly_name }} has
-        {%- if trigger.from_state.state == 'not_home' %} entered {{ trigger.to_state.state }}.
+        {%- if trigger.from_state.state == 'not_home' or trigger.from_state.state == 'Away' %} entered {{ trigger.to_state.state }}.
         {%- else %} exited {{ trigger.from_state.state }}.
         {%- endif %}
       title: 'Family Location'
