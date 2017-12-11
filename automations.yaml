@@ -271,7 +271,7 @@
     entity_id: group.jen_tracker
     to: 'not_home'
     for:
-      minutes: 10
+      minutes: 15
   action:
     service: switch.turn_off
     entity_id: 'switch.switch1'
