@@ -120,9 +120,14 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
   action:
+    - service: homeassistant.turn_off
+      entity_id: automation.timed_lights__movement_front_door
     - service: light.turn_off
     - service: homeassistant.turn_off
       entity_id: input_boolean.loop_livingcolours
+    - delay: ' 00:00:04'
+    - service: homeassistant.turn_on
+      entity_id: automation.timed_lights__movement_front_door
 
 - alias: 'Midnight - Livingroom Lights out'
   initial_state: false
