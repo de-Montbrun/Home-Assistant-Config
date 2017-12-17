@@ -116,12 +116,6 @@ logger:
     homeassistant.components.media_player.plex: fatal
     homeassistant.components.media_player.roku: fatal
 
-# Hue lights are not being discovered automaically.
-light:
-  platform: hue
-  host: 192.168.2.120
-  allow_unreachable:
-
 # Lutron Dimmers in Kitchen
 lutron_caseta:
   host: 192.168.2.121
