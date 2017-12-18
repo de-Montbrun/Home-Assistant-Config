@@ -179,7 +179,9 @@
             value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
   action:
     service: switch.turn_off
-    entity_id: switch.switch0
+    entity_id:
+      - switch.switch0
+      - switch.switch2
 
 - alias: 'Sunrise - Lights out'
   initial_state: true
@@ -342,13 +344,15 @@
     value_template: '{{ states("sensor.season") != "Summer" }}'
   action:
     service: switch.turn_off
-    entity_id: switch.switch0
+    entity_id:
+      - switch.switch0
+      - switch.switch2
 
 - alias: 'Gail home - turn on heater'
   initial_state: true
   trigger:
     platform: time
-    at: '08:30:01'
+    at: '09:00:01'
   condition:
     condition: and
     conditions:
@@ -358,7 +362,7 @@
         entity_id: sensor.gail
         state: 'home'
       - condition: time
-        after: '08:30:00'
+        after: '09:00:00'
       - condition: time
         before: '17:30:00'
       - condition: state
@@ -370,6 +374,7 @@
     service: switch.turn_on
     entity_id:
       - switch.switch0
+      - switch.switch2
 
 - alias: 'Bedtime'
   initial_state: true
