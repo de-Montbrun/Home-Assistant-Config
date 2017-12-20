@@ -212,6 +212,8 @@
         transition: 300
     - service: scene.turn_on
       entity_id: scene.livingroom_normal
+    - service: switch.turn_on
+      entity_id: switch.switch3
 
 - alias: 'Living room lux low - lights on'
   initial_state: true
@@ -416,8 +418,8 @@
       entity_id: group.kitchen_lights
     - service: homeassistant.turn_on
       entity_id: script.timer_livingroom_off
-    - service: ifttt.trigger
-      data: {"event":"kitchen_lights_off"}
+    - service: switch.turn_off
+      entity_id: switch.switch3
 
 - alias: 'GandG not home - turn off bedroom lights'
   initial_state: true
@@ -747,3 +749,33 @@
   action:
     service: media_player.media_pause
     entity_id: media_player.office
+
+- alias: 'Turn on heater in bedroom'
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.bed_room_temp.state|round < 14 }}'
+  condition:
+    condition: and
+    conditions:
+      - condition: time
+        after: '22:30:00'
+      - condition: time
+        before: '23:59:59'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: sensor.gail
+            state: 'home'
+          - condition: template
+            value_template: '{{ distance(states.device_tracker.dgrabbs_iphonehass) > 10 }}'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: sensor.gervais
+            state: 'home'
+          - condition: template
+            value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
+  action:
+    service: switch.turn_on
+    entity_id: switch.switch4
