@@ -762,6 +762,8 @@
   condition:
     condition: and
     conditions:
+      - condition: template
+        value_template: '{{ states("sensor.season") != "Summer" }}'
       - condition: time
         after: '22:30:01'
       - condition: time
