@@ -123,8 +123,6 @@
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights__movement_front_door
     - service: light.turn_off
-    - service: homeassistant.turn_off
-      entity_id: input_boolean.loop_livingcolours
     - delay: ' 00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights__movement_front_door
@@ -137,8 +135,6 @@
   action:
     - service: light.turn_off
       entity_id: group.livingroom_lights
-    - service: homeassistant.turn_off
-      entity_id: input_boolean.loop_livingcolours
 
 - alias: '2am - Lights out'
   initial_state: true
@@ -149,8 +145,6 @@
     - service: homeassistant.turn_off
       data:
         entity_id: automation.timed_lights__movement_front_door
-    - service: homeassistant.turn_off
-      entity_id: input_boolean.loop_livingcolours
     - service: light.turn_off
     - service: homeassistant.turn_on
       data:
@@ -233,35 +227,6 @@
   action:
     service: scene.turn_on
     entity_id: scene.livingroom_normal
-
-- alias: 'Livingroom to random colours'
-  initial_state: true
-  trigger:
-    platform: time
-    minutes: '/2'
-    seconds: 0
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: input_boolean.loop_livingcolours
-        state: 'on'
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
-      - condition: time
-        before: '23:50:00'
-  action:
-    service: light.turn_on
-    entity_id:
-      - light.couch0
-      - light.couch1
-      - light.fireplace0
-      - light.fireplace3
-      - light.table
-    data:
-      effect: random
-      transition: 5
 
 - alias: 'Jennifer Home - turn on'
   initial_state: false
@@ -410,8 +375,6 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
-    - service: homeassistant.turn_off
-      entity_id: input_boolean.loop_livingcolours
     - service: light.turn_off
       entity_id: light.bathroom
     - service: light.turn_off
