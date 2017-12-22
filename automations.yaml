@@ -111,14 +111,14 @@
             entity_id: sensor.gail
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.dgrabbs_iphonehass) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gail_iphonetracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: sensor.gervais
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights__movement_front_door
@@ -176,7 +176,7 @@
             entity_id: sensor.gervais
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
     service: switch.turn_off
     entity_id:
@@ -401,14 +401,14 @@
             entity_id: sensor.gail
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.dgrabbs_iphonehass) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gail_iphonetracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: sensor.gervais
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
     - service: homeassistant.turn_off
       entity_id: input_boolean.loop_livingcolours
@@ -768,14 +768,14 @@
             entity_id: sensor.gail
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.dgrabbs_iphonehass) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gail_iphonetracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: sensor.gervais
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.iphonehass) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
     service: switch.turn_on
     entity_id: switch.switch4
