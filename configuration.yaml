@@ -87,6 +87,9 @@ homeassistant:
     sensor.deMontbrun_DNS_Expiry:
       icon: mdi:dns
 
+    media_player.plex_znzbgfmho5u9bh7kcmwijm7v:
+      friendly_name: KeyPear
+
   customize_glob:
     "switch.tv_*":
       assumed_state: false
