@@ -588,7 +588,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: sensor.yweather_current
+    entity_id: sensor.pws_weather
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'
@@ -597,8 +597,8 @@
     service: notify.zulip
     data_template:
       message: >
-        []({{ states.sensor.yweather_current.attributes['entity_picture'] }})
-        **Current Weather Condition:** {{ states.sensor.yweather_current.state }}
+        []({{ states.sensor.pws_weather.attributes['entity_picture'] }})
+        **Current Weather Condition:** {{ states.sensor.pws_weather.state }}
 
         **Current Tempurature:** {{ states.sensor.yr_temperature.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
       title: 'Weather'
