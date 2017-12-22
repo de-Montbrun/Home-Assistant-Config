@@ -421,7 +421,7 @@
     - service: switch.turn_off
       entity_id: switch.switch3
 
-- alias: 'GandG not home - turn off bedroom lights'
+- alias: 'GandG not home - turn off bedroom things'
   initial_state: true
   trigger:
     - platform: state
@@ -440,8 +440,10 @@
         entity_id: binary_sensor.gervais_home
         state: 'off'
   action:
-    service: light.turn_off
-    entity_id: group.bedroom_lights
+    - service: light.turn_off
+      entity_id: group.bedroom_lights
+    - service: switch.turn_off
+      entity_id: switch.switch4
 
 - alias: 'Tell Jen to turn off her TV'
   initial_state: true
@@ -753,13 +755,15 @@
 - alias: 'Turn on heater in bedroom'
   initial_state: true
   trigger:
-    platform: template
-    value_template: '{{ states.sensor.bed_room_temp.state|round < 14 }}'
+    - platform: template
+      value_template: '{{ states.sensor.bed_room_temp.state|round < 15 }}'
+    - platform: time
+      at: '22:30:00'
   condition:
     condition: and
     conditions:
       - condition: time
-        after: '22:30:00'
+        after: '22:30:01'
       - condition: time
         before: '23:59:59'
       - condition: or
@@ -778,4 +782,13 @@
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
     service: switch.turn_on
+    entity_id: switch.switch4
+
+- alias: 'Turn off heater in bedroom'
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.bed_room_temp.state|round > 17 }}'
+  action:
+    service: switch.turn_off
     entity_id: switch.switch4
