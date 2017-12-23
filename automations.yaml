@@ -752,7 +752,7 @@
   initial_state: true
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.bed_room_temp.state|round < 15 }}'
+      value_template: '{{ states.sensor.bed_room_temp.state|int < 15 }}'
     - platform: time
       at: '22:30:00'
   condition:
