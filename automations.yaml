@@ -786,7 +786,7 @@
   initial_state: true
   trigger:
     platform: template
-    value_template: '{{ states.sensor.bed_room_temp.state|round > 17 }}'
+    value_template: '{{ states.sensor.bed_room_temp.state|int > 17 }}'
   action:
     service: switch.turn_off
     entity_id: switch.switch4
