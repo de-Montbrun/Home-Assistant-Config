@@ -590,9 +590,13 @@
     platform: state
     entity_id: sensor.pws_weather
   condition:
-    condition: numeric_state
-    entity_id: 'sensor.hass_uptime'
-    above: '.01'
+    condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: 'sensor.hass_uptime'
+        above: '.01'
+      - condition: template
+        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
   action:
     service: notify.zulip
     data_template:
