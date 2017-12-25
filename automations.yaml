@@ -754,14 +754,14 @@
     - platform: template
       value_template: '{{ states.sensor.bed_room_temp.state|int < 15 }}'
     - platform: time
-      at: '22:30:00'
+      at: '21:30:00'
   condition:
     condition: and
     conditions:
       - condition: template
         value_template: '{{ states("sensor.season") != "Summer" }}'
       - condition: time
-        after: '22:30:01'
+        after: '21:30:01'
       - condition: time
         before: '23:59:59'
       - condition: or
