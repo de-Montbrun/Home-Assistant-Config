@@ -20,18 +20,25 @@ homeassistant:
 
   customize:
     group.all_scenes:
+      friendly_name: Scenes
       hidden: false
     group.all_devices:
+      friendly_name: Devices
       hidden: false
     group.all_scripts:
+      friendly_name: Scripts
       hidden: false
     group.all_automations:
+      friendly_name: Automations
       hidden: false
     group.all_booleans:
+      friendly_name: Booleans
       hidden: false
     group.all_lights:
+      friendly_name: Lights
       hidden: false
     group.all_switches:
+      friendly_name: Switches
       hidden: false
 
     sensor.filesize_db:
