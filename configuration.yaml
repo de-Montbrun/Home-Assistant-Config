@@ -98,9 +98,6 @@ homeassistant:
 # }}}
 # {{{ misc
 
-# Enable web configs
-config:
-
 # Checks for available updates
 updater:
 
@@ -130,19 +127,10 @@ lutron_caseta:
   certfile: 'lutron/caseta.crt'
   ca_certs: 'lutron/caseta-bridge.crt'
 
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
-
-# Enables support for tracking state changes over time.
-history:
-
 # Setup db
 recorder:
   purge_interval: 2
   purge_keep_days: 3
-
-# View all events in a logbook
-logbook:
 
 # Track the sun
 sun:
@@ -386,9 +374,6 @@ sensor:
       - last_activity
       - last_ding
       - last_motion
-      - volume
-      - wifi_signal_category
-      - wifi_signal_strength
 
   - platform: speedtest
     hour:
@@ -447,12 +432,10 @@ sensor:
       - alerts
       - feelslike_c
       - heat_index_c
-      - pressure_trend
       - relative_humidity
       - solarradiation
       - temp_c
       - UV
-      - visibility_km
       - weather
       - wind_degrees
       - wind_gust_kph
@@ -462,10 +445,6 @@ sensor:
     monitored_conditions:
       - temp_min
       - temp_max
-      - wind_speed
-      - pressure
-      - visibility
-      - humidity
       - temperature
 
   - platform: crimereports
@@ -646,20 +625,9 @@ android_ip_webcam:
   - name: 'Front Door Camera'
     host: 192.168.2.92
     scan_interval: 1
-    sensors:
-      - battery_voltage
-      - light
-      - motion
     switches:
-      - exposure_lock
       - ffc
-      - focus
-      - gps_active
-      - night_vision
       - overlay
-      - torch
-      - whitebalance_lock
-      - video_recording
 
 camera:
   - platform: ring
