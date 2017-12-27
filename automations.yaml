@@ -318,8 +318,11 @@
 - alias: 'Gail home - turn on heater'
   initial_state: true
   trigger:
-    platform: time
-    at: '09:00:01'
+      - platform: time
+        at: '09:00:01'
+      - platform: state
+        entity_id: sensor.gail
+        to: 'home'
   condition:
     condition: and
     conditions:
@@ -629,7 +632,6 @@
   trigger:
     platform: state
     entity_id: sensor.pws_alerts
-    to: '1'
   condition:
     condition: and
     conditions:
@@ -638,6 +640,8 @@
         above: '.01'
       - condition: template
         value_template: '{{ trigger.from_state.state != "unknown" }}'
+      - condition: template
+        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
   action:
     service: notify.zulip
     data:
@@ -754,14 +758,16 @@
     - platform: template
       value_template: '{{ states.sensor.bed_room_temp.state|int < 15 }}'
     - platform: time
-      at: '21:30:00'
+      at: '21:30:01'
   condition:
     condition: and
     conditions:
       - condition: template
+        value_template: '{{ states.sensor.bed_room_temp.state|int < 15 }}'
+      - condition: template
         value_template: '{{ states("sensor.season") != "Summer" }}'
       - condition: time
-        after: '21:30:01'
+        after: '21:30:00'
       - condition: time
         before: '23:59:59'
       - condition: or
