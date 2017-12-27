@@ -97,9 +97,6 @@ homeassistant:
 # }}}
 # {{{ misc
 
-# Enable map
-map:
-
 # Enable web configs
 config:
 
