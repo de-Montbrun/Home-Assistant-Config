@@ -51,12 +51,13 @@ settings:
 
 lights_and_switches:
   entities:
-    - group.switches
     - group.bedroom_lights
     - group.kitchen_lights
     - group.livingroom_lights
     - group.misc_lights
+    - group.office_lights
     - group.outdoor_lights
+    - group.switches
   view: yes
   icon: mdi:lightbulb
 
@@ -168,6 +169,11 @@ misc_lights:
   entities:
     - light.bathroom
     - light.computer_room
+
+office_lights:
+  name: Office lights
+  entities:
+    - light.office_main_lights
 
 media_players:
   name: Media Players
