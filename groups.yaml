@@ -202,8 +202,8 @@ security_cam_sensors_switches:
   entities:
     - sensor.front_door_camera_video_connections
     - sensor.front_door_camera_audio_connections
-    - switch.front_door_frontfacing_camera
-    - switch.front_door_overlay
+    - switch.front_door_camera_frontfacing_camera
+    - switch.front_door_camera_overlay
 
 outdoor_lights:
   name: Outdoor lights
