@@ -139,6 +139,15 @@ lutron_caseta:
 
 # Enables support for tracking state changes over time.
 history:
+  include:
+    domains:
+      - sun
+    entities:
+      - group.cam_tracker
+      - group.jen_tracker
+      - group.family
+      - sensor.gervais
+      - sensor.gail
 
 # Setup db
 recorder:
