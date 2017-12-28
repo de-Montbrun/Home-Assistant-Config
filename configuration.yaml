@@ -134,6 +134,9 @@ lutron_caseta:
   certfile: 'lutron/caseta.crt'
   ca_certs: 'lutron/caseta-bridge.crt'
 
+# Enables support for tracking state changes over time.
+history:
+
 # Setup db
 recorder:
   purge_interval: 2
