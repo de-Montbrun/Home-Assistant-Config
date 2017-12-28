@@ -102,6 +102,9 @@ homeassistant:
     "switch.tv_*":
       assumed_state: false
 
+    "sensor.front_door_camera_*_connections":
+      hidden: true
+
 # }}}
 # {{{ misc
 

@@ -200,8 +200,6 @@ security_cams:
 security_cam_sensors_switches:
   name: Camera switches
   entities:
-    - sensor.front_door_camera_video_connections
-    - sensor.front_door_camera_audio_connections
     - switch.front_door_camera_frontfacing_camera
     - switch.front_door_camera_overlay
 
