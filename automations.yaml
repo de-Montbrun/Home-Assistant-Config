@@ -605,10 +605,14 @@
     service: notify.zulip
     data_template:
       message: >
-        []({{ states.sensor.pws_weather.attributes['entity_picture'] }})
+        []({{ states.sensor.pws_weather.attributes.entity_picture }})
         **Current Weather Condition:** {{ states.sensor.pws_weather.state }}
 
-        **Current Tempurature:** {{ states.sensor.yr_temperature.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
+        **Current Tempurature:** {{ states.sensor.pws_temp_c.state }}{{ states.sensor.pws_temp_c.attributes.unit_of_measurement }}
+
+        {% if states("sensor.season") == "Winter" %}**{{ states.sensor.pws_feelslike_c.attributes.friendly_name }}:** {{ states.sensor.pws_feelslike_c.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
+        {% elif states("sensor.season") == "Summer" %}**{{ states.sensor.pws_heat_index_c.attributes.friendly_name }}:** {{ states.sensor.pws_heat_index_c.state }}{{ states.sensor.pws_heat_index_c.attributes.unit_of_measurement }}
+        {% endif %}
       title: 'Weather'
 
 - alias: 'current UV index notification'
@@ -651,11 +655,11 @@
 
         ---
 
-        **{{ states.sensor.pws_alerts.attributes['Description'] }}**
+        **{{ states.sensor.pws_alerts.attributes.Description }}**
 
         ---
 
-        {{ states.sensor.pws_alerts.attributes['Message'] }}
+        {{ states.sensor.pws_alerts.attributes.Message }}
       title: 'Weather'
 
 - alias: 'weather forecast notification'
@@ -667,12 +671,12 @@
     service: notify.zulip
     data:
       message: >
-        []({{ states.sensor.pws_weather.attributes['entity_picture'] }})
+        []({{ states.sensor.pws_weather.attributes.entity_picture }})
         **Today's Forecast:** {{ states.sensor.pws_weather.state }}
 
-        **High:** {{ states.sensor.yweather_temperature_max.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
+        **High:** {{ states.sensor.yweather_temperature_max.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
 
-        **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes['unit_of_measurement'] }}
+        **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
       title: 'Weather'
 
 - alias: 'drive is filling'
