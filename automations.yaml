@@ -724,6 +724,7 @@
     entity_id: switch.tv_power
 
 - alias: 'Gail away - sonos speaker - set sleep timer'
+  initial_state: true
   trigger:
     platform: state
     entity_id: sensor.gail
@@ -735,6 +736,7 @@
       sleep_time: 900
 
 - alias: 'Gail home - sonos speaker - clear sleep timer'
+  initial_state: true
   trigger:
     platform: state
     entity_id: sensor.gail
