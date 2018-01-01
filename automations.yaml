@@ -683,9 +683,9 @@
   initial_state: true
   trigger:
     - platform: template
-      value_template: '{{ states("sensor.disk_use_mediacracker") | int >= 95 }}'
+      value_template: '{{ states.sensor.disk_used_mediacracker.state | int >= 95 }}'
     - platform: template
-      value_template: '{{ states("sensor.disk_use_mediagrapes") | int >= 95}}'
+      value_template: '{{ states.sensor.disk_used_mediagrapes.state | int >= 95 }}'
   action:
     service: notify.zulip
     data:
