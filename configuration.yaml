@@ -547,44 +547,52 @@ binary_sensor:
   - platform: 'bayesian'
     name: gail_home
     prior: 0.25
-    probability_threshold: 0.95
+    probability_threshold: 0.9
     observations:
       - entity_id: 'device_tracker.dgrabbs_iphonehass'
-        prob_given_true: 1
+        prob_given_true: 0.9
+        prob_given_false: 0.3
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.gail_iphonetracks'
-        prob_given_true: 1
+        prob_given_true: 0.9
+        prob_given_false: 0.2
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.dgrabbsiphone_2'
-        prob_given_true: 1
+        prob_given_true: 0.9
+        prob_given_false: 0.1
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.gail3'
-        prob_given_true: 1
+        prob_given_true: 0.9
+        prob_given_false: 0.1
         platform: 'state'
         to_state: 'home'
 
   - platform: 'bayesian'
     name: gervais_home
-    prior: 0.25
-    probability_threshold: 0.95
+    prior: 0.50
+    probability_threshold: 0.9
     observations:
       - entity_id: 'device_tracker.iphonehass'
-        prob_given_true: 1
+        prob_given_true: 0.9
+        prob_given_false: 0.3
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.gervais_iphonetracks'
-        prob_given_true: 1
+        prob_given_true: 0.9
+        prob_given_false: 0.2
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.iphone_2'
-        prob_given_true: 1
+        prob_given_true: 0.9
+        prob_given_false: 0.1
         platform: 'state'
         to_state: 'home'
       - entity_id: 'device_tracker.gervais3'
-        prob_given_true: 1
+        prob_given_true: 0.9
+        prob_given_false: 0.1
         platform: 'state'
         to_state: 'home'
 
