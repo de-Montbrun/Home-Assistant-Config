@@ -613,13 +613,6 @@ device_tracker:
       track_new_devices: True
       hide_if_away: True
 
-#  - platform: asuswrt
-#    host: 192.168.2.252
-#    username: !secret router_username
-#    password: !secret router_password
-#    mode: ap
-#    protocol: telnet
-
   - platform: nmap_tracker
     hosts: 192.168.2.1-9
     consider_home: 00:05:00
