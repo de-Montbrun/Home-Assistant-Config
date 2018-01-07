@@ -402,11 +402,11 @@ sensor:
     name: 'Grater uptime'
     command: cat /proc/uptime | awk '{ print $1 }'
     scan_interval: 60
-    unit_of_measurement: hours
+    unit_of_measurement: minutes
     value_template: >-
       {% set uptime = value | int %}
-      {% set hours = (uptime / 3600 ) | int %}
-      {{ hours }}
+      {% set minutes = (uptime / 60 ) | int %}
+      {{ minutes }}
 
   - platform: uptime
     name: 'HASS uptime'
