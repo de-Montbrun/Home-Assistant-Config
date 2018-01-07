@@ -239,7 +239,6 @@ switches:
 misc_sensors:
   name: Misc Sensors
   entities:
-    - sensor.hass_uptime
     - binary_sensor.workday_sensor
     - sensor.crime_reports
 
@@ -266,13 +265,17 @@ pihole_sensors:
 systemmonitor_sensors:
   name: System Monitor Sensors
   entities:
+    - sensor.hass_uptime
+    - sensor.grater_uptime
+    - sensor.since_last_boot
     - sensor.cpu_used
+    - sensor.ram_used
+    - sensor.swap_used
+    - sensor.disk_used_mediacracker
+    - sensor.disk_used_mediagrapes
     - sensor.average_load_1m
     - sensor.average_load_5m
     - sensor.average_load_15m
-    - sensor.ram_used
-    - sensor.disk_used_mediacracker
-    - sensor.disk_used_mediagrapes
     - sensor.ssl_certificate_expiry
     - sensor.deMontbrun_DNS_Expiry
     - sensor.filesize_db
