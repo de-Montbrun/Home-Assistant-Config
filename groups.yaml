@@ -271,8 +271,13 @@ systemmonitor_sensors:
     - sensor.cpu_used
     - sensor.ram_used
     - sensor.swap_used
+    - sensor.disk_used_
+    - sensor.disk_used_boot
+    - sensor.disk_used_mediaapple
     - sensor.disk_used_mediacracker
     - sensor.disk_used_mediagrapes
+    - sensor.disk_used_medialocs
+    - sensor.disk_used_mediawine
     - sensor.average_load_1m
     - sensor.average_load_5m
     - sensor.average_load_15m

@@ -384,6 +384,16 @@ sensor:
   - platform: systemmonitor
     resources:
       - type: disk_use_percent
+        arg: /
+      - type: disk_use_percent
+        arg: /boot
+      - type: disk_use_percent
+        arg: /media/locs
+      - type: disk_use_percent
+        arg: /media/apple
+      - type: disk_use_percent
+        arg: /media/wine
+      - type: disk_use_percent
         arg: /media/cracker
       - type: disk_use_percent
         arg: /media/grapes
