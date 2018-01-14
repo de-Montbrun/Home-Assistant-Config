@@ -183,7 +183,9 @@
     event: sunrise
     offset: '+00:10:00'
   action:
-    service: light.turn_off
+    - service: light.turn_off
+    - service: switch.turn_on
+      entity_id: switch.switch3
 
 - alias: 'Sunset - Lights on'
   initial_state: true
