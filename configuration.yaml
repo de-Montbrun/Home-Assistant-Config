@@ -64,7 +64,7 @@ homeassistant:
     device_tracker.gail3:
       hidden: true
     sensor.gail:
-      entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
+      hidden: true
 
     binary_sensor.gervais_home:
       hidden: true
@@ -78,7 +78,7 @@ homeassistant:
     device_tracker.gervais3:
       hidden: true
     sensor.gervais:
-      entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
+      hidden: true
 
     group.jen_tracker:
       entity_picture: https://avatars.io/facebook/jennifer.langdon.16

@@ -13,8 +13,8 @@ devices:
 family:
   name: Family
   entities:
-    - sensor.gail
-    - sensor.gervais
+    - device_tracker.gail_iphonetracks
+    - device_tracker.gervais_iphonetracks
     - group.cam_tracker
     - group.jen_tracker
     - device_tracker.grant
