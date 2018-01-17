@@ -556,7 +556,7 @@
     service: homeassistant.turn_on
     entity_id: script.timed_livingroom
 
-- alias: 'set sabnzb speed limit'
+- alias: 'Set sabnzb speed limit'
   initial_state: true
   trigger:
     - platform: state
@@ -570,7 +570,7 @@
   action:
     service: rest_command.sabnzb_api
 
-- alias: 'home presence notification'
+- alias: 'Home presence notification'
   initial_state: true
   trigger:
     platform: state
@@ -590,7 +590,7 @@
         {%- endif %} home.
       title: 'Family Location'
 
-- alias: 'phones presence notification'
+- alias: 'Phones presence notification'
   initial_state: true
   trigger:
       - platform: state
@@ -614,7 +614,7 @@
         {%- endif %}
       title: 'Family Location'
 
-- alias: 'current weather notification'
+- alias: 'Current weather notification'
   initial_state: true
   trigger:
     platform: state
@@ -641,7 +641,7 @@
         {% endif %}
       title: 'Weather'
 
-- alias: 'current UV index notification'
+- alias: 'Current UV index notification'
   initial_state: true
   trigger:
     platform: numeric_state
@@ -658,7 +658,7 @@
         :smiling_face_with_sunglasses: UV Index is {{ states.sensor.pws_uv.state }}. You better put on some sunscreen!
       title: 'Weather'
 
-- alias: 'weather alert notification'
+- alias: 'Weather alert notification'
   initial_state: true
   trigger:
     platform: state
@@ -688,7 +688,7 @@
         {{ states.sensor.pws_alerts.attributes.Message }}
       title: 'Weather'
 
-- alias: 'weather forecast notification'
+- alias: 'Weather forecast notification'
   initial_state: true
   trigger:
     platform: time
@@ -705,7 +705,7 @@
         **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
       title: 'Weather'
 
-- alias: 'drive is filling'
+- alias: 'Drive is filling'
   initial_state: true
   trigger:
     - platform: template
@@ -723,7 +723,7 @@
         drive is almost full.
       title: 'Alert'
 
-- alias: 'turn off livingroom tv when idle'
+- alias: 'Turn off livingroom tv when idle'
   initial_state: true
   trigger:
     - platform: state
