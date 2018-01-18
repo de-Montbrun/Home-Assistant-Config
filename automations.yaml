@@ -409,6 +409,8 @@
         - light.bathroom
         - group.kitchen_lights
         - group.office_lights
+      data:
+        transition: 300
     - service: homeassistant.turn_on
       entity_id: script.timer_livingroom_off
     - service: switch.turn_off
