@@ -709,6 +709,37 @@
         **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
       title: 'Weather'
 
+- alias: 'GandG not home - Movement in Bedroom'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.bedroom_motion
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.gail_home
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.gervais_home
+        state: 'off'
+  action:
+    service: notify.zulip
+    data:
+      message: >
+        {% if states.group.jen_tracker.state == 'home' and states.group.cam_tracker.state == 'home' %}
+        :cameron: Cameron or :jennifer: Jennifer
+        {% elif states.group.jen_tracker.state == 'home' %}
+        :jennifer: Jennifer
+        {% elif states.group.cam_tracker.state == 'home' %}
+        :cameron: Cameron
+        {% else %}
+        Someone
+        {% endif %}
+        is in GandG's Bedroom
+      title: 'Security Alert'
+
 - alias: 'Drive is filling'
   initial_state: true
   trigger:
