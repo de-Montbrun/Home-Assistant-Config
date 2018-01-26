@@ -5,13 +5,13 @@
 devices:
   name: Devices
   entities:
-    - group.family
+    - group.householdmembers
     - group.all_devices
   view: yes
   icon: mdi:network
 
-family:
-  name: Family
+householdmembers:
+  name: Household Members
   entities:
     - device_tracker.gail_iphonetracks
     - device_tracker.gervais_iphonetracks

@@ -562,7 +562,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: group.family
+      entity_id: group.householdmembers
     - platform: 'time'
       at: '10:00:00'
     - platform: 'time'
