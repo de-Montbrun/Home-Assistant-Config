@@ -408,6 +408,20 @@ sensor:
   - platform: pi_hole
     host: pi.hole
 
+  - platform: glances
+    host: pi.hole
+    name: pi.hole
+    resources:
+      - 'disk_use_percent'
+      - 'memory_use_percent'
+      - 'swap_use_percent'
+      - 'processor_load'
+
+  - platform: command_line
+    name: 'Pi CPU temp'
+    command: curl -sL http://pi.hole | grep Temp | awk '{ print $11 }' | sed 's/Temp:&nbsp;//' | sed 's/&nbsp;&deg;C<\/a>//'
+    unit_of_measurement: °C
+
   - platform: command_line
     name: 'Grater uptime'
     command: cat /proc/uptime | awk '{ print $1 }'

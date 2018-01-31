@@ -253,6 +253,11 @@ phone_sensors:
 pihole_sensors:
   name: Pi Hole Sensors
   entities:
+    - sensor.pi_cpu_temp
+    - sensor.pihole_cpu_load
+    - sensor.pihole_ram_used
+    - sensor.pihole_swap_used
+    - sensor.pihole_disk_used
     - sensor.pihole_ads_blocked_today
     - sensor.pihole_ads_percentage_blocked_today
     - sensor.pihole_dns_queries_cached
