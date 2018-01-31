@@ -814,8 +814,8 @@
     seconds: 0
   condition:
     condition: state
-    entity_id: sensor.gail
-    state: 'not_home'
+    entity_id: binary_sensor.gail_home
+    state: 'off'
   action:
     service: media_player.media_pause
     entity_id: media_player.office
