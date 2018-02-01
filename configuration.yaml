@@ -654,42 +654,42 @@ device_tracker:
     mode: ap
     protocol: ssh
     ssh_key: /home/homeassistant/.ssh/id_rsa
-    consider_home: 00:05:00
+    home_interval: 5
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
 
   - platform: nmap_tracker
     hosts: 192.168.2.1-9
-    consider_home: 00:05:00
+    home_interval: 5
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
 
   - platform: nmap_tracker
     hosts: 192.168.2.10-13
-    consider_home: 00:20:00
+    home_interval: 20
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
 
   - platform: nmap_tracker
     hosts: 192.168.2.14-100
-    consider_home: 00:02:00
+    home_interval: 2
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
 
   - platform: nmap_tracker
     hosts: 192.168.2.101-120
-    consider_home: 00:05:00
+    home_interval: 5
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
 
   - platform: nmap_tracker
     hosts: 192.168.2.121-254
-    consider_home: 00:05:00
+    home_interval: 5
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
