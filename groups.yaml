@@ -26,6 +26,20 @@ cam_tracker:
     - device_tracker.camphone
     - device_tracker.cameron2
 
+gail_tracker:
+  entities:
+      - device_tracker.dgrabbs_iphonehass
+      - device_tracker.gail_iphonetracks
+      - device_tracker.dgrabbsiphone_2
+      - device_tracker.gail3
+
+gervais_tracker:
+  entities:
+    - device_tracker.iphone_2
+    - device_tracker.gervais_iphonehass
+    - device_tracker.gervais_iphonetracks
+    - device_tracker.gervais3
+
 grant_tracker:
   name: Grant
   entities:

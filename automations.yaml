@@ -89,7 +89,7 @@
       for:
         minutes: 5
     - platform: state
-      entity_id: sensor.gail,sensor.gervais,group.cam_tracker,group.jen_tracker
+      entity_id: group.gail_tracker,group.gervais_tracker,group.cam_tracker,group.jen_tracker
       to: 'home'
   condition:
     condition: and
@@ -429,11 +429,11 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: binary_sensor.gail_home
-        state: 'off'
+        entity_id: group.gail_tracker
+        state: 'not_home'
       - condition: state
-        entity_id: binary_sensor.gervais_home
-        state: 'off'
+        entity_id: group.gervais_tracker
+        state: 'not_home'
   action:
     - service: light.turn_off
       entity_id: group.bedroom_lights
@@ -596,7 +596,7 @@
   initial_state: true
   trigger:
       - platform: state
-        entity_id: sensor.gail,sensor.gervais
+        entity_id: device_tracker.gervais_iphonetracks,device_tracker.gail_iphonetracks
   condition:
     condition: and
     conditions:
@@ -719,11 +719,11 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: binary_sensor.gail_home
-        state: 'off'
+        entity_id: group.gail_tracker
+        state: 'not_home'
       - condition: state
-        entity_id: binary_sensor.gervais_home
-        state: 'off'
+        entity_id: group.gervais_tracker
+        state: 'not_home'
   action:
     service: notify.zulip
     data:
@@ -814,8 +814,8 @@
     seconds: 0
   condition:
     condition: state
-    entity_id: binary_sensor.gail_home
-    state: 'off'
+    entity_id: group.gail_tracker
+    state: 'not_home'
   action:
     service: media_player.media_pause
     entity_id: media_player.office
