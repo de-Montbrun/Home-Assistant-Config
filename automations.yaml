@@ -677,6 +677,8 @@
         value_template: '{{ trigger.from_state.state != "unknown" }}'
       - condition: template
         value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+      - condition: template
+        value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.weather_alert_notification.attributes.last_triggered) | int > 1500 }}'
   action:
     service: notify.zulip
     data:
