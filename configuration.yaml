@@ -61,8 +61,6 @@ homeassistant:
       hidden: true
     device_tracker.gail3:
       hidden: true
-    sensor.gail:
-      hidden: true
     group.gail_tracker:
       hidden: true
 
@@ -74,8 +72,6 @@ homeassistant:
     device_tracker.gervais_iphonehass:
       hidden: true
     device_tracker.gervais3:
-      hidden: true
-    sensor.gervais:
       hidden: true
     group.gervais_tracker:
       hidden: true
@@ -157,8 +153,6 @@ history:
       - group.cam_tracker
       - group.jen_tracker
       - group.family
-      - sensor.gervais
-      - sensor.gail
 
 # Setup db
 recorder:

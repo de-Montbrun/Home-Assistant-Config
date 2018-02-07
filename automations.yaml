@@ -108,14 +108,14 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: sensor.gail
+            entity_id: group.gail_tracker
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.gail_iphonetracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
-            entity_id: sensor.gervais
+            entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
@@ -166,7 +166,7 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: sensor.gervais
+            entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
@@ -330,7 +330,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: sensor.gail
+      entity_id: group.gail_tracker
       from: 'home'
   condition:
     condition: template
@@ -347,7 +347,7 @@
       - platform: time
         at: '09:00:01'
       - platform: state
-        entity_id: sensor.gail
+        entity_id: group.gail_tracker
         to: 'home'
   condition:
     condition: and
@@ -355,7 +355,7 @@
       - condition: template
         value_template: '{{ states.sensor.yr_temperature.state < "10" }}'
       - condition: state
-        entity_id: sensor.gail
+        entity_id: group.gail_tracker
         state: 'home'
       - condition: time
         after: '09:00:00'
@@ -392,14 +392,14 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: sensor.gail
+            entity_id: group.gail_tracker
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.gail_iphonetracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
-            entity_id: sensor.gervais
+            entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
@@ -420,10 +420,10 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: sensor.gail
+      entity_id: group.gail_tracker
       from: 'home'
     - platform: state
-      entity_id: sensor.gervais
+      entity_id: group.gervais_tracker
       from: 'home'
   condition:
     condition: and
@@ -790,7 +790,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: sensor.gail
+    entity_id: group.gail_tracker
     from: 'home'
   action:
     service: media_player.sonos_set_sleep_timer
@@ -802,7 +802,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: sensor.gail
+    entity_id: group.gail_tracker
     to: 'home'
   action:
     service: media_player.sonos_clear_sleep_timer
@@ -843,14 +843,14 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: sensor.gail
+            entity_id: group.gail_tracker
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.gail_iphonetracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
-            entity_id: sensor.gervais
+            entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
