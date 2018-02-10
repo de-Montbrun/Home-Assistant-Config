@@ -249,6 +249,7 @@ switches:
     - switch.switch2
     - switch.switch3
     - switch.switch4
+    - switch.switch5
 
 misc_sensors:
   name: Misc Sensors

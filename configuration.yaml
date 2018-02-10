@@ -103,6 +103,19 @@ homeassistant:
     media_player.plex_znzbgfmho5u9bh7kcmwijm7v:
       friendly_name: KeyPear
 
+    switch.switch0:
+      friendly_name: Fireplace Switch
+    switch.switch1:
+      friendly_name: Jennifer Switch
+    switch.switch2:
+      friendly_name: Office Switch
+    switch.switch3:
+      friendly_name: Office Light Switch
+    switch.switch4:
+      friendly_name: Bedroom Switch
+    switch.switch5:
+      friendly_name: Spare Room Switch
+
   customize_glob:
     "switch.tv_*":
       assumed_state: false
@@ -664,13 +677,17 @@ wemo:
   static:
     - 192.168.2.80
     - 192.168.2.81
+    - 192.168.2.82
     - 192.168.2.83
-    - 192.168.2.84
 
 switch:
   - platform: tplink
-    host:  192.168.2.82
-    name: Switch2
+    host:  192.168.2.84
+    name: Switch4
+
+  - platform: tplink
+    host:  192.168.2.85
+    name: Switch5
 
   - platform: broadlink
     host: 192.168.2.7
