@@ -256,6 +256,7 @@ misc_sensors:
   entities:
     - binary_sensor.workday_sensor
     - sensor.crime_reports
+    - sensor.distance_apart
 
 phone_sensors:
   name: Phone Sensors

@@ -537,6 +537,13 @@ sensor:
     value_template: '{{ (value|int / 1024 / 1024)|round(1) }}'
     scan_interval: 900
 
+  - platform: template
+    sensors:
+      distance_apart:
+        friendly_name: 'GandG Apart'
+        value_template: '{{ distance(states.device_tracker.gervais_iphonetracks, states.device_tracker.gail_iphonetracks) | round (2) }}'
+        unit_of_measurement: 'km'
+
 binary_sensor:
   - platform: workday
     country: CA
