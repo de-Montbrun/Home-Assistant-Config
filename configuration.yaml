@@ -76,6 +76,9 @@ homeassistant:
     group.gervais_tracker:
       hidden: true
 
+    sensor.distance_apart:
+      icon: mdi:human-male-female
+
     group.jen_tracker:
       entity_picture: https://avatars.io/facebook/jennifer.langdon.16
     device_tracker.jenphone:
@@ -540,7 +543,12 @@ sensor:
     sensors:
       distance_apart:
         friendly_name: 'GandG Apart'
-        value_template: '{{ distance(states.device_tracker.gervais_iphonetracks, states.device_tracker.gail_iphonetracks) | round (2) }}'
+        value_template: >-
+          {% if distance(states.device_tracker.gervais_iphonetracks, states.device_tracker.gail_iphonetracks) | round (2) < 0.09 %}
+            0
+          {% else %}
+            {{ distance(states.device_tracker.gervais_iphonetracks, states.device_tracker.gail_iphonetracks) | round (2) }}
+          {% endif %}
         unit_of_measurement: 'km'
 
 binary_sensor:
