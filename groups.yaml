@@ -289,19 +289,19 @@ systemmonitor_sensors:
     - sensor.hass_uptime
     - sensor.grater_uptime
     - sensor.since_last_boot
-    - sensor.cpu_used
-    - sensor.ram_used
-    - sensor.swap_used
-    - sensor.disk_used_
-    - sensor.disk_used_boot
-    - sensor.disk_used_mediaapple
-    - sensor.disk_used_mediacracker
-    - sensor.disk_used_mediagrapes
-    - sensor.disk_used_medialocs
-    - sensor.disk_used_mediawine
-    - sensor.average_load_1m
-    - sensor.average_load_5m
-    - sensor.average_load_15m
+    - sensor.processor_use
+    - sensor.memory_use_percent
+    - sensor.swap_use_percent
+    - sensor.disk_use_percent_
+    - sensor.disk_use_percent_boot
+    - sensor.disk_use_percent_mediaapple
+    - sensor.disk_use_percent_mediacracker
+    - sensor.disk_use_percent_mediagrapes
+    - sensor.disk_use_percent_medialocs
+    - sensor.disk_use_percent_mediawine
+    - sensor.load_1m
+    - sensor.load_5m
+    - sensor.load_15m
     - sensor.ssl_certificate_expiry
     - sensor.deMontbrun_DNS_Expiry
     - sensor.filesize_db
