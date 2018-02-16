@@ -6,7 +6,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: media_player.plex_81cd37e4b6139e46a9735a145c08213c
+    entity_id: media_player.plex_plex_81cd37e4b6139e46a9735a145c08213c
     from: 'playing'
   condition:
     condition: and
@@ -25,7 +25,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: media_player.plex_81cd37e4b6139e46a9735a145c08213c
+    entity_id: media_player.plex_plex_81cd37e4b6139e46a9735a145c08213c
     to: 'playing'
   condition:
     condition: and
