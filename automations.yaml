@@ -508,7 +508,7 @@
     to: 'on'
   action:
     service: media_player.media_play_pause
-    entity_id: media_player.plex_81cd37e4b6139e46a9735a145c08213c
+    entity_id: media_player.plex_plex_81cd37e4b6139e46a9735a145c08213c
 
 - alias: 'Doorbell notify'
   initial_state: true
@@ -770,7 +770,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: media_player.plex_81cd37e4b6139e46a9735a145c08213c
+      entity_id: media_player.plex_plex_81cd37e4b6139e46a9735a145c08213c
       to: 'idle'
       for:
         minutes: 20
