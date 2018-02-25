@@ -72,6 +72,7 @@ lights_and_switches:
     - group.office_lights
     - group.outdoor_lights
     - group.switches
+    - group.tvswitches
   view: yes
   icon: mdi:lightbulb
 
@@ -189,6 +190,28 @@ office_lights:
   entities:
     - light.office_main_lights
 
+outdoor_lights:
+  name: Outdoor lights
+  entities:
+    - light.front_door
+    - light.back_door
+
+switches:
+  name: Switches
+  entities:
+    - switch.switch0
+    - switch.switch1
+    - switch.switch2
+    - switch.switch3
+    - switch.switch4
+    - switch.switch5
+
+tvswitches:
+  name: TV Switches
+  entities:
+    - switch.tv_mute
+    - switch.tv_power
+
 media_players:
   name: Media Players
   view: yes
@@ -217,12 +240,6 @@ security_cam_sensors_switches:
     - switch.front_door_camera_frontfacing_camera
     - switch.front_door_camera_overlay
 
-outdoor_lights:
-  name: Outdoor lights
-  entities:
-    - light.front_door
-    - light.back_door
-
 all_scenes:
   name: All scenes
   icon: mdi:home-variant
@@ -240,16 +257,6 @@ plex:
     - media_player.plex_plex_81cd37e4b6139e46a9735a145c08213c
     - media_player.plex_plex_znzbgfmho5u9bh7kcmwijm7v
     - media_player.plex_plex_6da228c4_976a_4937_bf21_8f7a256b5fec
-
-switches:
-  name: Switches
-  entities:
-    - switch.switch0
-    - switch.switch1
-    - switch.switch2
-    - switch.switch3
-    - switch.switch4
-    - switch.switch5
 
 misc_sensors:
   name: Misc Sensors
