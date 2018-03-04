@@ -261,9 +261,9 @@ zone delta_calgary_downtown:
 
 zone yyc:
   name: Calgary Airport
-  latitude: 51.125061
-  longitude: -114.016889
-  radius: 100
+  latitude: 51.131686
+  longitude: -114.006702
+  radius: 600
   icon: mdi:airplane
 
 zone yyg:
@@ -530,6 +530,10 @@ sensor:
 
   - platform: crimereports
     name: Crime Reports
+    radius: 5000
+
+  - platform: spotcrime
+    name: Spot Crime
     radius: 5000
 
   - platform: command_line
