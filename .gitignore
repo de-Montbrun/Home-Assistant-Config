@@ -19,6 +19,7 @@ logs
 
 .google.token
 .HA_VERSION
+.homekit.state
 .ring_cache.pickle
 .spotify-token-cache
 
