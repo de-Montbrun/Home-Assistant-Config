@@ -172,7 +172,7 @@ history:
     entities:
       - group.cam_tracker
       - group.jen_tracker
-      - group.family
+      - group.householdmembers
 
 # Setup db
 recorder:
