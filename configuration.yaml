@@ -214,6 +214,13 @@ zone:
   radius: 50
   icon: mdi:home
 
+zone craft_beer_corner:
+  name: Craft Beer Corner
+  latitude: !secret craft_beer_corner_latitude
+  longitude: !secret craft_beer_corner_longitude
+  radius: 20
+  icon: mdi:beer
+
 zone discoverygarden:
   name: discoverygarden
   latitude: !secret discoverygarden_latitude
