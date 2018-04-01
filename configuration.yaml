@@ -542,10 +542,6 @@ sensor:
     name: Crime Reports
     radius: 5000
 
-  - platform: spotcrime
-    name: Spot Crime
-    radius: 5000
-
   - platform: command_line
     name: 'filesize_db'
     command: 'stat -c %s "/etc/homeassistant/home-assistant_v2.db"'
