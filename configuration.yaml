@@ -167,16 +167,15 @@ lutron_caseta:
 # Enables support for tracking state changes over time.
 history:
   include:
-    domains:
-      - sun
     entities:
+      - device_tracker.gail_iphonetracks
+      - device_tracker.gervais_iphonetracks
       - group.cam_tracker
       - group.jen_tracker
       - group.householdmembers
 
-# Setup db
+# Setup recorder
 recorder:
-  purge_interval: 2
 
 # Add influxdb
 influxdb:
