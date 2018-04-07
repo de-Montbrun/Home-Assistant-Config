@@ -87,7 +87,6 @@ sensors:
     - group.misc_sensors
     - group.phone_sensors
     - group.doorbell
-    - group.pihole_sensors
     - group.systemmonitor_sensors
   view: yes
   icon: mdi:timer
@@ -274,23 +273,6 @@ phone_sensors:
     - sensor.dgrabbs_iphone_battery_state
     - sensor.iphone_battery_level
     - sensor.iphone_battery_state
-
-pihole_sensors:
-  name: Pi Hole Sensors
-  entities:
-    - sensor.pi_cpu_temp
-    - sensor.pihole_cpu_load
-    - sensor.pihole_ram_used
-    - sensor.pihole_swap_used
-    - sensor.pihole_disk_used
-    - sensor.pihole_ads_blocked_today
-    - sensor.pihole_ads_percentage_blocked_today
-    - sensor.pihole_dns_queries_cached
-    - sensor.pihole_dns_queries_forwarded
-    - sensor.pihole_dns_queries_today
-    - sensor.pihole_dns_unique_clients
-    - sensor.pihole_dns_unique_domains
-    - sensor.pihole_domains_blocked
 
 systemmonitor_sensors:
   name: System Monitor Sensors
