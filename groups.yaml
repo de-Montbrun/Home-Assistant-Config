@@ -224,6 +224,7 @@ media_players:
     - media_player.living_room_roku
     - media_player.spotify
     - media_player.office
+    - media_player.kitchen_speaker
 
 security_cams:
   name: Security
@@ -257,7 +258,6 @@ misc_sensors:
   entities:
     - binary_sensor.workday_sensor
     - sensor.crime_reports
-    - sensor.spot_crime
     - sensor.distance_apart
 
 phone_sensors:
