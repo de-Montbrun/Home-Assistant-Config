@@ -119,6 +119,11 @@ homeassistant:
     switch.switch5:
       friendly_name: Spare Room Switch
 
+    switch.front_door_camera_overlay:
+      hidden: true
+    switch.front_door_camera_frontfacing_camera:
+      hidden: true
+
   customize_glob:
     "switch.tv_*":
       assumed_state: false

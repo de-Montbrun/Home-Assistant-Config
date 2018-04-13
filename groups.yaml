@@ -230,14 +230,7 @@ security_cams:
   icon: mdi:video
   entities:
     - camera.front_door_camera
-    - camera.computer_camera
     - camera.front_door
-
-security_cam_sensors_switches:
-  name: Camera switches
-  entities:
-    - switch.front_door_camera_frontfacing_camera
-    - switch.front_door_camera_overlay
 
 all_scenes:
   name: All scenes
