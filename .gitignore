@@ -17,6 +17,7 @@ logs
 *.google.token
 *.swp
 
+.config_entries.json
 .google.token
 .HA_VERSION
 .homekit.state
