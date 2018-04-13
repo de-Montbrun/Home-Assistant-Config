@@ -162,10 +162,10 @@ bedroom_lights:
 kitchen_lights:
   name: Kitchen lights
   entities:
-    - light.kitchen_island
-    - light.kitchen_oven
-    - light.kitchen_table
-    - light.kitchen_window
+    - input_boolean.kitchen_island
+    - input_boolean.kitchen_oven
+    - input_boolean.kitchen_table
+    - input_boolean.kitchen_window
 
 livingroom_lights:
   name: Livingroom lights
@@ -181,13 +181,13 @@ livingroom_lights:
 misc_lights:
   name: Misc lights
   entities:
-    - light.bathroom
+    - input_boolean.bathroom
     - light.computer_room
 
 office_lights:
   name: Office lights
   entities:
-    - light.office_main_lights
+    - input_boolean.office_main_lights
 
 outdoor_lights:
   name: Outdoor lights
