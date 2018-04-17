@@ -89,6 +89,7 @@ sensors:
     - group.doorbell
     - group.pihole_sensors
     - group.systemmonitor_sensors
+    - group.zulip_sensors
   view: yes
   icon: mdi:timer
 
@@ -284,6 +285,14 @@ pihole_sensors:
     - sensor.pihole_dns_unique_clients
     - sensor.pihole_dns_unique_domains
     - sensor.pihole_domains_blocked
+
+zulip_sensors:
+  name: Zulip Sensors
+  entities:
+    - sensor.zulip_cpu_load
+    - sensor.zulip_ram_used
+    - sensor.zulip_swap_used
+    - sensor.zulip_disk_used
 
 systemmonitor_sensors:
   name: System Monitor Sensors
