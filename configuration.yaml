@@ -103,7 +103,7 @@ homeassistant:
     sensor.deMontbrun_DNS_Expiry:
       icon: mdi:dns
 
-    media_player.plex_znzbgfmho5u9bh7kcmwijm7v:
+    media_player.plex_plex_znzbgfmho5u9bh7kcmwijm7v:
       friendly_name: KeyPear
 
     switch.switch0:
