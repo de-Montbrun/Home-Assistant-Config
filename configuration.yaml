@@ -162,6 +162,13 @@ hue:
 homekit:
   pincode: !secret homekit_pincode
 
+# Lutron Dimmers
+lutron_caseta:
+  host: 192.168.2.121
+  keyfile: 'lutron/caseta.key'
+  certfile: 'lutron/caseta.crt'
+  ca_certs: 'lutron/caseta-bridge.crt'
+
 # Enables support for tracking state changes over time.
 history:
   include:
@@ -670,29 +677,6 @@ device_tracker:
       Grant2: grant-phone
       Gervais3: iphone
       Gail3: Gail-iPhone
-
-# }}}
-# {{{ Toggles
-
-input_boolean:
-  bathroom:
-    name: bathroom
-    icon: mdi:lightbulb
-  kitchen_island:
-    name: kitchen_island
-    icon: mdi:lightbulb
-  kitchen_oven:
-    name: kitchen_oven
-    icon: mdi:lightbulb
-  kitchen_table:
-    name: kitchen_table
-    icon: mdi:lightbulb
-  kitchen_window:
-    name: kitchen_window
-    icon: mdi:lightbulb
-  office_main_lights:
-    name: office_main_lights
-    icon: mdi:lightbulb
 
 # }}}
 # {{{ Security Cams

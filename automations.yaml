@@ -123,16 +123,6 @@
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights__movement_front_door
     - service: light.turn_off
-    - service: ifttt.trigger
-      data: {"event":"caseta_lights_off"}
-    - service: input_boolean.turn_off
-      entity_id:
-        - input_boolean.bathroom
-        - input_boolean.kitchen_island
-        - input_boolean.kitchen_oven
-        - input_boolean.kitchen_table
-        - input_boolean.kitchen_window
-        - input_boolean.office_main_lights
     - delay: ' 00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights__movement_front_door
@@ -155,16 +145,6 @@
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights__movement_front_door
     - service: light.turn_off
-    - service: ifttt.trigger
-      data: {"event":"caseta_lights_off"}
-    - service: input_boolean.turn_off
-      entity_id:
-        - input_boolean.bathroom
-        - input_boolean.kitchen_island
-        - input_boolean.kitchen_oven
-        - input_boolean.kitchen_table
-        - input_boolean.kitchen_window
-        - input_boolean.office_main_lights
     - delay: ' 00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights__movement_front_door
@@ -207,16 +187,6 @@
     - service: switch.turn_off
       entity_id: switch.switch3
     - service: light.turn_off
-    - service: ifttt.trigger
-      data: {"event":"caseta_lights_off"}
-    - service: input_boolean.turn_off
-      entity_id:
-        - input_boolean.bathroom
-        - input_boolean.kitchen_island
-        - input_boolean.kitchen_oven
-        - input_boolean.kitchen_table
-        - input_boolean.kitchen_window
-        - input_boolean.office_main_lights
 
 - alias: 'Sunset - Lights on'
   initial_state: true
@@ -225,10 +195,12 @@
     event: sunset
     offset: '-00:20:00'
   action:
-    - service: input_boolean.turn_on
+    - service: light.turn_on
       entity_id:
-        - input_boolean.bathroom
-        - input_boolean.kitchen_oven
+        - light.bathroom
+        - light.kitchen_oven
+      data:
+        brightness: 255
     - service: light.turn_on
       entity_id: group.outdoor_lights
       data:
@@ -256,8 +228,11 @@
         entity_id: group.office_lights
         state: 'off'
   action:
-    - service: homeassistant.turn_on
+    - service: light.turn_on
       entity_id: group.office_lights
+      data:
+        brightness: 200
+        transition: 5
     - service: switch.turn_on
       entity_id: switch.switch3
 
@@ -430,16 +405,13 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
-    - service: ifttt.trigger
-      data: {"event":"caseta_lights_off"}
-    - service: input_boolean.turn_off
+    - service: light.turn_off
       entity_id:
-        - input_boolean.bathroom
-        - input_boolean.kitchen_island
-        - input_boolean.kitchen_oven
-        - input_boolean.kitchen_table
-        - input_boolean.kitchen_window
-        - input_boolean.office_main_lights
+        - light.bathroom
+        - group.kitchen_lights
+        - group.office_lights
+      data:
+        transition: 300
     - service: homeassistant.turn_on
       entity_id: script.timer_livingroom_off
     - service: switch.turn_off
@@ -528,21 +500,6 @@
     - delay: ' 00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights__movement_front_door
-
-- alias: 'caseta lights'
-  initial_state: true
-  trigger:
-    - platform: state
-      entity_id:
-        - input_boolean.bathroom
-        - input_boolean.kitchen_island
-        - input_boolean.kitchen_oven
-        - input_boolean.kitchen_table
-        - input_boolean.kitchen_window
-        - input_boolean.office_main_lights
-  action:
-    service: ifttt.trigger
-    data_template: {"event": "{{ trigger.to_state.attributes.friendly_name }}_{{ trigger.to_state.state }}"}
 
 - alias: 'Doorbell rang - pause tv'
   initial_state: true
