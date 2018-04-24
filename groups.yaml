@@ -58,7 +58,7 @@ settings:
     - group.all_scripts
     - group.all_automations
     - group.all_scenes
-    - group.security_cam_sensors_switches
+    - group.security_cam_sensors
     - group.all_switches
   view: yes
   icon: mdi:settings
@@ -253,6 +253,12 @@ plex:
     - media_player.plex_plex_znzbgfmho5u9bh7kcmwijm7v
     - media_player.plex_plex_6da228c4_976a_4937_bf21_8f7a256b5fec
     - media_player.plex_plex_886d9ffb_dbf5_404b_b140_b37a852546f6
+
+security_cam_sensors:
+  name: Security Camera Sensors
+  entities:
+    - sensor.front_door_camera_motion
+    - sensor.front_door_camera_sound
 
 misc_sensors:
   name: Misc Sensors
