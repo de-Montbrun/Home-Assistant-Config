@@ -2,278 +2,7 @@
 ### Groups
 #################################################################
 
-devices:
-  name: Devices
-  entities:
-    - group.householdmembers
-    - group.all_devices
-  view: yes
-  icon: mdi:network
-
-householdmembers:
-  name: Household Members
-  entities:
-    - device_tracker.gail_iphonetracks
-    - device_tracker.gervais_iphonetracks
-    - group.cam_tracker
-    - group.jen_tracker
-    - device_tracker.grant
-  icon: mdi:account-multiple
-
-cam_tracker:
-  name: Cameron
-  entities:
-    - device_tracker.camphone
-    - device_tracker.cameron2
-
-gail_tracker:
-  entities:
-      - device_tracker.dgrabbs_iphonehass
-      - device_tracker.gail_iphonetracks
-      - device_tracker.dgrabbsiphone_2
-      - device_tracker.gail3
-
-gervais_tracker:
-  entities:
-    - device_tracker.iphone_2
-    - device_tracker.gervais_iphonehass
-    - device_tracker.gervais_iphonetracks
-    - device_tracker.gervais3
-
-grant_tracker:
-  name: Grant
-  entities:
-    - device_tracker.grantphone
-    - device_tracker.grant2
-
-jen_tracker:
-  name: Jennifer
-  entities:
-    - device_tracker.jenphone
-    - device_tracker.jennifer2
-
-settings:
-  name: Settings
-  entities:
-    - group.all_scripts
-    - group.all_automations
-    - group.all_scenes
-    - group.security_cam_sensors
-    - group.all_switches
-  view: yes
-  icon: mdi:settings
-
-lights_and_switches:
-  entities:
-    - group.bedroom_lights
-    - group.kitchen_lights
-    - group.livingroom_lights
-    - group.misc_lights
-    - group.office_lights
-    - group.outdoor_lights
-    - group.switches
-    - group.tvswitches
-  view: yes
-  icon: mdi:lightbulb
-
-sensors:
-  name: Sensors
-  entities:
-    - group.weather
-    - group.security_detectors
-    - group.bedroom_sensors
-    - group.livingroom_sensors
-    - group.speedtest
-    - group.misc_sensors
-    - group.phone_sensors
-    - group.doorbell
-    - group.pihole_sensors
-    - group.systemmonitor_sensors
-    - group.zulip_sensors
-  view: yes
-  icon: mdi:timer
-
-doorbell:
-  name: Doorbell
-  entities:
-    - binary_sensor.ring_front_door_ding
-    - binary_sensor.ring_front_door_motion
-    - sensor.ring_front_door_last_activity
-    - sensor.ring_front_door_last_ding
-    - sensor.ring_front_door_last_motion
-
-bedroom_sensors:
-  name: Bedroom Sensors
-  entities:
-    - sensor.bed_room_battery_level
-    - sensor.bed_room_lux
-    - sensor.bed_room_temp
-
-livingroom_sensors:
-  name: Livingroom Sensors
-  entities:
-    - sensor.living_room_battery_level
-    - sensor.living_room_lux
-    - sensor.living_room_temp
-
-security_detectors:
-  name: Security Detectors
-  entities:
-    - binary_sensor.bedroom_motion
-    - binary_sensor.bedroom_presence
-    - binary_sensor.livingroom_motion
-    - binary_sensor.livingroom_presence
-
-speedtest:
-  name: Speedtest
-  entities:
-    - sensor.speedtest_download
-    - sensor.speedtest_upload
-    - sensor.speedtest_ping
-
-weather:
-  name: Weather
-  entities:
-    - sun.sun
-    - sensor.moon
-    - sensor.season
-    - sensor.yr_symbol
-    - sensor.yr_temperature
-    - sensor.pws_alerts
-    - sensor.pws_feelslike_c
-    - sensor.pws_heat_index_c
-    - sensor.pws_relative_humidity
-    - sensor.pws_solarradiation
-    - sensor.pws_temp_c
-    - sensor.pws_UV
-    - sensor.pws_weather
-    - sensor.pws_wind_degrees
-    - sensor.pws_wind_gust_kph
-    - sensor.pws_wind_kph
-    - sensor.yweather_temperature
-    - sensor.yweather_temperature_min
-    - sensor.yweather_temperature_max
-    - sensor.worldtidesinfo
-
-bedroom_lights:
-  name: Bedroom lights
-  entities:
-    - light.bedroom0
-    - light.bedroom1
-
-kitchen_lights:
-  name: Kitchen lights
-  entities:
-    - light.kitchen_island
-    - light.kitchen_oven
-    - light.kitchen_table
-    - light.kitchen_window
-
-livingroom_lights:
-  name: Livingroom lights
-  entities:
-    - light.couch0
-    - light.couch1
-    - light.fireplace0
-    - light.fireplace1
-    - light.fireplace2
-    - light.fireplace3
-    - light.table
-
-misc_lights:
-  name: Misc lights
-  entities:
-    - light.bathroom
-    - light.computer_room
-
-office_lights:
-  name: Office lights
-  entities:
-    - light.office_main_lights
-
-outdoor_lights:
-  name: Outdoor lights
-  entities:
-    - light.front_door
-    - light.back_door
-
-switches:
-  name: Switches
-  entities:
-    - switch.switch0
-    - switch.switch1
-    - switch.switch2
-    - switch.switch3
-    - switch.switch4
-    - switch.switch5
-
-tvswitches:
-  name: TV Switches
-  entities:
-    - switch.tv_mute
-    - switch.tv_power
-
-media_players:
-  name: Media Players
-  view: yes
-  icon: mdi:play-circle-outline
-  entities:
-    - group.plex
-    - media_player.gandg
-    - media_player.jens_chromeo
-    - media_player.kidtv
-    - media_player.living_room_roku
-    - media_player.spotify
-    - media_player.office
-    - media_player.kitchen_speaker
-
-security_cams:
-  name: Security
-  view: yes
-  icon: mdi:video
-  entities:
-    - camera.front_door_camera
-    - camera.front_door
-
-all_scenes:
-  name: All scenes
-  icon: mdi:home-variant
-  entities:
-    - scene.kitchen_off
-    - scene.kitchen_one_percent
-    - scene.livingroom_normal
-    - scene.livingroom_dim
-    - scene.livingroom_nightlight
-
-plex:
-  name: Plex
-  entities:
-    - media_player.plex_web_safari
-    - media_player.plex_plex_81cd37e4b6139e46a9735a145c08213c
-    - media_player.plex_plex_znzbgfmho5u9bh7kcmwijm7v
-    - media_player.plex_plex_6da228c4_976a_4937_bf21_8f7a256b5fec
-    - media_player.plex_plex_886d9ffb_dbf5_404b_b140_b37a852546f6
-
-security_cam_sensors:
-  name: Security Camera Sensors
-  entities:
-    - sensor.front_door_camera_motion
-    - sensor.front_door_camera_sound
-
-misc_sensors:
-  name: Misc Sensors
-  entities:
-    - binary_sensor.workday_sensor
-    - sensor.crime_reports
-    - sensor.distance_apart
-
-phone_sensors:
-  name: Phone Sensors
-  entities:
-    - sensor.dgrabbs_iphone_battery_level
-    - sensor.dgrabbs_iphone_battery_state
-    - sensor.iphone_battery_level
-    - sensor.iphone_battery_state
+# {{{ Computer metric sensors
 
 pihole_sensors:
   name: Pi Hole Sensors
@@ -322,3 +51,300 @@ systemmonitor_sensors:
     - sensor.ssl_certificate_expiry
     - sensor.deMontbrun_DNS_Expiry
     - sensor.filesize_db
+
+# }}}
+# {{{ Lights and switches
+
+bedroom_lights:
+  name: Bedroom lights
+  entities:
+    - light.bedroom0
+
+kitchen_lights:
+  name: Kitchen lights
+  entities:
+    - light.kitchen_island
+    - light.kitchen_oven
+    - light.kitchen_table
+    - light.kitchen_window
+
+livingroom_lights:
+  name: Livingroom lights
+  entities:
+    - light.couch0
+    - light.couch1
+    - light.fireplace0
+    - light.fireplace1
+    - light.fireplace2
+    - light.fireplace3
+    - light.table
+
+misc_lights:
+  name: Misc lights
+  entities:
+    - light.bathroom
+    - light.computer_room
+
+office_lights:
+  name: Office lights
+  entities:
+    - light.office_main_lights
+
+outdoor_lights:
+  name: Outdoor lights
+  entities:
+    - light.front_door
+    - light.back_door
+
+spareroom_lights:
+  name: Spare room lights
+  entities:
+    - light.spare0
+    - light.spare1
+
+switches:
+  name: Switches
+  entities:
+    - switch.switch0
+    - switch.switch1
+    - switch.switch2
+    - switch.switch3
+    - switch.switch4
+    - switch.switch5
+
+tvswitches:
+  name: TV Switches
+  entities:
+    - switch.tv_mute
+    - switch.tv_power
+
+# }}}
+# {{{ Media players
+
+plex:
+  name: Plex
+  entities:
+    - media_player.plex_web_safari
+    - media_player.plex_plex_81cd37e4b6139e46a9735a145c08213c
+    - media_player.plex_plex_znzbgfmho5u9bh7kcmwijm7v
+    - media_player.plex_plex_6da228c4_976a_4937_bf21_8f7a256b5fec
+    - media_player.plex_plex_886d9ffb_dbf5_404b_b140_b37a852546f6
+
+# }}}
+#{{{ People
+
+householdmembers:
+  name: Household Members
+  entities:
+    - device_tracker.gail_iphonetracks
+    - device_tracker.gervais_iphonetracks
+    - group.cam_tracker
+    - group.jen_tracker
+    - device_tracker.grant
+  icon: mdi:account-multiple
+
+cam_tracker:
+  name: Cameron
+  entities:
+    - device_tracker.camphone
+    - device_tracker.cameron2
+
+gail_tracker:
+  entities:
+      - device_tracker.dgrabbs_iphonehass
+      - device_tracker.gail_iphonetracks
+      - device_tracker.dgrabbsiphone_2
+      - device_tracker.gail3
+
+gervais_tracker:
+  entities:
+    - device_tracker.iphone_2
+    - device_tracker.gervais_iphonehass
+    - device_tracker.gervais_iphonetracks
+    - device_tracker.gervais3
+
+grant_tracker:
+  name: Grant
+  entities:
+    - device_tracker.grantphone
+    - device_tracker.grant2
+
+jen_tracker:
+  name: Jennifer
+  entities:
+    - device_tracker.jenphone
+    - device_tracker.jennifer2
+
+# }}}
+# {{{ Scenes
+all_scenes:
+  name: All scenes
+  icon: mdi:home-variant
+  entities:
+    - scene.kitchen_off
+    - scene.kitchen_one_percent
+    - scene.livingroom_normal
+    - scene.livingroom_dim
+    - scene.livingroom_nightlight
+# }}}
+# {{{ Sensors
+
+bedroom_sensors:
+  name: Bedroom Sensors
+  entities:
+    - sensor.bed_room_battery_level
+    - sensor.bed_room_lux
+    - sensor.bed_room_temp
+
+doorbell:
+  name: Doorbell
+  entities:
+    - binary_sensor.ring_front_door_ding
+    - binary_sensor.ring_front_door_motion
+    - sensor.ring_front_door_last_activity
+    - sensor.ring_front_door_last_ding
+    - sensor.ring_front_door_last_motion
+
+livingroom_sensors:
+  name: Livingroom Sensors
+  entities:
+    - sensor.living_room_battery_level
+    - sensor.living_room_lux
+    - sensor.living_room_temp
+
+misc_sensors:
+  name: Misc Sensors
+  entities:
+    - binary_sensor.workday_sensor
+    - sensor.crime_reports
+    - sensor.distance_apart
+
+phone_sensors:
+  name: Phone Sensors
+  entities:
+    - sensor.dgrabbs_iphone_battery_level
+    - sensor.dgrabbs_iphone_battery_state
+    - sensor.iphone_battery_level
+    - sensor.iphone_battery_state
+
+security_cam_sensors:
+  name: Security Camera Sensors
+  entities:
+    - sensor.front_door_camera_motion
+    - sensor.front_door_camera_sound
+
+security_detectors:
+  name: Security Detectors
+  entities:
+    - binary_sensor.bedroom_motion
+    - binary_sensor.bedroom_presence
+    - binary_sensor.livingroom_motion
+    - binary_sensor.livingroom_presence
+
+speedtest:
+  name: Speedtest
+  entities:
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
+
+weather:
+  name: Weather
+  entities:
+    - sun.sun
+    - sensor.moon
+    - sensor.season
+    - sensor.yr_symbol
+    - sensor.yr_temperature
+    - sensor.pws_alerts
+    - sensor.pws_feelslike_c
+    - sensor.pws_heat_index_c
+    - sensor.pws_relative_humidity
+    - sensor.pws_solarradiation
+    - sensor.pws_temp_c
+    - sensor.pws_UV
+    - sensor.pws_weather
+    - sensor.pws_wind_degrees
+    - sensor.pws_wind_gust_kph
+    - sensor.pws_wind_kph
+    - sensor.yweather_temperature
+    - sensor.yweather_temperature_min
+    - sensor.yweather_temperature_max
+    - sensor.worldtidesinfo
+
+# }}}
+# {{{ Views
+
+devices:
+  name: Devices
+  entities:
+    - group.householdmembers
+    - group.all_devices
+  view: yes
+  icon: mdi:network
+
+settings:
+  name: Settings
+  entities:
+    - group.all_scripts
+    - group.all_automations
+    - group.all_scenes
+    - group.security_cam_sensors
+    - group.all_switches
+  view: yes
+  icon: mdi:settings
+
+lights_and_switches:
+  entities:
+    - group.bedroom_lights
+    - group.kitchen_lights
+    - group.livingroom_lights
+    - group.misc_lights
+    - group.office_lights
+    - group.outdoor_lights
+    - group.spareroom_lights
+    - group.switches
+    - group.tvswitches
+  view: yes
+  icon: mdi:lightbulb
+
+sensors:
+  name: Sensors
+  entities:
+    - group.weather
+    - group.security_detectors
+    - group.bedroom_sensors
+    - group.livingroom_sensors
+    - group.speedtest
+    - group.misc_sensors
+    - group.phone_sensors
+    - group.doorbell
+    - group.pihole_sensors
+    - group.systemmonitor_sensors
+    - group.zulip_sensors
+  view: yes
+  icon: mdi:timer
+
+media_players:
+  name: Media Players
+  view: yes
+  icon: mdi:play-circle-outline
+  entities:
+    - group.plex
+    - media_player.gandg
+    - media_player.jens_chromeo
+    - media_player.kidtv
+    - media_player.living_room_roku
+    - media_player.spotify
+    - media_player.office
+    - media_player.kitchen_speaker
+
+security_cams:
+  name: Security
+  view: yes
+  icon: mdi:video
+  entities:
+    - camera.front_door_camera
+    - camera.front_door
+
+# }}}
