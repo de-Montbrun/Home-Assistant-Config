@@ -80,14 +80,16 @@ homeassistant:
       icon: mdi:human-male-female
 
     group.jen_tracker:
-      entity_picture: https://avatars.io/facebook/jennifer.langdon.16
+      #entity_picture: https://avatars.io/facebook/jennifer.langdon.16
+      entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
     device_tracker.jenphone:
       hidden: true
     device_tracker.jennifer2:
       hidden: true
 
     group.cam_tracker:
-      entity_picture: https://avatars.io/facebook/cameron.langdon.73
+      #entity_picture: https://avatars.io/facebook/cameron.langdon.73
+      entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
     device_tracker.camphone:
       hidden: true
     device_tracker.cameron2:
