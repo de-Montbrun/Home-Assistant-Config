@@ -125,10 +125,9 @@ plex:
   name: Plex
   entities:
     - media_player.plex_web_safari
-    - media_player.plex_plex_81cd37e4b6139e46a9735a145c08213c
-    - media_player.plex_plex_znzbgfmho5u9bh7kcmwijm7v
-    - media_player.plex_plex_6da228c4_976a_4937_bf21_8f7a256b5fec
-    - media_player.plex_plex_886d9ffb_dbf5_404b_b140_b37a852546f6
+    - media_player.plex_livingroom
+    - media_player.keypear
+    - media_player.plexamp_gervais
 
 # }}}
 #{{{ People
