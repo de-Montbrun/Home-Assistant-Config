@@ -87,14 +87,19 @@
     entity_id: media_player.gandg
     to: 'playing'
   condition:
-    condition: state
-    entity_id: device_tracker.gandgtv
-    state: home
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.gandgtv
+        state: 'home'
+      - condition: state
+        entity_id: group.bedroom_lights
+        state: 'on'
   action:
     service: light.turn_on
     entity_id: light.bedroom0
     data:
-      brightness: 255
+      brightness: 100
       transition: 2
       xy_color: [ 0.169, 0.044 ]
 
@@ -105,14 +110,19 @@
     entity_id: media_player.gandg
     from: 'playing'
   condition:
-    condition: state
-    entity_id: device_tracker.gandgtv
-    state: home
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: device_tracker.gandgtv
+        state: 'home'
+      - condition: state
+        entity_id: group.bedroom_lights
+        state: 'on'
   action:
     service: light.turn_on
     entity_id: light.bedroom0
     data:
-      brightness: 255
+      brightness: 155
       transition: 2
       xy_color: [ 0.4448, 0.4066 ]
 
