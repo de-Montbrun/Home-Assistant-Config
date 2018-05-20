@@ -31,6 +31,7 @@ known_devices.yaml
 secrets.yaml
 
 components
+custom_components
 deps
 www
 icloud
