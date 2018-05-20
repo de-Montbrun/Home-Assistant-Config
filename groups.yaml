@@ -217,6 +217,7 @@ misc_sensors:
     - binary_sensor.workday_sensor
     - sensor.crime_reports
     - sensor.distance_apart
+    - sensor.nokia_15324269
 
 phone_sensors:
   name: Phone Sensors

@@ -52,6 +52,9 @@ homeassistant:
       friendly_name: SQLite DB size
       icon: mdi:database
 
+    sensor.nokia_15324269:
+      friendly_name: Gervais
+
     device_tracker.dgrabbs_iphonehass:
       hidden: true
     device_tracker.gail_iphonetracks:
@@ -577,6 +580,11 @@ sensor:
             {{ distance(states.device_tracker.gervais_iphonetracks, states.device_tracker.gail_iphonetracks) | round(2) }}
           {% endif %}
         unit_of_measurement: 'km'
+
+  - platform: nokia_health
+    consumer_key: !secret nokia_key
+    consumer_secret: !secret nokia_secret
+    scan_interval: 86400
 
 binary_sensor:
   - platform: workday

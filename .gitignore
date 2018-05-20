@@ -28,6 +28,7 @@ entity_registry.yaml
 google_calendars.yaml
 ip_bans.yaml
 known_devices.yaml
+nokia.json
 secrets.yaml
 
 components
