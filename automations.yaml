@@ -830,9 +830,6 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: device_tracker.retropie
-        state: 'not_home'
-      - condition: state
         entity_id: device_tracker.livingroomtv
         state: 'home'
   action:
