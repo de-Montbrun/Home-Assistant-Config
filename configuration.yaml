@@ -134,6 +134,8 @@ homeassistant:
 # }}}
 # {{{ misc
 
+config:
+
 map:
 
 # Checks for available updates
