@@ -274,6 +274,14 @@ zone delta_calgary_downtown:
   radius: 50
   icon: mdi:hotel
 
+zone confederation_bridge:
+  name: Confederation Bridge
+  latitude: 46.200184
+  longitude: -63.765234
+  radius: 4000
+  icon: mdi:bridge
+
+# Airports
 zone yyc:
   name: Calgary Airport
   latitude: 51.131686
