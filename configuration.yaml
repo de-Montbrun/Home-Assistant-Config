@@ -589,7 +589,7 @@ sensor:
   - platform: nokia_health
     consumer_key: !secret nokia_key
     consumer_secret: !secret nokia_secret
-    scan_interval: 86400
+    scan_interval: 3600
 
 binary_sensor:
   - platform: workday
