@@ -270,7 +270,6 @@ weather:
     - sensor.yweather_temperature
     - sensor.yweather_temperature_min
     - sensor.yweather_temperature_max
-    - sensor.worldtidesinfo
 
 # }}}
 # {{{ Views

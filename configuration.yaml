@@ -475,9 +475,6 @@ sensor:
 
   - platform: moon
 
-  - platform: worldtidesinfo
-    api_key: !secret worltides_api_key
-
   - platform: ring
     monitored_conditions:
       - last_activity
