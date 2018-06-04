@@ -624,7 +624,7 @@
     service: rest_command.sabnzb_api
 
 - alias: 'Home presence notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,group.grant_tracker
