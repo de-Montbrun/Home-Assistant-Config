@@ -43,7 +43,7 @@ systemmonitor_sensors:
     - sensor.disk_use_percent_mediaapple
     - sensor.disk_use_percent_mediacracker
     - sensor.disk_use_percent_mediagrapes
-    - sensor.disk_use_percent_medialocs
+    - sensor.disk_use_percent_home
     - sensor.disk_use_percent_mediawine
     - sensor.load_1m
     - sensor.load_5m
