@@ -809,23 +809,65 @@
       - condition: state
         entity_id: group.gervais_tracker
         state: 'not_home'
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.gandg_not_home__movement_in_bedroom.attributes.last_triggered) | int > 600 }}'
   action:
-    service: notify.zulip
-    data:
-      message: >
-        {% if states.group.jen_tracker.state == 'home' and states.group.cam_tracker.state == 'home' %}
-        :cameron: Cameron or :jennifer: Jennifer
-        {% elif states.group.jen_tracker.state == 'home' %}
-        :jennifer: Jennifer
-        {% elif states.group.cam_tracker.state == 'home' %}
-        :cameron: Cameron
-        {% else %}
-        Someone
-        {% endif %}
-        is in GandG's Bedroom
-      title: 'Security Alert'
+    - service: notify.zulip
+      data:
+        message: >
+          {% if states.group.jen_tracker.state == 'home' and states.group.cam_tracker.state == 'home' %}
+          :cameron: Cameron or :jennifer: Jennifer
+          {% elif states.group.jen_tracker.state == 'home' %}
+          :jennifer: Jennifer
+          {% elif states.group.cam_tracker.state == 'home' %}
+          :cameron: Cameron
+          {% else %}
+          Someone
+          {% endif %}
+          is in GandG's Bedroom
+        title: 'Security Alert'
+    - service: light.turn_on
+      entity_id: light.bedroom
+      data:
+        brightness: 255
+        xy_color: [ 0.701,0.299 ]
+    - delay: '00:00:02'
+    - service: light.turn_on
+      entity_id: light.bedroom
+      data:
+        brightness: 255
+        xy_color: [ 0.443,0.518 ]
+    - delay: '00:00:02'
+    - service: light.turn_on
+      entity_id: light.bedroom
+      data:
+        brightness: 255
+        xy_color: [ 0.137,0.041 ]
+    - delay: '00:00:02'
+    - service: light.turn_on
+      entity_id: light.bedroom
+      data:
+        brightness: 255
+        xy_color: [ 0.701,0.299 ]
+    - delay: '00:00:02'
+    - service: light.turn_on
+      entity_id: light.bedroom
+      data:
+        brightness: 255
+        xy_color: [ 0.443,0.518 ]
+    - delay: '00:00:02'
+    - service: light.turn_on
+      entity_id: light.bedroom
+      data:
+        brightness: 255
+        xy_color: [ 0.137,0.041 ]
+    - delay: '00:00:02'
+    - service: light.turn_on
+      entity_id: light.bedroom
+      data:
+        brightness: 255
+        xy_color: [ 0.701,0.299 ]
+    - delay: '00:10:00'
+    - service: light.turn_off
+      entity_id: light.bedroom
 
 - alias: 'Drive is filling'
   initial_state: true
