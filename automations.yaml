@@ -341,7 +341,39 @@
     service: switch.turn_off
     entity_id: 'switch.switch1'
 
-- alias: 'Window fan on'
+- alias: 'Bedroom Window fan on'
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.yr_temperature.state < states.sensor.bed_room_temp.state }}'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states.sensor.bed_room_temp.state | int >= 20 }}'
+      - condition: state
+        entity_id: sensor.season
+        state: 'Summer'
+  action:
+    service: switch.turn_on
+    entity_id: switch.switch4
+
+- alias: 'Bedroom Window fan off'
+  initial_state: true
+  trigger:
+    - platform: template
+      value_template: '{{ states.sensor.yr_temperature.state > states.sensor.bed_room_temp.state }}'
+    - platform: template
+      value_template: '{{ states.sensor.bed_room_temp.state | int < 20 }}'
+  condition:
+    condition: state
+    entity_id: sensor.season
+    state: 'Summer'
+  action:
+    service: switch.turn_off
+    entity_id: switch.switch4
+
+- alias: 'Livingroom Window fan on'
   initial_state: false
   trigger:
     platform: template
@@ -358,7 +390,7 @@
     service: switch.turn_on
     entity_id: switch.switch0
 
-- alias: 'Window fan off'
+- alias: 'Livingroom Window fan off'
   initial_state: false
   trigger:
     - platform: template
