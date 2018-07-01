@@ -426,7 +426,7 @@ sensor:
       - type: disk_use_percent
         arg: /boot
       - type: disk_use_percent
-        arg: /media/locs
+        arg: /home
       - type: disk_use_percent
         arg: /media/apple
       - type: disk_use_percent
