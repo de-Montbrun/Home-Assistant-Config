@@ -162,7 +162,11 @@ hue:
 
 # Homekit Setup
 homekit:
-  pincode: !secret homekit_pincode
+  filter:
+    include_domains:
+      - light
+      - media_player
+      - switch
 
 # Lutron Dimmers
 lutron_caseta:
