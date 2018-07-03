@@ -208,7 +208,7 @@
     condition: and
     conditions:
       - condition: template
-        value_template: '{{ states("sensor.season") != "Summer" }}'
+        value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: or
         conditions:
           - condition: state
@@ -336,7 +336,7 @@
       at: '01:29:59'
   condition:
     condition: template
-    value_template: '{{ states("sensor.season") != "Summer" }}'
+    value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: switch.turn_off
     entity_id: 'switch.switch1'
@@ -353,7 +353,7 @@
         value_template: '{{ states.sensor.bed_room_temp.state | int >= 20 }}'
       - condition: state
         entity_id: sensor.season
-        state: 'Summer'
+        state: 'summer'
   action:
     service: switch.turn_on
     entity_id: switch.switch4
@@ -368,13 +368,13 @@
   condition:
     condition: state
     entity_id: sensor.season
-    state: 'Summer'
+    state: 'summer'
   action:
     service: switch.turn_off
     entity_id: switch.switch4
 
 - alias: 'Livingroom Window fan on'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: template
     value_template: '{{ states.sensor.yr_temperature.state < states.sensor.living_room_temp.state }}'
@@ -385,13 +385,13 @@
         value_template: '{{ states.sensor.living_room_temp.state | int >= 20 }}'
       - condition: state
         entity_id: sensor.season
-        state: 'Summer'
+        state: 'summer'
   action:
     service: switch.turn_on
-    entity_id: switch.switch0
+    entity_id: switch.switch2
 
 - alias: 'Livingroom Window fan off'
-  initial_state: false
+  initial_state: true
   trigger:
     - platform: template
       value_template: '{{ states.sensor.yr_temperature.state > states.sensor.living_room_temp.state }}'
@@ -400,10 +400,10 @@
   condition:
     condition: state
     entity_id: sensor.season
-    state: 'Summer'
+    state: 'summer'
   action:
     service: switch.turn_off
-    entity_id: switch.switch0
+    entity_id: switch.switch2
 
 - alias: 'Gail away - turn off heater'
   initial_state: true
@@ -413,7 +413,7 @@
       from: 'home'
   condition:
     condition: template
-    value_template: '{{ states("sensor.season") != "Summer" }}'
+    value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: switch.turn_off
     entity_id:
@@ -444,7 +444,7 @@
         entity_id: 'binary_sensor.workday_sensor'
         state: 'on'
       - condition: template
-        value_template: '{{ states("sensor.season") != "Summer" }}'
+        value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: switch.turn_on
     entity_id:
@@ -723,8 +723,8 @@
 
         **Current Tempurature:** {{ states.sensor.pws_temp_c.state }}{{ states.sensor.pws_temp_c.attributes.unit_of_measurement }}
 
-        {% if states("sensor.season") == "Winter" %}**{{ states.sensor.pws_feelslike_c.attributes.friendly_name }}:** {{ states.sensor.pws_feelslike_c.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
-        {% elif states("sensor.season") == "Summer" %}**{{ states.sensor.pws_heat_index_c.attributes.friendly_name }}:** {{ states.sensor.pws_heat_index_c.state }}{{ states.sensor.pws_heat_index_c.attributes.unit_of_measurement }}
+        {% if states("sensor.season") == "winter" %}**{{ states.sensor.pws_feelslike_c.attributes.friendly_name }}:** {{ states.sensor.pws_feelslike_c.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
+        {% elif states("sensor.season") == "summer" %}**{{ states.sensor.pws_heat_index_c.attributes.friendly_name }}:** {{ states.sensor.pws_heat_index_c.state }}{{ states.sensor.pws_heat_index_c.attributes.unit_of_measurement }}
         {% endif %}
       title: 'Weather'
 
@@ -959,7 +959,7 @@
       - condition: template
         value_template: '{{ states.sensor.bed_room_temp.state | int < 17 }}'
       - condition: template
-        value_template: '{{ states("sensor.season") != "Summer" }}'
+        value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: time
         after: '21:30:00'
       - condition: time

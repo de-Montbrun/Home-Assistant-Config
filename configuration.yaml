@@ -113,7 +113,7 @@ homeassistant:
     switch.switch1:
       friendly_name: Jennifer Switch
     switch.switch2:
-      friendly_name: Office Switch
+      friendly_name: Livingroom Switch
     switch.switch3:
       friendly_name: Office Light Switch
     switch.switch4:
