@@ -363,9 +363,6 @@ http:
   api_password: !secret http_api_password
   ssl_certificate: !secret http_ssl_certificate
   ssl_key: !secret http_ssl_key
-  cors_allowed_origins:
-    - https://google.com
-    - https://home-assistant.io
   use_x_forwarded_for: true
   trusted_networks:
     - 192.168.2.0/24
