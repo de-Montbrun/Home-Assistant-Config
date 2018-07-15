@@ -364,6 +364,8 @@ http:
   ssl_certificate: !secret http_ssl_certificate
   ssl_key: !secret http_ssl_key
   use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
   trusted_networks:
     - 192.168.2.0/24
     - 127.0.0.1
@@ -641,6 +643,17 @@ device_tracker:
       track_new_devices: true
       hide_if_away: true
 
+  - platform: asuswrt
+    host: 192.168.2.210
+    username: !secret router_username
+    mode: ap
+    protocol: ssh
+    ssh_key: /home/homeassistant/.ssh/id_rsa
+    home_interval: 5
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: true
+
   - platform: nmap_tracker
     hosts: 192.168.2.1-9
     home_interval: 5
@@ -650,7 +663,7 @@ device_tracker:
 
   - platform: nmap_tracker
     hosts: 192.168.2.10-13
-    home_interval: 20
+    home_interval: 30
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
