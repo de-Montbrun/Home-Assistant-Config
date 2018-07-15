@@ -23,6 +23,7 @@ logs
 .homekit.state
 .ring_cache.pickle
 .spotify-token-cache
+.storage
 
 entity_registry.yaml
 google_calendars.yaml
