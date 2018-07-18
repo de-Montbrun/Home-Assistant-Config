@@ -886,22 +886,23 @@
 - alias: 'Turn off livingroom tv when idle'
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: media_player.plex_livingroom
-      to: 'idle'
-      for:
-        minutes: 20
-    - platform: state
-      entity_id: media_player.living_room_roku
-      to: 'idle'
-      for:
-        minutes: 20
+    - platform: time
+      minutes: '/20'
+      seconds: 0
   condition:
     condition: and
     conditions:
       - condition: state
         entity_id: device_tracker.livingroomtv
         state: 'home'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: media_player.plex_livingroom
+            state: 'idle'
+          - condition: state
+            entity_id: media_player.living_room_roku
+            state: 'idle'
   action:
     service: switch.turn_off
     entity_id: switch.tv_power
