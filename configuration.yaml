@@ -633,7 +633,7 @@ device_tracker:
   - platform: owntracks_http
 
   - platform: asuswrt
-    host: 192.168.2.249
+    host: 192.168.2.210
     username: !secret router_username
     mode: ap
     protocol: ssh
@@ -644,7 +644,7 @@ device_tracker:
       hide_if_away: true
 
   - platform: asuswrt
-    host: 192.168.2.210
+    host: 192.168.2.249
     username: !secret router_username
     mode: ap
     protocol: ssh
@@ -657,6 +657,7 @@ device_tracker:
   - platform: nmap_tracker
     hosts: 192.168.2.1-9
     home_interval: 5
+    interval_seconds: 60
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
@@ -664,6 +665,7 @@ device_tracker:
   - platform: nmap_tracker
     hosts: 192.168.2.10-13
     home_interval: 30
+    interval_seconds: 60
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
@@ -671,6 +673,7 @@ device_tracker:
   - platform: nmap_tracker
     hosts: 192.168.2.14-100
     home_interval: 2
+    interval_seconds: 60
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
@@ -678,6 +681,7 @@ device_tracker:
   - platform: nmap_tracker
     hosts: 192.168.2.101-120
     home_interval: 5
+    interval_seconds: 60
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
@@ -685,6 +689,7 @@ device_tracker:
   - platform: nmap_tracker
     hosts: 192.168.2.121-254
     home_interval: 5
+    interval_seconds: 60
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
