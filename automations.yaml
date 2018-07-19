@@ -900,9 +900,13 @@
           - condition: state
             entity_id: media_player.plex_livingroom
             state: 'idle'
+            for:
+              minutes: 5
           - condition: state
             entity_id: media_player.living_room_roku
             state: 'idle'
+            for:
+              minutes: 5
   action:
     service: switch.turn_off
     entity_id: switch.tv_power
