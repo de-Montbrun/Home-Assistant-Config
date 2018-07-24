@@ -250,6 +250,7 @@
     - service: light.turn_on
       entity_id: group.outdoor_lights
       data:
+        xy_color: [ 0.312,0.328 ]
         brightness: 255
         transition: 300
     - service: scene.turn_on
