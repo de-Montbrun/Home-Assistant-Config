@@ -17,6 +17,7 @@ logs
 *.google.token
 *.swp
 
+.cloud
 .config_entries.json
 .google.token
 .HA_VERSION
