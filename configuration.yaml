@@ -648,28 +648,6 @@ binary_sensor:
 device_tracker:
   - platform: owntracks_http
 
-  - platform: asuswrt
-    host: 192.168.2.210
-    username: !secret router_username
-    mode: ap
-    protocol: ssh
-    ssh_key: /home/homeassistant/.ssh/id_rsa
-    home_interval: 5
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
-  - platform: asuswrt
-    host: 192.168.2.249
-    username: !secret router_username
-    mode: ap
-    protocol: ssh
-    ssh_key: /home/homeassistant/.ssh/id_rsa
-    home_interval: 5
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
   - platform: nmap_tracker
     hosts: 192.168.2.1-9
     home_interval: 5
