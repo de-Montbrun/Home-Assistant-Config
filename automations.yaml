@@ -166,6 +166,7 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
+    - delay: ' 00:02:00'
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights__movement_front_door
     - service: light.turn_off
@@ -655,7 +656,7 @@
     service: rest_command.sabnzb_api
 
 - alias: 'Home presence notification'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,group.grant_tracker
@@ -992,3 +993,39 @@
   action:
     service: switch.turn_off
     entity_id: switch.switch4
+
+- alias: 'Fing update user'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: sensor.fing_state
+  action:
+    service: device_tracker.see
+    data_template:
+      dev_id: '{{ (trigger.to_state.state.split(": ")[1]).split(" ")[0]}}'
+      location_name: >-
+        {% if trigger.to_state.state.split(": ")[0] == 'Offline' %} not_home
+        {% elif trigger.to_state.state.split(": ")[0] == 'In range' or trigger.to_state.state.split(": ")[0] == 'Online' %} home
+        {% endif %}
+
+- alias: 'Germaine arrives'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: device_tracker.germaine
+    to: 'home'
+  action:
+    service: homeassistant.turn_off
+    entity_id: automation.gandg_not_home__movement_in_bedroom
+
+- alias: 'Germaine leaves'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: device_tracker.germaine
+    to: 'not_home'
+    for:
+      minutes: 90
+  action:
+    service: homeassistant.turn_on
+    entity_id: automation.gandg_not_home__movement_in_bedroom

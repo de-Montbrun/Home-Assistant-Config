@@ -55,6 +55,9 @@ homeassistant:
     sensor.nokia_15324269:
       friendly_name: Gervais
 
+    sensor.fing_state:
+      hidden: true
+
     device_tracker.dgrabbs_iphonehass:
       hidden: true
     device_tracker.gail_iphonetracks:
@@ -608,6 +611,15 @@ sensor:
     consumer_secret: !secret nokia_secret
     scan_interval: 3600
 
+  - platform: imap_email_content
+    name: Fing State
+    server: !secret fing_email_server
+    port: 993
+    username: !secret fing_email_username
+    password: !secret fing_email_password
+    senders:
+      - alert@fing.io
+
 binary_sensor:
   - platform: workday
     country: CA
@@ -658,7 +670,7 @@ device_tracker:
 
   - platform: nmap_tracker
     hosts: 192.168.2.10-13
-    home_interval: 30
+    home_interval: 5
     interval_seconds: 60
     new_device_defaults:
       track_new_devices: true
