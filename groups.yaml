@@ -139,14 +139,7 @@ householdmembers:
     - device_tracker.gervais_iphonetracks
     - group.cam_tracker
     - group.jen_tracker
-    - device_tracker.grant
   icon: mdi:account-multiple
-
-cam_tracker:
-  name: Cameron
-  entities:
-    - device_tracker.camphone
-    - device_tracker.cameron2
 
 gail_tracker:
   entities:
@@ -167,12 +160,21 @@ grant_tracker:
   entities:
     - device_tracker.grantphone
     - device_tracker.grant2
+    - device_tracker.grant_fing
+
+cam_tracker:
+  name: Cameron
+  entities:
+    - device_tracker.camphone
+    - device_tracker.cameron2
+    - device_tracker.cam_fing
 
 jen_tracker:
   name: Jennifer
   entities:
     - device_tracker.jenphone
     - device_tracker.jennifer2
+    - device_tracker.jen_fing
 
 # }}}
 # {{{ Scenes

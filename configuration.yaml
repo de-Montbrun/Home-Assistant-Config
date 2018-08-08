@@ -85,27 +85,31 @@ homeassistant:
     sensor.distance_apart:
       icon: mdi:human-male-female
 
-    group.jen_tracker:
-      #entity_picture: https://avatars.io/facebook/jennifer.langdon.16
-      entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
-    device_tracker.jenphone:
+    group.grant_tracker:
+      entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/54.png
+    device_tracker.grantphone:
       hidden: true
-    device_tracker.jennifer2:
+    device_tracker.grant2:
+      hidden: true
+    device_tracker.grant_fing:
       hidden: true
 
     group.cam_tracker:
-      #entity_picture: https://avatars.io/facebook/cameron.langdon.73
       entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
     device_tracker.camphone:
       hidden: true
     device_tracker.cameron2:
       hidden: true
-
-    group.grant_tracker:
-      group.grant_tracker: https://avatars.io/facebook/Grannt
-    device_tracker.grantphone:
+    device_tracker.cam_fing:
       hidden: true
-    device_tracker.grant2:
+
+    group.jen_tracker:
+      entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
+    device_tracker.jenphone:
+      hidden: true
+    device_tracker.jennifer2:
+      hidden: true
+    device_tracker.jen_fing:
       hidden: true
 
     sensor.deMontbrun_DNS_Expiry:
