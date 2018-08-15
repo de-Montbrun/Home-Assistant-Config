@@ -663,7 +663,7 @@
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'
-    above: '.01'
+    above: '10'
   action:
     service: notify.zulip
     data_template:
