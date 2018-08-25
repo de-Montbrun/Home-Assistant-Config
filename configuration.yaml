@@ -287,7 +287,7 @@ zone churchill_arms:
   name: Churchill Arms
   latitude: !secret churchill_arms_latitude
   longitude: !secret churchill_arms_longitude
-  radius: 50
+  radius: 25
   icon: mdi:beer
 
 zone qeh:
