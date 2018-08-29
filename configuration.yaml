@@ -63,9 +63,9 @@ homeassistant:
     device_tracker.gail_iphonetracks:
       hidden: false
       entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
-    device_tracker.dgrabbsiphone_2:
-      hidden: true
     device_tracker.gail3:
+      hidden: true
+    device_tracker.gail_fing:
       hidden: true
     group.gail_tracker:
       hidden: true
@@ -73,11 +73,9 @@ homeassistant:
     device_tracker.gervais_iphonetracks:
       hidden: false
       entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
-    device_tracker.iphone_2:
-      hidden: true
-    device_tracker.gervais_iphonehass:
-      hidden: true
     device_tracker.gervais3:
+      hidden: true
+    device_tracker.gervais_fing:
       hidden: true
     group.gervais_tracker:
       hidden: true
