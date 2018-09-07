@@ -808,6 +808,8 @@
         entity_id: group.gervais_tracker
         state: 'not_home'
   action:
+    - service: homeassistant.turn_off
+      entity_id: automation.gandg_not_home__movement_in_bedroom
     - service: notify.zulip
       data:
         message: >
@@ -863,9 +865,17 @@
       data:
         brightness: 255
         xy_color: [ 0.701,0.299 ]
-    - delay: '00:10:00'
+    - service: light.turn_on
+      entity_id: light.bedroom
+      data:
+        brightness: 255
+        xy_color: [ 0.312,0.328 ]
+    - delay: '00:00:05'
     - service: light.turn_off
       entity_id: light.bedroom
+    - delay: '00:00:05'
+    - service: homeassistant.turn_on
+      entity_id: automation.gandg_not_home__movement_in_bedroom
 
 - alias: 'Drive is filling'
   initial_state: true
