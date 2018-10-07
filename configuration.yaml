@@ -124,7 +124,7 @@ homeassistant:
     switch.switch4:
       friendly_name: Bedroom Switch
     switch.switch5:
-      friendly_name: Computer Room Switch
+      friendly_name: Office Switch
 
     light.office_main_lights:
       friendly_name: Office Main Lights
