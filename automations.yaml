@@ -191,6 +191,8 @@
   action:
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights__movement_front_door
+    - service: switch.turn_off
+      entity_id: switch.switch3
     - service: light.turn_off
     - delay: ' 00:00:04'
     - service: homeassistant.turn_on
@@ -221,7 +223,7 @@
     service: switch.turn_off
     entity_id:
       - switch.switch0
-      - switch.switch2
+      - switch.switch5
 
 - alias: 'Sunrise - Lights out'
   initial_state: true
@@ -360,7 +362,6 @@
     service: switch.turn_on
     entity_id:
       - switch.switch4
-      - switch.switch5
 
 - alias: 'Bedroom Window fan off'
   initial_state: true
@@ -377,7 +378,6 @@
     service: switch.turn_off
     entity_id:
       - switch.switch4
-      - switch.switch5
 
 - alias: 'Livingroom Window fan on'
   initial_state: true
@@ -424,7 +424,7 @@
     service: switch.turn_off
     entity_id:
       - switch.switch0
-      - switch.switch2
+      - switch.switch5
 
 - alias: 'Gail home - turn on heater'
   initial_state: true
@@ -455,7 +455,7 @@
     service: switch.turn_on
     entity_id:
       - switch.switch0
-      - switch.switch2
+      - switch.switch5
 
 - alias: 'Bedtime'
   initial_state: true
