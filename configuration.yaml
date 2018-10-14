@@ -133,9 +133,6 @@ homeassistant:
     "switch.tv_*":
       assumed_state: false
 
-    "sensor.front_door_camera_*_connections":
-      hidden: true
-
 # }}}
 # {{{ misc
 
@@ -412,11 +409,6 @@ media_player:
   - platform: roku
     host: 192.168.2.21
 
-## Spotify
-#  - platform: spotify
-#    client_id: !secret spotify_client_id
-#    client_secret: !secret spotify_client_secret
-
   - platform: sonos
     hosts: 192.168.2.139
 
@@ -446,8 +438,6 @@ sensor:
         arg: /
       - type: disk_use_percent
         arg: /boot
-      - type: disk_use_percent
-        arg: /home
       - type: disk_use_percent
         arg: /media/apple
       - type: disk_use_percent
@@ -715,14 +705,6 @@ device_tracker:
 
 # }}}
 # {{{ Security Cams
-
-android_ip_webcam:
-  - name: 'Front Door Camera'
-    host: 192.168.2.92
-    scan_interval: 1
-    sensors:
-      - motion
-      - sound
 
 camera:
   - platform: ring

@@ -166,7 +166,7 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_iphonetracks) > 10 }}'
   action:
-    - delay: ' 00:02:00'
+    - delay: ' 00:10:00'
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights__movement_front_door
     - service: light.turn_off
@@ -607,11 +607,6 @@
           {% elif trigger.to_state.attributes.device_class == 'occupancy' %} :bell:
           {% endif %}
         title: 'Security Alert'
-    - service: rest_command.take_a_picture
-    - service: camera.snapshot
-      data:
-        entity_id: camera.front_door_camera
-        filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door1.jpg'
     - delay: '00:05:30'
     - service: downloader.download_file
       data_template:

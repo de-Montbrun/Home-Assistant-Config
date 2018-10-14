@@ -43,7 +43,6 @@ systemmonitor_sensors:
     - sensor.disk_use_percent_mediaapple
     - sensor.disk_use_percent_mediacracker
     - sensor.disk_use_percent_mediagrapes
-    - sensor.disk_use_percent_home
     - sensor.disk_use_percent_mediawine
     - sensor.load_1m
     - sensor.load_5m
@@ -94,7 +93,8 @@ outdoor_lights:
   name: Outdoor lights
   entities:
     - light.front_door
-    - light.back_door
+    - light.backdoor0
+    - light.backdoor1
 
 spareroom_lights:
   name: Spare room lights
@@ -224,15 +224,10 @@ phone_sensors:
   name: Phone Sensors
   entities:
     - sensor.dgrabbs_iphone_battery_level
-    - sensor.dgrabbs_iphone_battery_state
+    - sensor.grdems_battery_level
+    - sensor.grdems_phone_battery_state
     - sensor.iphone_battery_level
     - sensor.iphone_battery_state
-
-security_cam_sensors:
-  name: Security Camera Sensors
-  entities:
-    - sensor.front_door_camera_motion
-    - sensor.front_door_camera_sound
 
 security_detectors:
   name: Security Detectors
@@ -344,7 +339,6 @@ security_cams:
   view: yes
   icon: mdi:video
   entities:
-    - camera.front_door_camera
     - camera.front_door
 
 # }}}
