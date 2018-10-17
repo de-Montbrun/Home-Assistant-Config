@@ -136,24 +136,6 @@ homeassistant:
 # }}}
 # {{{ misc
 
-cloud:
-  alexa:
-    filter:
-      exclude_domains:
-        - automation
-        - group
-        - media_player
-        - script
-        - sensor
-      include_entities:
-        - group.all_lights
-        - group.bedroom_lights
-        - group.kitchen_lights
-        - group.livingroom_lights
-        - group.office_lights
-        - group.outdoor_lights
-        - group.spareroom_lights
-
 config:
 map:
 
