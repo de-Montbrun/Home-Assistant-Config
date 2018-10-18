@@ -83,6 +83,7 @@ misc_lights:
   entities:
     - light.bathroom
     - light.computer_room
+    - light.hallway
 
 office_lights:
   name: Office lights
