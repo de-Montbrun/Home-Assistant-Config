@@ -1001,20 +1001,6 @@
     service: switch.turn_off
     entity_id: switch.switch4
 
-- alias: 'Fing update user'
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: sensor.fing_state
-  action:
-    service: device_tracker.see
-    data_template:
-      dev_id: '{{ (trigger.to_state.state.split(": ")[1]).split(" ")[0]}}'
-      location_name: >-
-        {% if trigger.to_state.state.split(": ")[0] == 'Offline' %} not_home
-        {% elif trigger.to_state.state.split(": ")[0] == 'In range' or trigger.to_state.state.split(": ")[0] == 'Online' %} home
-        {% endif %}
-
 - alias: 'Germaine arrives'
   initial_state: true
   trigger:
@@ -1036,3 +1022,17 @@
   action:
     service: homeassistant.turn_on
     entity_id: automation.gandg_not_home__movement_in_bedroom
+
+- alias: 'Fing update user'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: sensor.fing_state
+  action:
+    service: device_tracker.see
+    data_template:
+      dev_id: '{{ (trigger.to_state.state.split(": ")[1]).split(" ")[0]}}'
+      location_name: >-
+        {% if trigger.to_state.state.split(": ")[0] == 'Offline' %} not_home
+        {% elif trigger.to_state.state.split(": ")[0] == 'In range' or trigger.to_state.state.split(": ")[0] == 'Online' %} home
+        {% endif %}
