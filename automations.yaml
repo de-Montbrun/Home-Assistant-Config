@@ -790,7 +790,7 @@
       title: 'Weather'
 
 - alias: 'GandG not home - Movement in Bedroom'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.bedroom_motion
@@ -1026,7 +1026,7 @@
     entity_id: automation.gandg_not_home__movement_in_bedroom
 
 - alias: 'Germaine leaves'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: device_tracker.germaine
