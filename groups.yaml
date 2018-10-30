@@ -151,6 +151,7 @@ gail_tracker:
 
 gervais_tracker:
   entities:
+    - device_tracker.gervaisapplewatch
     - device_tracker.gervais_fing
     - device_tracker.gervais_iphonetracks
     - device_tracker.gervais3

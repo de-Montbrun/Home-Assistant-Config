@@ -77,6 +77,8 @@ homeassistant:
       hidden: true
     device_tracker.gervais_fing:
       hidden: true
+    device_tracker.gervaisapplewatch:
+      hidden: true
     group.gervais_tracker:
       hidden: true
 
