@@ -634,6 +634,13 @@ binary_sensor:
       - motion
 
 # }}}
+# {{{ Weather
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+
+# }}}
 # {{{ Presence Trackers
 
 device_tracker:
