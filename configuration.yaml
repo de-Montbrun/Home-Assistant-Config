@@ -393,9 +393,6 @@ media_player:
   - platform: roku
     host: 192.168.2.21
 
-  - platform: sonos
-    hosts: 192.168.2.139
-
 # }}}
 # {{{ Ring
 
