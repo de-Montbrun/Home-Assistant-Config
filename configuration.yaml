@@ -65,8 +65,6 @@ homeassistant:
       entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
     device_tracker.gail3:
       hidden: true
-    device_tracker.gail_fing:
-      hidden: true
     group.gail_tracker:
       hidden: true
 
@@ -74,8 +72,6 @@ homeassistant:
       hidden: false
       entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
     device_tracker.gervais3:
-      hidden: true
-    device_tracker.gervais_fing:
       hidden: true
     device_tracker.gervaisapplewatch:
       hidden: true
@@ -91,8 +87,6 @@ homeassistant:
       hidden: true
     device_tracker.grant2:
       hidden: true
-    device_tracker.grant_fing:
-      hidden: true
 
     group.cam_tracker:
       entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
@@ -100,16 +94,12 @@ homeassistant:
       hidden: true
     device_tracker.cameron2:
       hidden: true
-    device_tracker.cam_fing:
-      hidden: true
 
     group.jen_tracker:
       entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
     device_tracker.jenphone:
       hidden: true
     device_tracker.jennifer2:
-      hidden: true
-    device_tracker.jen_fing:
       hidden: true
 
     sensor.deMontbrun_DNS_Expiry:

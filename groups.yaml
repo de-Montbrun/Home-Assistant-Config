@@ -89,14 +89,14 @@ householdmembers:
 gail_tracker:
   entities:
     - device_tracker.dgrabbs_iphonehass
-    - device_tracker.gail_fing
+    - device_tracker.gail
     - device_tracker.gail_iphonetracks
     - device_tracker.gail3
 
 gervais_tracker:
   entities:
     - device_tracker.gervaisapplewatch
-    - device_tracker.gervais_fing
+    - device_tracker.gervais
     - device_tracker.gervais_iphonetracks
     - device_tracker.gervais3
 
@@ -105,20 +105,20 @@ grant_tracker:
   entities:
     - device_tracker.grantphone
     - device_tracker.grant2
-    - device_tracker.grant_fing
+    - device_tracker.grant
 
 cam_tracker:
   name: Cameron
   entities:
     - device_tracker.camphone
     - device_tracker.cameron2
-    - device_tracker.cam_fing
+    - device_tracker.cameron
 
 jen_tracker:
   name: Jennifer
   entities:
     - device_tracker.jenphone
     - device_tracker.jennifer2
-    - device_tracker.jen_fing
+    - device_tracker.jennifer
 
 # }}}
