@@ -1,0 +1,179 @@
+title: Home
+views:
+  # {{{ View People 👫
+
+  - title: Devices
+    icon: mdi:account-multiple
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: entities
+            title: Household Members
+            show_header_toggle: true
+            entities:
+              - device_tracker.gail_iphonetracks
+              - device_tracker.gervais_iphonetracks
+              - group.cam_tracker
+              - group.jen_tracker
+          - type: gauge
+            title: GandG Apart
+            unit_of_measurement: 'km'
+            severity:
+              green: 0
+              yellow: 200
+              red: 1000
+            entity: sensor.distance_apart
+      - type: map
+        entities:
+          - device_tracker.gail_iphonetracks
+          - device_tracker.gervais_iphonetracks
+
+  # }}}
+  # {{{ View Lights💡
+
+  - title: Lights
+    icon: mdi:lightbulb
+    cards:
+      - type: entities
+        title: All lights
+        show_header_toggle: false
+        entities:
+          - group.all_lights
+          - group.outdoor_lights
+          - group.mainfloor_lights
+          - group.secondfloor_lights
+          - group.bedroom_lights
+          - group.spareroom_lights
+          - group.kitchen_lights
+          - group.livingroom_lights
+          - group.office_lights
+      - type: entities
+        title: Bedroom lights
+        show_header_toggle: false
+        entities:
+          - group.bedroom_lights
+          - light.bedroom0
+      - type: entities
+        title: Kitchen lights
+        show_header_toggle: false
+        entities:
+          - group.kitchen_lights
+          - light.kitchen_island
+          - light.kitchen_oven
+          - light.kitchen_table
+          - light.kitchen_window
+      - type: entities
+        title: Livingroom lights
+        show_header_toggle: false
+        entities:
+          - group.livingroom_lights
+          - light.couch0
+          - light.couch1
+          - light.fireplace0
+          - light.fireplace1
+          - light.fireplace2
+          - light.fireplace3
+          - light.table
+      - type: entities
+        title: Misc lights
+        show_header_toggle: true
+        entities:
+          - light.bathroom
+          - light.hallway
+      - type: entities
+        title: Office lights
+        show_header_toggle: false
+        entities:
+          - group.office_lights
+          - light.office_main_lights
+          - switch.switch3
+      - type: entities
+        title: Outdoor lights
+        show_header_toggle: false
+        entities:
+          - group.outdoor_lights
+          - light.front_door
+          - light.backdoor0
+          - light.backdoor1
+      - type: entities
+        title: Spare room lights
+        show_header_toggle: false
+        entities:
+          - group.spareroom_lights
+          - light.computer_room
+          - light.spare0
+          - light.spare1
+
+  # }}}
+  # {{{ View Buttons 🔘
+
+  - title: buttons
+    icon: mdi:google-circles-communities
+    cards:
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.all_lights
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.mainfloor_lights
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.secondfloor_lights
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.bedroom_lights
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.spareroom_lights
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.kitchen_lights
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.livingroom_lights
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.office_lights
+      - type: entity-button
+        tap_action: more-info
+        hold_action: toggle
+        entity: group.outdoor_lights
+
+  # }}}
+  # {{{ View Weather 🌦️
+
+  - title: Weather
+    icon: mdi:weather-partlycloudy
+    cards:
+      - type: weather-forecast
+        name: Forecast
+        entity: weather.dark_sky
+      - type: entities
+        title: Weather
+        show_header_toggle: true
+        entities:
+          - sun.sun
+          - sensor.moon
+          - sensor.season
+
+  # }}}
+  # {{{ View Security 📹
+
+  - title: Security
+    icon: mdi:video
+    cards:
+      - type: picture-entity
+        title: Front Door
+        entity: camera.front_door
+        camera_image: camera.front_door
+        show_info: true
+
+  # }}}
