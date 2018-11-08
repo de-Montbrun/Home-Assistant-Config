@@ -36,12 +36,12 @@ mainfloor_lights:
     - group.office_lights
     - light.bathroom
     - light.hallway
-    - switch.switch3
 
 office_lights:
   name: Office lights
   entities:
     - light.office_main_lights
+    - switch.switch3
 
 outdoor_lights:
   name: Outdoor lights
