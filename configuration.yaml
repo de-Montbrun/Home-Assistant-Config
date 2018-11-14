@@ -84,7 +84,7 @@ homeassistant:
       icon: mdi:dns
 
     switch.switch0:
-      friendly_name: Fireplace Switch
+      friendly_name: Office Fireplace Switch
     switch.switch1:
       friendly_name: Jennifer Switch
     switch.switch2:
@@ -169,6 +169,7 @@ ifttt:
   key: !secret ifttt_key
 
 ffmpeg:
+  ffmpeg_bin: /usr/bin/ffmpeg
   run_test: false
 
 # Enable IOS component

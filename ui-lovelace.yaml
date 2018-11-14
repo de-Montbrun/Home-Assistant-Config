@@ -48,13 +48,14 @@ views:
           - group.livingroom_lights
           - group.office_lights
       - type: entities
-        title: Bedroom lights
+        title: Bedroom
         show_header_toggle: false
         entities:
           - group.bedroom_lights
           - light.bedroom0
+          - switch.switch4
       - type: entities
-        title: Kitchen lights
+        title: Kitchen
         show_header_toggle: false
         entities:
           - group.kitchen_lights
@@ -63,7 +64,7 @@ views:
           - light.kitchen_table
           - light.kitchen_window
       - type: entities
-        title: Livingroom lights
+        title: Livingroom
         show_header_toggle: false
         entities:
           - group.livingroom_lights
@@ -74,6 +75,7 @@ views:
           - light.fireplace2
           - light.fireplace3
           - light.table
+          - switch.switch2
       - type: entities
         title: Misc lights
         show_header_toggle: true
@@ -81,12 +83,14 @@ views:
           - light.bathroom
           - light.hallway
       - type: entities
-        title: Office lights
+        title: Office
         show_header_toggle: false
         entities:
           - group.office_lights
           - light.office_main_lights
+          - switch.switch0
           - switch.switch3
+          - switch.switch5
       - type: entities
         title: Outdoor lights
         show_header_toggle: false
@@ -96,7 +100,7 @@ views:
           - light.backdoor0
           - light.backdoor1
       - type: entities
-        title: Spare room lights
+        title: Spare room
         show_header_toggle: false
         entities:
           - group.spareroom_lights
