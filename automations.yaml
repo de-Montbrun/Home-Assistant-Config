@@ -1031,8 +1031,8 @@
   action:
     service: device_tracker.see
     data_template:
-      dev_id: '{{ trigger.to_state.state.split(" ")[0] }}'
+      dev_id: '{{ (trigger.to_state.state.split(": ")[1]).split(" ")[0]}}'
       location_name: >-
-        {% if trigger.to_state.state.split(" ")[1] == 'left' %} not_home
-        {% else %} home
+        {% if trigger.to_state.state.split(": ")[0] == 'Offline' %} not_home
+        {% elif trigger.to_state.state.split(": ")[0] == 'In range' or trigger.to_state.state.split(": ")[0] == 'Online' %} home
         {% endif %}
