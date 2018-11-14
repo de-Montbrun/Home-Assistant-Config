@@ -761,7 +761,7 @@
     service: notify.zulip
     data:
       message: >
-        :warning: :droplet: :cloud_with_lightning: :cloud_with_lightning_and_rain: :fog: :cloud_with_rain: :cloud_with_snow: :snowflake: :warning:
+        :warning: :water_drop: :lightning: :rainy: :thunderstorm: :fog: :snowstorm: :snowflake: :warning:
 
         ---
 
