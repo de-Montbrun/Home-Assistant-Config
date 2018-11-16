@@ -170,7 +170,6 @@ ifttt:
 
 ffmpeg:
   ffmpeg_bin: /usr/bin/ffmpeg
-  run_test: false
 
 # Enable IOS component
 ios:
