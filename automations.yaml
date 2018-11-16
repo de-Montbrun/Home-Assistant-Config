@@ -761,7 +761,7 @@
     service: notify.zulip
     data:
       message: >
-        :warning: :water_drop: :lightning: :rainy: :thunderstorm: :fog: :snowstorm: :snowflake: :warning:
+        :warning: :water_drop: :lightning: :rainy: :thunderstorm: :snowstorm: :snowflake: :warning:
 
         ---
 
