@@ -106,8 +106,8 @@ homeassistant:
 # }}}
 # {{{ misc
 
+# Enable frontend configuration
 config:
-map:
 
 # Checks for available updates
 updater:
