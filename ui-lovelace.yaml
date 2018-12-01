@@ -2,7 +2,7 @@ title: Home
 views:
   # {{{ View People 👫
 
-  - title: Devices
+  - title: People
     icon: mdi:account-multiple
     cards:
       - type: vertical-stack
@@ -11,8 +11,8 @@ views:
             title: Household Members
             show_header_toggle: true
             entities:
-              - device_tracker.gail_iphonetracks
-              - device_tracker.gervais_iphonetracks
+              - device_tracker.gail_219d5f9134624a449c44e159026137b6
+              - device_tracker.gervais_56f3792902ce4cc0ab26033d09334375
               - group.cam_tracker
               - group.jen_tracker
           - type: gauge
@@ -25,8 +25,8 @@ views:
             entity: sensor.distance_apart
       - type: map
         entities:
-          - device_tracker.gail_iphonetracks
-          - device_tracker.gervais_iphonetracks
+          - device_tracker.gail_219d5f9134624a449c44e159026137b6
+          - device_tracker.gervais_56f3792902ce4cc0ab26033d09334375
 
   # }}}
   # {{{ View Lights💡

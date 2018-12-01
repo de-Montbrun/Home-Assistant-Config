@@ -63,8 +63,8 @@ lutron_caseta:
 history:
   include:
     entities:
-      - device_tracker.gail_iphonetracks
-      - device_tracker.gervais_iphonetracks
+      - device_tracker.gail_219d5f9134624a449c44e159026137b6
+      - device_tracker.gervais_56f3792902ce4cc0ab26033d09334375
       - group.cam_tracker
       - group.jen_tracker
       - group.householdmembers
@@ -451,17 +451,17 @@ sensor:
       distance_apart:
         friendly_name: 'GandG Apart'
         value_template: >-
-          {% if distance(states.device_tracker.gervais_iphonetracks, states.device_tracker.gail_iphonetracks) | int == 0 %}
+          {% if distance(states.device_tracker.gervais_56f3792902ce4cc0ab26033d09334375, states.device_tracker.gail_219d5f9134624a449c44e159026137b6) | int == 0 %}
             0
-          {% elif distance(states.device_tracker.gervais_iphonetracks, states.device_tracker.gail_iphonetracks) | round(2) < 0.09 %}
+          {% elif distance(states.device_tracker.gervais_56f3792902ce4cc0ab26033d09334375, states.device_tracker.gail_219d5f9134624a449c44e159026137b6) | round(2) < 0.09 %}
             0
           {% else %}
-            {{ distance(states.device_tracker.gervais_iphonetracks, states.device_tracker.gail_iphonetracks) | round(2) }}
+            {{ distance(states.device_tracker.gervais_56f3792902ce4cc0ab26033d09334375, states.device_tracker.gail_219d5f9134624a449c44e159026137b6) | round(2) }}
           {% endif %}
         unit_of_measurement: 'km'
         entity_id:
-          - device_tracker.gail_iphonetracks
-          - device_tracker.gervais_iphonetracks
+          - device_tracker.gail_219d5f9134624a449c44e159026137b6
+          - device_tracker.gervais_56f3792902ce4cc0ab26033d09334375
 
   - platform: nokia_health
     consumer_key: !secret nokia_key
@@ -523,8 +523,6 @@ weather:
 # {{{ Presence Trackers
 
 device_tracker:
-  - platform: owntracks_http
-
   - platform: nmap_tracker
     hosts: 192.168.2.1-9
     home_interval: 5
