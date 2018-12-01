@@ -9,7 +9,6 @@ views:
         cards:
           - type: entities
             title: Household Members
-            show_header_toggle: true
             entities:
               - device_tracker.gail_219d5f9134624a449c44e159026137b6
               - device_tracker.gervais_56f3792902ce4cc0ab26033d09334375
