@@ -36,6 +36,7 @@ logger:
     homeassistant.components.camera: fatal
     homeassistant.components.media_player.plex: fatal
     homeassistant.components.media_player.roku: fatal
+    homeassistant.components.http.ban: warning
 
 # Hue lights are not being discovered automaically.
 hue:
