@@ -260,7 +260,9 @@
     - service: scene.turn_on
       entity_id: scene.livingroom_normal
     - service: switch.turn_on
-      entity_id: switch.switch3
+      entity_id:
+        - switch.switch2
+        - switch.switch3
 
 - alias: 'Sunset - Office lights on'
   initial_state: true
@@ -501,7 +503,9 @@
     - service: homeassistant.turn_on
       entity_id: script.timer_livingroom_off
     - service: switch.turn_off
-      entity_id: switch.switch3
+      entity_id:
+        - switch.switch2
+        - switch.switch3
 
 - alias: 'GandG not home - turn off bedroom things'
   initial_state: true
