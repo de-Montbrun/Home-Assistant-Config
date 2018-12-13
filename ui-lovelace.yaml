@@ -52,6 +52,8 @@ views:
         entities:
           - group.bedroom_lights
           - light.bedroom0
+          - light.bedroom1
+          - light.bedroom2
           - switch.switch4
       - type: entities
         title: Kitchen
@@ -73,7 +75,7 @@ views:
           - light.fireplace1
           - light.fireplace2
           - light.fireplace3
-          - light.table
+          - light.lamp
           - switch.switch2
       - type: entities
         title: Misc lights

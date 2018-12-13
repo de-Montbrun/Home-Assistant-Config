@@ -35,7 +35,7 @@
       transition: 2
       brightness: 255
       xy_color: [ 0.4448, 0.4066 ]
-    light.table:
+    light.lamp:
       state: on
       transition: 2
       brightness: 255
@@ -60,17 +60,19 @@
     light.fireplace1:
       state: on
       transition: 2
-      brightness: 100
+      brightness: 255
+      xy_color: [ 0.169, 0.044 ]
     light.fireplace2:
       state: on
       transition: 2
-      brightness: 100
+      brightness: 255
+      xy_color: [ 0.169, 0.044 ]
     light.fireplace3:
       state: on
       transition: 2
       brightness: 255
       xy_color: [ 0.169, 0.044 ]
-    light.table:
+    light.lamp:
       state: on
       transition: 2
       brightness: 100
@@ -107,7 +109,7 @@
       transition: 2
       brightness: 50
       xy_color: [ 0.5424, 0.4197 ]
-    light.table:
+    light.lamp:
       state: on
       transition: 2
       brightness: 50

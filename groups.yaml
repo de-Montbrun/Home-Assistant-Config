@@ -8,6 +8,8 @@ bedroom_lights:
   name: Bedroom lights
   entities:
     - light.bedroom0
+    - light.bedroom1
+    - light.bedroom2
 
 kitchen_lights:
   name: Kitchen lights
@@ -26,7 +28,7 @@ livingroom_lights:
     - light.fireplace1
     - light.fireplace2
     - light.fireplace3
-    - light.table
+    - light.lamp
 
 mainfloor_lights:
   name: Main Floor Lights
