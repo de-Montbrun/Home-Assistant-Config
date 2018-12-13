@@ -1,6 +1,6 @@
 title: Home
 views:
-  # {{{ View People 👫
+  # {{{ View People
 
   - title: People
     icon: mdi:account-multiple
@@ -28,7 +28,7 @@ views:
           - device_tracker.gervais_56f3792902ce4cc0ab26033d09334375
 
   # }}}
-  # {{{ View Lights💡
+  # {{{ View Lights
 
   - title: Lights
     icon: mdi:lightbulb
@@ -110,7 +110,7 @@ views:
           - light.spare1
 
   # }}}
-  # {{{ View Buttons 🔘
+  # {{{ View Buttons
 
   - title: buttons
     icon: mdi:google-circles-communities
@@ -153,7 +153,7 @@ views:
         entity: group.outdoor_lights
 
   # }}}
-  # {{{ View Weather 🌦️
+  # {{{ View Weather
 
   - title: Weather
     icon: mdi:weather-partlycloudy
@@ -170,7 +170,7 @@ views:
           - sensor.season
 
   # }}}
-  # {{{ View Security 📹
+  # {{{ View Security
 
   - title: Security
     icon: mdi:video
