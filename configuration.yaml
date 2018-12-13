@@ -90,6 +90,9 @@ ios:
 downloader:
   download_dir: /var/www/html/snapshots
 
+# Enable yaml mode for lovelace
+lovelace:
+    mode: yaml
 # }}}
 # {{{ text-to-speech
 tts:
@@ -314,7 +317,7 @@ sensor:
       - type: load_5m
       - type: load_15m
       - type: processor_use
-      - type: since_last_boot
+      - type: last_boot
 
   - platform: pi_hole
     host: pi.hole
