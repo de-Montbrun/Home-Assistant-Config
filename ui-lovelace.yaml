@@ -164,7 +164,7 @@ views:
         entity: weather.dark_sky
       - type: entities
         title: Weather
-        show_header_toggle: true
+        show_header_toggle: false
         entities:
           - sun.sun
           - sensor.moon
