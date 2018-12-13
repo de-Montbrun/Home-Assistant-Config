@@ -1016,7 +1016,7 @@
     entity_id: automation.gandg_not_home__movement_in_bedroom
 
 - alias: 'Germaine leaves'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: device_tracker.germaine
