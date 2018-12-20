@@ -192,9 +192,11 @@
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights__movement_front_door
     - service: switch.turn_off
-      entity_id: switch.switch3
+      entity_id:
+        - switch.switch2
+        - switch.switch3
     - service: light.turn_off
-    - delay: ' 00:00:04'
+    - delay: '00:00:05'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights__movement_front_door
 
@@ -999,8 +1001,10 @@
 - alias: 'Turn off heater in bedroom'
   initial_state: true
   trigger:
-    platform: template
-    value_template: '{{ states.sensor.bed_room_temp.state|int >= 17 }}'
+    - platform: template
+      value_template: '{{ states.sensor.bed_room_temp.state|int >= 17 }}'
+    - platform: time
+      at: '02:00:00'
   action:
     service: switch.turn_off
     entity_id: switch.switch4
