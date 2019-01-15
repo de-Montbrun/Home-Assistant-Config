@@ -82,8 +82,8 @@ plex:
 householdmembers:
   name: Household Members
   entities:
-    - device_tracker.gail_219d5f9134624a449c44e159026137b6
-    - device_tracker.gervais_56f3792902ce4cc0ab26033d09334375
+    - device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
+    - device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
     - group.cam_tracker
     - group.jen_tracker
   icon: mdi:account-multiple
@@ -92,14 +92,14 @@ gail_tracker:
   entities:
     - device_tracker.dgrabbs_iphonehass
     - device_tracker.gail_fing
-    - device_tracker.gail_219d5f9134624a449c44e159026137b6
+    - device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
     - device_tracker.gail3
 
 gervais_tracker:
   entities:
     - device_tracker.gervaisapplewatch
     - device_tracker.gervais_fing
-    - device_tracker.gervais_56f3792902ce4cc0ab26033d09334375
+    - device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
     - device_tracker.gervais3
 
 grant_tracker:
