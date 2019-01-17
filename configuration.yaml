@@ -436,12 +436,6 @@ sensor:
       - wind_gust_kph
       - wind_kph
 
-  - platform: yweather
-    monitored_conditions:
-      - temp_min
-      - temp_max
-      - temperature
-
   - platform: command_line
     name: 'filesize_db'
     command: 'stat -c %s "/etc/homeassistant/home-assistant_v2.db"'

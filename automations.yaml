@@ -778,23 +778,6 @@
         {{ states.sensor.pws_alerts.attributes.Message }}
       title: 'Weather'
 
-- alias: 'Weather forecast notification'
-  initial_state: true
-  trigger:
-    platform: time
-    at: '08:00:00'
-  action:
-    service: notify.zulip
-    data:
-      message: >
-        []({{ states.sensor.pws_weather.attributes.entity_picture }})
-        **Today's Forecast:** {{ states.sensor.pws_weather.state }}
-
-        **High:** {{ states.sensor.yweather_temperature_max.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
-
-        **Low:** {{ states.sensor.yweather_temperature_min.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
-      title: 'Weather'
-
 - alias: 'GandG not home - Movement in Bedroom'
   initial_state: false
   trigger:
