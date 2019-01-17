@@ -430,6 +430,8 @@ sensor:
       - relative_humidity
       - solarradiation
       - temp_c
+      - temp_high_1d_c
+      - temp_low_1d_c
       - UV
       - weather
       - wind_degrees
