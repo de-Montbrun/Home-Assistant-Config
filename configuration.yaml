@@ -26,8 +26,6 @@ updater:
 
 # Discover some devices automatically
 discovery:
-  ignore:
-    - roku
 
 # Set logging level
 logger:
@@ -266,16 +264,16 @@ weblink:
 # }}}
 # {{{ Media Players
 
+# Roku
+roku:
+  - host: 192.168.2.21
+
 media_player:
 
 # Plex
   - platform: plex
     entity_namespace: 'plex'
     use_custom_entity_ids: true
-
-# Roku
-  - platform: roku
-    host: 192.168.2.21
 
 # }}}
 # {{{ Ring

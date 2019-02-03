@@ -168,11 +168,11 @@
   action:
     - delay: ' 00:10:00'
     - service: homeassistant.turn_off
-      entity_id: automation.timed_lights__movement_front_door
+      entity_id: automation.timed_lights_movement_front_door
     - service: light.turn_off
     - delay: ' 00:00:04'
     - service: homeassistant.turn_on
-      entity_id: automation.timed_lights__movement_front_door
+      entity_id: automation.timed_lights_movement_front_door
 
 - alias: 'Midnight - Livingroom Lights out'
   initial_state: false
@@ -190,7 +190,7 @@
     at: '02:00:00'
   action:
     - service: homeassistant.turn_off
-      entity_id: automation.timed_lights__movement_front_door
+      entity_id: automation.timed_lights_movement_front_door
     - service: switch.turn_off
       entity_id:
         - switch.switch2
@@ -198,7 +198,7 @@
     - service: light.turn_off
     - delay: '00:00:05'
     - service: homeassistant.turn_on
-      entity_id: automation.timed_lights__movement_front_door
+      entity_id: automation.timed_lights_movement_front_door
 
 - alias: '6pm - heater off'
   initial_state: true
@@ -571,7 +571,7 @@
         state: 'below_horizon'
   action:
     - service: homeassistant.turn_off
-      entity_id: automation.timed_lights__movement_front_door
+      entity_id: automation.timed_lights_movement_front_door
     - service: light.turn_on
       data:
         entity_id:
@@ -585,7 +585,7 @@
         - light.computer_room
     - delay: ' 00:00:04'
     - service: homeassistant.turn_on
-      entity_id: automation.timed_lights__movement_front_door
+      entity_id: automation.timed_lights_movement_front_door
 
 - alias: 'Doorbell rang - pause tv'
   initial_state: true
@@ -812,7 +812,7 @@
         state: 'not_home'
   action:
     - service: homeassistant.turn_off
-      entity_id: automation.gandg_not_home__movement_in_bedroom
+      entity_id: automation.gandg_not_home_movement_in_bedroom
     - service: notify.zulip
       data:
         message: >
@@ -878,22 +878,22 @@
       entity_id: light.bedroom
     - delay: '00:00:05'
     - service: homeassistant.turn_on
-      entity_id: automation.gandg_not_home__movement_in_bedroom
+      entity_id: automation.gandg_not_home_movement_in_bedroom
 
 - alias: 'Drive is filling'
   initial_state: true
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.disk_used_mediacracker.state | int >= 95 }}'
+      value_template: '{{ states.sensor.disk_use_percent_media_cracker.state | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.disk_used_mediagrapes.state | int >= 95 }}'
+      value_template: '{{ states.sensor.disk_use_percent_media_grapes.state | int >= 95 }}'
   action:
     service: notify.zulip
     data:
       message: >
         :warning:
-        {% if trigger.to_state.attributes.friendly_name == 'Disk Use /media/cracker' %} Movie
-        {% elif trigger.to_state.attributes.friendly_name == 'Disk Use /media/grapes' %} TV
+        {% if trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/cracker' %} Movie
+        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/grapes' %} TV
         {% endif %}
         drive is almost full.
       title: 'Alert'
@@ -901,7 +901,7 @@
 - alias: 'Turn off livingroom tv when idle'
   initial_state: true
   trigger:
-    - platform: time
+    - platform: time_pattern
       minutes: '/20'
       seconds: 0
   condition:
@@ -951,7 +951,7 @@
 - alias: 'Pause sonos every 2 minutes if Gail away'
   initial_state: true
   trigger:
-    platform: time
+    platform: time_pattern
     minutes: '/2'
     seconds: 0
   condition:
@@ -1017,7 +1017,7 @@
     to: 'home'
   action:
     service: homeassistant.turn_off
-    entity_id: automation.gandg_not_home__movement_in_bedroom
+    entity_id: automation.gandg_not_home_movement_in_bedroom
 
 - alias: 'Germaine leaves'
   initial_state: true
@@ -1029,7 +1029,7 @@
       minutes: 90
   action:
     service: homeassistant.turn_on
-    entity_id: automation.gandg_not_home__movement_in_bedroom
+    entity_id: automation.gandg_not_home_movement_in_bedroom
 
 - alias: 'Fing update user'
   initial_state: true
