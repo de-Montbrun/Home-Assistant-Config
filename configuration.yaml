@@ -88,9 +88,6 @@ ios:
 downloader:
   download_dir: /var/www/html/snapshots
 
-# Enable yaml mode for lovelace
-lovelace:
-    mode: yaml
 # }}}
 # {{{ text-to-speech
 tts:
