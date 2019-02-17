@@ -88,6 +88,8 @@ ios:
 downloader:
   download_dir: /var/www/html/snapshots
 
+system_health:
+
 # }}}
 # {{{ text-to-speech
 tts:
