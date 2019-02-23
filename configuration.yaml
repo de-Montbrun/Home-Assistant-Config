@@ -16,7 +16,46 @@ homeassistant:
   whitelist_external_dirs:
     - /var/www/html/snapshots
   customize: !include customize.yaml
-# {{{ misc
+# {{{ frontend
+
+# Enables the frontend
+frontend:
+  javascript_version: latest
+
+http:
+  base_url: !secret http_base_url
+  api_password: !secret http_api_password
+  ssl_certificate: !secret http_ssl_certificate
+  ssl_key: !secret http_ssl_key
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+  trusted_networks:
+    - 192.168.2.0/24
+    - 127.0.0.1
+
+weblink:
+  entities:
+    - name: Home Security
+      url: https://home.demontbrun.com/snapshots/
+      icon: mdi:file-video
+
+# }}}
+# {{{ Media Players
+
+# Roku
+roku:
+  - host: 192.168.2.21
+
+media_player:
+
+# Plex
+  - platform: plex
+    entity_namespace: 'plex'
+    use_custom_entity_ids: true
+
+# }}}
+# {{{ Misc
 
 # Enable frontend configuration
 config:
@@ -99,195 +138,93 @@ speedtestdotnet:
     - upload
 
 # }}}
-# {{{ text-to-speech
-tts:
-  - platform: google
+# {{{ Notify
 
-  - platform: voicerss
-    api_key: !secret voicerss_api_key
-
-# }}}
-# {{{ zones
-
-zone:
-  name: Home
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
-  radius: 50
-  icon: mdi:home
-
-zone craft_beer_corner:
-  name: Craft Beer Corner
-  latitude: !secret craft_beer_corner_latitude
-  longitude: !secret craft_beer_corner_longitude
-  radius: 20
-  icon: mdi:beer
-
-zone discoverygarden:
-  name: discoverygarden
-  latitude: !secret discoverygarden_latitude
-  longitude: !secret discoverygarden_longitude
-  radius: 50
-  icon: mdi:domain
-
-zone upstreet:
-  name: Upstreet
-  latitude: !secret upstreet_latitude
-  longitude: !secret upstreet_longitude
-  radius: 30
-  icon: mdi:beer
-
-zone innovatia:
-  name: Innovatia
-  latitude: !secret innovatia_latitude
-  longitude: !secret innovatia_longitude
-  radius: 100
-  icon: mdi:domain
-
-zone walmart:
-  name: Walmart
-  latitude: !secret walmart_latitude
-  longitude: !secret walmart_longitude
-  radius: 100
-  icon: mdi:shopping
-
-zone churchill_arms:
-  name: Churchill Arms
-  latitude: !secret churchill_arms_latitude
-  longitude: !secret churchill_arms_longitude
-  radius: 25
-  icon: mdi:beer
-
-zone qeh:
-  name: Queen Elizabeth Hospital
-  latitude: !secret qeh_latitude
-  longitude: !secret qeh_longitude
-  radius: 200
-  icon: mdi:hospital-building
-
-zone delta_calgary_downtown:
-  name: Calgary Delta
-  latitude: 51.048800
-  longitude: -114.059662
-  radius: 50
-  icon: mdi:hotel
-
-zone confederation_bridge:
-  name: Confederation Bridge
-  latitude: 46.200184
-  longitude: -63.765234
-  radius: 4000
-  icon: mdi:bridge
-
-# Airports
-zone yyc:
-  name: Calgary Airport
-  latitude: 51.131686
-  longitude: -114.006702
-  radius: 600
-  icon: mdi:airplane
-
-zone yyg:
-  name: Charlottetown Airport
-  latitude: 46.286076
-  longitude: -63.131658
-  radius: 200
-  icon: mdi:airplane
-
-zone yeg:
-  name: Edmonton Airport
-  latitude: 53.307505
-  longitude: -113.584352
-  radius: 600
-  icon: mdi:airplane
-
-zone yhz:
-  name: Halifax Airport
-  latitude: 44.887088
-  longitude: -63.515278
-  radius: 400
-  icon: mdi:airplane
-
-zone yul:
-  name: Montreal Airport
-  latitude: 45.458942
-  longitude: -73.750330
-  radius: 400
-  icon: mdi:airplane
-
-zone yyz:
-  name: Pearson Airport
-  latitude: 43.679232
-  longitude: -79.620109
-  radius: 1000
-  icon: mdi:airplane
-
-zone ytz:
-  name: Toronto City Central Airport
-  latitude: 43.628482
-  longitude: -79.395958
-  radius: 400
-  icon: mdi:airplane
-
-zone yjz:
-  name: Saint John Airport
-  latitude: 45.326501
-  longitude: -65.888867
-  radius: 400
-  icon: mdi:airplane
-
-zone yyt:
-  name: "St. John's Airport"
-  latitude: 47.621210
-  longitude: -52.742443
-  radius: 400
-  icon: mdi:airplane
+notify:
+  - name: zulip
+    platform: rest
+    resource: !secret zulip_notify_resource
+    method: POST_JSON
+    title_param_name: topic
 
 # }}}
-# {{{ frontend
+# {{{ Presence Trackers
 
-# Enables the frontend
-frontend:
-  javascript_version: latest
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.2.1-9
+    home_interval: 5
+    interval_seconds: 60
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: true
 
-http:
-  base_url: !secret http_base_url
-  api_password: !secret http_api_password
-  ssl_certificate: !secret http_ssl_certificate
-  ssl_key: !secret http_ssl_key
-  use_x_forwarded_for: true
-  trusted_proxies:
-    - 127.0.0.1
-  trusted_networks:
-    - 192.168.2.0/24
-    - 127.0.0.1
+  - platform: nmap_tracker
+    hosts: 192.168.2.10-13
+    home_interval: 5
+    interval_seconds: 60
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: true
 
-weblink:
-  entities:
-    - name: Home Security
-      url: https://home.demontbrun.com/snapshots/
-      icon: mdi:file-video
+  - platform: nmap_tracker
+    hosts: 192.168.2.14-100
+    home_interval: 2
+    interval_seconds: 60
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: true
+
+  - platform: nmap_tracker
+    hosts: 192.168.2.101-120
+    home_interval: 5
+    interval_seconds: 60
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: true
+
+  - platform: nmap_tracker
+    hosts: 192.168.2.121-254
+    home_interval: 5
+    interval_seconds: 60
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: true
+    exclude:
+      - 192.168.2.150
+
+  - platform: ping
+    count: 10
+    hosts:
+      Jennifer2: jen-phone
+      Cameron2: cam-phone
+      Grant2: grant-phone
+      Gervais3: iphone
+      Gail3: Gail-iPhone
 
 # }}}
-# {{{ Media Players
+## {{{ Rest Commands
 
-# Roku
-roku:
-  - host: 192.168.2.21
+rest_command:
+  sabnzb_api:
+    url: !secret sabnzbd_rest_url
 
-media_player:
+  take_a_picture:
+    url: http://192.168.2.92:8080/photo_save_only.jpg
 
-# Plex
-  - platform: plex
-    entity_namespace: 'plex'
-    use_custom_entity_ids: true
-
-# }}}
+## }}}
 # {{{ Ring
 
 ring:
   username: !secret ring_username
   password: !secret ring_password
+
+# }}}
+# {{{ Security Cams
+
+camera:
+  - platform: ring
+    scan_interval: 90
 
 # }}}
 # {{{ Sensors
@@ -508,96 +445,6 @@ binary_sensor:
       - motion
 
 # }}}
-# {{{ Weather
-
-weather:
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    mode: daily
-
-# }}}
-# {{{ Presence Trackers
-
-device_tracker:
-  - platform: nmap_tracker
-    hosts: 192.168.2.1-9
-    home_interval: 5
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.10-13
-    home_interval: 5
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.14-100
-    home_interval: 2
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.101-120
-    home_interval: 5
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.121-254
-    home_interval: 5
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-    exclude:
-      - 192.168.2.150
-
-  - platform: ping
-    count: 10
-    hosts:
-      Jennifer2: jen-phone
-      Cameron2: cam-phone
-      Grant2: grant-phone
-      Gervais3: iphone
-      Gail3: Gail-iPhone
-
-# }}}
-# {{{ Security Cams
-
-camera:
-  - platform: ring
-    scan_interval: 90
-
-# }}}
-# {{{ Notify
-
-notify:
-  - name: zulip
-    platform: rest
-    resource: !secret zulip_notify_resource
-    method: POST_JSON
-    title_param_name: topic
-
-# }}}
-## {{{ Rest Commands
-
-rest_command:
-  sabnzb_api:
-    url: !secret sabnzbd_rest_url
-
-  take_a_picture:
-    url: http://192.168.2.92:8080/photo_save_only.jpg
-
-## }}}
 # {{{ Switches
 
 tuya:
@@ -635,6 +482,159 @@ switch:
         friendly_name: 'TV Mute'
         command_on: 'JgBYAAABKZQSExITEjkRFBEUERQRFBEUETkROREUETkRORE5ETkSORE5ERQRFBE5ERQRFBEUERQRFBE5ETkRFBE5ETkSOBI4EgAFMAABKUoRAAxsAAEpSxEADQU='
         command_off: 'JgBYAAABKZQSExITEjkRFBEUERQRFBEUETkROREUETkRORE5ETkSORE5ERQRFBE5ERQRFBEUERQRFBE5ETkRFBE5ETkSOBI4EgAFMAABKUoRAAxsAAEpSxEADQU='
+
+# }}}
+# {{{ Text-to-speech
+tts:
+  - platform: google
+
+  - platform: voicerss
+    api_key: !secret voicerss_api_key
+
+# }}}
+# {{{ Weather
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    mode: daily
+
+# }}}
+# {{{ zones
+
+zone:
+  name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: 50
+  icon: mdi:home
+
+zone craft_beer_corner:
+  name: Craft Beer Corner
+  latitude: !secret craft_beer_corner_latitude
+  longitude: !secret craft_beer_corner_longitude
+  radius: 20
+  icon: mdi:beer
+
+zone discoverygarden:
+  name: discoverygarden
+  latitude: !secret discoverygarden_latitude
+  longitude: !secret discoverygarden_longitude
+  radius: 50
+  icon: mdi:domain
+
+zone upstreet:
+  name: Upstreet
+  latitude: !secret upstreet_latitude
+  longitude: !secret upstreet_longitude
+  radius: 30
+  icon: mdi:beer
+
+zone innovatia:
+  name: Innovatia
+  latitude: !secret innovatia_latitude
+  longitude: !secret innovatia_longitude
+  radius: 100
+  icon: mdi:domain
+
+zone walmart:
+  name: Walmart
+  latitude: !secret walmart_latitude
+  longitude: !secret walmart_longitude
+  radius: 100
+  icon: mdi:shopping
+
+zone churchill_arms:
+  name: Churchill Arms
+  latitude: !secret churchill_arms_latitude
+  longitude: !secret churchill_arms_longitude
+  radius: 25
+  icon: mdi:beer
+
+zone qeh:
+  name: Queen Elizabeth Hospital
+  latitude: !secret qeh_latitude
+  longitude: !secret qeh_longitude
+  radius: 200
+  icon: mdi:hospital-building
+
+zone delta_calgary_downtown:
+  name: Calgary Delta
+  latitude: 51.048800
+  longitude: -114.059662
+  radius: 50
+  icon: mdi:hotel
+
+zone confederation_bridge:
+  name: Confederation Bridge
+  latitude: 46.200184
+  longitude: -63.765234
+  radius: 4000
+  icon: mdi:bridge
+
+# Airports
+zone yyc:
+  name: Calgary Airport
+  latitude: 51.131686
+  longitude: -114.006702
+  radius: 600
+  icon: mdi:airplane
+
+zone yyg:
+  name: Charlottetown Airport
+  latitude: 46.286076
+  longitude: -63.131658
+  radius: 200
+  icon: mdi:airplane
+
+zone yeg:
+  name: Edmonton Airport
+  latitude: 53.307505
+  longitude: -113.584352
+  radius: 600
+  icon: mdi:airplane
+
+zone yhz:
+  name: Halifax Airport
+  latitude: 44.887088
+  longitude: -63.515278
+  radius: 400
+  icon: mdi:airplane
+
+zone yul:
+  name: Montreal Airport
+  latitude: 45.458942
+  longitude: -73.750330
+  radius: 400
+  icon: mdi:airplane
+
+zone yyz:
+  name: Pearson Airport
+  latitude: 43.679232
+  longitude: -79.620109
+  radius: 1000
+  icon: mdi:airplane
+
+zone ytz:
+  name: Toronto City Central Airport
+  latitude: 43.628482
+  longitude: -79.395958
+  radius: 400
+  icon: mdi:airplane
+
+zone yjz:
+  name: Saint John Airport
+  latitude: 45.326501
+  longitude: -65.888867
+  radius: 400
+  icon: mdi:airplane
+
+zone yyt:
+  name: "St. John's Airport"
+  latitude: 47.621210
+  longitude: -52.742443
+  radius: 400
+  icon: mdi:airplane
 
 # }}}
 
