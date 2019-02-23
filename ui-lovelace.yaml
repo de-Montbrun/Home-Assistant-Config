@@ -1,6 +1,7 @@
 title: home
 views:
-  - cards:
+  - badges: []
+    cards:
       - cards:
           - entities:
               - entity: device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
@@ -10,11 +11,7 @@ views:
             show_header_toggle: false
             title: Household Members
             type: entities
-          - type: conditional
-            conditions:
-              - entity: sensor.distance_apart
-                state: '> 1'
-            card:
+          - card:
               entity: sensor.distance_apart
               max: 4000
               min: 0
@@ -25,16 +22,19 @@ views:
                 yellow: 200
               theme: default
               type: gauge
+            conditions:
+              - entity: sensor.distance_apart
+                state: '> 1'
+            type: conditional
         type: vertical-stack
       - entities:
           - entity: device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
           - entity: device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
         type: map
-    badges: []
     icon: 'mdi:account-multiple'
+    panel: false
     path: default-view
     title: People
-    panel: false
   - badges: []
     cards:
       - entities:
@@ -50,20 +50,22 @@ views:
         show_header_toggle: false
         title: All lights
         type: entities
-      - entities:
+      - card:
+          show_header_toggle: false
+          title: Bedroom
+        entities:
           - entity: group.bedroom_lights
           - entity: light.bedroom0
           - entity: light.bedroom1
           - entity: light.bedroom2
           - switch.switch4
-        type: entity-filter
         state_filter:
           - 'on'
           - 'off'
-        card:
-          title: Bedroom
+        type: entity-filter
+      - card:
           show_header_toggle: false
-      - type: entity-filter
+          title: Livingroom
         entities:
           - entity: group.livingroom_lights
           - light.couch0
@@ -77,9 +79,7 @@ views:
         state_filter:
           - 'on'
           - 'off'
-        card:
-          show_header_toggle: false
-          title: Livingroom
+        type: entity-filter
       - entities:
           - group.spareroom_lights
           - light.computer_room
@@ -88,19 +88,19 @@ views:
         show_header_toggle: false
         title: Spare rooms
         type: entities
-      - entities:
+      - card:
+          show_header_toggle: false
+          title: Office
+        entities:
           - group.office_lights
           - light.office_main_lights
           - switch.switch0
           - switch.switch3
           - switch.switch5
-        type: entity-filter
         state_filter:
           - 'on'
           - 'off'
-        card:
-          show_header_toggle: false
-          title: Office
+        type: entity-filter
       - entities:
           - entity: light.bathroom
           - entity: light.hallway
@@ -155,7 +155,8 @@ views:
         title: Front Door
         type: picture-entity
       - entities:
-          - icon: 'mdi:file-video'
+          - entity: weblink.home_security
+            icon: 'mdi:file-video'
             name: Home Security
             type: weblink
             url: 'https://home.demontbrun.com/snapshots/'
@@ -173,6 +174,8 @@ views:
       - entity: media_player.office
         type: media-control
       - entity: media_player.plex_keypear
+        type: media-control
+      - entity: media_player.cam_s_roku
         type: media-control
     icon: 'mdi:play-circle-outline'
     title: Media Players
