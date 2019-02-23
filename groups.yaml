@@ -77,7 +77,7 @@ plex:
     - media_player.plexamp_gervais
 
 # }}}
-#{{{ People
+# {{{ People
 
 householdmembers:
   name: Household Members
