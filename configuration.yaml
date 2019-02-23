@@ -90,6 +90,14 @@ downloader:
 
 system_health:
 
+speedtestdotnet:
+  scan_interval:
+    hours: 8
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+
 # }}}
 # {{{ text-to-speech
 tts:
@@ -367,14 +375,6 @@ sensor:
       - last_activity
       - last_ding
       - last_motion
-
-  - platform: speedtest
-    hour:
-      - 4
-    monitored_conditions:
-      - ping
-      - download
-      - upload
 
   - platform: rest
     resource: !secret hue_bedroom_battery
