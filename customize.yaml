@@ -43,25 +43,25 @@ sensor.distance_apart:
   icon: mdi:human-male-female
 
 person.grant:
-  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/54.png
+  entity_picture: https://avatars.io/facebook/Grannt
 group.grant_tracker:
-  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/54.png
+  entity_picture: https://avatars.io/facebook/Grannt
 device_tracker.grantphone:
   hidden: true
 device_tracker.grant2:
   hidden: true
 
 person.cameron:
-  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
+  entity_picture: https://avatars.io/facebook/cameron.langdon.73
 group.cam_tracker:
-  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
+  entity_picture: https://avatars.io/facebook/cameron.langdon.73
 device_tracker.camphone:
   hidden: true
 device_tracker.cameron2:
   hidden: true
 
 person.jennifer:
-  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
+  entity_picture: https://avatars.io/facebook/jennifer.langdon.16
 group.jen_tracker:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
 device_tracker.jenphone:
