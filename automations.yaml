@@ -796,7 +796,7 @@
       title: 'Weather'
 
 - alias: 'GandG not home - Movement in Bedroom'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.bedroom_motion
