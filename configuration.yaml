@@ -54,6 +54,13 @@ media_player:
     entity_namespace: 'plex'
     use_custom_entity_ids: true
 
+# Alexa
+alexa_media:
+  accounts:
+    - email: !secret alexa_username
+      password: !secret alexa_password
+      url: !secret alexa_url
+
 # }}}
 # {{{ Misc
 
