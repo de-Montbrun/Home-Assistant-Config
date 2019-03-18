@@ -61,7 +61,8 @@ device_tracker.cameron2:
   hidden: true
 
 person.jennifer:
-  entity_picture: https://avatars.io/facebook/jennifer.langdon.16
+  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
+  #entity_picture: https://avatars.io/facebook/jennifer.langdon.16
 group.jen_tracker:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
 device_tracker.jenphone:
