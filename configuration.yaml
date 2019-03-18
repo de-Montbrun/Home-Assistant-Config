@@ -16,6 +16,13 @@ homeassistant:
   whitelist_external_dirs:
     - /var/www/html/snapshots
   customize: !include customize.yaml
+
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.2.0/24
+        - 127.0.0.1
+
 # {{{ frontend
 
 # Enables the frontend
@@ -29,9 +36,6 @@ http:
   ssl_key: !secret http_ssl_key
   use_x_forwarded_for: true
   trusted_proxies:
-    - 127.0.0.1
-  trusted_networks:
-    - 192.168.2.0/24
     - 127.0.0.1
 
 weblink:
