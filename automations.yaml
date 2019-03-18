@@ -145,12 +145,20 @@
       - condition: state
         entity_id: device_tracker.livingroomtv
         state: 'not_home'
-      - condition: state
-        entity_id: group.cam_tracker
-        state: 'home'
-      - condition: state
-        entity_id: group.jen_tracker
-        state: 'home'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.cam_tracker
+            state: 'home'
+          - condition: template
+            value_template: '{{ as_timestamp(now())-as_timestamp(states.group.cam_tracker.last_updated) > 98000 }}'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.jen_tracker
+            state: 'home'
+          - condition: template
+            value_template: '{{ as_timestamp(now())-as_timestamp(states.group.jen_tracker.last_updated) > 98000 }}'
       - condition: or
         conditions:
           - condition: state
