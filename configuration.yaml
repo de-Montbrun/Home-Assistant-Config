@@ -111,10 +111,8 @@ homekit:
 history:
   include:
     entities:
-      - device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
-      - device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
-      - group.cam_tracker
-      - group.jen_tracker
+      - person.gail
+      - person.gervais
 
 # Setup recorder
 recorder:
