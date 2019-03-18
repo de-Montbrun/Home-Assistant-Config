@@ -943,7 +943,7 @@
   action:
     service: media_player.sonos_set_sleep_timer
     data:
-      entity_id: media_player.office
+      entity_id: media_player.sonos
       sleep_time: 900
 
 - alias: 'Gail home - sonos speaker - clear sleep timer'
@@ -954,7 +954,7 @@
     to: 'home'
   action:
     service: media_player.sonos_clear_sleep_timer
-    entity_id: media_player.office
+    entity_id: media_player.sonos
 
 - alias: 'Pause sonos every 2 minutes if Gail away'
   initial_state: true
@@ -968,7 +968,7 @@
     state: 'not_home'
   action:
     service: media_player.media_pause
-    entity_id: media_player.office
+    entity_id: media_player.sonos
 
 - alias: 'Turn on heater in bedroom'
   initial_state: true
