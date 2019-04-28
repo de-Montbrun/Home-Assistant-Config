@@ -116,9 +116,6 @@ history:
 # Setup recorder
 recorder:
 
-# Add influxdb
-influxdb:
-
 # Track the sun
 sun:
 
