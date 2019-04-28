@@ -3,80 +3,80 @@
 #################################################################
 #
 #scene:
-- name: Livingroom normal
+- name: Sunroom normal
   entities:
-    light.couch0:
+    light.sunroom0:
       state: on
       transition: 2
       brightness: 255
       xy_color: [ 0.4448, 0.4066 ]
-    light.couch1:
+    light.sunroom1:
       state: on
       transition: 2
       brightness: 255
       xy_color: [ 0.4448, 0.4066 ]
-    light.fireplace0:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
-    light.fireplace1:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
-    light.fireplace2:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
-    light.fireplace3:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
-    light.lamp:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
-- name: Livingroom dim
+  #    light.fireplace0:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.4448, 0.4066 ]
+  #    light.fireplace1:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.4448, 0.4066 ]
+  #    light.fireplace2:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.4448, 0.4066 ]
+  #    light.fireplace3:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.4448, 0.4066 ]
+  #    light.lamp:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.4448, 0.4066 ]
+- name: Sunroom dim
   entities:
-    light.couch0:
+    light.sunroom0:
       state: on
       transition: 2
       brightness: 255
       xy_color: [ 0.169, 0.044 ]
-    light.couch1:
+    light.sunroom1:
       state: on
       transition: 2
       brightness: 255
       xy_color: [ 0.169, 0.044 ]
-    light.fireplace0:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.169, 0.044 ]
-    light.fireplace1:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.169, 0.044 ]
-    light.fireplace2:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.169, 0.044 ]
-    light.fireplace3:
-      state: on
-      transition: 2
-      brightness: 255
-      xy_color: [ 0.169, 0.044 ]
-    light.lamp:
-      state: on
-      transition: 2
-      brightness: 100
-      xy_color: [ 0.169, 0.044 ]
+  #    light.fireplace0:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.169, 0.044 ]
+  #    light.fireplace1:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.169, 0.044 ]
+  #    light.fireplace2:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.169, 0.044 ]
+  #    light.fireplace3:
+  #      state: on
+  #      transition: 2
+  #      brightness: 255
+  #      xy_color: [ 0.169, 0.044 ]
+  #    light.lamp:
+  #      state: on
+  #      transition: 2
+  #      brightness: 100
+  #      xy_color: [ 0.169, 0.044 ]
 - name: Livingroom nightlight
   entities:
     light.couch0:

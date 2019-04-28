@@ -5,9 +5,12 @@
 - alias: 'Plex paused/stopped - normal lights'
   initial_state: true
   trigger:
-    platform: state
-    entity_id: media_player.plex_livingroom
-    from: 'playing'
+    - platform: state
+      entity_id: media_player.plex_livingroom
+      from: 'playing'
+    - platform: state
+      entity_id: media_player.plex_plex_h1r93s5i49ldqs0plqixfu9d
+      from: 'playing'
   condition:
     condition: and
     conditions:
@@ -15,18 +18,21 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.livingroom_lights
+        entity_id: group.sunroom_lights
         state: 'on'
   action:
     service: scene.turn_on
-    entity_id: scene.livingroom_normal
+    entity_id: scene.sunroom_normal
 
 - alias: 'Plex playing - Dimm lights'
   initial_state: true
   trigger:
-    platform: state
-    entity_id: media_player.plex_livingroom
-    to: 'playing'
+    - platform: state
+      entity_id: media_player.plex_livingroom
+      to: 'playing'
+    - platform: state
+      entity_id: media_player.plex_plex_h1r93s5i49ldqs0plqixfu9d
+      to: 'playing'
   condition:
     condition: and
     conditions:
@@ -34,11 +40,11 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.livingroom_lights
+        entity_id: group.sunroom_lights
         state: 'on'
   action:
     service: scene.turn_on
-    entity_id: scene.livingroom_dim
+    entity_id: scene.sunroom_dim
 
 - alias: 'Roku Idle'
   initial_state: true
@@ -53,11 +59,11 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.livingroom_lights
+        entity_id: group.sunroom_lights
         state: 'on'
   action:
     service: scene.turn_on
-    entity_id: scene.livingroom_normal
+    entity_id: scene.sunroom_normal
 
 - alias: 'Roku Playing'
   initial_state: true
@@ -72,13 +78,13 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.livingroom_lights
+        entity_id: group.sunroom_lights
         state: 'on'
       - condition: template
         value_template: "{{ is_state_attr('media_player.living_room_roku', 'app_name', 'Netflix') }}"
   action:
     service: scene.turn_on
-    entity_id: scene.livingroom_dim
+    entity_id: scene.sunroom_dim
 
 - alias: 'GandG Playing'
   initial_state: true
@@ -182,14 +188,14 @@
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
 
-- alias: 'Midnight - Livingroom Lights out'
+- alias: 'Midnight - Sunroom Lights out'
   initial_state: false
   trigger:
     platform: time
     at: '23:59:59'
   action:
     - service: light.turn_off
-      entity_id: group.livingroom_lights
+      entity_id: group.sunroom_lights
 
 - alias: '2am - Lights out'
   initial_state: true
@@ -257,6 +263,7 @@
     - service: light.turn_on
       entity_id:
         - light.bathroom
+        - light.cherub
         - light.hallway
         - light.kitchen_oven
       data:
@@ -268,7 +275,7 @@
         brightness: 255
         transition: 300
     - service: scene.turn_on
-      entity_id: scene.livingroom_normal
+      entity_id: scene.sunroom_normal
     - service: switch.turn_on
       entity_id:
         - switch.switch2
@@ -603,7 +610,7 @@
     to: 'on'
   action:
     service: media_player.media_play_pause
-    entity_id: media_player.plex_livingroom
+    entity_id: media_player.plex_livingroom, media_player.plex_plex_h1r93s5i49ldqs0plqixfu9d
 
 - alias: 'Doorbell notify'
   initial_state: true
@@ -922,6 +929,11 @@
         conditions:
           - condition: state
             entity_id: media_player.plex_livingroom
+            state: 'idle'
+            for:
+              minutes: 15
+          - condition: state
+            entity_id: media_player.plex_plex_h1r93s5i49ldqs0plqixfu9d
             state: 'idle'
             for:
               minutes: 15

@@ -11,6 +11,12 @@ bedroom_lights:
     - light.bedroom1
     - light.bedroom2
 
+hallway_lights:
+  name: Hallway lights
+  entities:
+    - light.hallway
+    - light.cherub
+
 kitchen_lights:
   name: Kitchen lights
   entities:
@@ -23,21 +29,17 @@ livingroom_lights:
   name: Livingroom lights
   entities:
     - light.couch0
-    - light.couch1
     - light.fireplace0
-    - light.fireplace1
-    - light.fireplace2
     - light.fireplace3
     - light.lamp
 
 mainfloor_lights:
   name: Main Floor Lights
   entities:
+    - group.hallway_lights
     - group.kitchen_lights
     - group.livingroom_lights
     - group.office_lights
-    - light.bathroom
-    - light.hallway
 
 office_lights:
   name: Office lights
@@ -64,6 +66,12 @@ spareroom_lights:
   entities:
     - light.spare0
     - light.spare1
+
+sunroom_lights:
+  name: Sunroom lights
+  entities:
+    - light.sunroom0
+    - light.sunroom1
 
 # }}}
 # {{{ Media players
