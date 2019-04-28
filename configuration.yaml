@@ -294,6 +294,8 @@ sensor:
         arg: /media/cracker
       - type: disk_use_percent
         arg: /media/grapes
+      - type: disk_use_percent
+        arg: /home
       - type: memory_use_percent
       - type: swap_use_percent
       - type: load_1m
