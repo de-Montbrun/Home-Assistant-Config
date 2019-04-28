@@ -714,7 +714,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: sensor.pws_weather
+    entity_id: sensor.dark_sky_summary
   condition:
     condition: and
     conditions:
@@ -729,19 +729,19 @@
     service: notify.zulip
     data_template:
       message: >
-        []({{ states.sensor.pws_weather.attributes.entity_picture }})
-        **Current Weather Condition:** {{ states.sensor.pws_weather.state }}
+        [](https://ha.demontbrun.com{{ states.sensor.dark_sky_summary.attributes.entity_picture }})
+        **Weather Condition:** {{ states.sensor.dark_sky_summary.state }}
 
-        **Current Tempurature:** {{ states.sensor.pws_temp_c.state }}{{ states.sensor.pws_temp_c.attributes.unit_of_measurement }}
+        **Tempurature:** {{ states.sensor.dark_sky_temperature.state }}{{ states.sensor.dark_sky_temperature.attributes.unit_of_measurement }}
 
-        **{{ states.sensor.pws_feelslike_c.attributes.friendly_name }}:** {{ states.sensor.pws_feelslike_c.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
+        **Feels like:** {{ states.sensor.dark_sky_apparent_temperature.state }}{{ states.sensor.dark_sky_apparent_temperature.attributes.unit_of_measurement }}
       title: 'Weather'
 
 - alias: 'Current UV index notification'
   initial_state: true
   trigger:
     platform: numeric_state
-    entity_id: sensor.pws_uv
+    entity_id: sensor.dark_sky_uv_index
     above: '5'
   condition:
     condition: numeric_state
@@ -751,40 +751,40 @@
     service: notify.zulip
     data:
       message: >
-        :smiling_face_with_sunglasses: UV Index is {{ states.sensor.pws_uv.state }}. You better put on some sunscreen!
+        :smiling_face_with_sunglasses: UV Index is {{ states.sensor.dark_sky_uv_index.state }}. You better put on some sunscreen!
       title: 'Weather'
 
-- alias: 'Weather alert notification'
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: sensor.pws_alerts
-  condition:
-    condition: and
-    conditions:
-      - condition: numeric_state
-        entity_id: 'sensor.hass_uptime'
-        above: '.01'
-      - condition: template
-        value_template: '{{ trigger.from_state.state != "unknown" }}'
-      - condition: template
-        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.weather_alert_notification.attributes.last_triggered) | int > 1500 }}'
-  action:
-    service: notify.zulip
-    data:
-      message: >
-        :warning: :water_drop: :lightning: :rainy: :thunderstorm: :snowstorm: :snowflake: :warning:
-
-        ---
-
-        **{{ states.sensor.pws_alerts.attributes.Description }}**
-
-        ---
-
-        {{ states.sensor.pws_alerts.attributes.Message }}
-      title: 'Weather'
+  #- alias: 'Weather alert notification'
+  #  initial_state: true
+  #  trigger:
+  #    platform: state
+  #    entity_id: sensor.pws_alerts
+  #  condition:
+  #    condition: and
+  #    conditions:
+  #      - condition: numeric_state
+  #        entity_id: 'sensor.hass_uptime'
+  #        above: '.01'
+  #      - condition: template
+  #        value_template: '{{ trigger.from_state.state != "unknown" }}'
+  #      - condition: template
+  #        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+  #      - condition: template
+  #        value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.weather_alert_notification.attributes.last_triggered) | int > 1500 }}'
+  #  action:
+  #    service: notify.zulip
+  #    data:
+  #      message: >
+  #        :warning: :water_drop: :lightning: :rainy: :thunderstorm: :snowstorm: :snowflake: :warning:
+  #
+  #        ---
+  #
+  #        **{{ states.sensor.pws_alerts.attributes.Description }}**
+  #
+  #        ---
+  #
+  #        {{ states.sensor.pws_alerts.attributes.Message }}
+  #      title: 'Weather'
 
 - alias: 'Weather forecast notification'
   initial_state: true
@@ -795,12 +795,12 @@
     service: notify.zulip
     data:
       message: >
-        []({{ states.sensor.pws_weather.attributes.entity_picture }})
-        **Today's Forecast:** {{ states.sensor.pws_weather.state }}
+        []({{ states.sensor.dark_sky_summary.attributes.entity_picture }})
+        **Today's Forecast:** {{ states.sensor.dark_sky_summary.state }}
 
-        **High:** {{ states.sensor.pws_temp_high_1d_c.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
+        **High:** {{ states.sensor.dark_sky_temperature_high.state }}{{ states.sensor.dark_sky_temperature_high.attributes.unit_of_measurement }}
 
-        **Low:** {{ states.sensor.pws_temp_low_1d_c.state }}{{ states.sensor.yr_temperature.attributes.unit_of_measurement }}
+        **Low:** {{ states.sensor.dark_sky_temperature_low.state }}{{ states.sensor.dark_sky_temperature_low.attributes.unit_of_measurement }}
       title: 'Weather'
 
 - alias: 'GandG not home - Movement in Bedroom'

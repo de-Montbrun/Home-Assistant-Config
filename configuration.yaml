@@ -401,22 +401,6 @@ sensor:
       - temperature
       - symbol
 
-  - platform: wunderground
-    api_key: !secret wunderground_api_key
-    monitored_conditions:
-      - alerts
-      - feelslike_c
-      - relative_humidity
-      - solarradiation
-      - temp_c
-      - temp_high_1d_c
-      - temp_low_1d_c
-      - UV
-      - weather
-      - wind_degrees
-      - wind_gust_kph
-      - wind_kph
-
   - platform: command_line
     name: 'filesize_db'
     command: 'stat -c %s "/etc/homeassistant/home-assistant_v2.db"'
@@ -454,6 +438,24 @@ sensor:
     password: !secret fing_email_password
     senders:
       - alert@fing.io
+
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - apparent_temperature
+      - humidity
+      - nearest_storm_distance
+      - temperature
+      - temperature_high
+      - temperature_low
+      - summary
+      - wind_bearing
+      - wind_gust
+      - wind_speed
+      - uv_index
+    units: ca
+    scan_interval:
+      hours: 1
 
 binary_sensor:
   - platform: workday
@@ -541,8 +543,12 @@ tts:
 
 weather:
   - platform: darksky
+    name: sj
     api_key: !secret darksky_api_key
     mode: daily
+    scan_interval:
+      hours: 1
+
 
 # }}}
 # {{{ zones
@@ -667,7 +673,7 @@ zone ytz:
   radius: 400
   icon: mdi:airplane
 
-zone yjz:
+zone ysj:
   name: Saint John Airport
   latitude: 45.326501
   longitude: -65.888867
