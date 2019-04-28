@@ -761,38 +761,6 @@
         :smiling_face_with_sunglasses: UV Index is {{ states.sensor.dark_sky_uv_index.state }}. You better put on some sunscreen!
       title: 'Weather'
 
-  #- alias: 'Weather alert notification'
-  #  initial_state: true
-  #  trigger:
-  #    platform: state
-  #    entity_id: sensor.pws_alerts
-  #  condition:
-  #    condition: and
-  #    conditions:
-  #      - condition: numeric_state
-  #        entity_id: 'sensor.hass_uptime'
-  #        above: '.01'
-  #      - condition: template
-  #        value_template: '{{ trigger.from_state.state != "unknown" }}'
-  #      - condition: template
-  #        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
-  #      - condition: template
-  #        value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.weather_alert_notification.attributes.last_triggered) | int > 1500 }}'
-  #  action:
-  #    service: notify.zulip
-  #    data:
-  #      message: >
-  #        :warning: :water_drop: :lightning: :rainy: :thunderstorm: :snowstorm: :snowflake: :warning:
-  #
-  #        ---
-  #
-  #        **{{ states.sensor.pws_alerts.attributes.Description }}**
-  #
-  #        ---
-  #
-  #        {{ states.sensor.pws_alerts.attributes.Message }}
-  #      title: 'Weather'
-
 - alias: 'Weather forecast notification'
   initial_state: true
   trigger:
