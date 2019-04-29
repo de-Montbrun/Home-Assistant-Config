@@ -424,11 +424,6 @@ sensor:
           - device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
           - device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
 
-  - platform: nokia_health
-    consumer_key: !secret nokia_key
-    consumer_secret: !secret nokia_secret
-    scan_interval: 3600
-
   - platform: imap_email_content
     name: Fing State
     server: !secret fing_email_server
