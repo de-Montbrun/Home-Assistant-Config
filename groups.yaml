@@ -4,6 +4,13 @@
 
 # {{{ Lights and switches
 
+bathroom_lights:
+  name: Bathroom lights
+  entities:
+    - switch.bathroom0
+    - switch.bathroom1
+    - switch.bathroom2
+
 bedroom_lights:
   name: Bedroom lights
   entities:
