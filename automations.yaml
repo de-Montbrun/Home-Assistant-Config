@@ -262,10 +262,8 @@
   action:
     - service: light.turn_on
       entity_id:
-        - light.bathroom
-        - light.cherub
-        - light.hallway
-        - light.kitchen_oven
+        - group.hallway_lights
+        - light.bathroom2
       data:
         brightness: 255
     - service: light.turn_on
@@ -511,10 +509,11 @@
   action:
     - service: light.turn_off
       entity_id:
-        - light.bathroom
-        - light.hallway
+        - light.bathroom2
+        - group.hallway_lights
         - group.kitchen_lights
         - group.office_lights
+        - group.sunroom_lights
       data:
         transition: 300
     - service: homeassistant.turn_on
@@ -1029,7 +1028,7 @@
     - service: notify.zulip
       data_template:
         message: >
-          :blue_circle: Router is responding :smile:
+          :blue_circle: Router is responding
         title: 'Internet'
 
 - alias: 'Bell Router issues - offline'
@@ -1044,13 +1043,8 @@
     - service: notify.zulip
       data_template:
         message: >
-          :black_large_square: Router has been offline for 10 minutes. Toggling plug. :frowning:
+          :black_large_square: Router has been offline for over 10 minutes.
         title: 'Internet'
-    - service: switch.turn_off
-      entity_id: switch.switch6
-    - delay: '00:00:20'
-    - service: switch.turn_on
-      entity_id: switch.switch6
 
 - alias: 'Fing update user'
   initial_state: true
