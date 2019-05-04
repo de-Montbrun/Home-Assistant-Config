@@ -193,46 +193,12 @@ person:
 
 device_tracker:
   - platform: nmap_tracker
-    hosts: 192.168.2.1-9
+    hosts: 192.168.2.10-15
     home_interval: 5
-    interval_seconds: 60
+    interval_seconds: 120
     new_device_defaults:
       track_new_devices: true
       hide_if_away: true
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.10-13
-    home_interval: 5
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.14-100
-    home_interval: 2
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.101-120
-    home_interval: 5
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-
-  - platform: nmap_tracker
-    hosts: 192.168.2.121-254
-    home_interval: 5
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: true
-      hide_if_away: true
-    exclude:
-      - 192.168.2.150
 
   - platform: ping
     count: 10
