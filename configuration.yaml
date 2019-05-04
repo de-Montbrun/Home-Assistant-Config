@@ -432,6 +432,7 @@ sensor:
     password: !secret fing_email_password
     senders:
       - alert@fing.io
+      - alert@fing.com
 
   - platform: darksky
     api_key: !secret darksky_api_key
