@@ -239,7 +239,6 @@
     service: switch.turn_off
     entity_id:
       - switch.switch0
-      - switch.switch5
 
 - alias: 'Sunrise - Lights out'
   initial_state: true
@@ -442,7 +441,6 @@
     service: switch.turn_off
     entity_id:
       - switch.switch0
-      - switch.switch5
 
 - alias: 'Gail home - turn on heater'
   initial_state: true
@@ -473,7 +471,6 @@
     service: switch.turn_on
     entity_id:
       - switch.switch0
-      - switch.switch5
 
 - alias: 'Bedtime'
   initial_state: true
@@ -1025,11 +1022,11 @@
     entity_id: device_tracker.router
     from: 'not_home'
   action:
-    - service: notify.zulip
-      data_template:
-        message: >
-          :blue_circle: Router is responding
-        title: 'Internet'
+    service: notify.zulip
+    data_template:
+      message: >
+        :blue_circle: Router is responding
+      title: 'Internet'
 
 - alias: 'Bell Router issues - offline'
   initial_state: true
@@ -1045,6 +1042,11 @@
         message: >
           :black_large_square: Router has been offline for over 10 minutes.
         title: 'Internet'
+    - service: switch.turn_off
+      entity_id: switch.switch5
+    - delay: '00:00:30'
+    - service: switch.turn_on
+      entity_id: switch.switch5
 
 - alias: 'Fing update user'
   initial_state: true
