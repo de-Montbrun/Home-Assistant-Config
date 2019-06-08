@@ -54,8 +54,6 @@ media_player:
 
 # Plex
   - platform: plex
-    entity_namespace: 'plex'
-    use_custom_entity_ids: true
 
 # Alexa
 alexa_media:
@@ -501,7 +499,8 @@ switch:
 # }}}
 # {{{ Text-to-speech
 tts:
-  - platform: google
+  - platform: google_translate
+    service_name: google_say
 
   - platform: voicerss
     api_key: !secret voicerss_api_key

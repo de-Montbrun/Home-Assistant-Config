@@ -6,10 +6,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: media_player.plex_livingroom
-      from: 'playing'
-    - platform: state
-      entity_id: media_player.plex_plex_h1r93s5i49ldqs0plqixfu9d
+      entity_id: media_player.plex_sunroom
       from: 'playing'
   condition:
     condition: and
@@ -28,10 +25,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: media_player.plex_livingroom
-      to: 'playing'
-    - platform: state
-      entity_id: media_player.plex_plex_h1r93s5i49ldqs0plqixfu9d
+      entity_id: media_player.plex_sunroom
       to: 'playing'
   condition:
     condition: and
@@ -171,14 +165,14 @@
             entity_id: group.gail_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gail_owntracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
   action:
     - delay: ' 00:10:00'
     - service: homeassistant.turn_off
@@ -234,7 +228,7 @@
             entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
   action:
     service: switch.turn_off
     entity_id:
@@ -495,14 +489,14 @@
             entity_id: group.gail_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gail_owntracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
   action:
     - service: light.turn_off
       entity_id:
@@ -691,7 +685,7 @@
   initial_state: true
   trigger:
       - platform: state
-        entity_id: device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375,device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
+        entity_id: device_tracker.gervais_owntracks,device_tracker.gail_owntracks
   condition:
     condition: and
     conditions:
@@ -968,14 +962,14 @@
             entity_id: group.gail_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gail_owntracks) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
   action:
     service: switch.turn_on
     entity_id: switch.switch4
