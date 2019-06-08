@@ -1027,16 +1027,16 @@
     entity_id: device_tracker.router
     to: 'not_home'
     for:
-      minutes: 10
+      minutes: 2
   action:
     - service: notify.zulip
       data_template:
         message: >
-          :black_large_square: Router has been offline for over 10 minutes.
+          :black_large_square: Router has been offline for over a minute.
         title: 'Internet'
     - service: switch.turn_off
       entity_id: switch.switch5
-    - delay: '00:00:30'
+    - delay: '00:00:15'
     - service: switch.turn_on
       entity_id: switch.switch5
 
