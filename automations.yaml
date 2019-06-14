@@ -799,54 +799,54 @@
           is in GandG's Bedroom
         title: 'Security Alert'
     - service: light.turn_on
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
       data:
         brightness: 255
         xy_color: [ 0.701,0.299 ]
     - delay: '00:00:02'
     - service: light.turn_on
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
       data:
         brightness: 255
         xy_color: [ 0.443,0.518 ]
     - delay: '00:00:02'
     - service: light.turn_on
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
       data:
         brightness: 255
         xy_color: [ 0.137,0.041 ]
     - delay: '00:00:02'
     - service: light.turn_on
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
       data:
         brightness: 255
         xy_color: [ 0.701,0.299 ]
     - delay: '00:00:02'
     - service: light.turn_on
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
       data:
         brightness: 255
         xy_color: [ 0.443,0.518 ]
     - delay: '00:00:02'
     - service: light.turn_on
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
       data:
         brightness: 255
         xy_color: [ 0.137,0.041 ]
     - delay: '00:00:02'
     - service: light.turn_on
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
       data:
         brightness: 255
         xy_color: [ 0.701,0.299 ]
     - service: light.turn_on
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
       data:
         brightness: 255
         xy_color: [ 0.312,0.328 ]
     - delay: '00:00:05'
     - service: light.turn_off
-      entity_id: light.bedroom
+      entity_id: light.bedroom0
     - delay: '00:00:05'
     - service: homeassistant.turn_on
       entity_id: automation.gandg_not_home_movement_in_bedroom
