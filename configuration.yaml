@@ -159,14 +159,14 @@ person:
     device_trackers:
       - device_tracker.iphonehass
       - device_tracker.gervais_fing
-      - device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
+      - device_tracker.gervais_owntracks
   - name: Gail
     id: gail1968
     user_id: 1b937317d2a242d7af7df282b35359b1
     device_trackers:
       - device_tracker.dgrabbs_iphonehass
       - device_tracker.gail_fing
-      - device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
+      - device_tracker.gail_owntracks
   - name: Cameron
     id: cam1995
     device_trackers:
@@ -376,17 +376,17 @@ sensor:
       distance_apart:
         friendly_name: 'GandG Apart'
         value_template: >-
-          {% if distance(states.device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375, states.device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6) | int == 0 %}
+          {% if distance(states.device_tracker.gervais_owntracks, states.device_tracker.gail_owntracks) | int == 0 %}
             0
-          {% elif distance(states.device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375, states.device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6) | round(2) < 0.09 %}
+          {% elif distance(states.device_tracker.gervais_owntracks, states.device_tracker.gail_owntracks) | round(2) < 0.09 %}
             0
           {% else %}
-            {{ distance(states.device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375, states.device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6) | round(2) }}
+            {{ distance(states.device_tracker.gervais_owntracks, states.device_tracker.gail_owntracks) | round(2) }}
           {% endif %}
         unit_of_measurement: 'km'
         entity_id:
-          - device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
-          - device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
+          - device_tracker.gail_owntracks
+          - device_tracker.gervais_owntracks
 
   - platform: imap_email_content
     name: Fing State

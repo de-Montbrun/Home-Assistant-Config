@@ -19,7 +19,7 @@ person.gail:
   entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
 device_tracker.dgrabbs_iphonehass:
   hidden: true
-device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6:
+device_tracker.gail_owntracks:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
 device_tracker.gail3:
@@ -29,7 +29,7 @@ group.gail_tracker:
 
 person.gervais:
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
-device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375:
+device_tracker.gervais_owntracks:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
 device_tracker.gervais3:
