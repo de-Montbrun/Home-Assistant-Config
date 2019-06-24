@@ -746,7 +746,7 @@
     service: notify.zulip
     data:
       message: >
-        :smiling_face_with_sunglasses: UV Index is {{ states.sensor.dark_sky_uv_index.state }}. You better put on some sunscreen!
+        :sunny: UV Index is {{ states.sensor.dark_sky_uv_index.state }}. You better put on some sunscreen!
       title: 'Weather'
 
 - alias: 'Weather forecast notification'
