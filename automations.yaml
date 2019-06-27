@@ -5,9 +5,9 @@
 - alias: 'Plex paused/stopped - normal lights'
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: media_player.plex_sunroom
-      from: 'playing'
+    platform: state
+    entity_id: media_player.plex_sunroom
+    from: 'playing'
   condition:
     condition: and
     conditions:
@@ -24,9 +24,9 @@
 - alias: 'Plex playing - Dimm lights'
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: media_player.plex_sunroom
-      to: 'playing'
+    platform: state
+    entity_id: media_player.plex_sunroom
+    to: 'playing'
   condition:
     condition: and
     conditions:
@@ -1023,11 +1023,16 @@
 - alias: 'Bell Router issues - offline'
   initial_state: true
   trigger:
-    platform: state
-    entity_id: device_tracker.router
-    to: 'not_home'
-    for:
-      minutes: 2
+    - platform: state
+      entity_id: device_tracker.router
+      to: 'not_home'
+      for:
+        minutes: 2
+    - platform: state
+      entity_id: device_tracker.router
+      to: 'not_home'
+      for:
+        minutes: 15
   action:
     - service: notify.zulip
       data_template:
