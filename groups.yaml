@@ -25,6 +25,7 @@ hallway_lights:
   entities:
     - light.hallway
     - light.cherub
+    - light.foyer
 
 kitchen_lights:
   name: Kitchen lights
@@ -68,7 +69,6 @@ secondfloor_lights:
   entities:
     - group.bedroom_lights
     - group.spareroom_lights
-    - light.computer_room
 
 spareroom_lights:
   name: Spare room lights
@@ -114,7 +114,6 @@ gail_tracker:
 
 gervais_tracker:
   entities:
-    - device_tracker.gervaisapplewatch
     - device_tracker.gervais_fing
     - device_tracker.gervais_owntracks
     - device_tracker.gervais3
