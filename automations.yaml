@@ -448,7 +448,7 @@
       - switch.switch0
 
 - alias: 'Gail home - turn on heater'
-  initial_state: true
+  initial_state: false
   trigger:
       - platform: time
         at: '09:00:01'
@@ -541,9 +541,14 @@
       - condition: state
         entity_id: group.gervais_tracker
         state: 'not_home'
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
   action:
-    service: light.turn_off
-    entity_id: group.bedroom_lights
+    - service: light.turn_off
+      entity_id: group.bedroom_lights
+    - service: switch.turn_off
+      entity_id: group.bathroom_lights
 
 - alias: 'Tell Jen to turn off her TV'
   initial_state: true
