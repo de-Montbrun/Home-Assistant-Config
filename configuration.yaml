@@ -549,7 +549,7 @@ zone innovatia:
   icon: mdi:domain
 
 zone walmart:
-  name: Walmart
+  name: Walmart - Charlottetown
   latitude: !secret walmart_latitude
   longitude: !secret walmart_longitude
   radius: 100
@@ -637,7 +637,7 @@ zone ysj:
   name: Saint John Airport
   latitude: 45.326501
   longitude: -65.888867
-  radius: 400
+  radius: 600
   icon: mdi:airplane
 
 zone yyt:
