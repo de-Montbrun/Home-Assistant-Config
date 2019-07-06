@@ -4,7 +4,7 @@
 
 - id: switch_hass_template
   alias: switch_hass_template
-  initial_state: false
+  initial_state: true
   trigger:
     - platform: homeassistant
       event: start
