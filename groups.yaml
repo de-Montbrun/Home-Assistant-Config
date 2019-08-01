@@ -23,17 +23,19 @@ bedroom_lights:
 hallway_lights:
   name: Hallway lights
   entities:
-    - light.hallway
+    - light.stairs_back
     - light.cherub
     - light.foyer
+    - light.hallway
+    - light.upstairshallway
 
 kitchen_lights:
   name: Kitchen lights
   entities:
     - light.kitchen_island
-    - light.kitchen_oven
-    - light.kitchen_table
-    - light.kitchen_window
+    - light.kitchen_pots
+    - light.kitchen_swirly0
+    - light.kitchen_swirly1
 
 livingroom_lights:
   name: Livingroom lights
@@ -61,8 +63,8 @@ outdoor_lights:
   name: Outdoor lights
   entities:
     - light.front_door
-    - light.backdoor0
-    - light.backdoor1
+    - switch.outdoor_backdoor
+    - switch.outdoor_deck_lights
 
 secondfloor_lights:
   name: Second floor lights
