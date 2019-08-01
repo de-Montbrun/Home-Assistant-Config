@@ -270,22 +270,6 @@ sensor:
       - type: processor_use
       - type: last_boot
 
-  - platform: pi_hole
-    host: pi.hole
-    monitored_conditions:
-      - unique_clients
-      - ads_blocked_today
-      - dns_queries_today
-
-  - platform: glances
-    host: pi.hole
-    name: pi.hole
-    resources:
-      - 'disk_use_percent'
-      - 'memory_use_percent'
-      - 'swap_use_percent'
-      - 'processor_load'
-
   - platform: glances
     host: zulip.dem
     name: zulip
@@ -517,7 +501,7 @@ zone:
   name: Home
   latitude: !secret home_latitude
   longitude: !secret home_longitude
-  radius: 50
+  radius: 80
   icon: mdi:home
 
 zone craft_beer_corner:
