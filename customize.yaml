@@ -1,20 +1,15 @@
 sensor.grater_uptime:
   friendly_name: Uptime
   icon: mdi:clock
-
 sensor.swap_used:
   icon: mdi:memory
-
 sensor.filesize_db:
   friendly_name: SQLite DB size
   icon: mdi:database
-
 sensor.nokia_15324269:
   friendly_name: Gervais
-
 sensor.fing_state:
   hidden: true
-
 person.gail:
   entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
 device_tracker.dgrabbs_iphonehass:
@@ -26,7 +21,6 @@ device_tracker.gail3:
   hidden: true
 group.gail_tracker:
   hidden: true
-
 person.gervais:
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
 device_tracker.gervais_owntracks:
@@ -38,10 +32,8 @@ device_tracker.gervaisapplewatch:
   hidden: true
 group.gervais_tracker:
   hidden: true
-
 sensor.distance_apart:
   icon: mdi:human-male-female
-
 person.grant:
   entity_picture: https://avatars.io/facebook/Grannt
 group.grant_tracker:
@@ -50,7 +42,6 @@ device_tracker.grantphone:
   hidden: true
 device_tracker.grant2:
   hidden: true
-
 person.cameron:
   entity_picture: https://avatars.io/facebook/cameron.langdon.73
 group.cam_tracker:
@@ -59,20 +50,16 @@ device_tracker.camphone:
   hidden: true
 device_tracker.cameron2:
   hidden: true
-
 person.jennifer:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
-  #entity_picture: https://avatars.io/facebook/jennifer.langdon.16
 group.jen_tracker:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
 device_tracker.jenphone:
   hidden: true
 device_tracker.jennifer2:
   hidden: true
-
 sensor.deMontbrun_DNS_Expiry:
   icon: mdi:dns
-
 switch.switch0:
   friendly_name: Office Fireplace Switch
 switch.switch1:
@@ -85,10 +72,11 @@ switch.switch4:
   friendly_name: Bedroom Switch
 switch.switch5:
   friendly_name: Router Switch
-
 light.office_main_lights:
   friendly_name: Office Main Lights
-
-#customize_glob:
-#  "switch.tv_*":
-#  assumed_state: false
+light.stairs_back:
+  friendly_name: Back Stairs
+switch.outdoor_backdoor:
+  friendly_name: Backdoor
+switch.outdoor_deck_lights:
+  friendly_name: Deck Lights
