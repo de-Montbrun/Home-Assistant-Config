@@ -76,7 +76,11 @@ light.office_main_lights:
   friendly_name: Office Main Lights
 light.stairs_back:
   friendly_name: Back Stairs
+light.main_floor_bathroom_light:
+  friendly_name: Main Floor Bathroom
 switch.outdoor_backdoor:
   friendly_name: Backdoor
 switch.outdoor_deck_lights:
   friendly_name: Deck Lights
+switch.basement_light:
+  friendly_name: Basement Light
