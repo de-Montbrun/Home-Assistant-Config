@@ -185,11 +185,12 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
   action:
-    - delay: ' 00:10:00'
+    - delay: '00:10:00'
     - service: homeassistant.turn_off
       entity_id: automation.timed_lights_movement_front_door
     - service: light.turn_off
-    - delay: ' 00:00:04'
+      entity_id: all
+    - delay: '00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
 
@@ -368,7 +369,7 @@
     entity_id: 'switch.switch1'
 
 - alias: 'Bedroom Window fan on'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: template
     value_template: '{{ states.sensor.yr_temperature.state < states.sensor.bed_room_temp.state }}'
@@ -386,7 +387,7 @@
       - switch.switch4
 
 - alias: 'Bedroom Window fan off'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: template
       value_template: '{{ states.sensor.yr_temperature.state > states.sensor.bed_room_temp.state }}'
@@ -511,17 +512,10 @@
   action:
     - service: light.turn_off
       entity_id:
-        - group.hallway_lights
-        - group.kitchen_lights
+        - group.all_lights
         - group.office_lights
-        - group.sunroom_lights
-    - service: homeassistant.turn_on
-      entity_id: script.timer_livingroom_off
-    - service: switch.turn_off
-      entity_id:
-        - switch.bathroom2
-        - switch.switch2
-        - switch.switch3
+        - group.outdoor_lights
+        - switch.basement_light
 
 - alias: 'GandG not home - turn off bedroom things'
   initial_state: true
@@ -602,7 +596,7 @@
       entity_id:
         - group.outdoor_lights
         - light.computer_room
-    - delay: ' 00:00:04'
+    - delay: '00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
 
@@ -614,7 +608,7 @@
     to: 'on'
   action:
     service: media_player.media_play_pause
-    entity_id: media_player.plex_livingroom, media_player.plex_plex_h1r93s5i49ldqs0plqixfu9d
+    entity_id: media_player.plex_livingroom, media_player.plex_sunroom
 
 - alias: 'Doorbell notify'
   initial_state: true
@@ -734,6 +728,8 @@
         above: '.01'
       - condition: template
         value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+      - condition: template
+        value_template: '{{ trigger.to_state.state != "unknown" }}'
       - condition: template
         value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.current_weather_notification.attributes.last_triggered) | int > 3600 }}'
   action:
@@ -991,7 +987,7 @@
     entity_id: switch.switch4
 
 - alias: 'Turn off heater in bedroom'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: template
       value_template: '{{ states.sensor.bed_room_temp.state|int >= 17 }}'
@@ -1023,7 +1019,7 @@
     service: homeassistant.turn_on
     entity_id: automation.gandg_not_home_movement_in_bedroom
 
-- alias: 'Bell Router issues - back online'
+- alias: 'Router issues - back online'
   initial_state: true
   trigger:
     platform: state
@@ -1036,14 +1032,14 @@
         :blue_circle: Router is responding
       title: 'Internet'
 
-- alias: 'Bell Router issues - offline'
+- alias: 'Router issues - offline'
   initial_state: true
   trigger:
     - platform: state
       entity_id: device_tracker.router
       to: 'not_home'
       for:
-        minutes: 2
+        minutes: 1
     - platform: state
       entity_id: device_tracker.router
       to: 'not_home'
@@ -1055,11 +1051,19 @@
         message: >
           :black_large_square: Router has been offline for over a minute.
         title: 'Internet'
-    - service: switch.turn_off
-      entity_id: switch.switch5
-    - delay: '00:00:15'
+
+- alias: 'Timed basement light'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: person.chris
+    to: 'home'
+  action:
     - service: switch.turn_on
-      entity_id: switch.switch5
+      entity_id: switch.basement_light
+    - delay: '00:10:00'
+    - service: switch.turn_off
+      entity_id: switch.basement_light
 
 - alias: 'Fing update user'
   initial_state: true
