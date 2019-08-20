@@ -50,6 +50,7 @@ weblink:
 # Roku
 roku:
   - host: 192.168.2.18
+  - host: 192.168.2.130
 
 media_player:
 

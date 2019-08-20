@@ -84,6 +84,9 @@ sunroom_lights:
   entities:
     - light.sunroom0
     - light.sunroom1
+    - light.sunroom2
+    - light.sunroom3
+    - light.sunroom4
 
 # }}}
 # {{{ Media players
