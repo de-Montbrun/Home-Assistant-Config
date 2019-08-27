@@ -35,26 +35,26 @@ timer_outdoor_off:
       data:
         entity_id: automation.timed_lights__movement_front_door
 
-timed_livingroom:
-  alias: "Turn on livingroom lights and set timer"
+timed_sunroom:
+  alias: "Turn on sunroom lights and set timer"
   sequence:
     # Cancel ev. old timers
     - service: script.turn_off
       data:
-         entity_id: script.timer_livingroom_off
+         entity_id: script.timer_sunroom_off
     - service: scene.turn_on
       data:
-        entity_id: scene.livingroom_nightlight
+        entity_id: scene.sunroom_nightlight
     # Set new timer
     - service: script.turn_on
       data:
-        entity_id: script.timer_livingroom_off
+        entity_id: script.timer_sunroom_off
 
-timer_livingroom_off:
-  alias: "Turn off livingroom lights after 10 minutes"
+timer_sunroom_off:
+  alias: "Turn off sunroom lights after 10 minutes"
   sequence:
     - delay:
         minutes: 10
     - service: light.turn_off
       data:
-        entity_id: group.livingroom_lights
+        entity_id: group.sunroom_lights

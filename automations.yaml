@@ -309,11 +309,11 @@
         entity_id: 'sensor.living_room_lux'
         below: '6500'
       - condition: state
-        entity_id: group.livingroom_lights
+        entity_id: group.sunroom_lights
         state: 'off'
   action:
     service: scene.turn_on
-    entity_id: scene.livingroom_normal
+    entity_id: scene.sunroom_normal
 
 - alias: 'Jennifer Home - turn on'
   initial_state: true
@@ -390,7 +390,7 @@
       - switch.switch4
 
 - alias: 'Livingroom Window fan on'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: template
     value_template: '{{ states.sensor.yr_temperature.state < states.sensor.living_room_temp.state }}'
@@ -407,7 +407,7 @@
     entity_id: switch.switch2
 
 - alias: 'Livingroom Window fan off'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: template
       value_template: '{{ states.sensor.yr_temperature.state > states.sensor.living_room_temp.state }}'
@@ -625,7 +625,7 @@
         entity_id: camera.front_door
         filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door2.jpg'
 
-- alias: 'Timed lights - Movement in Livingroom'
+- alias: 'Timed lights - Movement in Sunroom'
   initial_state: true
   trigger:
     platform: state
@@ -635,14 +635,14 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: group.livingroom_lights
+        entity_id: group.sunroom_lights
         state: 'off'
       - condition: state
         entity_id: sun.sun
         state: 'below_horizon'
   action:
     service: homeassistant.turn_on
-    entity_id: script.timed_livingroom
+    entity_id: script.timed_sunroom
 
 - alias: 'Set sabnzb speed limit'
   initial_state: true

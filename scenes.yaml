@@ -57,7 +57,7 @@
       transition: 2
       brightness: 255
       xy_color: [ 0.169, 0.044 ]
-- name: Livingroom nightlight
+- name: Sunroom nightlight
   entities:
     light.couch0:
       state: on

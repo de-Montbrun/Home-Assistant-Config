@@ -72,6 +72,7 @@ secondfloor_lights:
   entities:
     - group.bedroom_lights
     - group.spareroom_lights
+    - group.sunroom_lights
 
 spareroom_lights:
   name: Spare room lights
