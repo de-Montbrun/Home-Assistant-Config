@@ -202,7 +202,9 @@
       entity_id:
         - switch.switch2
         - switch.switch3
+        - group.bathroom_lights
     - service: light.turn_off
+      entity_id: all
     - delay: '00:00:05'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
@@ -241,9 +243,11 @@
     offset: '+00:10:00'
   action:
     - service: light.turn_off
+      entity_id: all
     - service: switch.turn_off
       entity_id: switch.switch3
     - service: light.turn_off
+      entity_id: all
 
 - alias: 'Sunset - Lights on'
   initial_state: true
@@ -582,7 +586,6 @@
     - service: light.turn_off
       entity_id:
         - group.outdoor_lights
-        - light.computer_room
     - delay: '00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
