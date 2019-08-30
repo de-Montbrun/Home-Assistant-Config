@@ -134,7 +134,7 @@
       entity_id: media_player.roku_sunroom
       to: 'off'
       for:
-        minutes: 5
+        minutes: 15
     - platform: state
       entity_id: group.gail_tracker,group.gervais_tracker,group.cam_tracker,group.jen_tracker
       to: 'home'
@@ -177,6 +177,12 @@
       entity_id: automation.timed_lights_movement_front_door
     - service: light.turn_off
       entity_id: all
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.bathroom_lights
+        - group.mainfloor_lights
+        - group.outdoor_lights
+        - group.secondfloor_lights
     - delay: '00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
@@ -205,6 +211,15 @@
         - group.bathroom_lights
     - service: light.turn_off
       entity_id: all
+    - service: homeassistant.turn_off
+      entity_id:
+        - group.all_lights
+        - group.office_lights
+        - group.outdoor_lights
+        - group.mainfloor_lights
+        - group.secondfloor_lights
+        - group.bathroom_lights
+        - switch.basement_light
     - delay: '00:00:05'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
@@ -242,12 +257,15 @@
     event: sunrise
     offset: '+00:10:00'
   action:
-    - service: light.turn_off
-      entity_id: all
-    - service: switch.turn_off
-      entity_id: switch.switch3
-    - service: light.turn_off
-      entity_id: all
+    service: homeassistant.turn_off
+    entity_id:
+      - group.all_lights
+      - group.office_lights
+      - group.outdoor_lights
+      - group.mainfloor_lights
+      - group.secondfloor_lights
+      - group.bathroom_lights
+      - switch.basement_light
 
 - alias: 'Sunset - Lights on'
   initial_state: true
@@ -501,11 +519,14 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
   action:
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       entity_id:
         - group.all_lights
         - group.office_lights
         - group.outdoor_lights
+        - group.mainfloor_lights
+        - group.secondfloor_lights
+        - group.bathroom_lights
         - switch.basement_light
 
 - alias: 'GandG not home - turn off bedroom things'
@@ -627,6 +648,19 @@
       data_template:
         entity_id: camera.front_door
         filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door2.jpg'
+
+- alias: Update Available Notification
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.updater
+      from: 'off'
+      to: 'on'
+  action:
+    - service: notify.zulip
+      data:
+        message: 'Update for Home Assistant is available.'
+        title: 'Home Assistant'
 
 - alias: 'Timed lights - Movement in Sunroom'
   initial_state: true
@@ -900,42 +934,6 @@
     data:
       entity_id: remote.roku_sunrooom
       command: power
-
-- alias: 'Gail away - sonos speaker - set sleep timer'
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: group.gail_tracker
-    from: 'home'
-  action:
-    service: media_player.sonos_set_sleep_timer
-    data:
-      entity_id: media_player.sonos
-      sleep_time: 900
-
-- alias: 'Gail home - sonos speaker - clear sleep timer'
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: group.gail_tracker
-    to: 'home'
-  action:
-    service: media_player.sonos_clear_sleep_timer
-    entity_id: media_player.sonos
-
-- alias: 'Pause sonos every 2 minutes if Gail away'
-  initial_state: true
-  trigger:
-    platform: time_pattern
-    minutes: '/2'
-    seconds: 0
-  condition:
-    condition: state
-    entity_id: group.gail_tracker
-    state: 'not_home'
-  action:
-    service: media_player.media_pause
-    entity_id: media_player.sonos
 
 - alias: 'Turn on heater in bedroom'
   initial_state: true
