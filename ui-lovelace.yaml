@@ -4,12 +4,18 @@ views:
     cards:
       - cards:
           - entities:
-              - entity: device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
-              - entity: device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
-              - entity: group.cam_tracker
-              - entity: group.jen_tracker
+              - entity: person.gail
+              - entity: person.gervais
+              - entity: person.jennifer
             show_header_toggle: false
             title: Household Members
+            type: entities
+          - card: null
+            entities:
+              - entity: person.chris
+              - entity: person.jamie
+            show_header_toggle: false
+            title: Tenants
             type: entities
           - card:
               entity: sensor.distance_apart
@@ -24,12 +30,14 @@ views:
               type: gauge
             conditions:
               - entity: sensor.distance_apart
-                state: '> 1'
+                state_not: '0'
             type: conditional
         type: vertical-stack
       - entities:
-          - entity: device_tracker.gail_219d5f91_3462_4a44_9c44_e159026137b6
-          - entity: device_tracker.gervais_56f37929_02ce_4cc0_ab26_033d09334375
+          - entity: device_tracker.gervais_owntracks
+          - entity: device_tracker.gail_owntracks
+          - entity: person.jennifer
+          - entity: person.cameron
         type: map
     icon: 'mdi:account-multiple'
     panel: false
@@ -38,18 +46,32 @@ views:
   - badges: []
     cards:
       - entities:
-          - group.all_lights
-          - group.outdoor_lights
-          - group.mainfloor_lights
-          - group.secondfloor_lights
-          - group.bedroom_lights
-          - group.spareroom_lights
-          - group.kitchen_lights
-          - group.livingroom_lights
-          - group.office_lights
+          - entity: group.all_lights
+          - entity: group.outdoor_lights
+          - entity: group.mainfloor_lights
+          - entity: group.secondfloor_lights
+          - entity: group.bathroom_lights
+          - entity: group.bedroom_lights
+          - entity: group.hallway_lights
+          - entity: group.kitchen_lights
+          - entity: group.livingroom_lights
+          - entity: group.office_lights
+          - entity: group.sunroom_lights
         show_header_toggle: false
-        title: All lights
+        title: All Lights
         type: entities
+      - card:
+          show_header_toggle: false
+          title: Bathroom
+        entities:
+          - entity: group.bathroom_lights
+          - entity: switch.bathroom0
+          - entity: switch.bathroom1
+          - entity: switch.bathroom2
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
       - card:
           show_header_toggle: false
           title: Bedroom
@@ -58,7 +80,36 @@ views:
           - entity: light.bedroom0
           - entity: light.bedroom1
           - entity: light.bedroom2
+          - entity: light.bedroom3
+          - entity: light.bedroom4
           - switch.switch4
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Hallway
+        entities:
+          - entity: group.hallway_lights
+          - entity: light.stairs_back
+          - entity: light.cherub
+          - entity: light.foyer
+          - entity: light.hallway
+          - entity: light.upstairshallway
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Kitchen
+        entities:
+          - entity: group.kitchen_lights
+          - entity: light.kitchen_island
+          - entity: light.kitchen_pots
+          - entity: light.kitchen_swirly0
+          - entity: light.kitchen_swirly1
         state_filter:
           - 'on'
           - 'off'
@@ -80,14 +131,6 @@ views:
           - 'on'
           - 'off'
         type: entity-filter
-      - entities:
-          - group.spareroom_lights
-          - light.computer_room
-          - light.spare0
-          - light.spare1
-        show_header_toggle: false
-        title: Spare rooms
-        type: entities
       - card:
           show_header_toggle: false
           title: Office
@@ -96,56 +139,58 @@ views:
           - light.office_main_lights
           - switch.switch0
           - switch.switch3
-          - switch.switch5
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Outdoor
+        entities:
+          - entity: group.outdoor_lights
+          - entity: light.front_door
+          - entity: switch.outdoor_backdoor
+          - entity: switch.outdoor_deck_lights
         state_filter:
           - 'on'
           - 'off'
         type: entity-filter
       - entities:
-          - entity: light.bathroom
-          - entity: light.hallway
-        show_header_toggle: true
-        title: Misc Lights
+          - entity: group.sunroom_lights
+          - entity: light.sunroom0
+          - entity: light.sunroom1
+          - entity: light.sunroom2
+          - entity: light.sunroom3
+          - entity: light.sunroom4
+        show_header_toggle: false
+        title: Sunroom
         type: entities
       - entities:
-          - entity: group.kitchen_lights
-          - entity: light.kitchen_island
-          - entity: light.kitchen_oven
-          - entity: light.kitchen_table
-          - entity: light.kitchen_window
+          - entity: switch.basement_light
+          - entity: light.main_floor_bathroom_light
         show_header_toggle: false
-        title: Kitchen
-        type: entities
-      - entities:
-          - entity: group.outdoor_lights
-          - entity: light.front_door
-          - entity: light.backdoor0
-          - entity: light.backdoor1
-        show_header_toggle: false
-        title: Outdoor lights
-        type: entities
-      - entities:
-          - entity: switch.tv_power
-          - entity: switch.tv_mute
-        show_header_toggle: false
-        title: TV
+        title: Misc
         type: entities
     icon: 'mdi:lightbulb'
     title: Lights and Switches
   - badges: []
     cards:
-      - entity: weather.dark_sky
-        name: Forecast
+      - entity: weather.sj
+        name: in Saint John
         type: weather-forecast
       - entities:
-          - entity: sensor.pws_weather
           - entity: sun.sun
-          - entity: sensor.moon
-          - entity: sensor.season
+          - entity: sensor.dark_sky_summary
+          - entity: sensor.dark_sky_temperature
+          - entity: sensor.dark_sky_apparent_temperature
+          - entity: sensor.dark_sky_wind_gust
+          - entity: sensor.dark_sky_humidity
+          - entity: sensor.dark_sky_uv_index
+          - entity: sensor.dark_sky_nearest_storm_distance
         show_header_toggle: false
-        title: Weather
         type: entities
-    icon: 'mdi:weather-partlycloudy'
+    icon: 'mdi:weather-cloudy'
+    panel: false
     title: Weather
   - badges: []
     cards:
@@ -167,88 +212,45 @@ views:
     title: Security
   - badges: []
     cards:
-      - entity: media_player.living_room_roku
+      - entity: media_player.everywhere
         type: media-control
-      - entity: media_player.plex_livingroom
+      - entity: media_player.bedroom
+        type: media-control
+      - entity: media_player.kitchen
         type: media-control
       - entity: media_player.office
         type: media-control
-      - entity: media_player.plex_keypear
+      - entity: media_player.sun_room
         type: media-control
-      - entity: media_player.cam_s_roku
+      - entity: media_player.apt_a
         type: media-control
+      - card:
+          entity: media_player.plex_sunroom
+          type: media-control
+        type: entity-filter
+        entities:
+          - entity: media_player.plex_sunroom
+        state_filter:
+          - playing
+          - idle
+          - paused
     icon: 'mdi:play-circle-outline'
     title: Media Players
   - badges: []
     cards:
-      - entities:
-          - automation.timed_lights_movement_in_livingroom
-          - automation.everyone_home_and_gone_to_bed_lights_out
-          - automation.set_sabnzb_speed_limit
-          - automation.midnight_livingroom_lights_out
-          - automation.home_presence_notification
-          - automation.2am_lights_out
-          - automation.phones_presence_notification
-          - automation.6pm_heater_off
-          - automation.current_weather_notification
-          - automation.sunrise_lights_out
-          - automation.current_uv_index_notification
-          - automation.sunset_lights_on
-          - automation.weather_alert_notification
-          - automation.sunset_office_lights_on
-          - automation.weather_forecast_notification
-          - automation.living_room_lux_low_lights_on
-          - automation.gandg_not_home_movement_in_bedroom
-          - automation.jennifer_home_turn_on
-          - automation.drive_is_filling
-          - automation.jennifer_away_turn_off
-          - automation.turn_off_livingroom_tv_when_idle
-          - automation.midnight_heater_off
-          - automation.gail_away_sonos_speaker_set_sleep_timer
-          - automation.bedroom_window_fan_on
-          - automation.gail_home_sonos_speaker_clear_sleep_timer
-          - automation.bedroom_window_fan_off
-          - automation.pause_sonos_every_2_minutes_if_gail_away
-          - automation.livingroom_window_fan_on
-          - automation.turn_on_heater_in_bedroom
-          - automation.livingroom_window_fan_off
-          - automation.plex_paused_stopped_normal_lights
-          - automation.turn_off_heater_in_bedroom
-          - automation.gail_away_turn_off_heater
-          - automation.germaine_arrives
-          - automation.gail_home_turn_on_heater
-          - automation.germaine_leaves
-          - automation.bedtime
-          - automation.plex_playing_dimm_lights
-          - automation.gandg_not_home_turn_off_bedroom_things
-          - automation.fing_update_user
-          - automation.roku_idle
-          - automation.tell_jen_to_turn_off_her_tv
-          - automation.roku_playing
-          - automation.timed_lights_movement_front_door
-          - automation.gandg_playing
-          - automation.doorbell_rang_pause_tv
-          - automation.gandg_paused
-          - automation.doorbell_notify
-        show_header_toggle: false
-        title: Automations
-        type: entities
       - cards:
           - entities:
-              - scene.livingroom_dim
-              - scene.livingroom_normal
-              - scene.livingroom_nightlight
-              - scene.caseta_lights_off
-              - scene.kitchen_one_percent
-              - scene.kitchen_off
+              - scene.sunroom_dim
+              - scene.sunroom_normal
+              - scene.sunroom_nightlight
             show_header_toggle: false
             title: Scene
             type: entities
           - entities:
-              - script.timed_livingroom
+              - script.timed_sunroom
               - script.timer_outdoor_off
               - script.timed_outdoor
-              - script.timer_livingroom_off
+              - script.timer_sunroom_off
             show_header_toggle: false
             title: Script
             type: entities
