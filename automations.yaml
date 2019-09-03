@@ -206,6 +206,7 @@
       entity_id: automation.timed_lights_movement_front_door
     - service: switch.turn_off
       entity_id:
+        - switch.basement_light
         - switch.switch2
         - switch.switch3
         - group.bathroom_lights
@@ -521,9 +522,7 @@
   action:
     - service: homeassistant.turn_off
       entity_id:
-        - group.all_lights
         - group.office_lights
-        - group.outdoor_lights
         - group.mainfloor_lights
         - group.secondfloor_lights
         - group.bathroom_lights
@@ -912,23 +911,27 @@
       minutes: '/20'
       seconds: 0
   condition:
-    condition: or
+    condition: and
     conditions:
-      - condition: state
-        entity_id: media_player.plex_sunroom
-        state: 'idle'
-        for:
-          minutes: 15
-      - condition: state
-        entity_id: media_player.roku_sunroom
-        state: 'idle'
-        for:
-          minutes: 15
-      - condition: state
-        entity_id: media_player.roku_sunroom
-        state: 'home'
-        for:
-          minutes: 15
+      - condition: template
+        value_template: '{{ states("media_player.roku_sunroom") != "off" }}'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: media_player.plex_sunroom
+            state: 'idle'
+            for:
+              minutes: 15
+          - condition: state
+            entity_id: media_player.roku_sunroom
+            state: 'idle'
+            for:
+              minutes: 15
+          - condition: state
+            entity_id: media_player.roku_sunroom
+            state: 'home'
+            for:
+              minutes: 15
   action:
     service: remote.send_command
     data:
