@@ -278,6 +278,7 @@
     - service: light.turn_on
       entity_id:
         - group.hallway_lights
+        - group.livingroom_lights
       data:
         brightness: 255
     - service: light.turn_on
@@ -495,7 +496,7 @@
     entity_id: media_player.roku_sunroom
     to: 'off'
     for:
-      minutes: 10
+      minutes: 15
   condition:
     condition: and
     conditions:
