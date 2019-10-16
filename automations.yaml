@@ -12,6 +12,8 @@
     - service: frontend.set_theme
       data_template:
         name: 'dark_theme'
+    - delay: '00:03:00'
+    - service: homekit.start
 
 - alias: 'Plex paused/stopped - normal lights'
   initial_state: true

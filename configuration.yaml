@@ -93,6 +93,7 @@ hue:
 
 # Homekit Setup
 homekit:
+  auto_start: false
   filter:
     include_domains:
       - light
