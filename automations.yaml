@@ -197,6 +197,8 @@
   action:
     - service: light.turn_off
       entity_id: group.sunroom_lights
+    - service: switch.turn_off
+      entity_id: switch.switch2
 
 - alias: '2am - Lights out'
   initial_state: true
@@ -338,8 +340,10 @@
         entity_id: group.sunroom_lights
         state: 'off'
   action:
-    service: scene.turn_on
-    entity_id: scene.sunroom_normal
+    - service: scene.turn_on
+      entity_id: scene.sunroom_normal
+    - service: switch.turn_on
+      entity_id: switch.switch2
 
 - alias: 'Jennifer Home - turn on'
   initial_state: true
@@ -414,38 +418,6 @@
     service: switch.turn_off
     entity_id:
       - switch.switch4
-
-- alias: 'Livingroom Window fan on'
-  initial_state: false
-  trigger:
-    platform: template
-    value_template: '{{ states.sensor.yr_temperature.state < states.sensor.living_room_temp.state }}'
-  condition:
-    condition: and
-    conditions:
-      - condition: template
-        value_template: '{{ states.sensor.living_room_temp.state | int >= 20 }}'
-      - condition: state
-        entity_id: sensor.season
-        state: 'summer'
-  action:
-    service: switch.turn_on
-    entity_id: switch.switch2
-
-- alias: 'Livingroom Window fan off'
-  initial_state: false
-  trigger:
-    - platform: template
-      value_template: '{{ states.sensor.yr_temperature.state > states.sensor.living_room_temp.state }}'
-    - platform: template
-      value_template: '{{ states.sensor.living_room_temp.state | int < 20 }}'
-  condition:
-    condition: state
-    entity_id: sensor.season
-    state: 'summer'
-  action:
-    service: switch.turn_off
-    entity_id: switch.switch2
 
 - alias: 'Gail away - turn off heater'
   initial_state: true
