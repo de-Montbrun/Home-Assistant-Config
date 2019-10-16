@@ -49,13 +49,14 @@ weblink:
 
 # Roku
 roku:
-  - host: 192.168.2.18
+  - host: 192.168.2.218
   - host: 192.168.2.130
 
-media_player:
-
 # Plex
-  - platform: plex
+plex:
+  host: 192.168.2.150
+
+media_player:
 
 # Alexa
 alexa_media:
@@ -81,7 +82,6 @@ logger:
   default: error
   logs:
     homeassistant.components.camera: fatal
-    homeassistant.components.media_player.plex: fatal
     homeassistant.components.media_player.roku: fatal
     homeassistant.components.http.ban: warning
 
