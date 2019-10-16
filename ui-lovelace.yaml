@@ -126,7 +126,6 @@ views:
           - light.fireplace2
           - light.fireplace3
           - light.lamp
-          - switch.switch2
         state_filter:
           - 'on'
           - 'off'
@@ -155,16 +154,21 @@ views:
           - 'on'
           - 'off'
         type: entity-filter
-      - entities:
-          - entity: group.sunroom_lights
-          - entity: light.sunroom0
-          - entity: light.sunroom1
-          - entity: light.sunroom2
-          - entity: light.sunroom3
-          - entity: light.sunroom4
-        show_header_toggle: false
-        title: Sunroom
-        type: entities
+      - card:
+          show_header_toggle: false
+          title: Sunroom
+        entities:
+          - group.sunroom_lights
+          - light.sunroom0
+          - light.sunroom1
+          - light.sunroom2
+          - light.sunroom3
+          - light.sunroom4
+          - switch.switch2
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
       - entities:
           - entity: switch.basement_light
           - entity: light.main_floor_bathroom_light
@@ -227,13 +231,12 @@ views:
       - card:
           entity: media_player.plex_sunroom
           type: media-control
-        type: entity-filter
-        entities:
+        conditions:
+          - entity: media_player.roku_sunroom
+            state_not: 'off'
           - entity: media_player.plex_sunroom
-        state_filter:
-          - playing
-          - idle
-          - paused
+            state: playing
+        type: conditional
     icon: 'mdi:play-circle-outline'
     title: Media Players
   - badges: []
