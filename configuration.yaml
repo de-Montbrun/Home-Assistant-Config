@@ -489,6 +489,13 @@ zone:
   radius: 80
   icon: mdi:home
 
+zone big_tide:
+  name: Big Tide
+  latitude: 45.271503
+  longitude: -66.061162
+  radius: 20
+  icon: mdi:beer
+
 zone craft_beer_corner:
   name: Craft Beer Corner
   latitude: !secret craft_beer_corner_latitude
