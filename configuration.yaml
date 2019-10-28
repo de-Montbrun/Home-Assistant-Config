@@ -207,6 +207,14 @@ device_tracker:
       Router: router
 
 # }}}
+#  {{{ Asus
+
+asuswrt:
+  host: 192.168.2.254
+  username: !secret router_username
+  ssh_key: /home/homeassistant/.ssh/id_rsa
+
+# }}}
 ## {{{ Rest Commands
 
 rest_command:
