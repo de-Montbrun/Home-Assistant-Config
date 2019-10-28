@@ -88,7 +88,7 @@
         entity_id: group.sunroom_lights
         state: 'on'
       - condition: template
-        value_template: "{{ is_state_attr('media_player.living_room_roku', 'app_name', 'Netflix') }}"
+        value_template: "{{ is_state_attr('media_player.roku_sunroom', 'app_name', 'Netflix') }}"
   action:
     service: scene.turn_on
     entity_id: scene.sunroom_dim
@@ -1015,7 +1015,7 @@
           :black_large_square: Router has been offline for over a minute.
         title: 'Internet'
 
-- alias: 'Timed basement light'
+- alias: 'Timed basement light - Chris Home'
   initial_state: true
   trigger:
     platform: state
@@ -1027,6 +1027,18 @@
     - delay: '00:10:00'
     - service: switch.turn_off
       entity_id: switch.basement_light
+
+- alias: 'Timed basement light'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: switch.basement_light
+    to: 'home'
+    for:
+      hours: 1
+  action:
+    service: switch.turn_off
+    entity_id: switch.basement_light
 
 - alias: 'Fing update user'
   initial_state: true
