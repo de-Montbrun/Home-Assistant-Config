@@ -629,11 +629,11 @@
     - service: downloader.download_file
       data_template:
         url: '{{ states.camera.front_door.attributes.video_url }}'
-        filename: '{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door2.mp4'
+        filename: '{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door.mp4'
     - service: camera.snapshot
       data_template:
         entity_id: camera.front_door
-        filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door2.jpg'
+        filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door.jpg'
 
 - alias: Update Available Notification
   initial_state: true
