@@ -164,7 +164,7 @@ views:
           - light.sunroom2
           - light.sunroom3
           - light.sunroom4
-          - switch.switch2
+          - switch.switch6
         state_filter:
           - 'on'
           - 'off'
@@ -228,15 +228,19 @@ views:
         type: media-control
       - entity: media_player.apt_a
         type: media-control
+      - entity: media_player.plex_sunroom
+        type: media-control
       - card:
-          entity: media_player.plex_sunroom
+          entity: media_player.plex_roku_3
           type: media-control
         conditions:
-          - entity: media_player.roku_sunroom
+          - entity: media_player.plex_roku_3
             state_not: 'off'
-          - entity: media_player.plex_sunroom
+          - entity: media_player.plex_roku_3
             state: playing
         type: conditional
+      - entity: media_player.plex_xboxone
+        type: media-control
     icon: 'mdi:play-circle-outline'
     title: Media Players
   - badges: []
