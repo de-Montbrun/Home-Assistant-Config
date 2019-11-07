@@ -31,8 +31,14 @@
         entity_id: group.sunroom_lights
         state: 'on'
   action:
-    service: scene.turn_on
-    entity_id: scene.sunroom_normal
+    - service: scene.turn_on
+      entity_id: scene.sunroom_normal
+    - delay: '00:00:04'
+    - service: scene.turn_on
+      entity_id: scene.sunroom_normal
+    - delay: '00:00:30'
+    - service: scene.turn_on
+      entity_id: scene.sunroom_normal
 
 - alias: 'Plex playing - Dimm lights'
   initial_state: true
@@ -50,8 +56,14 @@
         entity_id: group.sunroom_lights
         state: 'on'
   action:
-    service: scene.turn_on
-    entity_id: scene.sunroom_dim
+    - service: scene.turn_on
+      entity_id: scene.sunroom_dim
+    - delay: '00:00:04'
+    - service: scene.turn_on
+      entity_id: scene.sunroom_dim
+    - delay: '00:00:30'
+    - service: scene.turn_on
+      entity_id: scene.sunroom_dim
 
 - alias: 'Roku Idle'
   initial_state: true
