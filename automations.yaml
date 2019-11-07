@@ -210,7 +210,7 @@
     - service: light.turn_off
       entity_id: group.sunroom_lights
     - service: switch.turn_off
-      entity_id: switch.switch2
+      entity_id: switch.switch6
 
 - alias: '2am - Lights out'
   initial_state: true
@@ -223,8 +223,8 @@
     - service: switch.turn_off
       entity_id:
         - switch.basement_light
-        - switch.switch2
         - switch.switch3
+        - switch.switch6
         - group.bathroom_lights
     - service: light.turn_off
       entity_id: all
@@ -308,8 +308,8 @@
     - service: switch.turn_on
       entity_id:
         - switch.bathroom2
-        - switch.switch2
         - switch.switch3
+        - switch.switch6
 
 - alias: 'Sunset - Office lights on'
   initial_state: true
@@ -355,7 +355,7 @@
     - service: scene.turn_on
       entity_id: scene.sunroom_normal
     - service: switch.turn_on
-      entity_id: switch.switch2
+      entity_id: switch.switch6
 
 - alias: 'Jennifer Home - turn on'
   initial_state: true

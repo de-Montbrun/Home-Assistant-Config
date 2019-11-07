@@ -65,13 +65,15 @@ switch.switch0:
 switch.switch1:
   friendly_name: Jennifer Switch
 switch.switch2:
-  friendly_name: Saltlick Switch
+  friendly_name: Burnt Switch
 switch.switch3:
   friendly_name: Office Light Switch
 switch.switch4:
   friendly_name: Bedroom Switch
 switch.switch5:
   friendly_name: Router Switch
+switch.switch6:
+  friendly_name: Saltlick Switch
 light.office_main_lights:
   friendly_name: Office Main Lights
 light.stairs_back:
