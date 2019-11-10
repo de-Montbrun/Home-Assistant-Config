@@ -180,7 +180,7 @@ person:
   - name: Jennifer
     id: jen2000
     device_trackers:
-      - device_tracker.jenphone
+      - device_tracker.jen_phone
       - device_tracker.jennifer2
       - device_tracker.jen_fing
 

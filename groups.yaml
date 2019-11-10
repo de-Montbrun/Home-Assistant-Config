@@ -143,7 +143,7 @@ cam_tracker:
 jen_tracker:
   name: Jennifer
   entities:
-    - device_tracker.jenphone
+    - device_tracker.jen_phone
     - device_tracker.jennifer2
     - device_tracker.jen_fing
 
