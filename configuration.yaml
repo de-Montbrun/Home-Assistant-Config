@@ -147,6 +147,9 @@ notify:
     method: POST_JSON
     title_param_name: topic
 
+  - name: ecobee
+    platform: ecobee
+
 # }}}
 # {{{ Persons
 

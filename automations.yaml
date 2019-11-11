@@ -141,6 +141,79 @@
       transition: 2
       xy_color: [ 0.4448, 0.4066 ]
 
+- id: turn_on_lights_hallway
+  alias: 'Occupancy in hallway - turn on lights'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.my_ecobee_occupancy
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: group.hallway_lights
+      state: 'off'
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    service: light.turn_on
+    entity_id: group.hallway_lights
+
+- id: turn_on_lights_bedroom
+  alias: 'Occupancy in bedroom - turn on lights'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.master_bedroom_occupancy
+    to: 'on'
+  condition:
+    - condition: state
+      entity_id: group.bedroom_lights
+      state: 'off'
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    service: light.turn_on
+    entity_id: group.bedroom_lights
+
+- id: turn_off_lights_bedroom
+  alias: 'No one in bedroom - turn off lights'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.master_bedroom_occupancy
+    to: 'off'
+  action:
+    service: light.turn_off
+    entity_id: group.bedroom_lights
+
+- id: turn_on_lights_office
+  alias: 'Occupancy in Office - turn on lights'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.office_occupancy
+    to: 'on'
+  condition:
+    condition: state
+    entity_id: 'binary_sensor.workday_sensor'
+    state: 'on'
+  action:
+    service: switch.turn_on
+    entity_id: switch.switch3
+
+- id: turn_off_lights_office
+  alias: 'No one in Office - turn off lights'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.office_occupancy
+    to: 'off'
+  action:
+    service: switch.turn_off
+    entity_id: switch.switch3
+
 - alias: 'Everyone home and gone to bed - Lights out'
   initial_state: true
   trigger:
