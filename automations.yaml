@@ -140,7 +140,7 @@
 
 - id: turn_on_lights_hallway
   alias: 'Occupancy in hallway - turn on lights'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.my_ecobee_occupancy
@@ -158,7 +158,7 @@
 
 - id: turn_on_lights_bedroom
   alias: 'Occupancy in bedroom - turn on lights'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.master_bedroom_occupancy
@@ -176,7 +176,7 @@
 
 - id: turn_off_lights_bedroom
   alias: 'No one in bedroom - turn off lights'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.master_bedroom_occupancy
@@ -216,7 +216,7 @@
   trigger:
     - platform: state
       entity_id: media_player.roku_sunroom
-      to: 'off'
+      to: 'standby'
       for:
         minutes: 15
     - platform: state
@@ -365,6 +365,8 @@
       entity_id:
         - group.hallway_lights
         - group.livingroom_lights
+        - light.upstairsbathroom
+        - light.kitchen_pots
       data:
         brightness: 255
     - service: light.turn_on
@@ -378,6 +380,7 @@
     - service: switch.turn_on
       entity_id:
         - switch.bathroom2
+        - switch.outdoor_backdoor
         - switch.switch3
         - switch.switch6
 
@@ -411,7 +414,7 @@
   trigger:
     - platform: state
       entity_id: media_player.roku_sunroom
-      to: 'home'
+      from: 'standby'
   condition:
     condition: and
     conditions:
@@ -550,7 +553,7 @@
   trigger:
     platform: state
     entity_id: media_player.roku_sunroom
-    to: 'off'
+    to: 'standby'
     for:
       minutes: 15
   condition:
@@ -657,7 +660,6 @@
       data:
         entity_id:
           - group.outdoor_lights
-          - light.computer_room
         brightness: 255
     - delay: '00:10:00'
     - service: light.turn_off
@@ -971,7 +973,7 @@
     condition: and
     conditions:
       - condition: template
-        value_template: '{{ states("media_player.roku_sunroom") != "off" }}'
+        value_template: '{{ states("media_player.roku_sunroom") != "standby" }}'
       - condition: or
         conditions:
           - condition: state
@@ -999,14 +1001,14 @@
   initial_state: true
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.bed_room_temp.state | int < 15 }}'
+      value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 15 }}'
     - platform: time
       at: '22:00:00'
   condition:
     condition: and
     conditions:
       - condition: template
-        value_template: '{{ states.sensor.bed_room_temp.state | int < 17 }}'
+        value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 17 }}'
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: time
@@ -1032,10 +1034,10 @@
     entity_id: switch.switch4
 
 - alias: 'Turn off heater in bedroom'
-  initial_state: false
+  initial_state: true
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.bed_room_temp.state|int >= 17 }}'
+      value_template: '{{ states.sensor.master_bedroom_temperature.state | int >= 17 }}'
     - platform: time
       at: '02:00:00'
   action:

@@ -73,6 +73,7 @@ secondfloor_lights:
     - group.bedroom_lights
     - group.spareroom_lights
     - group.sunroom_lights
+    - light.upstairsbathroom
     - switch.switch6
 
 spareroom_lights:
