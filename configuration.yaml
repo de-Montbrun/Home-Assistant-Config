@@ -23,6 +23,14 @@ homeassistant:
         - 192.168.2.0/24
         - 127.0.0.1
 
+#  {{{ Asus
+
+asuswrt:
+  host: 192.168.2.254
+  username: !secret router_username
+  ssh_key: /home/homeassistant/.ssh/id_rsa
+
+# }}}
 # {{{ frontend
 
 # Enables the frontend
@@ -209,14 +217,6 @@ device_tracker:
       Grant2: grant-phone
       Jennifer2: jen-phone
       Router: router
-
-# }}}
-#  {{{ Asus
-
-asuswrt:
-  host: 192.168.2.254
-  username: !secret router_username
-  ssh_key: /home/homeassistant/.ssh/id_rsa
 
 # }}}
 ## {{{ Rest Commands
