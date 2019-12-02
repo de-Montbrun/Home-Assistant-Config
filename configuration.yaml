@@ -128,8 +128,8 @@ ifttt:
 ffmpeg:
   ffmpeg_bin: /usr/bin/ffmpeg
 
-# Enable IOS component
-ios:
+# Enable Mobile App component
+mobile_app:
 
 downloader:
   download_dir: /var/www/html/snapshots

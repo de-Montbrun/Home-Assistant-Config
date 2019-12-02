@@ -116,16 +116,19 @@ householdmembers:
 
 gail_tracker:
   entities:
-    - device_tracker.dgrabbs_iphonehass
     - device_tracker.gail_fing
     - device_tracker.gail_owntracks
     - device_tracker.gail3
+    - device_tracker.grdems_phone
+    - device_tracker.grdems_phone_2
 
 gervais_tracker:
   entities:
     - device_tracker.gervais_fing
     - device_tracker.gervais_owntracks
     - device_tracker.gervais3
+    - device_tracker.iphone
+    - device_tracker.iphone_2
 
 grant_tracker:
   name: Grant
