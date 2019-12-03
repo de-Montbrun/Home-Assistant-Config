@@ -1001,6 +1001,8 @@
       value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 15 }}'
     - platform: time
       at: '22:00:00'
+    - platform: time
+      at: '7:30:00'
   condition:
     condition: and
     conditions:
@@ -1008,10 +1010,20 @@
         value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 17 }}'
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
-      - condition: time
-        after: '21:30:00'
-      - condition: time
-        before: '23:59:59'
+      - condition: or
+        conditions:
+          - condition: and
+            conditions:
+              - condition: time
+                after: '21:30:00'
+              - condition: time
+                before: '23:59:59'
+          - condition: and
+            conditions:
+              - condition: time
+                after: '7:00:00'
+              - condition: time
+                before: '10:00:00'
       - condition: or
         conditions:
           - condition: state
