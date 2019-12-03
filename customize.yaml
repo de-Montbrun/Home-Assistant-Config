@@ -1,17 +1,9 @@
-sensor.grater_uptime:
-  friendly_name: Uptime
-  icon: mdi:clock
-sensor.swap_used:
-  icon: mdi:memory
-sensor.filesize_db:
-  friendly_name: SQLite DB size
-  icon: mdi:database
-sensor.nokia_15324269:
-  friendly_name: Gervais
-sensor.fing_state:
-  hidden: true
-person.gail:
-  entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
+binary_sensor.bedroom_motion:
+  friendly_name: Lost Occpancy
+  icon: mdi:home
+binary_sensor.livingroom_motion:
+  friendly_name: Sun Room Occpancy
+  icon: mdi:home
 device_tracker.dgrabbs_iphonehass:
   hidden: true
 device_tracker.gail_owntracks:
@@ -21,8 +13,6 @@ device_tracker.gail3:
   hidden: true
 group.gail_tracker:
   hidden: true
-person.gervais:
-  entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
 device_tracker.gervais_owntracks:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
@@ -32,24 +22,26 @@ device_tracker.gervaisapplewatch:
   hidden: true
 group.gervais_tracker:
   hidden: true
-sensor.distance_apart:
-  icon: mdi:human-male-female
-person.grant:
-  entity_picture: https://avatars.io/facebook/Grannt
 group.grant_tracker:
   entity_picture: https://avatars.io/facebook/Grannt
 device_tracker.grantphone:
   hidden: true
 device_tracker.grant2:
   hidden: true
-person.cameron:
-  entity_picture: https://avatars.io/facebook/cameron.langdon.73
 group.cam_tracker:
   entity_picture: https://avatars.io/facebook/cameron.langdon.73
 device_tracker.camphone:
   hidden: true
 device_tracker.cameron2:
   hidden: true
+person.cameron:
+  entity_picture: https://avatars.io/facebook/cameron.langdon.73
+person.gail:
+  entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
+person.gervais:
+  entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
+person.grant:
+  entity_picture: https://avatars.io/facebook/Grannt
 person.jennifer:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
 group.jen_tracker:
@@ -60,35 +52,43 @@ device_tracker.jennifer2:
   hidden: true
 sensor.deMontbrun_DNS_Expiry:
   icon: mdi:dns
-switch.switch0:
-  friendly_name: Office Fireplace Switch
-switch.switch1:
-  friendly_name: Jennifer Switch
-switch.switch2:
-  friendly_name: Burnt Switch
-switch.switch3:
-  friendly_name: Office Light Switch
-switch.switch4:
-  friendly_name: Bedroom Switch
-switch.switch5:
-  friendly_name: Router Switch
-switch.switch6:
-  friendly_name: Saltlick Switch
 light.office_main_lights:
   friendly_name: Office Main Lights
 light.stairs_back:
   friendly_name: Back Stairs
+  icon: mdi:lightbulb
 light.main_floor_bathroom_light:
   friendly_name: Main Floor Bathroom
-switch.outdoor_backdoor:
-  friendly_name: Backdoor
-switch.outdoor_deck_lights:
-  friendly_name: Deck Lights
+sensor.grater_uptime:
+  friendly_name: Uptime
+  icon: mdi:clock
+sensor.swap_used:
+  icon: mdi:memory
+sensor.filesize_db:
+  friendly_name: SQLite DB size
+  icon: mdi:database
+sensor.fing_state:
+  hidden: true
+sensor.distance_apart:
+  icon: mdi:human-male-female
 switch.basement_light:
   friendly_name: Basement Light
-binary_sensor.livingroom_motion:
-  friendly_name: Sun Room Occpancy
-  icon: mdi:home
-binary_sensor.bedroom_motion:
-  friendly_name: Lost Occpancy
-  icon: mdi:home
+  icon: mdi:lightbulb
+switch.bathroom0:
+  icon: mdi:lightbulb
+switch.bathroom1:
+  icon: mdi:lightbulb
+switch.bathroom2:
+  icon: mdi:lightbulb
+switch.outdoor_backdoor:
+  friendly_name: Backdoor
+  icon: mdi:lightbulb
+switch.outdoor_deck_lights:
+  friendly_name: Deck Lights
+  icon: mdi:lightbulb
+switch.switch3:
+  friendly_name: Office Light Switch
+switch.switch4:
+  friendly_name: Bedroom Switch
+switch.switch6:
+  friendly_name: Saltlick Switch
