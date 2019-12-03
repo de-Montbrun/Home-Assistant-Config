@@ -86,3 +86,9 @@ switch.outdoor_deck_lights:
   friendly_name: Deck Lights
 switch.basement_light:
   friendly_name: Basement Light
+binary_sensor.livingroom_motion:
+  friendly_name: Sun Room Occpancy
+  icon: mdi:home
+binary_sensor.bedroom_motion:
+  friendly_name: Lost Occpancy
+  icon: mdi:home
