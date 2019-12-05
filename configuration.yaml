@@ -167,14 +167,14 @@ person:
     device_trackers:
       - device_tracker.iphonehass
       - device_tracker.gervais_fing
-      - device_tracker.gervais_owntracks
+      - device_tracker.iphone_2
   - name: Gail
     id: gail1968
     user_id: 1b937317d2a242d7af7df282b35359b1
     device_trackers:
       - device_tracker.dgrabbs_iphonehass
       - device_tracker.gail_fing
-      - device_tracker.gail_owntracks
+      - device_tracker.grdems_phone_2
   - name: Cameron
     id: cam1995
     device_trackers:

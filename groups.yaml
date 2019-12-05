@@ -108,8 +108,8 @@ plex:
 householdmembers:
   name: Household Members
   entities:
-    - device_tracker.gail_owntracks
-    - device_tracker.gervais_owntracks
+    - person.gervais
+    - person.gail
     - group.cam_tracker
     - group.jen_tracker
   icon: mdi:account-multiple
