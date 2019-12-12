@@ -1,6 +1,9 @@
 binary_sensor.bedroom_motion:
   friendly_name: Lost Occpancy
   icon: mdi:home
+binary_sensor.kitchen_motion:
+  friendly_name: Kitchen Occpancy
+  icon: mdi:home
 binary_sensor.livingroom_motion:
   friendly_name: Sun Room Occpancy
   icon: mdi:home
