@@ -31,6 +31,19 @@ asuswrt:
   ssh_key: /home/homeassistant/.ssh/id_rsa
 
 # }}}
+# {{{ emulated hue
+
+emulated_hue:
+  listen_port: 80
+  host_ip: 192.168.2.151
+  expose_by_default: false
+  entities:
+    media_player.roku_sunroom:
+      hidden: false
+    switch.switch6:
+      hidden: false
+
+# }}}
 # {{{ frontend
 
 # Enables the frontend
