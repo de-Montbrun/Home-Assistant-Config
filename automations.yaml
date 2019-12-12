@@ -244,14 +244,14 @@
             entity_id: group.gail_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gail_owntracks) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
   action:
     - delay: '00:10:00'
     - service: homeassistant.turn_off
@@ -328,7 +328,7 @@
             entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
   action:
     service: switch.turn_off
     entity_id:
@@ -568,14 +568,14 @@
             entity_id: group.gail_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gail_owntracks) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
   action:
     - service: homeassistant.turn_off
       entity_id:
@@ -774,7 +774,7 @@
   initial_state: true
   trigger:
       - platform: state
-        entity_id: device_tracker.gervais_owntracks,device_tracker.gail_owntracks
+        entity_id: person.gervais,person.gail
   condition:
     condition: and
     conditions:
@@ -1030,14 +1030,14 @@
             entity_id: group.gail_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gail_owntracks) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
       - condition: or
         conditions:
           - condition: state
             entity_id: group.gervais_tracker
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.gervais_owntracks) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
   action:
     service: switch.turn_on
     entity_id: switch.switch4
