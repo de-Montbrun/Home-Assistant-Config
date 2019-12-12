@@ -685,6 +685,20 @@
     - platform: state
       entity_id: binary_sensor.ring_front_door_ding
       to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.ring_front_door_ding
+        state: 'on'
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.ring_front_door_motion
+          state: 'on'
+        - condition: state
+          entity_id: sun.sun
+          state: 'below_horizon'
   action:
     - service: notify.zulip
       data_template:
