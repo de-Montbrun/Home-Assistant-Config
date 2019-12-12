@@ -61,8 +61,6 @@ device_tracker.jennifer2:
   hidden: true
 sensor.deMontbrun_DNS_Expiry:
   icon: mdi:dns
-light.office_main_lights:
-  friendly_name: Office Main Lights
 light.stairs_back:
   friendly_name: Back Stairs
   icon: mdi:lightbulb
@@ -95,8 +93,6 @@ switch.outdoor_backdoor:
 switch.outdoor_deck_lights:
   friendly_name: Deck Lights
   icon: mdi:lightbulb
-switch.switch3:
-  friendly_name: Office Light Switch
 switch.switch4:
   friendly_name: Bedroom Switch
 switch.switch6:
