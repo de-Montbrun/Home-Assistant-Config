@@ -704,6 +704,36 @@
     service: homeassistant.turn_on
     entity_id: script.timed_sunroom
 
+- alias: 'Kitchen - Occupancy lights on'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.kitchen_motion
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.kitchen_lights
+        state: 'off'
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+  action:
+    - service: light.turn_on
+      entity_id: light.kitchen_pots
+      data:
+        brightness: 50
+
+- alias: 'Kitchen - No occupancy lights off'
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ as_timestamp(now()) - as_timestamp(states.binary_sensor.kitchen_motion.last_changed) | int > 600 }}'
+  action:
+    - service: light.turn_off
+      entity_id: group.kitchen_lights
+
 - alias: 'Set sabnzb speed limit'
   initial_state: true
   trigger:
@@ -726,7 +756,7 @@
   condition:
     condition: numeric_state
     entity_id: 'sensor.hass_uptime'
-    above: '10'
+    above: '.01'
   action:
     service: notify.zulip
     data_template:
