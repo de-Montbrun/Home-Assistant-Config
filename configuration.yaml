@@ -40,6 +40,8 @@ emulated_hue:
   entities:
     media_player.roku_sunroom:
       hidden: false
+    switch.switch3:
+      hidden: false
     switch.switch6:
       hidden: false
 
@@ -471,9 +473,9 @@ tuya:
 # Wemo switches are not always being discovered automatically.
 wemo:
   static:
-    - 192.168.2.80
-    - 192.168.2.81
-    - 192.168.2.82
+    #- 192.168.2.80
+    #- 192.168.2.81
+    #- 192.168.2.82
     - 192.168.2.83
 tplink:
   switch:
