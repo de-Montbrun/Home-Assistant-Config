@@ -1074,20 +1074,29 @@
     service: homeassistant.turn_on
     entity_id: automation.gandg_not_home_movement_in_bedroom
 
-- alias: 'Router issues - back online'
+- alias: 'Router or AP back online'
   initial_state: true
   trigger:
-    platform: state
-    entity_id: device_tracker.router
-    from: 'not_home'
+    - platform: state
+      entity_id: device_tracker.router
+      from: 'not_home'
+    - platform: state
+      entity_id: device_tracker.bedroom_ap
+      from: 'not_home'
+    - platform: state
+      entity_id: device_tracker.living_room_ap
+      from: 'not_home'
+    - platform: state
+      entity_id: device_tracker.sunroom_ap
+      from: 'not_home'
   action:
     service: notify.zulip
     data_template:
       message: >
-        :blue_circle: Router is responding
+        :blue_circle: {{ trigger.to_state.attributes.friendly_name }} is responding
       title: 'Internet'
 
-- alias: 'Router issues - offline'
+- alias: 'Router or AP Offline'
   initial_state: true
   trigger:
     - platform: state
@@ -1100,11 +1109,41 @@
       to: 'not_home'
       for:
         minutes: 15
+    - platform: state
+      entity_id: device_tracker.bedroom_ap
+      to: 'not_home'
+      for:
+        minutes: 1
+    - platform: state
+      entity_id: device_tracker.bedroom_ap
+      to: 'not_home'
+      for:
+        minutes: 15
+    - platform: state
+      entity_id: device_tracker.living_room_ap
+      to: 'not_home'
+      for:
+        minutes: 1
+    - platform: state
+      entity_id: device_tracker.living_room_ap
+      to: 'not_home'
+      for:
+        minutes: 15
+    - platform: state
+      entity_id: device_tracker.sunroom_ap
+      to: 'not_home'
+      for:
+        minutes: 1
+    - platform: state
+      entity_id: device_tracker.sunroom
+      to: 'not_home'
+      for:
+        minutes: 15
   action:
     - service: notify.zulip
       data_template:
         message: >
-          :black_large_square: Router has been offline for over a minute.
+          :black_large_square: {{ trigger.to_state.attributes.friendly_name }} has been offline for over a minute.
         title: 'Internet'
 
 - alias: 'Timed basement light - Chris Home'
