@@ -194,8 +194,8 @@
     entity_id: 'binary_sensor.workday_sensor'
     state: 'on'
   action:
-    service: switch.turn_on
-    entity_id: switch.switch3
+    - service: light.turn_on
+      entity_id: group.office_lights
 
 - id: turn_off_lights_office
   alias: 'No one in Office - turn off lights'
@@ -205,8 +205,10 @@
     entity_id: binary_sensor.office_occupancy
     to: 'off'
   action:
-    service: switch.turn_off
-    entity_id: switch.switch3
+    - service: switch.turn_off
+      entity_id: switch.switch3
+    - service: light.turn_off
+      entity_id: group.office_lights
 
 - alias: 'Everyone home and gone to bed - Lights out'
   initial_state: true
@@ -320,19 +322,12 @@
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("sensor.season") != "summer" }}'
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: group.gervais_tracker
-            state: 'home'
-          - condition: template
-            value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
+      condition: template
+      value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: switch.turn_off
     entity_id:
-      - switch.switch0
+      - switch.switch3
 
 - alias: 'Sunrise - Lights out'
   initial_state: true
@@ -378,7 +373,6 @@
       entity_id:
         - switch.bathroom2
         - switch.outdoor_backdoor
-        - switch.switch3
         - switch.switch6
 
 - alias: 'Sunset - Office lights on'
@@ -403,7 +397,7 @@
     - service: light.turn_on
       entity_id: group.office_lights
       data:
-        brightness: 200
+        brightness: 255
         transition: 5
 
 - alias: 'Sunroom lux low - lights on'
@@ -501,11 +495,11 @@
     entity_id:
       - switch.switch4
 
-- alias: 'Gail away - turn off heater'
+- alias: 'Gervais away - turn off heater'
   initial_state: true
   trigger:
     - platform: state
-      entity_id: group.gail_tracker
+      entity_id: group.gervais_tracker
       from: 'home'
   condition:
     condition: template
@@ -513,37 +507,7 @@
   action:
     service: switch.turn_off
     entity_id:
-      - switch.switch0
-
-- alias: 'Gail home - turn on heater'
-  initial_state: false
-  trigger:
-      - platform: time
-        at: '09:00:01'
-      - platform: state
-        entity_id: group.gail_tracker
-        to: 'home'
-  condition:
-    condition: and
-    conditions:
-      - condition: template
-        value_template: '{{ states.sensor.yr_temperature.state < "10" }}'
-      - condition: state
-        entity_id: group.gail_tracker
-        state: 'home'
-      - condition: time
-        after: '09:00:00'
-      - condition: time
-        before: '17:30:00'
-      - condition: state
-        entity_id: 'binary_sensor.workday_sensor'
-        state: 'on'
-      - condition: template
-        value_template: '{{ states("sensor.season") != "summer" }}'
-  action:
-    service: switch.turn_on
-    entity_id:
-      - switch.switch0
+      - switch.switch3
 
 - alias: 'Bedtime'
   initial_state: true
@@ -584,6 +548,7 @@
         - group.secondfloor_lights
         - group.bathroom_lights
         - switch.basement_light
+        - switch.switch3
 
 - alias: 'GandG not home - turn off bedroom things'
   initial_state: true
