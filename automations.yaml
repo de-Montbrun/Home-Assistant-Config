@@ -226,6 +226,9 @@
     conditions:
       - condition: time
         after: '22:30:00'
+      - condition: state
+        entity_id: media_player.roku_sunroom
+        state: 'standby'
       - condition: or
         conditions:
           - condition: state
