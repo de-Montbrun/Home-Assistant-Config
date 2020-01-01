@@ -813,7 +813,6 @@
     service: notify.zulip
     data_template:
       message: >
-        [](https://ha.demontbrun.com{{ states.sensor.dark_sky_summary.attributes.entity_picture }})
         **Weather Condition:** {{ states.sensor.dark_sky_summary.state }}
 
         **Tempurature:** {{ states.sensor.dark_sky_temperature.state }}{{ states.sensor.dark_sky_temperature.attributes.unit_of_measurement }}
