@@ -189,9 +189,7 @@ person:
   - name: Cameron
     id: cam1995
     device_trackers:
-      - device_tracker.camphone
       - device_tracker.cameron2
-      - device_tracker.cam_fing
   - name: Grant
     id: grant1994
     device_trackers:
@@ -219,6 +217,14 @@ device_tracker:
       track_new_devices: true
       hide_if_away: true
 
+  - platform: nmap_tracker
+    hosts: 192.168.2.250-254
+    home_interval: 5
+    interval_seconds: 120
+    new_device_defaults:
+      track_new_devices: true
+      hide_if_away: true
+
   - platform: ping
     count: 10
     hosts:
@@ -227,7 +233,6 @@ device_tracker:
       Gervais3: iphone
       Grant2: grant-phone
       Jennifer2: jen-phone
-      Router: router
 
 # }}}
 ## {{{ Rest Commands
@@ -394,17 +399,17 @@ sensor:
       distance_apart:
         friendly_name: 'GandG Apart'
         value_template: >-
-          {% if distance(states.device_tracker.gervais_owntracks, states.device_tracker.gail_owntracks) | int == 0 %}
+          {% if distance(states.device_tracker.iphone_2, states.device_tracker.grdems_phone_2) | int == 0 %}
             0
-          {% elif distance(states.device_tracker.gervais_owntracks, states.device_tracker.gail_owntracks) | round(2) < 0.09 %}
+          {% elif distance(states.device_tracker.iphone_2, states.device_tracker.grdems_phone_2) | round(2) < 0.09 %}
             0
           {% else %}
-            {{ distance(states.device_tracker.gervais_owntracks, states.device_tracker.gail_owntracks) | round(2) }}
+            {{ distance(states.device_tracker.iphone_2, states.device_tracker.grdems_phone_2) | round(2) }}
           {% endif %}
         unit_of_measurement: 'km'
         entity_id:
-          - device_tracker.gail_owntracks
-          - device_tracker.gervais_owntracks
+          - device_tracker.grdems_phone_2
+          - device_tracker.iphone_2
 
   - platform: imap_email_content
     name: Fing State
