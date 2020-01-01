@@ -20,6 +20,12 @@ bedroom_lights:
     - light.bedroom3
     - light.bedroom4
 
+diningroom_lights:
+  name: Dining room lights
+  entities:
+    - light.diningroom0
+    - light.diningroom1
+
 hallway_lights:
   name: Hallway lights
   entities:
@@ -48,6 +54,7 @@ livingroom_lights:
 mainfloor_lights:
   name: Main floor lights
   entities:
+    - group.diningroom_lights
     - group.hallway_lights
     - group.kitchen_lights
     - group.livingroom_lights
@@ -57,8 +64,8 @@ mainfloor_lights:
 office_lights:
   name: Office lights
   entities:
-    - light.office_main_lights
-    - switch.switch3
+    - light.office0
+    - light.office1
 
 outdoor_lights:
   name: Outdoor lights
