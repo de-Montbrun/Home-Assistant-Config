@@ -4,7 +4,7 @@ binary_sensor.bedroom_motion:
 binary_sensor.kitchen_motion:
   friendly_name: Kitchen Occpancy
   icon: mdi:home
-binary_sensor.livingroom_motion:
+binary_sensor.sunroom_motion:
   friendly_name: Sun Room Occpancy
   icon: mdi:home
 device_tracker.dgrabbs_iphonehass:

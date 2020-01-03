@@ -364,20 +364,20 @@ sensor:
     name: 'Kitchen Temperature'
 
   - platform: rest
-    resource: !secret hue_livingroom_battery
+    resource: !secret hue_sunroom_battery
     value_template: '{{ value_json.config.battery }}'
     unit_of_measurement: '%'
     scan_interval: 86400
     name: 'Living Room Battery Level'
 
   - platform: rest
-    resource: !secret hue_livingroom_lightlevel
+    resource: !secret hue_sunroom_lightlevel
     value_template: '{{ value_json.state.lightlevel }}'
     unit_of_measurement: Lux
     name: 'Living Room Lux'
 
   - platform: rest
-    resource: !secret hue_livingroom_temp
+    resource: !secret hue_sunroom_temp
     value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
     unit_of_measurement: °C
     name: 'Living Room Temp'
@@ -457,8 +457,8 @@ binary_sensor:
     scan_interval: 2
 
   - platform: rest
-    name: Livingroom Motion
-    resource: !secret hue_livingroom_status
+    name: Sunroom Motion
+    resource: !secret hue_sunroom_status
     value_template: '{{ value_json.state.status }}'
     scan_interval: 2
 

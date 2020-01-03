@@ -413,7 +413,7 @@
     condition: and
     conditions:
       - condition: numeric_state
-        entity_id: 'sensor.living_room_lux'
+        entity_id: 'sensor.sun_room_lux'
         below: '6500'
       - condition: state
         entity_id: group.sunroom_lights
@@ -689,7 +689,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.livingroom_motion
+    entity_id: binary_sensor.sunroom_motion
     to: 'on'
   condition:
     condition: and
@@ -728,8 +728,9 @@
 - alias: 'Kitchen - No occupancy lights off'
   initial_state: true
   trigger:
-    platform: template
-    value_template: '{{ as_timestamp(now()) - as_timestamp(states.binary_sensor.kitchen_motion.last_changed) | int > 600 }}'
+    platform: state
+    entity_id: binary_sensor.kitchen_motion
+    to: 'off'
   action:
     - service: light.turn_off
       entity_id: group.kitchen_lights
