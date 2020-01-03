@@ -189,7 +189,9 @@ person:
   - name: Cameron
     id: cam1995
     device_trackers:
+      - device_tracker.camphone
       - device_tracker.cameron2
+      - device_tracker.cam_fing
   - name: Grant
     id: grant1994
     device_trackers:
