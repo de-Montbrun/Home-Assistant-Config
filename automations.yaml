@@ -944,16 +944,28 @@
   initial_state: true
   trigger:
     - platform: template
+      value_template: '{{ states.sensor.disk_use_percent.state | int >= 95 }}'
+    - platform: template
+      value_template: '{{ states.sensor.sensor.disk_use_percent_boot.state | int >= 95 }}'
+    - platform: template
+      value_template: '{{ states.sensor.sensor.disk_use_percent_home.state | int >= 95 }}'
+    - platform: template
+      value_template: '{{ states.sensor.disk_use_percent_media_apple.state | int >= 95 }}'
+    - platform: template
       value_template: '{{ states.sensor.disk_use_percent_media_cracker.state | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.disk_use_percent_media_grapes.state | int >= 95 }}'
+      value_template: '{{ states.sensor.disk_use_percent_media_wine.state | int >= 95 }}'
   action:
     service: notify.zulip
     data:
       message: >
         :warning:
-        {% if trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/cracker' %} Movie
-        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/grapes' %} TV
+        {% if trigger.to_state.attributes.friendly_name == 'Disk use (percent) /' %} Root
+        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /boot' %} Boot
+        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /home' %} Home
+        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/apple' %} Apple
+        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/cracker' %} Cracker
+        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/wine' %} Wine
         {% endif %}
         drive is almost full.
       title: 'Alert'
