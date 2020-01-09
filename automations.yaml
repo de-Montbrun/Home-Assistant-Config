@@ -173,14 +173,18 @@
 
 - id: turn_off_lights_bedroom
   alias: 'No one in bedroom - turn off lights'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.master_bedroom_occupancy
     to: 'off'
+    for:
+      minutes: 30
   action:
-    service: light.turn_off
-    entity_id: group.bedroom_lights
+    - service: light.turn_off
+      entity_id: group.bedroom_lights
+    - service: switch.turn_off
+      entity_id: group.bathroom_lights
 
 - id: turn_on_lights_office
   alias: 'Occupancy in Office - turn on lights'
@@ -356,52 +360,17 @@
     event: sunset
     offset: '-00:20:00'
   action:
-    - service: light.turn_on
-      entity_id:
-        - group.hallway_lights
-        - group.livingroom_lights
-        - light.upstairsbathroom
-        - light.kitchen_pots
-      data:
-        brightness: 255
-    - service: light.turn_on
-      entity_id: group.outdoor_lights
-      data:
-        xy_color: [ 0.312,0.328 ]
-        brightness: 255
-        transition: 300
-    - service: scene.turn_on
-      entity_id: scene.sunroom_normal
-    - service: switch.turn_on
-      entity_id:
-        - switch.bathroom2
-        - switch.outdoor_backdoor
-        - switch.switch6
-
-- alias: 'Sunset - Office lights on'
-  initial_state: true
-  trigger:
-    platform: sun
-    event: sunset
-    offset: '-00:20:00'
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: device_tracker.yoga
-        state: 'home'
-      - condition: state
-        entity_id: 'binary_sensor.workday_sensor'
-        state: 'on'
-      - condition: state
-        entity_id: group.office_lights
-        state: 'off'
-  action:
-    - service: light.turn_on
-      entity_id: group.office_lights
-      data:
-        brightness: 255
-        transition: 5
+    service: homeassistant.turn_on
+    entity_id:
+      - group.hallway_lights
+      - group.livingroom_lights
+      - group.outdoor_lights
+      - light.upstairsbathroom
+      - light.kitchen_pots
+      - scene.sunroom_normal
+      - switch.bathroom2
+      - switch.outdoor_backdoor
+      - switch.switch6
 
 - alias: 'Sunroom lux low - lights on'
   initial_state: true
@@ -726,7 +695,7 @@
         brightness: 50
 
 - alias: 'Kitchen - No occupancy lights off'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.kitchen_motion
@@ -1177,7 +1146,7 @@
   trigger:
     platform: state
     entity_id: switch.basement_light
-    to: 'home'
+    to: 'on'
     for:
       hours: 1
   action:
