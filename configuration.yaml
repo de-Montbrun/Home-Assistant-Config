@@ -321,12 +321,6 @@ sensor:
 
   - platform: moon
 
-  - platform: ring
-    monitored_conditions:
-      - last_activity
-      - last_ding
-      - last_motion
-
   - platform: rest
     resource: !secret hue_bedroom_battery
     value_template: '{{ value_json.config.battery }}'
@@ -463,11 +457,6 @@ binary_sensor:
     resource: !secret hue_sunroom_status
     value_template: '{{ value_json.state.status }}'
     scan_interval: 2
-
-  - platform: ring
-    monitored_conditions:
-      - ding
-      - motion
 
 # }}}
 # {{{ Switches
