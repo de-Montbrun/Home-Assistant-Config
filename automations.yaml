@@ -573,10 +573,10 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.ring_front_door_motion
+      entity_id: binary_sensor.front_door_motion
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.ring_front_door_ding
+      entity_id: binary_sensor.front_door_ding
       to: 'on'
   condition:
     condition: and
@@ -607,7 +607,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.ring_front_door_ding
+    entity_id: binary_sensor.front_door_ding
     to: 'on'
   action:
     service: media_player.media_play_pause
@@ -617,10 +617,10 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: binary_sensor.ring_front_door_motion
+      entity_id: binary_sensor.front_door_motion
       to: 'on'
     - platform: state
-      entity_id: binary_sensor.ring_front_door_ding
+      entity_id: binary_sensor.front_door_ding
       to: 'on'
   action:
     - service: notify.zulip
