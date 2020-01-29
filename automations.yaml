@@ -491,7 +491,7 @@
   initial_state: false
   trigger:
     platform: template
-    value_template: '{{ states.sensor.yr_temperature.state < states.sensor.bed_room_temp.state }}'
+    value_template: '{{ states.sensor.dark_sky_temperature.state < states.sensor.bed_room_temp.state }}'
   condition:
     condition: and
     conditions:
@@ -509,7 +509,7 @@
   initial_state: false
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.yr_temperature.state > states.sensor.bed_room_temp.state }}'
+      value_template: '{{ states.sensor.dark_sky_temperature.state > states.sensor.bed_room_temp.state }}'
     - platform: template
       value_template: '{{ states.sensor.bed_room_temp.state | int < 18 }}'
   condition:
