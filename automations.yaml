@@ -214,6 +214,60 @@
     - service: light.turn_off
       entity_id: group.office_lights
 
+- id: occupancy_no_one_home_turn_down_heat
+  alias: 'Occupancy - no one home - turn down heat'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
+    from: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.cam_tracker
+        state: not_home
+      - condition: state
+        entity_id: group.jen_tracker
+        state: not_home
+      - condition: template
+        value_template: '{{ states("person.gail") != "home" }}'
+      - condition: template
+        value_template: '{{ states("person.gervais") != "home" }}'
+      - condition: template
+        value_template: '{{ states("sensor.season") != "summer" }}'
+      - condition: template
+        value_template: '{{ states.sensor.dark_sky_temperature.state | int <= 5 }}'
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.my_ecobee
+      preset_mode: 'Away'
+
+- id: occupancy_return_home_turn_up_heat
+  alias: 'Occupancy - return home - turn up heat'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
+    to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("sensor.season") != "summer" }}'
+      - condition: template
+        value_template: '{{ states.sensor.dark_sky_temperature.state | int <= 5 }}'
+      - condition: time
+        after: '16:30:00'
+      - condition: time
+        before: '23:20:00'
+  action:
+    service: climate.set_preset_mode
+    data:
+      entity_id: climate.my_ecobee
+      preset_mode: 'Home'
+
 - alias: 'Everyone home and gone to bed - Lights out'
   initial_state: true
   trigger:
