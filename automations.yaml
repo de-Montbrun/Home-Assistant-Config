@@ -1115,18 +1115,9 @@
 - alias: 'Router or AP back online'
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: device_tracker.router
-      from: 'not_home'
-    - platform: state
-      entity_id: device_tracker.bedroom_ap
-      from: 'not_home'
-    - platform: state
-      entity_id: device_tracker.living_room_ap
-      from: 'not_home'
-    - platform: state
-      entity_id: device_tracker.sunroom_ap
-      from: 'not_home'
+    platform: state
+    entity_id: device_tracker.router,device_tracker.bedroom_ap,device_tracker.living_room_ap,device_tracker.sunroom_ap
+    from: 'not_home'
   action:
     service: notify.zulip
     data_template:
@@ -1138,42 +1129,20 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: device_tracker.router
+      entity_id:
+        - device_tracker.router
+        - device_tracker.bedroom_ap
+        - device_tracker.living_room_ap
+        - device_tracker.sunroom_ap
       to: 'not_home'
       for:
         minutes: 1
     - platform: state
-      entity_id: device_tracker.router
-      to: 'not_home'
-      for:
-        minutes: 15
-    - platform: state
-      entity_id: device_tracker.bedroom_ap
-      to: 'not_home'
-      for:
-        minutes: 1
-    - platform: state
-      entity_id: device_tracker.bedroom_ap
-      to: 'not_home'
-      for:
-        minutes: 15
-    - platform: state
-      entity_id: device_tracker.living_room_ap
-      to: 'not_home'
-      for:
-        minutes: 1
-    - platform: state
-      entity_id: device_tracker.living_room_ap
-      to: 'not_home'
-      for:
-        minutes: 15
-    - platform: state
-      entity_id: device_tracker.sunroom_ap
-      to: 'not_home'
-      for:
-        minutes: 1
-    - platform: state
-      entity_id: device_tracker.sunroom
+      entity_id:
+        - device_tracker.router
+        - device_tracker.bedroom_ap
+        - device_tracker.living_room_ap
+        - device_tracker.sunroom_ap
       to: 'not_home'
       for:
         minutes: 15
