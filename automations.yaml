@@ -223,7 +223,7 @@
       for:
         minutes: 15
     - platform: state
-      entity_id: group.gail_tracker,group.gervais_tracker,group.cam_tracker,group.jen_tracker
+      entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
       to: 'home'
   condition:
     condition: and
@@ -249,16 +249,14 @@
             value_template: '{{ as_timestamp(now())-as_timestamp(states.group.jen_tracker.last_updated) > 98000 }}'
       - condition: or
         conditions:
-          - condition: state
-            entity_id: group.gail_tracker
-            state: 'home'
+          - condition: template
+            value_template: '{{ states("person.gail") != "home" }}'
           - condition: template
             value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
       - condition: or
         conditions:
-          - condition: state
-            entity_id: group.gervais_tracker
-            state: 'home'
+          - condition: template
+            value_template: '{{ states("person.gervais") != "home" }}'
           - condition: template
             value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
   action:
@@ -473,7 +471,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: group.gervais_tracker
+      entity_id: person.gervais
       from: 'home'
   condition:
     condition: template
@@ -503,14 +501,14 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: group.gail_tracker
+            entity_id: person.gail
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
       - condition: or
         conditions:
           - condition: state
-            entity_id: group.gervais_tracker
+            entity_id: person.gervais
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
@@ -522,34 +520,36 @@
         - group.secondfloor_lights
         - group.bathroom_lights
         - switch.basement_light
+        - switch.switch2
         - switch.switch3
+    - service: climate.set_preset_mode
+      data:
+        entity_id: climate.my_ecobee
+        preset_mode: 'Sleep'
 
 - alias: 'GandG not home - turn off bedroom things'
   initial_state: true
   trigger:
     - platform: state
-      entity_id: group.gail_tracker
+      entity_id: person.gail
       from: 'home'
     - platform: state
-      entity_id: group.gervais_tracker
+      entity_id: person.gervais
       from: 'home'
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: group.gail_tracker
-        state: 'not_home'
-      - condition: state
-        entity_id: group.gervais_tracker
-        state: 'not_home'
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
+      - condition: template
+        value_template: '{{ states("person.gail") != "home" }}'
+      - condition: template
+        value_template: '{{ states("person.gervais") != "home" }}'
   action:
     - service: light.turn_off
       entity_id: group.bedroom_lights
     - service: switch.turn_off
-      entity_id: group.bathroom_lights
+      entity_id:
+        - group.bathroom_lights
+        - switch.switch4
 
 - alias: 'Tell Jen to turn off her TV'
   initial_state: true
@@ -745,8 +745,8 @@
 - alias: 'Phones presence notification'
   initial_state: true
   trigger:
-      - platform: state
-        entity_id: person.gervais,person.gail
+    platform: state
+    entity_id: person.gervais,person.gail
   condition:
     condition: and
     conditions:
@@ -837,12 +837,10 @@
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: group.gail_tracker
-        state: 'not_home'
-      - condition: state
-        entity_id: group.gervais_tracker
-        state: 'not_home'
+      - condition: template
+        value_template: '{{ states("person.gail") != "home" }}'
+      - condition: template
+        value_template: '{{ states("person.gervais") != "home" }}'
   action:
     - service: homeassistant.turn_off
       entity_id: automation.gandg_not_home_movement_in_bedroom
@@ -1010,14 +1008,14 @@
       - condition: or
         conditions:
           - condition: state
-            entity_id: group.gail_tracker
+            entity_id: person.gail
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
       - condition: or
         conditions:
           - condition: state
-            entity_id: group.gervais_tracker
+            entity_id: person.gervais
             state: 'home'
           - condition: template
             value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
