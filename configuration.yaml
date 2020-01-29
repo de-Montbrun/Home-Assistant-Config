@@ -107,6 +107,7 @@ hue:
   bridges:
     - host: 192.168.2.120
       allow_unreachable: true
+      allow_hue_groups: false
 
 # Homekit Setup
 homekit:
