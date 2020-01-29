@@ -1091,7 +1091,7 @@
     entity_id: switch.switch4
 
 - alias: 'Germaine arrives'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: device_tracker.germaine
@@ -1101,7 +1101,7 @@
     entity_id: automation.gandg_not_home_movement_in_bedroom
 
 - alias: 'Germaine leaves'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: device_tracker.germaine
