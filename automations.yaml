@@ -352,6 +352,7 @@
       - group.secondfloor_lights
       - group.bathroom_lights
       - switch.basement_light
+      - switch.switch2
 
 - alias: 'Sunset - Lights on'
   initial_state: true
@@ -370,6 +371,7 @@
       - scene.sunroom_normal
       - switch.bathroom2
       - switch.outdoor_backdoor
+      - switch.switch2
       - switch.switch6
 
 - alias: 'Sunroom lux low - lights on'
