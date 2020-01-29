@@ -542,9 +542,9 @@ zone upstreet:
   icon: mdi:beer
 
 zone innovatia:
-  name: Innovatia
-  latitude: !secret innovatia_latitude
-  longitude: !secret innovatia_longitude
+  name: Brunswick Square
+  latitude: !secret brunswicksquare_latitude
+  longitude: !secret brunswicksquare_longitude
   radius: 100
   icon: mdi:domain
 
