@@ -476,13 +476,12 @@
     service: homeassistant.turn_on
     entity_id:
       - group.hallway_lights
-      - group.livingroom_lights
+      - group.livingroom_lamps
       - group.outdoor_lights
       - light.upstairsbathroom
-      - light.kitchen_pots
+      - scene.sunset
       - scene.sunroom_normal
       - switch.bathroom2
-      - switch.outdoor_backdoor
       - switch.switch2
       - switch.switch6
 

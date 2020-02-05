@@ -34,6 +34,7 @@ hallway_lights:
     - light.foyer
     - light.hallway
     - light.upstairshallway
+    - switch.switch0
 
 kitchen_lights:
   name: Kitchen lights
@@ -43,13 +44,24 @@ kitchen_lights:
     - light.kitchen_swirly0
     - light.kitchen_swirly1
 
+livingroom_lamps:
+  name: Livingroom lamps
+  entities:
+    - light.lamp0
+    - light.lamp1
+    - light.lamp2
+
 livingroom_lights:
   name: Livingroom lights
   entities:
-    - light.couch0
-    - light.fireplace0
-    - light.fireplace3
-    - light.lamp
+    - group.livingroom_lamps
+    - group.livingroom_chandeliers
+
+livingroom_chandeliers:
+  name: Livingroom Chandeliers
+  entities:
+    - light.living_room_pendants0
+    - light.living_room_pendants1
 
 mainfloor_lights:
   name: Main floor lights
@@ -108,6 +120,8 @@ plex:
     - media_player.plex_livingroom
     - media_player.keypear
     - media_player.plexamp_gervais
+    - media_player.plex_sunroom
+    - media_player.plex_roku_3
 
 # }}}
 # {{{ People
