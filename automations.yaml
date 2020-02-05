@@ -99,6 +99,66 @@
     service: scene.turn_on
     entity_id: scene.sunroom_dim
 
+- alias: 'Bedroom Plex paused/stopped - normal lights'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: media_player.plex_roku_3
+    from: 'playing'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: state
+        entity_id: group.bedroom_lights
+        state: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: group.bedroom_lights
+      data:
+        transition: 2
+        brightness: 255
+        xy_color: [ 0.4448, 0.4066 ]
+    - delay: '00:00:04'
+    - service: light.turn_on
+      entity_id: group.bedroom_lights
+      data:
+        transition: 2
+        brightness: 255
+        xy_color: [ 0.4448, 0.4066 ]
+
+- alias: 'Bedroom Plex playing - Dimm lights'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: media_player.plex_roku_3
+    to: 'playing'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: 'below_horizon'
+      - condition: state
+        entity_id: group.bedroom_lights
+        state: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: group.bedroom_lights
+      data:
+        transition: 2
+        brightness: 255
+        xy_color: [ 0.169, 0.044 ]
+    - delay: '00:00:30'
+    - service: light.turn_on
+      entity_id: group.bedroom_lights
+      data:
+        transition: 2
+        brightness: 255
+        xy_color: [ 0.169, 0.044 ]
+
 - alias: 'GandG Playing'
   initial_state: true
   trigger:
