@@ -485,7 +485,7 @@
       - switch.switch2
       - switch.switch6
 
-- alias: 'Sunroom lux low - lights on'
+- alias: 'Sunroom lumens low - lights on'
   initial_state: true
   trigger:
     - platform: state
@@ -495,7 +495,7 @@
     condition: and
     conditions:
       - condition: numeric_state
-        entity_id: 'sensor.sun_room_lux'
+        entity_id: 'sensor.sun_room_lumens'
         below: '6500'
       - condition: state
         entity_id: group.sunroom_lights
@@ -773,7 +773,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.sunroom_motion
+    entity_id: binary_sensor.sun_room_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -792,7 +792,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.kitchen_motion
+    entity_id: binary_sensor.kitchen_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -813,7 +813,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.kitchen_motion
+    entity_id: binary_sensor.kitchen_motion_sensor
     to: 'off'
     for:
       minutes: 45
@@ -945,7 +945,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.bedroom_motion
+    entity_id: binary_sensor.master_bedroom_occupancy
     to: 'on'
   condition:
     condition: and

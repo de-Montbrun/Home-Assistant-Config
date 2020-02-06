@@ -237,6 +237,8 @@ device_tracker:
       Grant2: grant-phone
       Jennifer2: jen-phone
 
+  - platform: huesensor
+
 # }}}
 ## {{{ Rest Commands
 
@@ -322,63 +324,6 @@ sensor:
 
   - platform: moon
 
-  - platform: rest
-    resource: !secret hue_bedroom_battery
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 86400
-    name: 'Bed Room Battery Level'
-
-  - platform: rest
-    resource: !secret hue_bedroom_lightlevel
-    value_template: '{{ value_json.state.lightlevel }}'
-    unit_of_measurement: Lux
-    name: 'Bed Room Lux'
-
-  - platform: rest
-    resource: !secret hue_bedroom_temp
-    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
-    unit_of_measurement: °C
-    name: 'Bed Room Temp'
-
-  - platform: rest
-    resource: !secret hue_kitchen_battery
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 86400
-    name: 'Kitchen Battery Level'
-
-  - platform: rest
-    resource: !secret hue_kitchen_lightlevel
-    value_template: '{{ value_json.state.lightlevel }}'
-    unit_of_measurement: Lux
-    name: 'Kitchen Lux'
-
-  - platform: rest
-    resource: !secret hue_kitchen_temp
-    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
-    unit_of_measurement: °C
-    name: 'Kitchen Temperature'
-
-  - platform: rest
-    resource: !secret hue_sunroom_battery
-    value_template: '{{ value_json.config.battery }}'
-    unit_of_measurement: '%'
-    scan_interval: 86400
-    name: 'Living Room Battery Level'
-
-  - platform: rest
-    resource: !secret hue_sunroom_lightlevel
-    value_template: '{{ value_json.state.lightlevel }}'
-    unit_of_measurement: Lux
-    name: 'Living Room Lux'
-
-  - platform: rest
-    resource: !secret hue_sunroom_temp
-    value_template: '{{ value_json.state.temperature | round(-1) | float / 100 }}'
-    unit_of_measurement: °C
-    name: 'Living Room Temp'
-
   - platform: yr
     monitored_conditions:
       - temperature
@@ -393,6 +338,54 @@ sensor:
 
   - platform: template
     sensors:
+      bed_room_lumens:
+        friendly_name: 'Bed Room Lumens'
+        value_template: '{{ states.binary_sensor.bedroom_motion_sensor.attributes.light_level }}'
+        unit_of_measurement: Lumens
+        device_class: illuminance
+      bed_room_battery_level:
+        friendly_name: 'Bed Room Battery Level'
+        value_template: '{{ states.binary_sensor.bedroom_motion_sensor.attributes.battery }}'
+        unit_of_measurement: '%'
+        device_class: battery
+      bed_room_temp:
+        friendly_name: 'Bed Room Temperature'
+        value_template: '{{ states.binary_sensor.bedroom_motion_sensor.attributes.temperature }}'
+        unit_of_measurement: °C
+        device_class: temperature
+
+      kitchen_lumens:
+        friendly_name: 'Kitchen Lumens'
+        value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.light_level }}'
+        unit_of_measurement: Lumens
+        device_class: illuminance
+      kitchen_battery_level:
+        friendly_name: 'Kitchen Battery Level'
+        value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.battery }}'
+        unit_of_measurement: '%'
+        device_class: battery
+      kitchen_temp:
+        friendly_name: 'Kitchen Temperature'
+        value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.temperature }}'
+        unit_of_measurement: °C
+        device_class: temperature
+
+      sun_room_lumens:
+        friendly_name: 'Sun Room Lumens'
+        value_template: '{{ states.binary_sensor.sun_room_motion_sensor.attributes.light_level }}'
+        unit_of_measurement: Lumens
+        device_class: illuminance
+      sun_room_battery_level:
+        friendly_name: 'Sun Room Battery Level'
+        value_template: '{{ states.binary_sensor.sun_room_motion_sensor.attributes.battery }}'
+        unit_of_measurement: '%'
+        device_class: battery
+      sun_room_temp:
+        friendly_name: 'Sun Room Temperature'
+        value_template: '{{ states.binary_sensor.sun_room_motion_sensor.attributes.temperature }}'
+        unit_of_measurement: °C
+        device_class: temperature
+
       distance_apart:
         friendly_name: 'GandG Apart'
         value_template: >-
@@ -441,23 +434,7 @@ binary_sensor:
     country: CA
     province: PE
 
-  - platform: rest
-    name: Bedroom Motion
-    resource: !secret hue_bedroom_status
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 2
-
-  - platform: rest
-    name: Kitchen Motion
-    resource: !secret hue_kitchen_status
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 2
-
-  - platform: rest
-    name: Sunroom Motion
-    resource: !secret hue_sunroom_status
-    value_template: '{{ value_json.state.status }}'
-    scan_interval: 2
+  - platform: huesensor
 
 # }}}
 # {{{ Switches
