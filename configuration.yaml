@@ -297,15 +297,6 @@ sensor:
       - type: processor_use
       - type: last_boot
 
-  - platform: glances
-    host: zulip.dem
-    name: zulip
-    resources:
-      - 'disk_use_percent'
-      - 'memory_use_percent'
-      - 'swap_use_percent'
-      - 'processor_load'
-
   - platform: command_line
     name: 'Grater uptime'
     command: cat /proc/uptime | awk '{ print $1 }'
