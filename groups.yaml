@@ -25,6 +25,13 @@ diningroom_lights:
   entities:
     - light.diningroom0
     - light.diningroom1
+dressing_room_lights:
+  name: Dressing room lights
+  entities:
+    - light.dressing_room0
+    - light.dressing_room1
+    - light.dressing_room2
+    - light.dressing_room3
 
 hallway_lights:
   name: Hallway lights
@@ -32,7 +39,7 @@ hallway_lights:
     - light.stairs_back
     - light.cherub
     - light.foyer
-    - light.hallway
+    - light.hallway_wall
     - light.upstairshallway
     - switch.switch0
 
@@ -90,6 +97,7 @@ secondfloor_lights:
   name: Second floor lights
   entities:
     - group.bedroom_lights
+    - group.dressing_room_lights
     - group.spareroom_lights
     - group.sunroom_lights
     - light.upstairsbathroom

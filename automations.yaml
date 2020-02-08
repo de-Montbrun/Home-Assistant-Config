@@ -242,7 +242,9 @@
       minutes: 30
   action:
     - service: light.turn_off
-      entity_id: group.bedroom_lights
+      entity_id:
+        - group.bedroom_lights
+        - group.dressing_room_lights
     - service: switch.turn_off
       entity_id: group.bathroom_lights
 
@@ -658,7 +660,9 @@
         value_template: '{{ states("person.gervais") != "home" }}'
   action:
     - service: light.turn_off
-      entity_id: group.bedroom_lights
+      entity_id:
+        - group.bedroom_lights
+        - group.dressing_room_lights
     - service: switch.turn_off
       entity_id:
         - group.bathroom_lights
