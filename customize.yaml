@@ -22,7 +22,7 @@ group.gail_tracker:
 device_tracker.gervais_owntracks:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
-device_tracker.iphone_2:
+device_tracker.iphone:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
 device_tracker.gervais3:

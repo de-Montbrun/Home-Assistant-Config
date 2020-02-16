@@ -181,7 +181,7 @@ person:
     id: gevais1968
     user_id: 552babcc7c9f490191d97de847350f77
     device_trackers:
-      - device_tracker.iphone_2
+      - device_tracker.iphone
   - name: Gail
     id: gail1968
     user_id: 1b937317d2a242d7af7df282b35359b1
@@ -378,12 +378,12 @@ sensor:
       distance_apart:
         friendly_name: 'GandG Apart'
         value_template: >-
-          {% if distance(states.device_tracker.iphone_2, states.device_tracker.grdems_phone_2) | int == 0 %}
+          {% if distance(states.device_tracker.iphone, states.device_tracker.grdems_phone_2) | int == 0 %}
             0
-          {% elif distance(states.device_tracker.iphone_2, states.device_tracker.grdems_phone_2) | round(2) < 0.09 %}
+          {% elif distance(states.device_tracker.iphone, states.device_tracker.grdems_phone_2) | round(2) < 0.09 %}
             0
           {% else %}
-            {{ distance(states.device_tracker.iphone_2, states.device_tracker.grdems_phone_2) | round(2) }}
+            {{ distance(states.device_tracker.iphone, states.device_tracker.grdems_phone_2) | round(2) }}
           {% endif %}
         unit_of_measurement: 'km'
         entity_id:
