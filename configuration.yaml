@@ -31,6 +31,27 @@ asuswrt:
   ssh_key: /home/homeassistant/.ssh/id_rsa
 
 # }}}
+# {{{ Circadian Lighting
+
+circadian_lighting:
+switch:
+  - platform: circadian_lighting
+    name: Bedroom Circadian
+    lights_xy:
+      - light.bedroom0
+      - light.bedroom1
+      - light.bedroom2
+      - light.bedroom3
+      - light.bedroom4
+
+  - platform: circadian_lighting
+    name: Office Circadian
+    disable_brightness_adjust: true
+    lights_xy:
+      - light.office0
+      - light.office1
+
+# }}}
 # {{{ emulated hue
 
 emulated_hue:
