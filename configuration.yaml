@@ -296,11 +296,11 @@ device_tracker:
   - platform: ping
     count: 10
     hosts:
-      Cameron2: cam-phone
-      Gail3: Gail-iPhone
-      Gervais3: iphone
-      Grant2: grant-phone
-      Jennifer2: jen-phone
+      cameron2: cam-phone
+      gail3: Gail-iPhone
+      gervais3: iphone
+      grant2: grant-phone
+      jennifer2: jen-phone
 
   - platform: huesensor
 
@@ -404,11 +404,6 @@ sensor:
         value_template: '{{ states.binary_sensor.bedroom_motion_sensor.attributes.battery }}'
         unit_of_measurement: '%'
         device_class: battery
-      bed_room_temp:
-        friendly_name: 'Bed Room Temperature'
-        value_template: '{{ states.binary_sensor.bedroom_motion_sensor.attributes.temperature }}'
-        unit_of_measurement: °C
-        device_class: temperature
 
       kitchen_lumens:
         friendly_name: 'Kitchen Lumens'
@@ -420,27 +415,17 @@ sensor:
         value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.battery }}'
         unit_of_measurement: '%'
         device_class: battery
-      kitchen_temp:
-        friendly_name: 'Kitchen Temperature'
-        value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.temperature }}'
-        unit_of_measurement: °C
-        device_class: temperature
 
       sun_room_lumens:
         friendly_name: 'Sun Room Lumens'
-        value_template: '{{ states.binary_sensor.sun_room_motion_sensor.attributes.light_level }}'
+        value_template: '{{ states.binary_sensor.sunroom_motion_sensor.attributes.light_level }}'
         unit_of_measurement: Lumens
         device_class: illuminance
       sun_room_battery_level:
         friendly_name: 'Sun Room Battery Level'
-        value_template: '{{ states.binary_sensor.sun_room_motion_sensor.attributes.battery }}'
+        value_template: '{{ states.binary_sensor.sunroom_motion_sensor.attributes.battery }}'
         unit_of_measurement: '%'
         device_class: battery
-      sun_room_temp:
-        friendly_name: 'Sun Room Temperature'
-        value_template: '{{ states.binary_sensor.sun_room_motion_sensor.attributes.temperature }}'
-        unit_of_measurement: °C
-        device_class: temperature
 
       distance_apart:
         friendly_name: 'GandG Apart'
