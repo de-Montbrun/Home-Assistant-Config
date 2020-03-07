@@ -58,6 +58,8 @@
     - delay: '00:00:30'
     - service: scene.turn_on
       entity_id: scene.sunroom_dim
+    - service: homeassistant.turn_off
+      entity_id: script.timer_sunroom_off
 
 - alias: 'Roku Idle'
   initial_state: true
@@ -260,6 +262,8 @@
     entity_id: 'binary_sensor.workday_sensor'
     state: 'on'
   action:
+    - service: switch.turn_on
+      entity_id: switch.switch1
     - service: light.turn_on
       entity_id: group.office_lights
 
@@ -374,7 +378,7 @@
           - condition: template
             value_template: '{{ states("person.gervais") != "home" }}'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
     - delay: '00:10:00'
     - service: homeassistant.turn_off
@@ -413,6 +417,9 @@
     - service: switch.turn_off
       entity_id:
         - switch.basement_light
+        - switch.switch0
+        - switch.switch1
+        - switch.switch2
         - switch.switch3
         - switch.switch6
         - group.bathroom_lights
@@ -466,6 +473,8 @@
       - group.secondfloor_lights
       - group.bathroom_lights
       - switch.basement_light
+      - switch.switch0
+      - switch.switch1
       - switch.switch2
 
 - alias: 'Sunset - Lights on'
@@ -484,6 +493,7 @@
       - scene.sunset
       - scene.sunroom_normal
       - switch.bathroom2
+      - switch.switch1
       - switch.switch2
       - switch.switch6
 
@@ -626,7 +636,7 @@
             entity_id: person.gervais
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
     - service: homeassistant.turn_off
       entity_id:
@@ -635,6 +645,7 @@
         - group.secondfloor_lights
         - group.bathroom_lights
         - switch.basement_light
+        - switch.switch1
         - switch.switch2
         - switch.switch3
     - service: climate.set_preset_mode
@@ -777,7 +788,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.sun_room_motion_sensor
+    entity_id: binary_sensor.sunroom_motion_sensor
     to: 'on'
   condition:
     condition: and
@@ -1135,7 +1146,7 @@
             entity_id: person.gervais
             state: 'home'
           - condition: template
-            value_template: '{{ distance(states.device_tracker.iphone_2) > 10 }}'
+            value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
     service: switch.turn_on
     entity_id: switch.switch4
