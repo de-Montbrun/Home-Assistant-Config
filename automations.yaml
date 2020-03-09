@@ -28,7 +28,7 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.sunroom_lights
+        entity_id: light.sunroom_lights
         state: 'on'
   action:
     - service: scene.turn_on
@@ -50,7 +50,7 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.sunroom_lights
+        entity_id: light.sunroom_lights
         state: 'on'
   action:
     - service: scene.turn_on
@@ -74,7 +74,7 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.sunroom_lights
+        entity_id: light.sunroom_lights
         state: 'on'
   action:
     service: scene.turn_on
@@ -93,7 +93,7 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.sunroom_lights
+        entity_id: light.sunroom_lights
         state: 'on'
       - condition: template
         value_template: "{{ is_state_attr('media_player.roku_sunroom', 'app_name', 'Netflix') }}"
@@ -114,18 +114,18 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.bedroom_lights
+        entity_id: light.bedroom_lights
         state: 'on'
   action:
     - service: light.turn_on
-      entity_id: group.bedroom_lights
+      entity_id: light.bedroom_lights
       data:
         transition: 2
         brightness: 255
         xy_color: [ 0.4448, 0.4066 ]
     - delay: '00:00:04'
     - service: light.turn_on
-      entity_id: group.bedroom_lights
+      entity_id: light.bedroom_lights
       data:
         transition: 2
         brightness: 255
@@ -144,18 +144,18 @@
         entity_id: sun.sun
         state: 'below_horizon'
       - condition: state
-        entity_id: group.bedroom_lights
+        entity_id: light.bedroom_lights
         state: 'on'
   action:
     - service: light.turn_on
-      entity_id: group.bedroom_lights
+      entity_id: light.bedroom_lights
       data:
         transition: 2
         brightness: 255
         xy_color: [ 0.169, 0.044 ]
     - delay: '00:00:30'
     - service: light.turn_on
-      entity_id: group.bedroom_lights
+      entity_id: light.bedroom_lights
       data:
         transition: 2
         brightness: 255
@@ -169,11 +169,11 @@
     to: 'playing'
   condition:
     condition: state
-    entity_id: group.bedroom_lights
+    entity_id: light.bedroom_lights
     state: 'on'
   action:
     service: light.turn_on
-    entity_id: light.bedroom0
+    entity_id: light.bedroom_lights
     data:
       brightness: 100
       transition: 2
@@ -187,11 +187,11 @@
     from: 'playing'
   condition:
     condition: state
-    entity_id: group.bedroom_lights
+    entity_id: light.bedroom_lights
     state: 'on'
   action:
     service: light.turn_on
-    entity_id: light.bedroom0
+    entity_id: light.bedroom_lights
     data:
       brightness: 155
       transition: 2
@@ -206,14 +206,14 @@
     to: 'on'
   condition:
     - condition: state
-      entity_id: group.hallway_lights
+      entity_id: light.hallway_lights
       state: 'off'
     - condition: state
       entity_id: sun.sun
       state: 'below_horizon'
   action:
     service: light.turn_on
-    entity_id: group.hallway_lights
+    entity_id: light.hallway_lights
 
 - id: turn_on_lights_bedroom
   alias: 'Occupancy in bedroom - turn on lights'
@@ -224,14 +224,14 @@
     to: 'on'
   condition:
     - condition: state
-      entity_id: group.bedroom_lights
+      entity_id: light.bedroom_lights
       state: 'off'
     - condition: state
       entity_id: sun.sun
       state: 'below_horizon'
   action:
     service: light.turn_on
-    entity_id: group.bedroom_lights
+    entity_id: light.bedroom_lights
 
 - id: turn_off_lights_bedroom
   alias: 'No one in bedroom - turn off lights'
@@ -243,12 +243,11 @@
     for:
       minutes: 30
   action:
-    - service: light.turn_off
-      entity_id:
-        - group.bedroom_lights
-        - group.dressing_room_lights
-    - service: switch.turn_off
-      entity_id: group.bathroom_lights
+    service: light.turn_off
+    entity_id:
+      - light.bathroom_lights
+      - light.bedroom_lights
+      - light.dressing_room_lights
 
 - id: turn_on_lights_office
   alias: 'Occupancy in Office - turn on lights'
@@ -262,10 +261,8 @@
     entity_id: 'binary_sensor.workday_sensor'
     state: 'on'
   action:
-    - service: switch.turn_on
-      entity_id: switch.switch1
-    - service: light.turn_on
-      entity_id: group.office_lights
+    service: light.turn_on
+    entity_id: light.office_lights
 
 - id: turn_off_lights_office
   alias: 'No one in Office - turn off lights'
@@ -275,10 +272,8 @@
     entity_id: binary_sensor.office_occupancy
     to: 'off'
   action:
-    - service: switch.turn_off
-      entity_id: switch.switch3
     - service: light.turn_off
-      entity_id: group.office_lights
+      entity_id: light.office_lights
 
 - id: occupancy_no_one_home_turn_down_heat
   alias: 'Occupancy - no one home - turn down heat'
@@ -387,10 +382,10 @@
       entity_id: all
     - service: homeassistant.turn_off
       entity_id:
-        - group.bathroom_lights
-        - group.mainfloor_lights
-        - group.outdoor_lights
-        - group.secondfloor_lights
+        - light.bathroom_lights
+        - light.main_floor_lights
+        - light.outdoor_lights
+        - light.second_floor_lights
     - delay: '00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
@@ -401,10 +396,8 @@
     platform: time
     at: '23:59:59'
   action:
-    - service: light.turn_off
-      entity_id: group.sunroom_lights
-    - service: switch.turn_off
-      entity_id: switch.switch6
+    service: light.turn_off
+    entity_id: light.sunroom_lights
 
 - alias: '2am - Lights out'
   initial_state: true
@@ -416,23 +409,10 @@
       entity_id: automation.timed_lights_movement_front_door
     - service: switch.turn_off
       entity_id:
-        - switch.basement_light
         - switch.switch0
-        - switch.switch1
-        - switch.switch2
         - switch.switch3
-        - switch.switch6
-        - group.bathroom_lights
     - service: light.turn_off
       entity_id: all
-    - service: homeassistant.turn_off
-      entity_id:
-        - group.office_lights
-        - group.outdoor_lights
-        - group.mainfloor_lights
-        - group.secondfloor_lights
-        - group.bathroom_lights
-        - switch.basement_light
     - delay: '00:00:05'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
@@ -453,8 +433,7 @@
       value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: switch.turn_off
-    entity_id:
-      - switch.switch3
+    entity_id: switch.switch3
 
 - alias: 'Sunrise - Lights out'
   initial_state: true
@@ -465,17 +444,8 @@
   action:
     - service: light.turn_off
       entity_id: all
-    - service: homeassistant.turn_off
-      entity_id:
-      - group.office_lights
-      - group.outdoor_lights
-      - group.mainfloor_lights
-      - group.secondfloor_lights
-      - group.bathroom_lights
-      - switch.basement_light
-      - switch.switch0
-      - switch.switch1
-      - switch.switch2
+    - service: switch.turn_off
+      entity_id: switch.switch0
 
 - alias: 'Sunset - Lights on'
   initial_state: true
@@ -486,16 +456,16 @@
   action:
     service: homeassistant.turn_on
     entity_id:
-      - group.hallway_lights
-      - group.livingroom_lamps
-      - group.outdoor_lights
+      - light.bathroom2
+      - light.hallway_lights
+      - light.livingroom_lamps
+      - light.livingroom_shelves
+      - light.office_table
+      - light.outdoor_lights
+      - light.saltlick
       - light.upstairsbathroom
       - scene.sunset
       - scene.sunroom_normal
-      - switch.bathroom2
-      - switch.switch1
-      - switch.switch2
-      - switch.switch6
 
 - alias: 'Sunroom lumens low - lights on'
   initial_state: true
@@ -510,53 +480,13 @@
         entity_id: 'sensor.sun_room_lumens'
         below: '6500'
       - condition: state
-        entity_id: group.sunroom_lights
+        entity_id: light.sunroom_lights
         state: 'off'
   action:
     - service: scene.turn_on
       entity_id: scene.sunroom_normal
-    - service: switch.turn_on
-      entity_id: switch.switch6
-
-- alias: 'Jennifer Home - turn on'
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: group.jen_tracker
-    to: 'home'
-  action:
-    service: switch.turn_on
-    entity_id: 'switch.switch1'
-
-- alias: 'Jennifer Away - turn off'
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: group.jen_tracker
-    to: 'not_home'
-    for:
-      hours: 2
-  action:
-    service: switch.turn_off
-    entity_id: 'switch.switch1'
-
-- alias: 'Midnight - heater off'
-  initial_state: true
-  trigger:
-    - platform: time
-      at: '23:59:59'
-    - platform: time
-      at: '00:29:59'
-    - platform: time
-      at: '00:59:59'
-    - platform: time
-      at: '01:29:59'
-  condition:
-    condition: template
-    value_template: '{{ states("sensor.season") != "summer" }}'
-  action:
-    service: switch.turn_off
-    entity_id: 'switch.switch1'
+    - service: light.turn_on
+      entity_id: light.saltlick
 
 - alias: 'Bedroom Window fan on'
   initial_state: false
@@ -640,13 +570,12 @@
   action:
     - service: homeassistant.turn_off
       entity_id:
-        - group.office_lights
-        - group.mainfloor_lights
-        - group.secondfloor_lights
-        - group.bathroom_lights
-        - switch.basement_light
-        - switch.switch1
-        - switch.switch2
+        - light.basement_light
+        - light.bathroom_lights
+        - light.livingroom_shelves
+        - light.main_floor_lights
+        - light.office_lights
+        - light.second_floor_lights
         - switch.switch3
     - service: climate.set_preset_mode
       data:
@@ -672,11 +601,11 @@
   action:
     - service: light.turn_off
       entity_id:
-        - group.bedroom_lights
-        - group.dressing_room_lights
+        - light.bathroom_lights
+        - light.bedroom_lights
+        - light.dressing_room_lights
     - service: switch.turn_off
       entity_id:
-        - group.bathroom_lights
         - switch.switch4
 
 - alias: 'Tell Jen to turn off her TV'
@@ -712,7 +641,7 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: group.outdoor_lights
+        entity_id: light.outdoor_lights
         state: 'off'
       - condition: state
         entity_id: sun.sun
@@ -723,12 +652,12 @@
     - service: light.turn_on
       data:
         entity_id:
-          - group.outdoor_lights
+          - light.outdoor_lights
         brightness: 255
     - delay: '00:10:00'
     - service: light.turn_off
       entity_id:
-        - group.outdoor_lights
+        - light.outdoor_lights
     - delay: '00:00:04'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
@@ -779,10 +708,10 @@
       from: 'off'
       to: 'on'
   action:
-    - service: notify.zulip
-      data:
-        message: 'Update for Home Assistant is available.'
-        title: 'Home Assistant'
+    service: notify.zulip
+    data:
+      message: 'Update for Home Assistant is available.'
+      title: 'Home Assistant'
 
 - alias: 'Timed lights - Movement in Sunroom'
   initial_state: true
@@ -794,7 +723,7 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: group.sunroom_lights
+        entity_id: light.sunroom_lights
         state: 'off'
       - condition: state
         entity_id: sun.sun
@@ -813,16 +742,16 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: group.kitchen_lights
+        entity_id: light.kitchen_lights
         state: 'off'
       - condition: state
         entity_id: sun.sun
         state: 'below_horizon'
   action:
-    - service: light.turn_on
-      entity_id: light.kitchen_pots
-      data:
-        brightness: 50
+    service: light.turn_on
+    entity_id: light.kitchen_pots
+    data:
+      brightness: 50
 
 - alias: 'Kitchen - No occupancy lights off'
   initial_state: true
@@ -833,8 +762,8 @@
     for:
       minutes: 45
   action:
-    - service: light.turn_off
-      entity_id: group.kitchen_lights
+    service: light.turn_off
+    entity_id: light.kitchen_lights
 
 - alias: 'Spareroom - Occupancy lights on'
   initial_state: true
@@ -846,16 +775,16 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: group.spareroom_lights
+        entity_id: light.spareroom_lights
         state: 'off'
       - condition: state
         entity_id: sun.sun
         state: 'below_horizon'
   action:
-    - service: light.turn_on
-      entity_id: group.sapreroom_lights
-      data:
-        brightness: 50
+    service: light.turn_on
+    entity_id: light.spareroom_lights
+    data:
+      brightness: 50
 
 - alias: 'Spareroom - No occupancy lights off'
   initial_state: true
@@ -866,8 +795,8 @@
     for:
       minutes: 45
   action:
-    - service: light.turn_off
-      entity_id: group.spareroom_lights
+    service: light.turn_off
+    entity_id: light.spareroom_lights
 
 - alias: 'Set sabnzb speed limit'
   initial_state: true
@@ -1254,11 +1183,11 @@
       for:
         minutes: 15
   action:
-    - service: notify.zulip
-      data_template:
-        message: >
-          :black_large_square: {{ trigger.to_state.attributes.friendly_name }} has been offline for over a minute.
-        title: 'Internet'
+    service: notify.zulip
+    data_template:
+      message: >
+        :black_large_square: {{ trigger.to_state.attributes.friendly_name }} has been offline for over a minute.
+      title: 'Internet'
 
 - alias: 'Timed basement light - Chris Home'
   initial_state: true
@@ -1277,13 +1206,13 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: switch.basement_light
+    entity_id: ligh.basement_light
     to: 'on'
     for:
       hours: 1
   action:
-    service: switch.turn_off
-    entity_id: switch.basement_light
+    service: light.turn_off
+    entity_id: light.basement_light
 
 - alias: 'Fing update user'
   initial_state: true
@@ -1305,10 +1234,10 @@
     platform: state
     entity_id: input_select.zigbee2mqtt_log_level
   action:
-    - service: mqtt.publish
-      data:
-        payload_template: "{{ states('input_select.zigbee2mqtt_log_level') }}"
-        topic: zigbee2mqtt/bridge/config/log_level
+    service: mqtt.publish
+    data:
+      payload_template: "{{ states('input_select.zigbee2mqtt_log_level') }}"
+      topic: zigbee2mqtt/bridge/config/log_level
 # Automation to start timer when enable join is turned on
 - id: zigbee_join_enabled
   alias: Zigbee Join Enabled

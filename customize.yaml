@@ -59,13 +59,13 @@ device_tracker.jenphone:
   hidden: true
 device_tracker.jennifer2:
   hidden: true
-sensor.deMontbrun_DNS_Expiry:
-  icon: mdi:dns
 light.stairs_back:
   friendly_name: Back Stairs
   icon: mdi:lightbulb
 light.main_floor_bathroom_light:
   friendly_name: Main Floor Bathroom
+sensor.deMontbrun_DNS_Expiry:
+  icon: mdi:dns
 sensor.grater_uptime:
   friendly_name: Uptime
   icon: mdi:clock
@@ -78,24 +78,3 @@ sensor.fing_state:
   hidden: true
 sensor.distance_apart:
   icon: mdi:human-male-female
-switch.basement_light:
-  friendly_name: Basement Light
-  icon: mdi:lightbulb
-switch.bathroom0:
-  icon: mdi:lightbulb
-switch.bathroom1:
-  icon: mdi:lightbulb
-switch.bathroom2:
-  icon: mdi:lightbulb
-switch.outdoor_backdoor:
-  friendly_name: Backdoor
-  icon: mdi:lightbulb
-switch.outdoor_deck_lights:
-  friendly_name: Deck Lights
-  icon: mdi:lightbulb
-switch.switch2:
-  friendly_name: Livingroom Switch
-switch.switch4:
-  friendly_name: Bedroom Switch
-switch.switch6:
-  friendly_name: Saltlick Switch

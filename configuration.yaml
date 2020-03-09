@@ -95,6 +95,172 @@ weblink:
       icon: mdi:file-video
 
 # }}}
+# {{{ Lights
+
+light:
+  # Make basemnet switch act like a light
+  - platform: switch
+    name: Basement Light
+    entity_id: switch.basement_light
+
+  # Make Bathroom switches act like lights
+  - platform: switch
+    name: Bathroom0
+    entity_id: switch.bathroom0
+  - platform: switch
+    name: Bathroom1
+    entity_id: switch.bathroom1
+  - platform: switch
+    name: Bathroom2
+    entity_id: switch.bathroom2
+
+  # Make Livingroom switch act like a light
+  - platform: switch
+    name: Livingroom Shelves
+    entity_id: switch.switch2
+
+  # Make Office Table switch act like a light
+  - platform: switch
+    name: Office Table
+    entity_id: switch.switch1
+
+  # Make Outdoor switches act like lights
+  - platform: switch
+    name: Backdoor
+    entity_id: switch.outdoor_backdoor
+  - platform: switch
+    name: Deck lights
+    entity_id: switch.outdoor_deck_lights
+
+  # Make Sunroom switch act like light
+  - platform: switch
+    name: Saltlick
+    entity_id: switch.switch6
+
+  - platform: group
+    name: Bathroom lights
+    entities:
+      - light.bathroom0
+      - light.bathroom1
+      - light.bathroom2
+
+  - platform: group
+    name: Bedroom lights
+    entities:
+      - light.bedroom0
+      - light.bedroom1
+      - light.bedroom2
+      - light.bedroom3
+      - light.bedroom4
+
+  - platform: group
+    name: Diningroom lights
+    entities:
+      - light.diningroom0
+      - light.diningroom1
+      - light.diningroom2
+      - light.diningroom3
+      - light.diningroom4
+      - light.diningroom5
+      - light.diningroom6
+
+  - platform: group
+    name: Dressing room lights
+    entities:
+      - light.dressing_room0
+      - light.dressing_room1
+      - light.dressing_room2
+      - light.dressing_room3
+
+  - platform: group
+    name: Hallway lights
+    entities:
+      - light.cherub
+      - light.foyer
+      - light.hallway_table
+      - light.hallway_wall
+      - light.stairs_back
+      - light.upstairshallway
+
+  - platform: group
+    name: Kitchen lights
+    entities:
+      - light.kitchen_island
+      - light.kitchen_pots
+      - light.kitchen_swirly0
+      - light.kitchen_swirly1
+
+  - platform: group
+    name: Livingroom lamps
+    entities:
+      - light.lamp0
+      - light.lamp1
+      - light.lamp2
+
+  - platform: group
+    name: Livingroom lights
+    entities:
+      - light.livingroom_lamps
+      - light.livingroom_chandeliers
+      - light.livingroom_shelves
+
+  - platform: group
+    name: Livingroom Chandeliers
+    entities:
+      - light.living_room_pendants0
+      - light.living_room_pendants1
+
+  - platform: group
+    name: Main floor lights
+    entities:
+      - light.diningroom_lights
+      - light.hallway_lights
+      - light.kitchen_lights
+      - light.livingroom_lights
+      - light.office_lights
+      - light.main_floor_bathroom_light
+
+  - platform: group
+    name: Office lights
+    entities:
+      - light.office0
+      - light.office1
+      - light.office_table
+
+  - platform: group
+    name: Outdoor lights
+    entities:
+      - light.front_door
+      - light.outdoor_backdoor
+      - light.outdoor_deck_lights
+
+  - platform: group
+    name: Second floor lights
+    entities:
+      - light.bedroom_lights
+      - light.dressing_room_lights
+      - light.spareroom_lights
+      - light.sunroom_lights
+      - light.upstairsbathroom
+      - light.saltlick
+
+  - platform: group
+    name: Spare room lights
+    entities:
+      - light.spare0
+      - light.spare1
+
+  - platform: group
+    name: Sunroom lights
+    entities:
+      - light.saltlick
+      - light.sunroom0
+      - light.sunroom1
+      - light.sunroom2
+      - light.sunroom3
+      - light.sunroom4
+
+#  }}}
 # {{{ Media Players
 
 # Plex
