@@ -329,6 +329,49 @@
       entity_id: climate.my_ecobee
       preset_mode: 'Home'
 
+- id: occupancy_gandg_not_home_turn_off_bedroom_heater
+  alias: 'Occupancy - GandG not home - turn off bedroom heater'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: person.gail,person.gervais
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("person.gail") != "home" }}'
+      - condition: template
+        value_template: '{{ states("person.gervais") != "home" }}'
+      - condition: template
+        value_template: '{{ states("sensor.season") != "summer" }}'
+      - condition: template
+        value_template: '{{ states.sensor.dark_sky_temperature.state | int <= 5 }}'
+  action:
+    service: climate.set_hvac_mode
+    data:
+      entity_id: climate.bedroom_heater
+      preset_mode: 'off'
+
+- id: occupancy_gandg_return_home_turn_on_bedroom_heater
+  alias: 'Occupancy - GandG return home - turn on bedroom heater'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: person.gail,person.gervais
+    to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("sensor.season") != "summer" }}'
+      - condition: template
+        value_template: '{{ states.sensor.dark_sky_temperature.state | int <= 5 }}'
+  action:
+    service: climate.set_hvac_mode
+    data:
+      entity_id: climate.bedroom_heater
+      preset_mode: 'heat'
+
 - alias: 'Everyone home and gone to bed - Lights out'
   initial_state: true
   trigger:

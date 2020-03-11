@@ -15,6 +15,7 @@ homeassistant:
   # Allow homeassistant to write to snapshots dir
   whitelist_external_dirs:
     - /var/www/html/snapshots
+    - /etc/homeassistant/file_restore
   customize: !include customize.yaml
 
   auth_providers:
@@ -463,6 +464,22 @@ device_tracker:
   - platform: huesensor
 
 # }}}
+# {{{ Programmable thermostat
+
+climate:
+  - platform: programmable_thermostat
+    name: Bedroom Heater
+    heater:
+      - switch.switch4
+    actual_temp_sensor: sensor.master_bedroom_temperature
+    min_temp: 14
+    max_temp: 18
+    target_temp_sensor: sensor.thermostat_program
+    tolerance: 0.3
+    hvac_options: 7
+    auto_mode: all
+
+# }}}
 ## {{{ Rest Commands
 
 rest_command:
@@ -549,6 +566,14 @@ sensor:
     unit_of_measurement: 'MB'
     value_template: '{{ (value|int / 1024 / 1024)|round(1) }}'
     scan_interval: 900
+
+  # Data for programmable thermostat
+  - platform: file_restore
+    unit_of_measurement: '°C'
+    file_path: '/etc/homeassistant/file_restore/thermostat_program.csv'
+    name: Thermostat Program
+    length: day
+    detail: hour
 
   - platform: template
     sensors:
