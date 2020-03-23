@@ -1108,7 +1108,7 @@
       entity_id: remote.roku_sunrooom
       command: power
 
-- alias: 'Turn on heater in bedroom'
+- alias: 'Turn up heat in bedroom'
   initial_state: true
   trigger:
     - platform: template
@@ -1153,10 +1153,12 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
-    service: switch.turn_on
-    entity_id: switch.switch4
+    service: climate.set_temperature
+    data:
+      entity_id: climate.bedroom_heater
+      temperature: 17
 
-- alias: 'Turn off heater in bedroom'
+- alias: 'Turn down heat in bedroom'
   initial_state: true
   trigger:
     - platform: template
@@ -1166,8 +1168,10 @@
     - platform: time
       at: '09:00:00'
   action:
-    service: switch.turn_off
-    entity_id: switch.switch4
+    service: climate.set_temperature
+    data:
+      entity_id: climate.bedroom_heater
+      temperature: 14
 
 - alias: 'Germaine arrives'
   initial_state: false

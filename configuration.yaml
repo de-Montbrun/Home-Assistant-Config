@@ -43,6 +43,7 @@ switch:
     lights_xy:
       - light.office0
       - light.office1
+      - light.office2
 
   - platform: mqtt
     name: "Zigbee2mqtt Main join"
@@ -80,12 +81,6 @@ http:
   use_x_forwarded_for: true
   trusted_proxies:
     - 127.0.0.1
-
-weblink:
-  entities:
-    - name: Home Security
-      url: https://home.demontbrun.com/snapshots/
-      icon: mdi:file-video
 
 # }}}
 # {{{ Lights
@@ -218,14 +213,15 @@ light:
     entities:
       - light.office0
       - light.office1
+      - light.office2
       - light.office_table
 
   - platform: group
     name: Outdoor lights
     entities:
       - light.front_door
-      - light.outdoor_backdoor
-      - light.outdoor_deck_lights
+      - light.backdoor
+      - light.deck_lights
 
   - platform: group
     name: Second floor lights
@@ -690,7 +686,7 @@ tuya:
 # Wemo switches are not always being discovered automatically.
 wemo:
   static:
-    - 192.168.2.80
+    #- 192.168.2.80
     - 192.168.2.81
     - 192.168.2.82
     - 192.168.2.83
