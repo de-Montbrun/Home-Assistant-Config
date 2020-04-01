@@ -23,7 +23,14 @@ homeassistant:
       trusted_networks:
         - 192.168.2.0/24
         - 127.0.0.1
+#  {{{ Asus
 
+asuswrt:
+  host: 192.168.2.1
+  username: !secret router_username
+  ssh_key: /home/homeassistant/.ssh/id_rsa
+
+# }}}
 # {{{ Circadian Lighting & mqtt switch
 
 circadian_lighting:
@@ -453,7 +460,7 @@ device_tracker:
     hosts:
       cameron2: cam-phone
       gail3: Gail-iPhone
-      gervais3: iphone
+      gervais3: gphone
       grant2: grant-phone
       jennifer2: jen-phone
 
