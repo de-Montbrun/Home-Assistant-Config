@@ -74,3 +74,9 @@ sensor.fing_state:
   hidden: true
 sensor.distance_apart:
   icon: mdi:human-male-female
+sensor.warnings:
+  icon: mdi:cloud-alert
+sensor.humidity:
+  icon: mdi:water-percent
+sensor.wind_gust:
+  icon: mdi:weather-windy
