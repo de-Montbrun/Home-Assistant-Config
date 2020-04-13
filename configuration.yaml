@@ -504,6 +504,7 @@ ring:
 
 camera:
   - platform: ring
+  - platform: environment_canada
 
 # }}}
 # {{{ Sensors
@@ -656,6 +657,8 @@ sensor:
     scan_interval:
       hours: 1
 
+  - platform: environment_canada
+
   # Sensor for monitoring the bridge state
   - platform: mqtt
     name: Zigbee2mqtt Bridge state
@@ -719,13 +722,7 @@ tts:
 # {{{ Weather
 
 weather:
-  - platform: darksky
-    name: sj
-    api_key: !secret darksky_api_key
-    mode: daily
-    scan_interval:
-      hours: 1
-
+  - platform: environment_canada
 
 # }}}
 
