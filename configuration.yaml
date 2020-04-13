@@ -421,19 +421,16 @@ person:
     id: cam1995
     device_trackers:
       - device_tracker.camphone
-      - device_tracker.cameron2
       - device_tracker.cam_fing
   - name: Grant
     id: grant1994
     device_trackers:
       - device_tracker.grantphone
-      - device_tracker.grant2
       - device_tracker.grant_fing
   - name: Jennifer
     id: jen2000
     device_trackers:
       - device_tracker.jen_phone
-      - device_tracker.jennifer2
       - device_tracker.jen_fing
 
 # }}}
@@ -455,15 +452,6 @@ device_tracker:
     interval_seconds: 120
     new_device_defaults:
       track_new_devices: true
-
-  - platform: ping
-    count: 10
-    hosts:
-      cameron2: cam-phone
-      gail3: Gail-iPhone
-      gervais3: gphone
-      grant2: grant-phone
-      jennifer2: jen-phone
 
   - platform: huesensor
 
