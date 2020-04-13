@@ -17,8 +17,6 @@ device_tracker.grdems_phone_2:
   entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
 device_tracker.gail3:
   hidden: true
-group.gail_tracker:
-  hidden: true
 device_tracker.gervais_owntracks:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
@@ -29,8 +27,6 @@ device_tracker.gervais3:
   hidden: true
 device_tracker.gervaisapplewatch:
   hidden: true
-group.gervais_tracker:
-  hidden: true
 group.grant_tracker:
   entity_picture: https://avatars.io/facebook/Grannt
 device_tracker.grantphone:
@@ -38,19 +34,19 @@ device_tracker.grantphone:
 device_tracker.grant2:
   hidden: true
 group.cam_tracker:
-  entity_picture: https://avatars.io/facebook/cameron.langdon.73
+  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
 device_tracker.camphone:
   hidden: true
 device_tracker.cameron2:
   hidden: true
 person.cameron:
-  entity_picture: https://avatars.io/facebook/cameron.langdon.73
+  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
 person.gail:
   entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
 person.gervais:
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
 person.grant:
-  entity_picture: https://avatars.io/facebook/Grannt
+  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/54.png
 person.jennifer:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
 group.jen_tracker:
