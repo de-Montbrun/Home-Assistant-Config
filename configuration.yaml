@@ -172,6 +172,7 @@ light:
     entities:
       - light.cherub
       - light.foyer
+      - light.hallway_back
       - light.hallway_table
       - light.hallway_wall
       - light.stairs_back
