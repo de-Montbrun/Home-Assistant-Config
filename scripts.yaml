@@ -1,4 +1,4 @@
-#################################################################
+##################################################################
 #### Scripts
 ##################################################################
 
@@ -27,7 +27,7 @@ timed_outdoor:
     # Cancel ev. old timers
     - service: script.turn_off
       data:
-         entity_id: script.timer_outdoor_off
+        entity_id: script.timer_outdoor_off
     - service: homeassistant.turn_off
       data:
         entity_id: automation.timed_lights__movement_front_door
@@ -60,7 +60,7 @@ timed_sunroom:
     # Cancel ev. old timers
     - service: script.turn_off
       data:
-         entity_id: script.timer_sunroom_off
+        entity_id: script.timer_sunroom_off
     - service: scene.turn_on
       data:
         entity_id: scene.sunroom_nightlight
