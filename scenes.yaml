@@ -1,86 +1,195 @@
+---
 #################################################################
 #### Scenes
 #################################################################
-#
-#scene:
+
 - name: Sunroom normal
   entities:
     light.sunroom0:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
+      xy_color:
+      - 0.4448
+      - 0.4066
     light.sunroom1:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
+      xy_color:
+      - 0.4448
+      - 0.4066
     light.sunroom2:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
+      xy_color:
+      - 0.4448
+      - 0.4066
     light.sunroom3:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
+      xy_color:
+      - 0.4448
+      - 0.4066
     light.sunroom4:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.4448, 0.4066 ]
+      xy_color:
+      - 0.4448
+      - 0.4066
+  id: 9875c4420310427ab3228ac9fe1d46d0
 - name: Sunroom dim
   entities:
     light.sunroom0:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.169, 0.044 ]
+      xy_color:
+      - 0.169
+      - 0.044
     light.sunroom1:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.169, 0.044 ]
+      xy_color:
+      - 0.169
+      - 0.044
     light.sunroom2:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.169, 0.044 ]
+      xy_color:
+      - 0.169
+      - 0.044
     light.sunroom3:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.169, 0.044 ]
+      xy_color:
+      - 0.169
+      - 0.044
     light.sunroom4:
-      state: on
+      state: true
       transition: 2
       brightness: 255
-      xy_color: [ 0.169, 0.044 ]
+      xy_color:
+      - 0.169
+      - 0.044
+  id: 22d592f249a84cdabd4d20d816b94013
 - name: Sunroom nightlight
   entities:
     light.sunroom0:
-      state: on
+      state: true
       transition: 2
       brightness: 50
-      xy_color: [ 0.5424, 0.4197 ]
+      xy_color:
+      - 0.5424
+      - 0.4197
     light.sunroom1:
-      state: on
+      state: true
       transition: 2
       brightness: 50
-      xy_color: [ 0.5424, 0.4197 ]
+      xy_color:
+      - 0.5424
+      - 0.4197
     light.sunroom2:
-      state: on
+      state: true
       transition: 2
       brightness: 50
-      xy_color: [ 0.5424, 0.4197 ]
+      xy_color:
+      - 0.5424
+      - 0.4197
     light.sunroom3:
-      state: on
+      state: true
       transition: 2
       brightness: 50
-      xy_color: [ 0.5424, 0.4197 ]
+      xy_color:
+      - 0.5424
+      - 0.4197
     light.sunroom4:
-      state: on
+      state: true
       transition: 2
       brightness: 50
-      xy_color: [ 0.5424, 0.4197 ]
+      xy_color:
+      - 0.5424
+      - 0.4197
+  id: bb8450516daf4640bd4e4a097145c973
+- id: '1586910709551'
+  name: Sunset
+  entities:
+    light.hallway_lights:
+      brightness: 680
+      color_temp: 75
+      friendly_name: Hallway lights
+      max_mireds: 1000
+      min_mireds: 100
+      state: 'on'
+      supported_features: 43
+    light.kitchen_pots:
+      brightness: 48
+      device_id: '5'
+      friendly_name: Kitchen_Pots
+      state: 'on'
+      supported_features: 1
+      zone_id: '3'
+    light.livingroom_chandeliers:
+      brightness: 51
+      friendly_name: Livingroom Chandeliers
+      state: 'on'
+      supported_features: 1
+    light.livingroom_lamps:
+      brightness: 1000
+      color_temp: 78
+      friendly_name: Livingroom lamps
+      max_mireds: 1000
+      min_mireds: 100
+      state: 'on'
+      supported_features: 3
+    light.livingroom_shelves:
+      friendly_name: Livingroom Shelves
+      state: 'on'
+      supported_features: 0
+    light.main_floor_bathroom_light:
+      brightness: 255
+      device_id: '11'
+      friendly_name: Main Floor Bathroom
+      state: 'on'
+      supported_features: 1
+      zone_id: '7'
+    light.office2:
+      brightness: 1000
+      color_temp: 78
+      friendly_name: Office Wall
+      max_mireds: 1000
+      min_mireds: 100
+      state: 'on'
+      supported_features: 3
+      xy_color:
+      - 0.169
+      - 0.044
+    light.outdoor_lights:
+      brightness: 254
+      friendly_name: Outdoor lights
+      state: 'on'
+      supported_features: 41
+    light.saltlick:
+      friendly_name: Saltlick
+      state: 'on'
+      supported_features: 0
+    light.upstairsbathroom:
+      brightness: 254
+      friendly_name: UpstairsBathroom
+      state: 'on'
+      supported_features: 41
+    scene.sunroom_normal:
+      entity_id:
+      - light.sunroom0
+      - light.sunroom1
+      - light.sunroom2
+      - light.sunroom3
+      - light.sunroom4
+      friendly_name: Sunroom normal
+      state: scening
