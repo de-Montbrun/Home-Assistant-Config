@@ -263,6 +263,12 @@
   action:
     service: light.turn_on
     entity_id: light.office_lights
+    data:
+      transition: 2
+      brightness: 255
+      xy_color:
+        - 0.4448
+        - 0.4066
 
 - id: turn_off_lights_office
   alias: 'No one in Office - turn off lights'
@@ -499,14 +505,6 @@
   action:
     service: homeassistant.turn_on
     entity_id:
-      - light.bathroom2
-      - light.hallway_lights
-      - light.livingroom_lamps
-      - light.livingroom_shelves
-      - light.office_table
-      - light.outdoor_lights
-      - light.saltlick
-      - light.upstairsbathroom
       - scene.sunset
       - scene.sunroom_normal
 
@@ -856,7 +854,7 @@
     service: rest_command.sabnzb_api
 
 - alias: 'Home presence notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,group.grant_tracker
