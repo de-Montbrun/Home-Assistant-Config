@@ -264,11 +264,8 @@
     service: light.turn_on
     entity_id: light.office_lights
     data:
-      transition: 2
-      brightness: 255
-      xy_color:
-        - 0.4448
-        - 0.4066
+      brightness: 1000
+      color_temp: 78
 
 - id: turn_off_lights_office
   alias: 'No one in Office - turn off lights'
