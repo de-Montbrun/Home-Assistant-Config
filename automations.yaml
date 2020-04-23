@@ -541,7 +541,7 @@
         - switch.switch4
 
 - alias: 'Tell Jen to turn off her TV'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: time
     at: '08:10:00'
@@ -607,9 +607,9 @@
 - alias: 'Doorbell notify'
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: binary_sensor.front_door_motion
-      to: 'on'
+    #    - platform: state
+    #      entity_id: binary_sensor.front_door_motion
+    #      to: 'on'
     - platform: state
       entity_id: binary_sensor.front_door_ding
       to: 'on'
@@ -789,7 +789,7 @@
       title: 'Family Location'
 
 - alias: 'Current weather notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: sensor.condition
@@ -824,15 +824,20 @@
       title: 'Weather'
 
 - alias: 'Current UV index notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: numeric_state
     entity_id: sensor.uv_index
     above: '5'
   condition:
-    condition: numeric_state
-    entity_id: 'sensor.hass_uptime'
-    above: '.01'
+    condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: 'sensor.hass_uptime'
+        above: '.01'
+      - condition: state
+        entity_id: sun.sun
+        state: 'above_horizon'
   action:
     service: notify.zulip
     data:
