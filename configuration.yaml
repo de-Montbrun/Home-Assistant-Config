@@ -117,7 +117,7 @@ light:
   # Make Office Table switch act like a light
   - platform: switch
     name: Office Table
-    entity_id: switch.switch1
+    entity_id: switch.switch0
 
   # Make Outdoor switches act like lights
   - platform: switch
@@ -685,8 +685,8 @@ tuya:
 # Wemo switches are not always being discovered automatically.
 wemo:
   static:
-    #- 192.168.2.80
-    - 192.168.2.81
+    - 192.168.2.80
+      #- 192.168.2.81
     - 192.168.2.82
     - 192.168.2.83
 
