@@ -2,19 +2,6 @@
 #### Automations
 #################################################################
 
-- id: switch_hass_template
-  alias: switch_hass_template
-  initial_state: true
-  trigger:
-    - platform: homeassistant
-      event: start
-  action:
-    - service: frontend.set_theme
-      data_template:
-        name: 'dark_theme'
-    - delay: '00:03:00'
-    - service: homekit.start
-
 - alias: 'Plex paused/stopped - normal lights'
   initial_state: true
   trigger:
