@@ -117,12 +117,8 @@
   entities:
     light.hallway_lights:
       friendly_name: Hallway lights
-      state: true
-      transition: 2
+      state: 'on'
       brightness: 255
-      xy_color:
-      - 0.169
-      - 0.044
     light.hallway_table:
       brightness: 1000
       color_temp: 78
@@ -164,7 +160,7 @@
       zone_id: '7'
     light.office2:
       friendly_name: Office Wall
-      state: true
+      state: 'on'
       transition: 2
       brightness: 255
       xy_color:
@@ -174,7 +170,6 @@
       brightness: 255
       friendly_name: Outdoor lights
       state: 'on'
-      supported_features: 41
     light.saltlick:
       friendly_name: Saltlick
       state: 'on'
@@ -184,3 +179,7 @@
       friendly_name: UpstairsBathroom
       state: 'on'
       supported_features: 41
+    light.bathroom2:
+      state: 'on'
+      friendly_name: Bathroom2
+
