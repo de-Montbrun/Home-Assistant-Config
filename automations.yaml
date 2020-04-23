@@ -389,10 +389,15 @@
     event: sunset
     offset: '-00:20:00'
   action:
-    service: homeassistant.turn_on
-    entity_id:
-      - scene.sunset
-      - scene.sunroom_normal
+    - service: scene.turn_on
+      entity_id:
+        - scene.sunset
+        - scene.sunroom_normal
+    - service: light.turn_on
+      entity_id: light.hallway_table
+      data:
+        brightness: 1000
+        color_temp: 78
 
 - alias: 'Sunroom lumens low - lights on'
   initial_state: true
