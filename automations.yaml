@@ -1105,7 +1105,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: device_tracker.router,device_tracker.bedroom_ap,device_tracker.living_room_ap,device_tracker.sunroom_ap
+    entity_id: device_tracker.router,device_tracker.bedroom_ap,device_tracker.livingroom_ap,device_tracker.sunroom_ap
     from: 'not_home'
   action:
     service: notify.zulip
