@@ -67,6 +67,28 @@ emulated_hue:
   host_ip: 192.168.2.151
   expose_by_default: false
   entities:
+    light.cherub:
+      hidden: false
+    light.hallway_back:
+      hidden: false
+    light.hallway_table:
+      hidden: false
+    light.hallway_wall:
+      hidden: false
+    light.lamp0:
+      hidden: false
+    light.lamp1:
+      hidden: false
+    light.lamp2:
+      hidden: false
+    light.office0:
+      hidden: false
+    light.office1:
+      hidden: false
+    light.office2:
+      hidden: false
+    light.upstairsbathroom:
+      hidden: false
     media_player.roku_sunroom:
       hidden: false
     switch.switch3:
@@ -256,6 +278,12 @@ light:
       - light.sunroom2
       - light.sunroom3
       - light.sunroom4
+
+  - platform: group
+    name: Washroom lights
+    entities:
+      - light.main_floor_bathroom_light
+      - light.upstairsbathroom
 
 #  }}}
 # {{{ Media Players
