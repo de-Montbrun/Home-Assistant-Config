@@ -93,8 +93,6 @@ emulated_hue:
       hidden: false
     switch.switch3:
       hidden: false
-    switch.switch6:
-      hidden: false
 
 # }}}
 # {{{ frontend
@@ -152,7 +150,7 @@ light:
   # Make Sunroom switch act like light
   - platform: switch
     name: Saltlick
-    entity_id: switch.switch6
+    entity_id: switch.switch5
 
   - platform: group
     name: Bathroom lights
@@ -721,7 +719,7 @@ wemo:
 tplink:
   switch:
     - host: 192.168.2.84
-#    - host: 192.168.2.85
+    - host: 192.168.2.85
     - host: 192.168.2.87
     - host: 192.168.2.88
     - host: 192.168.2.89
