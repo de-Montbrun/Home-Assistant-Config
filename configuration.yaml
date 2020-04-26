@@ -69,11 +69,27 @@ emulated_hue:
   entities:
     light.cherub:
       hidden: false
+    light.diningroom0:
+      hidden: false
+    light.diningroom1:
+      hidden: false
+    light.diningroom2:
+      hidden: false
+    light.diningroom3:
+      hidden: false
+    light.diningroom4:
+      hidden: false
+    light.diningroom5:
+      hidden: false
+    light.diningroom6:
+      hidden: false
     light.hallway_back:
       hidden: false
     light.hallway_table:
       hidden: false
     light.hallway_wall:
+      hidden: false
+    light.hallway_upstairs:
       hidden: false
     light.lamp0:
       hidden: false
@@ -87,11 +103,17 @@ emulated_hue:
       hidden: false
     light.office2:
       hidden: false
+    light.spare0:
+      hidden: false
+    light.spare1:
+      hidden: false
+    light.stairs_back:
+      hidden: false
     light.upstairsbathroom:
       hidden: false
     media_player.roku_sunroom:
       hidden: false
-    switch.switch3:
+    switch.switch6:
       hidden: false
 
 # }}}
@@ -195,8 +217,8 @@ light:
       - light.hallway_back
       - light.hallway_table
       - light.hallway_wall
+      - light.hallway_upstairs
       - light.stairs_back
-      - light.upstairshallway
 
   - platform: group
     name: Kitchen lights
@@ -256,10 +278,12 @@ light:
     entities:
       - light.bedroom_lights
       - light.dressing_room_lights
+      - light.hallway_back
+      - light.hallway_upstairs
       - light.spareroom_lights
       - light.sunroom_lights
       - light.upstairsbathroom
-      - light.saltlick
+      - light.stairs_back
 
   - platform: group
     name: Spare room lights

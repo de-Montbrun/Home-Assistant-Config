@@ -115,18 +115,119 @@
 - id: '1586910709551'
   name: Sunset
   entities:
-    light.hallway_lights:
-      friendly_name: Hallway lights
+    light.bathroom2:
+      friendly_name: Bathroom2
       state: 'on'
+      supported_features: 0
+    light.cherub:
       brightness: 255
-    light.hallway_table:
-      brightness: 1000
-      color_temp: 78
-      friendly_name: HallwayTable
-      max_mireds: 1000
-      min_mireds: 100
+      color_temp: 153
+      effect: '0'
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      friendly_name: Cherub
+      hs_color:
+      - 225.176
+      - 100
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 0
+      - 63
+      - 255
       state: 'on'
-      supported_features: 3
+      supported_features: 23
+      xy_color:
+      - 0.137
+      - 0.065
+    light.foyer:
+      brightness: 254
+      friendly_name: Foyer
+      state: 'on'
+      supported_features: 41
+    light.front_door:
+      brightness: 254
+      friendly_name: Front door
+      state: 'on'
+      supported_features: 41
+    light.hallway_back:
+      brightness: 255
+      color_temp: 153
+      effect: '0'
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      friendly_name: Hallway Back
+      hs_color:
+      - 0
+      - 0
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      state: 'on'
+      supported_features: 23
+      xy_color:
+      - 0.323
+      - 0.329
+    light.hallway_table:
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      friendly_name: Hallway Table
+      max_mireds: 500
+      min_mireds: 153
+      state: unavailable
+      supported_features: 23
+    light.hallway_upstairs:
+      brightness: 255
+      color_temp: 167
+      effect: '0'
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      friendly_name: Hallway Upstairs
+      hs_color:
+      - 0
+      - 0
+      max_mireds: 500
+      min_mireds: 153
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      state: 'on'
+      supported_features: 23
+      xy_color:
+      - 0.323
+      - 0.329
+    light.hallway_wall:
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      friendly_name: Hallway Wall
+      max_mireds: 500
+      min_mireds: 153
+      state: unavailable
+      supported_features: 23
     light.kitchen_pots:
       brightness: 48
       device_id: '5'
@@ -140,13 +241,17 @@
       state: 'on'
       supported_features: 1
     light.livingroom_lamps:
-      brightness: 1000
-      color_temp: 78
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '4'
+      - '3'
       friendly_name: Livingroom lamps
-      max_mireds: 1000
-      min_mireds: 100
-      state: 'on'
-      supported_features: 3
+      max_mireds: 500
+      min_mireds: 153
+      state: unavailable
+      supported_features: 23
     light.livingroom_shelves:
       friendly_name: Livingroom Shelves
       state: 'on'
@@ -159,27 +264,43 @@
       supported_features: 1
       zone_id: '7'
     light.office2:
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
       friendly_name: Office Wall
-      state: 'on'
-      transition: 2
-      brightness: 255
-      xy_color:
-      - 0.169
-      - 0.044
+      max_mireds: 500
+      min_mireds: 153
+      state: unavailable
+      supported_features: 23
     light.outdoor_lights:
-      brightness: 255
+      brightness: 254
       friendly_name: Outdoor lights
       state: 'on'
+      supported_features: 41
     light.saltlick:
       friendly_name: Saltlick
       state: 'on'
       supported_features: 0
-    light.upstairsbathroom:
+    light.stairs_back:
       brightness: 255
+      device_id: '7'
+      friendly_name: Back Stairs
+      icon: mdi:lightbulb
+      state: 'on'
+      supported_features: 1
+      zone_id: '4'
+    light.upstairsbathroom:
+      effect_list:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
       friendly_name: UpstairsBathroom
-      state: 'on'
-      supported_features: 41
-    light.bathroom2:
-      state: 'on'
-      friendly_name: Bathroom2
-
+      max_mireds: 500
+      min_mireds: 153
+      state: unavailable
+      supported_features: 23
