@@ -150,13 +150,13 @@
       state: 'on'
       supported_features: 41
     light.front_door:
-      brightness: 254
+      brightness: 255
       friendly_name: Front door
       state: 'on'
       supported_features: 41
     light.hallway_back:
       brightness: 255
-      color_temp: 153
+      color_temp: 182
       effect: '0'
       effect_list:
       - '0'
@@ -180,6 +180,9 @@
       - 0.323
       - 0.329
     light.hallway_table:
+      brightness: 255
+      color_temp: 182
+      effect: '0'
       effect_list:
       - '0'
       - '1'
@@ -187,13 +190,23 @@
       - '3'
       - '4'
       friendly_name: Hallway Table
+      hs_color:
+      - 0
+      - 0
       max_mireds: 500
       min_mireds: 153
-      state: unavailable
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      state: 'on'
       supported_features: 23
+      xy_color:
+      - 0.323
+      - 0.329
     light.hallway_upstairs:
       brightness: 255
-      color_temp: 167
+      color_temp: 153
       effect: '0'
       effect_list:
       - '0'
@@ -217,6 +230,9 @@
       - 0.323
       - 0.329
     light.hallway_wall:
+      brightness: 255
+      color_temp: 182
+      effect: '0'
       effect_list:
       - '0'
       - '1'
@@ -224,10 +240,20 @@
       - '3'
       - '4'
       friendly_name: Hallway Wall
+      hs_color:
+      - 225.176
+      - 100
       max_mireds: 500
       min_mireds: 153
-      state: unavailable
+      rgb_color:
+      - 0
+      - 63
+      - 255
+      state: 'on'
       supported_features: 23
+      xy_color:
+      - 0.137
+      - 0.065
     light.kitchen_pots:
       brightness: 48
       device_id: '5'
@@ -236,22 +262,35 @@
       supported_features: 1
       zone_id: '3'
     light.livingroom_chandeliers:
-      brightness: 51
+      brightness: 71
       friendly_name: Livingroom Chandeliers
       state: 'on'
       supported_features: 1
     light.livingroom_lamps:
+      brightness: 255
+      color_temp: 153
+      effect: '0'
       effect_list:
-      - '0'
-      - '1'
       - '2'
-      - '4'
+      - '1'
+      - '0'
       - '3'
+      - '4'
       friendly_name: Livingroom lamps
+      hs_color:
+      - 0
+      - 0
       max_mireds: 500
       min_mireds: 153
-      state: unavailable
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      state: 'on'
       supported_features: 23
+      xy_color:
+      - 0.323
+      - 0.329
     light.livingroom_shelves:
       friendly_name: Livingroom Shelves
       state: 'on'
@@ -264,6 +303,9 @@
       supported_features: 1
       zone_id: '7'
     light.office2:
+      brightness: 255
+      color_temp: 176
+      effect: '0'
       effect_list:
       - '0'
       - '1'
@@ -271,12 +313,22 @@
       - '3'
       - '4'
       friendly_name: Office Wall
+      hs_color:
+      - 240
+      - 100
       max_mireds: 500
       min_mireds: 153
-      state: unavailable
+      rgb_color:
+      - 0
+      - 0
+      - 255
+      state: 'on'
       supported_features: 23
+      xy_color:
+      - 0.136
+      - 0.04
     light.outdoor_lights:
-      brightness: 254
+      brightness: 255
       friendly_name: Outdoor lights
       state: 'on'
       supported_features: 41
@@ -293,6 +345,9 @@
       supported_features: 1
       zone_id: '4'
     light.upstairsbathroom:
+      brightness: 255
+      color_temp: 169
+      effect: '0'
       effect_list:
       - '0'
       - '1'
@@ -300,7 +355,17 @@
       - '3'
       - '4'
       friendly_name: UpstairsBathroom
+      hs_color:
+      - 0
+      - 0
       max_mireds: 500
       min_mireds: 153
-      state: unavailable
+      rgb_color:
+      - 255
+      - 255
+      - 255
+      state: 'on'
       supported_features: 23
+      xy_color:
+      - 0.323
+      - 0.329
