@@ -2,6 +2,17 @@
 #### Automations
 #################################################################
 
+- id: tasmoto_state_on_ha_restart
+  alias: "Tasmota State on HA Restart"
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    service: mqtt.publish
+    data:
+      topic: "cmnd/tasmotas/backlog"
+      payload: "power1 ;power2 ;power3 ;power4 ;power5; dimmer; state "
+
 - alias: 'Plex paused/stopped - normal lights'
   initial_state: true
   trigger:
@@ -392,7 +403,7 @@
     - service: scene.turn_on
       entity_id:
         - scene.sunset
-        - scene.sunroom_normal
+        - scene.sunroom_dim
     - service: light.turn_on
       entity_id: light.hallway_table
       data:
@@ -698,7 +709,7 @@
     entity_id: light.kitchen_lights
 
 - alias: 'Spareroom - Occupancy lights on'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.found_motion_sensor
@@ -719,7 +730,7 @@
       brightness: 50
 
 - alias: 'Spareroom - No occupancy lights off'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.found_motion_sensor
