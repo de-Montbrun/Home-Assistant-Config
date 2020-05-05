@@ -310,10 +310,6 @@ light:
 #  }}}
 # {{{ Media Players
 
-# Plex
-plex:
-  host: 192.168.2.150
-
 media_player:
 
 # Alexa
