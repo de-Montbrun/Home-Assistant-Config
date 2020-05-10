@@ -13,6 +13,28 @@
       topic: "cmnd/tasmotas/backlog"
       payload: "power1 ;power2 ;power3 ;power4 ;power5; dimmer; state "
 
+      #- alias: "Power state on HA start-up"
+      #  trigger:
+      #    platform: homeassistant
+      #    event: start
+      #  action:
+      #    - service: mqtt.publish
+      #      data:
+      #        topic: "cmnd/tasmotas/power1"
+      #        payload: ""
+      #    - service: mqtt.publish
+      #      data:
+      #        topic: "cmnd/tasmotas/power2"
+      #        payload: ""
+      #    - service: mqtt.publish
+      #      data:
+      #        topic: "cmnd/tasmotas/Power3"
+      #        payload: ""
+      #    - service: mqtt.publish
+      #      data:
+      #        topic: "cmnd/tasmotas/power4"
+      #        payload: ""
+
 - alias: 'Plex paused/stopped - normal lights'
   initial_state: true
   trigger:
