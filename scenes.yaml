@@ -156,79 +156,27 @@
       supported_features: 41
     light.hallway_back:
       brightness: 255
-      color_temp: 182
-      effect: '0'
-      effect_list:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
       friendly_name: Hallway Back
-      hs_color:
-      - 0
-      - 0
-      max_mireds: 500
-      min_mireds: 153
       rgb_color:
       - 255
       - 255
       - 255
       state: 'on'
-      supported_features: 23
-      xy_color:
-      - 0.323
-      - 0.329
     light.hallway_table:
-      brightness: 255
-      color_temp: 182
-      effect: '0'
-      effect_list:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
       friendly_name: Hallway Table
-      hs_color:
-      - 0
-      - 0
-      max_mireds: 500
-      min_mireds: 153
       rgb_color:
       - 255
       - 255
       - 255
       state: 'on'
-      supported_features: 23
-      xy_color:
-      - 0.323
-      - 0.329
     light.hallway_upstairs:
       brightness: 255
-      color_temp: 153
-      effect: '0'
-      effect_list:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
       friendly_name: Hallway Upstairs
-      hs_color:
-      - 0
-      - 0
-      max_mireds: 500
-      min_mireds: 153
       rgb_color:
       - 255
       - 255
       - 255
       state: 'on'
-      supported_features: 23
-      xy_color:
-      - 0.323
-      - 0.329
     light.hallway_wall:
       brightness: 255
       color_temp: 182
@@ -346,26 +294,9 @@
       zone_id: '4'
     light.upstairsbathroom:
       brightness: 255
-      color_temp: 169
-      effect: '0'
-      effect_list:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
       friendly_name: UpstairsBathroom
-      hs_color:
-      - 0
-      - 0
-      max_mireds: 500
-      min_mireds: 153
       rgb_color:
       - 255
       - 255
       - 255
       state: 'on'
-      supported_features: 23
-      xy_color:
-      - 0.323
-      - 0.329
