@@ -301,7 +301,7 @@ hue:
       allow_unreachable: true
       allow_hue_groups: false
 
-# Homekit Setup
+# Homekit
 homekit:
   auto_start: false
   filter:
@@ -310,12 +310,12 @@ homekit:
       - media_player
       - switch
 
-# Lutron Dimmers
+# Lutron Caseta
 lutron_caseta:
   host: 192.168.2.121
-  keyfile: 'lutron/caseta.key'
-  certfile: 'lutron/caseta.crt'
-  ca_certs: 'lutron/caseta-bridge.crt'
+  keyfile:  '/etc/homeassistant/lutron/caseta.key'
+  certfile: '/etc/homeassistant/lutron/caseta.crt'
+  ca_certs: '/etc/homeassistant/lutron/caseta-bridge.crt'
 
 # Enables support for tracking state changes over time.
 history:
