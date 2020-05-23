@@ -620,9 +620,9 @@
 - alias: 'Doorbell notify'
   initial_state: true
   trigger:
-    #    - platform: state
-    #      entity_id: binary_sensor.front_door_motion
-    #      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.front_door_motion
+      to: 'on'
     - platform: state
       entity_id: binary_sensor.front_door_ding
       to: 'on'
