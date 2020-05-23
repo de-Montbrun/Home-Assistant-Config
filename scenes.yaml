@@ -157,25 +157,18 @@
     light.hallway_back:
       brightness: 255
       friendly_name: Hallway Back
-      rgb_color:
-      - 255
-      - 255
-      - 255
+      xy_color:
+      - 0.323
+      - 0.329
       state: 'on'
     light.hallway_table:
       friendly_name: Hallway Table
-      rgb_color:
-      - 255
-      - 255
-      - 255
+      xy_color:
+      - 0.323
+      - 0.329
       state: 'on'
     light.hallway_upstairs:
-      brightness: 255
       friendly_name: Hallway Upstairs
-      rgb_color:
-      - 255
-      - 255
-      - 255
       state: 'on'
     light.hallway_wall:
       brightness: 255
@@ -209,11 +202,6 @@
       state: 'on'
       supported_features: 1
       zone_id: '3'
-    light.livingroom_chandeliers:
-      brightness: 71
-      friendly_name: Livingroom Chandeliers
-      state: 'on'
-      supported_features: 1
     light.livingroom_lamps:
       brightness: 255
       color_temp: 153
@@ -292,11 +280,15 @@
       state: 'on'
       supported_features: 1
       zone_id: '4'
+      xy_color:
+      - 0.323
+      - 0.329
     light.upstairsbathroom:
       brightness: 255
       friendly_name: UpstairsBathroom
-      rgb_color:
-      - 255
-      - 255
-      - 255
+      xy_color:
+      - 0.323
+      - 0.329
+      state: 'on'
+    light.office_table:
       state: 'on'
