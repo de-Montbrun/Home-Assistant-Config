@@ -267,7 +267,6 @@
       brightness: 255
       friendly_name: Outdoor lights
       state: 'on'
-      supported_features: 41
     light.saltlick:
       friendly_name: Saltlick
       state: 'on'
