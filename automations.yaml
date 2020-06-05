@@ -711,7 +711,7 @@
     entity_id: light.kitchen_lights
 
 - alias: 'Spareroom - Occupancy lights on'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.found_motion_sensor
@@ -728,11 +728,9 @@
   action:
     service: light.turn_on
     entity_id: light.spareroom_lights
-    data:
-      brightness: 50
 
 - alias: 'Spareroom - No occupancy lights off'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: binary_sensor.found_motion_sensor
