@@ -145,10 +145,10 @@
       - 0.137
       - 0.065
     light.foyer:
-      brightness: 254
       friendly_name: Foyer
       state: 'on'
       supported_features: 41
+      brightness: 255
     light.front_door:
       brightness: 255
       friendly_name: Front door
@@ -283,11 +283,8 @@
       - 0.323
       - 0.329
     light.upstairsbathroom:
+      state: 'on'
       brightness: 255
       friendly_name: UpstairsBathroom
-      xy_color:
-      - 0.323
-      - 0.329
-      state: 'on'
     light.office_table:
       state: 'on'
