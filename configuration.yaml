@@ -77,7 +77,7 @@ http:
 # {{{ Lights
 
 light:
-  # Make basemnet switch act like a light
+  # Make basement switch act like a light
   - platform: switch
     name: Basement Light
     entity_id: switch.basement_light
@@ -133,7 +133,7 @@ light:
       - light.bedroom4
 
   - platform: group
-    name: Diningroom lights
+    name: Dining room lights
     entities:
       - light.diningroom0
       - light.diningroom1
@@ -193,7 +193,7 @@ light:
   - platform: group
     name: Main floor lights
     entities:
-      - light.diningroom_lights
+      - light.dining_room_lights
       - light.hallway_lights
       - light.kitchen_lights
       - light.livingroom_lights
@@ -281,7 +281,7 @@ logger:
     homeassistant.components.media_player.roku: fatal
     homeassistant.components.http.ban: warning
 
-# Hue lights are not being discovered automaically.
+# Hue lights are not being discovered automatically
 hue:
   bridges:
     - host: 192.168.2.120
