@@ -23,12 +23,30 @@ homeassistant:
       trusted_networks:
         - 192.168.2.0/24
         - 127.0.0.1
-#  {{{ Asus
+# {{{ Asus
 
 asuswrt:
   host: 192.168.2.1
   username: !secret router_username
   ssh_key: /home/homeassistant/.ssh/id_rsa
+
+# }}}
+# {{{ Alexa
+
+alexa:
+  smart_home:
+    endpoint: https://api.amazonalexa.com/v3/events
+    client_id: !secret alexa_client_id
+    client_secret: !secret alexa_client_secret
+    filter:
+      include_domains:
+        - light
+        - scene
+      include_entities:
+        - media_player.roku_3
+        - media_player.roku_sunroom
+        - media_player.sonos
+        - switch.switch4
 
 # }}}
 # {{{ Circadian Lighting & mqtt switch
