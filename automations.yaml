@@ -434,7 +434,7 @@
       entity_id: light.saltlick
 
 - alias: 'Bedroom Window fan on'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: template
     value_template: '{{ states.sensor.temperature.state < states.sensor.master_bedroom_temperature.state }}'
@@ -446,22 +446,44 @@
       - condition: state
         entity_id: sensor.season
         state: 'summer'
+      - condition: and
+        conditions:
+          - condition: or
+            conditions:
+            - condition: time
+              after: '18:00:00'
+            - condition: time
+              before: '05:00:00'
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: person.gail
+              state: 'home'
+            - condition: template
+              value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
   action:
     service: switch.turn_on
     entity_id:
       - switch.switch4
 
 - alias: 'Bedroom Window fan off'
-  initial_state: false
+  initial_state: true
   trigger:
     - platform: template
       value_template: '{{ states.sensor.temperature.state > states.sensor.master_bedroom_temperature.state }}'
     - platform: template
       value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 18 }}'
+    - platform: time
+      at: '08:00:00'
   condition:
-    condition: state
-    entity_id: sensor.season
-    state: 'summer'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: person.gail
+        state: 'home'
+      - condition: state
+        entity_id: sensor.season
+        state: 'summer'
   action:
     service: switch.turn_off
     entity_id:
