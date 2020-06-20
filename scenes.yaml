@@ -250,19 +250,19 @@
       - '4'
       friendly_name: Office Wall
       hs_color:
-      - 240
+      - 0
       - 100
       max_mireds: 500
       min_mireds: 153
       rgb_color:
-      - 0
-      - 0
       - 255
+      - 0
+      - 0
       state: 'on'
       supported_features: 23
       xy_color:
-      - 0.136
-      - 0.04
+      - 0.701
+      - 0.299
     light.outdoor_lights:
       brightness: 255
       friendly_name: Outdoor lights
