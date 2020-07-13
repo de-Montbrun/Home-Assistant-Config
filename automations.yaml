@@ -706,6 +706,22 @@
     service: homeassistant.turn_on
     entity_id: script.timed_sunroom
 
+- alias: 'Sunroom - No occupancy lights off'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.sunroom_motion_sensor
+    to: 'off'
+    for:
+      minutes: 10
+  condition:
+    condition: state
+    entity_id: media_player.roku_sunroom
+    state: 'standby'
+  action:
+    service: light.turn_off
+    entity_id: light.sunroom_lights
+
 - alias: 'Kitchen - Occupancy lights on'
   initial_state: true
   trigger:
