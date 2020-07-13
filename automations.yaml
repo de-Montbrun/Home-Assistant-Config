@@ -360,7 +360,6 @@
     - service: switch.turn_off
       entity_id:
         - switch.switch0
-        - switch.switch6
     - service: light.turn_off
       entity_id: all
     - delay: '00:00:05'
@@ -383,7 +382,7 @@
       value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: switch.turn_off
-    entity_id: switch.switch6
+    entity_id: switch.switch3
 
 - alias: 'Sunrise - Lights out'
   initial_state: true
@@ -476,14 +475,25 @@
     - platform: time
       at: '08:00:00'
   condition:
-    condition: and
+    condition: or
     conditions:
-      - condition: state
-        entity_id: person.gail
-        state: 'home'
-      - condition: state
-        entity_id: sensor.season
-        state: 'summer'
+      - condition: template
+        value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 18 }}'
+      - condition: template
+        value_template: '{{ states.sensor.temperature.state > states.sensor.master_bedroom_temperature.state }}'
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: sensor.season
+            state: 'summer'
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: person.gail
+                state: 'home'
+              - condition: state
+                entity_id: binary_sensor.workday_sensor
+                state: 'on'
   action:
     service: switch.turn_off
     entity_id:
@@ -501,7 +511,7 @@
   action:
     service: switch.turn_off
     entity_id:
-      - switch.switch6
+      - switch.switch3
 
 - alias: 'Bedtime'
   initial_state: true
@@ -543,7 +553,7 @@
         - light.main_floor_lights
         - light.office_lights
         - light.second_floor_lights
-        - switch.switch6
+        - switch.switch3
     - service: climate.set_preset_mode
       data:
         entity_id: climate.my_ecobee
@@ -571,9 +581,6 @@
         - light.bathroom_lights
         - light.bedroom_lights
         - light.dressing_room_lights
-    - service: switch.turn_off
-      entity_id:
-        - switch.switch4
 
 - alias: 'Tell Jen to turn off her TV'
   initial_state: false
