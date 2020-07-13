@@ -85,8 +85,8 @@ frontend:
   themes: !include_dir_merge_named themes/
 
 http:
-  ssl_certificate: !secret http_ssl_certificate
-  ssl_key: !secret http_ssl_key
+  #ssl_certificate: !secret http_ssl_certificate
+  #ssl_key: !secret http_ssl_key
   use_x_forwarded_for: true
   trusted_proxies:
     - 127.0.0.1
@@ -172,13 +172,13 @@ light:
   - platform: group
     name: Hallway lights
     entities:
+      - light.stairs_back
       - light.cherub
       - light.foyer
       - light.hallway_back
       - light.hallway_table
       - light.hallway_wall
       - light.hallway_upstairs
-      - light.stairs_back
 
   - platform: group
     name: Kitchen lights
@@ -221,9 +221,9 @@ light:
   - platform: group
     name: Office lights
     entities:
-      - light.office0
-      - light.office1
-      - light.office2
+      - light.office_lamp
+      - light.office_main_light
+      - light.office_wall
       - light.office_table
 
   - platform: group
@@ -318,9 +318,9 @@ homekit:
 # Lutron Caseta
 lutron_caseta:
   host: 192.168.2.121
-  keyfile:  'lutron/caseta.key'
-  certfile: 'lutron/caseta.crt'
-  ca_certs: 'lutron/caseta-bridge.crt'
+  keyfile:  '/etc/homeassistant/lutron/caseta.key'
+  certfile: '/etc/homeassistant/lutron/caseta.crt'
+  ca_certs: '/etc/homeassistant/lutron/caseta-bridge.crt'
 
 # Enables support for tracking state changes over time.
 history:
@@ -348,14 +348,6 @@ downloader:
   download_dir: /var/www/html/snapshots
 
 system_health:
-
-speedtestdotnet:
-  scan_interval:
-    hours: 8
-  monitored_conditions:
-    - ping
-    - download
-    - upload
 
 # }}}
 # {{{ mqtt
@@ -413,14 +405,9 @@ notify:
 # {{{ Persons
 
 person:
-  - name: Gervais
-    id: gevais1968
-    user_id: 552babcc7c9f490191d97de847350f77
-    device_trackers:
-      - device_tracker.iphone
   - name: Gail
     id: gail1968
-    user_id: 1b937317d2a242d7af7df282b35359b1
+    user_id: 09f60884ba844227a9b3c2d54fb341e2
     device_trackers:
       - device_tracker.grdems_phone_2
   - name: Cameron
@@ -438,6 +425,7 @@ person:
     device_trackers:
       - device_tracker.jen_phone
       - device_tracker.jen_fing
+      - device_tracker.jennifer_pro
 
 # }}}
 # {{{ Presence Trackers
@@ -459,23 +447,29 @@ device_tracker:
     new_device_defaults:
       track_new_devices: true
 
+  - platform: ping
+    count: 10
+    hosts:
+      bell_router: 192.168.2.1
+
   - platform: huesensor
 
 # }}}
 # {{{ Programmable thermostat
 
-climate:
-  - platform: programmable_thermostat
-    name: Bedroom Heater
-    heater:
-      - switch.switch4
-    actual_temp_sensor: sensor.master_bedroom_temperature
-    min_temp: 14
-    max_temp: 18
-    target_temp_sensor: sensor.thermostat_program
-    tolerance: 0.3
-    hvac_options: 7
-    auto_mode: all
+# Commenting this out. It's messing with my window fan
+#climate:
+#  - platform: programmable_thermostat
+#    name: Bedroom Heater
+#    heater:
+#      - switch.switch4
+#    actual_temp_sensor: sensor.master_bedroom_temperature
+#    min_temp: 14
+#    max_temp: 18
+#    target_temp_sensor: sensor.thermostat_program
+#    tolerance: 0.3
+#    hvac_options: 7
+#    auto_mode: all
 
 # }}}
 ## {{{ Rest Commands
@@ -527,8 +521,6 @@ sensor:
       - type: disk_use_percent
         arg: /media/cracker
       - type: disk_use_percent
-        arg: /media/grapes
-      - type: disk_use_percent
         arg: /home
       - type: memory_use_percent
       - type: swap_use_percent
@@ -554,11 +546,6 @@ sensor:
 
   - platform: moon
 
-  - platform: yr
-    monitored_conditions:
-      - temperature
-      - symbol
-
   - platform: command_line
     name: 'filesize_db'
     command: 'stat -c %s "/etc/homeassistant/home-assistant_v2.db"'
@@ -576,38 +563,38 @@ sensor:
 
   - platform: template
     sensors:
-      bed_room_lumens:
-        friendly_name: 'Bed Room Lumens'
-        value_template: '{{ states.binary_sensor.bedroom_motion_sensor.attributes.light_level }}'
-        unit_of_measurement: Lumens
-        device_class: illuminance
-      bed_room_battery_level:
-        friendly_name: 'Bed Room Battery Level'
-        value_template: '{{ states.binary_sensor.bedroom_motion_sensor.attributes.battery }}'
-        unit_of_measurement: '%'
-        device_class: battery
-
-      kitchen_lumens:
-        friendly_name: 'Kitchen Lumens'
-        value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.light_level }}'
-        unit_of_measurement: Lumens
-        device_class: illuminance
       kitchen_battery_level:
         friendly_name: 'Kitchen Battery Level'
         value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.battery }}'
         unit_of_measurement: '%'
         device_class: battery
-
-      sun_room_lumens:
-        friendly_name: 'Sun Room Lumens'
-        value_template: '{{ states.binary_sensor.sunroom_motion_sensor.attributes.light_level }}'
+      kitchen_lumens:
+        friendly_name: 'Kitchen Lumens'
+        value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.light_level }}'
         unit_of_measurement: Lumens
         device_class: illuminance
-      sun_room_battery_level:
-        friendly_name: 'Sun Room Battery Level'
-        value_template: '{{ states.binary_sensor.sunroom_motion_sensor.attributes.battery }}'
+
+      spare_room_battery_level:
+        friendly_name: 'Spare Room Battery Level'
+        value_template: '{{ states.binary_sensor.spare_room_motion_sensor.attributes.battery }}'
         unit_of_measurement: '%'
         device_class: battery
+      spare_room_lumens:
+        friendly_name: 'Spare Room Lumens'
+        value_template: '{{ states.binary_sensor.spare_room_motion_sensor.attributes.light_level }}'
+        unit_of_measurement: Lumens
+        device_class: illuminance
+
+      sun_room_battery_level:
+        friendly_name: 'Sun Room Battery Level'
+        value_template: '{{ states.binary_sensor.sun_room_motion_sensor.attributes.battery }}'
+        unit_of_measurement: '%'
+        device_class: battery
+      sun_room_lumens:
+        friendly_name: 'Sun Room Lumens'
+        value_template: '{{ states.binary_sensor.sun_room_motion_sensor.attributes.light_level }}'
+        unit_of_measurement: Lumens
+        device_class: illuminance
 
       distance_apart:
         friendly_name: 'GandG Apart'
@@ -633,24 +620,6 @@ sensor:
     senders:
       - alert@fing.io
       - alert@fing.com
-
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    monitored_conditions:
-      - apparent_temperature
-      - humidity
-      - nearest_storm_distance
-      - temperature
-      - temperature_high
-      - temperature_low
-      - summary
-      - wind_bearing
-      - wind_gust
-      - wind_speed
-      - uv_index
-    units: ca
-    scan_interval:
-      hours: 1
 
   - platform: environment_canada
 
@@ -687,9 +656,9 @@ binary_sensor:
 wemo:
   static:
     - 192.168.2.80
-      #- 192.168.2.81
+    # Died - 192.168.2.81
     - 192.168.2.82
-    - 192.168.2.83
+    # Currently unused - 192.168.2.83
 
 tplink:
   switch:
