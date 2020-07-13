@@ -1,0 +1,369 @@
+title: ''
+views:
+  - badges: []
+    cards:
+      - cards:
+          - entities:
+              - entity: person.gail
+              - entity: person.gervais
+              - entity: person.jennifer
+            show_header_toggle: false
+            title: Household Members
+            type: entities
+          - card: null
+            entities:
+              - entity: person.chris
+              - entity: person.simone
+            show_header_toggle: false
+            title: Tenants
+            type: entities
+          - card:
+              entity: sensor.distance_apart
+              max: 4000
+              min: 0
+              name: GandG Apart
+              severity:
+                green: 0
+                red: 1000
+                yellow: 200
+              theme: default
+              type: gauge
+            conditions:
+              - entity: sensor.distance_apart
+                state_not: '0'
+            type: conditional
+        type: vertical-stack
+      - dark_mode: true
+        entities:
+          - entity: device_tracker.iphone
+          - entity: device_tracker.grdems_phone_2
+        hours_to_show: 2
+        type: map
+    icon: 'mdi:account-multiple'
+    panel: false
+    path: default-view
+    title: People
+  - badges: []
+    cards:
+      - entities:
+          - entity: light.outdoor_lights
+          - entity: light.main_floor_lights
+          - entity: light.second_floor_lights
+          - entity: light.bathroom_lights
+          - entity: light.bedroom_lights
+          - entity: light.dining_room_lights
+          - entity: light.dressing_room_lights
+          - entity: light.hallway_lights
+          - entity: light.kitchen_lights
+          - entity: light.livingroom_lights
+          - entity: light.office_lights
+          - entity: light.sunroom_lights
+        show_header_toggle: false
+        title: All Lights
+        type: entities
+      - card:
+          show_header_toggle: false
+          title: Bathroom
+        entities:
+          - entity: light.bathroom_lights
+          - entity: light.bathroom0
+          - entity: light.bathroom1
+          - entity: light.bathroom2
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Bedroom
+        entities:
+          - entity: light.bedroom_lights
+          - switch.circadian_lighting_bedroom_circadian
+          - entity: light.bedroom0
+          - entity: light.bedroom1
+          - entity: light.bedroom2
+          - entity: light.bedroom3
+          - entity: light.bedroom4
+          - switch.switch4
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Dining Room
+        entities:
+          - entity: light.dining_room_lights
+          - entity: light.diningroom0
+          - entity: light.diningroom1
+          - entity: light.diningroom2
+          - entity: light.diningroom3
+          - entity: light.diningroom4
+          - entity: light.diningroom5
+          - entity: light.diningroom6
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - entities:
+          - entity: light.dressing_room_lights
+          - entity: light.dressing_room0
+          - entity: light.dressing_room1
+          - entity: light.dressing_room2
+          - entity: light.dressing_room3
+        show_header_toggle: false
+        title: Dressing Room
+        type: entities
+      - card:
+          show_header_toggle: false
+          title: Hallway
+        entities:
+          - entity: light.hallway_lights
+          - entity: light.stairs_back
+          - entity: light.cherub
+          - entity: light.foyer
+          - entity: light.hallway_back
+          - entity: light.hallway_table
+          - entity: light.hallway_upstairs
+          - entity: light.hallway_wall
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Kitchen
+        entities:
+          - entity: light.kitchen_lights
+          - entity: light.kitchen_island
+          - entity: light.kitchen_pots
+          - entity: light.kitchen_swirly0
+          - entity: light.kitchen_swirly1
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Livingroom
+        entities:
+          - entity: light.livingroom_lights
+          - entity: light.lamp0
+          - entity: light.lamp1
+          - entity: light.lamp2
+          - entity: light.living_room_pendants0
+          - entity: light.living_room_pendants1
+          - entity: light.livingroom_shelves
+        state_color: true
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Office
+        entities:
+          - light.office_lights
+          - switch.circadian_lighting_office_circadian
+          - light.office_lamp
+          - light.office_main_light
+          - light.office_table
+          - light.office_wall
+          - switch.switch3
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Outdoor
+        entities:
+          - entity: light.outdoor_lights
+          - entity: light.front_door
+          - entity: light.backdoor
+          - entity: light.deck_lights
+        state_color: true
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Sunroom
+        entities:
+          - light.sunroom_lights
+          - light.sunroom0
+          - light.sunroom1
+          - light.sunroom2
+          - light.sunroom3
+          - light.sunroom4
+          - light.saltlick
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Misc
+        entities:
+          - entity: light.basement_light
+          - entity: light.main_floor_bathroom_light
+          - entity: light.upstairsbathroom
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - entities:
+          - entity: light.spare_room_lights
+          - entity: light.spare0
+          - entity: light.spare1
+        show_header_toggle: false
+        title: Spare Room
+        type: entities
+    icon: 'mdi:lightbulb'
+    title: Lights and Switches
+  - badges: []
+    cards:
+      - entity: weather.saint_john
+        name: in Saint John
+        type: weather-forecast
+      - entities:
+          - entity: sun.sun
+          - entity: sensor.condition
+          - entity: sensor.air_quality_health_index
+          - entity: sensor.temperature
+          - entity: sensor.high_temperature
+          - entity: sensor.low_temperature
+          - entity: sensor.humidex
+          - entity: sensor.wind_chill
+          - entity: sensor.wind_gust
+          - entity: sensor.humidity
+          - entity: sensor.uv_index
+          - entity: sensor.warnings
+          - entity: sensor.watches
+        show_header_toggle: false
+        type: entities
+      - entities:
+          - entity: climate.my_ecobee
+          - entity: binary_sensor.my_ecobee_occupancy
+          - entity: sensor.my_ecobee_temperature
+          - entity: binary_sensor.living_room_occupancy
+          - entity: sensor.living_room_temperature
+          - entity: binary_sensor.office_occupancy
+          - entity: sensor.office_temperature
+          - entity: binary_sensor.jennifer_room_occupancy
+          - entity: sensor.jennifer_room_temperature
+          - entity: binary_sensor.master_bedroom_occupancy
+          - entity: sensor.master_bedroom_temperature
+          - entity: binary_sensor.upstair_hall_occupancy
+          - entity: sensor.upstair_hall_temperature
+          - entity: sensor.my_ecobee_humidity
+        show_header_toggle: false
+        state_color: true
+        title: Eco Bee
+        type: entities
+      - entities:
+          - entity: binary_sensor.kitchen_motion_sensor
+          - entity: sensor.kitchen_sensor_temperature
+          - sensor.kitchen_sensor_light_level
+          - sensor.kitchen_lumens
+          - sensor.kitchen_battery_level
+          - entity: binary_sensor.sun_room_motion_sensor
+          - entity: sensor.sun_room_sensor_temperature
+          - sensor.sun_room_sensor_light_level
+          - sensor.sun_room_lumens
+          - sensor.sun_room_battery_level
+          - entity: binary_sensor.spare_room_motion_sensor
+          - entity: sensor.spare_room_sensor_temperature
+          - sensor.spare_room_sensor_light_level
+          - sensor.spare_room_lumens
+          - sensor.spare_room_battery_level
+        show_header_toggle: false
+        state_color: true
+        title: Hue Sensors
+        type: entities
+    icon: 'mdi:weather-cloudy'
+    panel: false
+    title: Weather
+  - badges: []
+    cards:
+      - camera_image: camera.front_door
+        entity: camera.front_door
+        show_info: true
+        title: Front Door
+        type: picture-entity
+      - entities:
+          - entity: weblink.home_security
+            icon: 'mdi:file-video'
+            name: Home Security
+            type: weblink
+            url: 'https://home.demontbrun.com/snapshots/'
+        show_header_toggle: false
+        title: Recordings
+        type: entities
+      - entities:
+          - sensor.front_door_battery
+          - binary_sensor.front_door_ding
+          - sensor.front_door_last_activity
+          - sensor.front_door_last_ding
+          - sensor.front_door_last_motion
+          - binary_sensor.front_door_motion
+          - sensor.front_door_volume
+        state_color: true
+        type: entities
+    icon: 'mdi:video'
+    title: Security
+  - badges: []
+    cards:
+      - entity: media_player.everywhere
+        type: media-control
+      - entity: media_player.bedroom
+        type: media-control
+      - entity: media_player.kitchen
+        type: media-control
+      - entity: media_player.office
+        type: media-control
+      - entity: media_player.sun_room
+        type: media-control
+      - card:
+          entity: media_player.apt_a
+          type: media-control
+        conditions:
+          - entity: media_player.plex_xboxone
+            state_not: 'off'
+          - entity: media_player.plex_xboxone
+            state: playing
+        type: conditional
+      - card:
+          entity: media_player.plex_roku_3
+          type: media-control
+        conditions:
+          - entity: media_player.plex_roku_3
+            state_not: 'off'
+          - entity: media_player.plex_roku_3
+            state: playing
+        type: conditional
+      - card:
+          entity: media_player.plex_xboxone
+          type: media-control
+        conditions:
+          - entity: media_player.plex_xboxone
+            state_not: 'off'
+          - entity: media_player.plex_xboxone
+            state: playing
+        type: conditional
+      - entity: media_player.plex_sunroom
+        type: media-control
+      - entity: media_player.roku_sunroom
+        type: media-control
+      - card:
+          entity: media_player.plex_plex_for_mac_keypear_dem
+          type: media-control
+        conditions:
+          - entity: media_player.plex_plex_for_mac_keypear_dem
+            state_not: 'off'
+          - entity: media_player.plex_plex_for_mac_keypear_dem
+            state: playing
+        type: conditional
+    icon: 'mdi:play-circle-outline'
+    title: Media Players
