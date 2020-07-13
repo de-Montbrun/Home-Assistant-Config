@@ -1223,6 +1223,39 @@
     service: light.turn_off
     entity_id: light.basement_light
 
+- alias: 'Bell Router issues - back online'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: device_tracker.bell_router
+    from: 'not_home'
+  action:
+    - service: notify.zulip
+      data_template:
+        message: >
+          :blue_circle: Bell router is responding :smile:
+        title: 'Internet'
+
+- alias: 'Bell Router issues - offline'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: device_tracker.bell_router
+    to: 'not_home'
+    for:
+      minutes: 10
+  action:
+    - service: notify.zulip
+      data_template:
+        message: >
+          :black_large_square: Router has been offline for 10 minutes. Toggling plug. :frowning:
+        title: 'Internet'
+    - service: switch.turn_off
+      entity_id: switch.switch6
+    - delay: '00:00:20'
+    - service: switch.turn_on
+      entity_id: switch.switch6
+
 - alias: 'Fing update user'
   initial_state: true
   trigger:
