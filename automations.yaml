@@ -1233,7 +1233,7 @@
     - service: notify.zulip
       data_template:
         message: >
-          :blue_circle: Bell router is responding :smile:
+          :blue_circle: Bell router is responding :check:
         title: 'Internet'
 
 - alias: 'Bell Router issues - offline'
@@ -1243,12 +1243,12 @@
     entity_id: device_tracker.bell_router
     to: 'not_home'
     for:
-      minutes: 10
+      minutes: 5
   action:
     - service: notify.zulip
       data_template:
         message: >
-          :black_large_square: Router has been offline for 10 minutes. Toggling plug. :frowning:
+          :black_large_square: Router has been offline for 5 minutes. Toggling plug. :no_entry:
         title: 'Internet'
     - service: switch.turn_off
       entity_id: switch.switch6
