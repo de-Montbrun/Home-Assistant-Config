@@ -1259,6 +1259,10 @@
     - delay: '00:00:20'
     - service: switch.turn_on
       entity_id: switch.switch6
+    - service: device_tracker.see
+      data_template:
+        dev_id: bell_router
+        location_name: 'triggered'
 
 - alias: 'Fing update user'
   initial_state: true
