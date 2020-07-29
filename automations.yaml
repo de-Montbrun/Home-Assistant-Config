@@ -1229,19 +1229,26 @@
 
 - alias: 'Bell Router issues - back online'
   initial_state: true
+  mode: single
   trigger:
     platform: state
     entity_id: device_tracker.bell_router
     from: 'not_home'
   action:
+    - service: homeassistant.turn_off
+      entity_id:  automation.bell_router_issues_offline
     - service: notify.zulip
       data_template:
         message: >
           :blue_circle: Bell router is responding :check:
         title: 'Internet'
+    - delay: '00:00:05'
+    - service: homeassistant.turn_on
+      entity_id:  automation.bell_router_issues_offline
 
 - alias: 'Bell Router issues - offline'
   initial_state: true
+  mode: restart
   trigger:
     platform: state
     entity_id: device_tracker.bell_router
