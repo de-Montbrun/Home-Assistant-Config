@@ -43,36 +43,36 @@
       transition: 2
       brightness: 255
       xy_color:
-      - 0.169
-      - 0.044
+      - 0.167
+      - 0.137
     light.sunroom1:
       state: true
       transition: 2
       brightness: 255
       xy_color:
-      - 0.169
-      - 0.044
+      - 0.167
+      - 0.137
     light.sunroom2:
       state: true
       transition: 2
       brightness: 255
       xy_color:
-      - 0.169
-      - 0.044
+      - 0.167
+      - 0.137
     light.sunroom3:
       state: true
       transition: 2
       brightness: 255
       xy_color:
-      - 0.169
-      - 0.044
+      - 0.167
+      - 0.137
     light.sunroom4:
       state: true
       transition: 2
       brightness: 255
       xy_color:
-      - 0.169
-      - 0.044
+      - 0.167
+      - 0.137
   id: 22d592f249a84cdabd4d20d816b94013
 - name: Sunroom nightlight
   entities:
