@@ -443,21 +443,12 @@
       - condition: state
         entity_id: sensor.season
         state: 'summer'
-      - condition: and
+      - condition: or
         conditions:
-          - condition: or
-            conditions:
-            - condition: time
-              after: '18:00:00'
-            - condition: time
-              before: '05:00:00'
-          - condition: or
-            conditions:
-            - condition: state
-              entity_id: person.gail
-              state: 'home'
-            - condition: template
-              value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
+          - condition: time
+            after: '18:00:00'
+          - condition: time
+            before: '08:00:00'
   action:
     service: switch.turn_on
     entity_id:
@@ -513,12 +504,13 @@
 
 - alias: 'Bedtime'
   initial_state: true
+  mode: restart
   trigger:
     platform: state
     entity_id: media_player.roku_sunroom
     to: 'standby'
     for:
-      minutes: 20
+      minutes: 5
   condition:
     condition: and
     conditions:
@@ -543,6 +535,7 @@
           - condition: template
             value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
+    - delay: '00:15:00'
     - service: homeassistant.turn_off
       entity_id:
         - light.basement_light
