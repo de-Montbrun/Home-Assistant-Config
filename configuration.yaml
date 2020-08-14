@@ -26,8 +26,8 @@ homeassistant:
 # {{{ Asus
 
 asuswrt:
-  host: 192.168.2.4
-  username: pi
+  host: 192.168.2.1
+  username: !secret router_username
   ssh_key: /home/homeassistant/.ssh/id_rsa
 
 # }}}
@@ -441,9 +441,9 @@ device_tracker:
       track_new_devices: true
 
   - platform: ping
-    count: 10
+    count: 3
     hosts:
-      bell_router: 192.168.2.1
+      bell_internet: 1.1.1.1
 
   - platform: huesensor
 

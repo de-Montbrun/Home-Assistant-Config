@@ -1227,49 +1227,40 @@
     service: light.turn_off
     entity_id: light.basement_light
 
-- alias: 'Bell Router issues - back online'
+- alias: 'Bell Internet issues - back online'
   initial_state: true
   mode: single
   trigger:
     platform: state
-    entity_id: device_tracker.bell_router
+    entity_id: device_tracker.bell_internet
     from: 'not_home'
   action:
     - service: homeassistant.turn_off
-      entity_id:  automation.bell_router_issues_offline
+      entity_id:  automation.bell_internet_issues_offline
     - service: notify.zulip
       data_template:
         message: >
-          :blue_circle: Bell router is responding :check:
+          :blue_circle: Internet back online :check:
         title: 'Internet'
     - delay: '00:00:05'
     - service: homeassistant.turn_on
-      entity_id:  automation.bell_router_issues_offline
+      entity_id:  automation.bell_internet_issues_offline
 
-- alias: 'Bell Router issues - offline'
+- alias: 'Bell Internet issues - offline'
   initial_state: true
   mode: restart
   trigger:
     platform: state
-    entity_id: device_tracker.bell_router
+    entity_id: device_tracker.bell_internet
     to: 'not_home'
     for:
       minutes: 5
   action:
-    - service: notify.zulip
-      data_template:
-        message: >
-          :black_large_square: Router has been offline for 5 minutes. Toggling plug. :no_entry:
-        title: 'Internet'
-    - service: switch.turn_off
-      entity_id: switch.switch6
-    - delay: '00:00:20'
-    - service: switch.turn_on
-      entity_id: switch.switch6
-    - service: device_tracker.see
-      data_template:
-        dev_id: bell_router
-        location_name: 'triggered'
+    service: notify.zulip
+    data_template:
+      message: >
+        :black_large_square: Internet has been offline for 5 minutes. :no_entry:
+      title: 'Internet'
 
 - alias: 'Fing update user'
   initial_state: true
