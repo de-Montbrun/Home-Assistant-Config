@@ -453,6 +453,7 @@
     service: switch.turn_on
     entity_id:
       - switch.switch4
+      - switch.switch6
 
 - alias: 'Bedroom Window fan off'
   initial_state: true
@@ -487,6 +488,7 @@
     service: switch.turn_off
     entity_id:
       - switch.switch4
+      - switch.switch6
 
 - alias: 'Gervais away - turn off heater'
   initial_state: true
