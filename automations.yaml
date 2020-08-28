@@ -1046,6 +1046,11 @@
     conditions:
       - condition: template
         value_template: '{{ states("media_player.roku_sunroom") != "standby" }}'
+      - condition: state
+        entity_id: binary_sensor.sun_room_motion_sensor
+        state: 'off'
+        for:
+          minutes: 39
       - condition: or
         conditions:
           - condition: state
