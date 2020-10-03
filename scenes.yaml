@@ -162,7 +162,13 @@
       - 0.329
       state: 'on'
     light.hallway_table:
+      brightness: 255
       friendly_name: Hallway Table
+      effect: '0'
+      rgb_color:
+      - 255
+      - 255
+      - 255
       xy_color:
       - 0.323
       - 0.329

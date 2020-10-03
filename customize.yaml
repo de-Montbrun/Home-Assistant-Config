@@ -7,19 +7,11 @@ binary_sensor.kitchen_motion:
 binary_sensor.sunroom_motion:
   friendly_name: Sun Room Occpancy
   icon: mdi:home
-device_tracker.dgrabbs_iphonehass:
-  hidden: true
-device_tracker.gail_owntracks:
-  hidden: false
-  entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
-device_tracker.grdems_phone_2:
+device_tracker.gail_iphone:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
 device_tracker.gail3:
   hidden: true
-device_tracker.gervais_owntracks:
-  hidden: false
-  entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
 device_tracker.iphone:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar

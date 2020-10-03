@@ -23,6 +23,9 @@ homeassistant:
       trusted_networks:
         - 192.168.2.0/24
         - 127.0.0.1
+
+default_config:
+
 # {{{ Asus
 
 asuswrt:
@@ -272,13 +275,6 @@ light:
 
 media_player:
 
-# Alexa
-alexa_media:
-  accounts:
-    - email: !secret alexa_username
-      password: !secret alexa_password
-      url: !secret alexa_url
-
 # }}}
 # {{{ Misc
 
@@ -322,8 +318,15 @@ history:
       - person.gail
       - person.gervais
 
-# Setup recorder
+# Setup recorder and logbook
 recorder:
+logbook:
+  exclude:
+    domains:
+      - device_tracker
+      - sun
+
+image:
 
 # Track the sun
 sun:
@@ -402,7 +405,8 @@ person:
     id: gail1968
     user_id: 09f60884ba844227a9b3c2d54fb341e2
     device_trackers:
-      - device_tracker.grdems_phone_2
+      - device_tracker.gail_iphone
+      - device_tracker.gail3
   - name: Cameron
     id: cam1995
     device_trackers:
@@ -418,7 +422,6 @@ person:
     device_trackers:
       - device_tracker.jen_phone
       - device_tracker.jen_fing
-      - device_tracker.jennifer_pro
 
 # }}}
 # {{{ Presence Trackers
