@@ -791,7 +791,7 @@
   initial_state: true
   trigger:
     - platform: state
-      entity_id: group.householdmembers
+      entity_id: person.gail,person.gervais,group.jen_tracker
     - platform: 'time'
       at: '10:00:00'
     - platform: 'time'
