@@ -454,18 +454,18 @@ device_tracker:
 # {{{ Programmable thermostat
 
 # Commenting this out. It's messing with my window fan
-#climate:
-#  - platform: programmable_thermostat
-#    name: Bedroom Heater
-#    heater:
-#      - switch.switch4
-#    actual_temp_sensor: sensor.master_bedroom_temperature
-#    min_temp: 14
-#    max_temp: 18
-#    target_temp_sensor: sensor.thermostat_program
-#    tolerance: 0.3
-#    hvac_options: 7
-#    auto_mode: all
+climate:
+  - platform: programmable_thermostat
+    name: Bedroom Heater
+    heater:
+      - switch.switch4
+    actual_temp_sensor: sensor.master_bedroom_temperature
+    min_temp: 14
+    max_temp: 18
+    target_temp_sensor: sensor.thermostat_program
+    tolerance: 0.3
+    hvac_options: 7
+    auto_mode: all
 
 # }}}
 ## {{{ Rest Commands
@@ -650,7 +650,7 @@ wemo:
     - 192.168.2.80
     # Died - 192.168.2.81
     - 192.168.2.82
-    # Currently unused - 192.168.2.83
+    - 192.168.2.83
 
 tplink:
   switch:
