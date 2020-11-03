@@ -249,30 +249,31 @@
       supported_features: 1
       zone_id: '7'
     light.office_wall:
-      brightness: 150
-      color_temp: 176
-      effect: '0'
-      effect_list:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      friendly_name: Office Wall
-      hs_color:
-      - 0
-      - 100
-      max_mireds: 500
-      min_mireds: 153
-      rgb_color:
-      - 255
-      - 0
-      - 0
       state: 'on'
-      supported_features: 23
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+      brightness: 255
+      color_temp: 153
+      hs_color:
+        - 215.947
+        - 89.02
+      rgb_color:
+        - 27
+        - 118
+        - 255
       xy_color:
-      - 0.701
-      - 0.299
+        - 0.144
+        - 0.126
+      white_value: 0
+      effect: '0'
+      friendly_name: Office Wall
+      supported_features: 151
     light.outdoor_lights:
       brightness: 255
       friendly_name: Outdoor lights
