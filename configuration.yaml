@@ -13,7 +13,7 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Halifax
   # Allow homeassistant to write to snapshots dir
-  whitelist_external_dirs:
+  allowlist_external_dirs:
     - /var/www/html/snapshots
     - /etc/homeassistant/file_restore
   customize: !include customize.yaml
