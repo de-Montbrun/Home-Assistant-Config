@@ -243,7 +243,7 @@ light:
       - light.dressing_room_lights
       - light.hallway_back
       - light.hallway_upstairs
-      - light.spareroom_lights
+      - light.spare_room_lights
       - light.sunroom_lights
       - light.upstairsbathroom
       - light.stairs_back
@@ -511,11 +511,7 @@ sensor:
       - type: disk_use_percent
         arg: /boot
       - type: disk_use_percent
-        arg: /media/apple
-      - type: disk_use_percent
         arg: /media/wine
-      - type: disk_use_percent
-        arg: /media/cracker
       - type: disk_use_percent
         arg: /home
       - type: memory_use_percent
