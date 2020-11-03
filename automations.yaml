@@ -1095,7 +1095,7 @@
     condition: and
     conditions:
       - condition: template
-        value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 17 }}'
+        value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 18 }}'
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: or
@@ -1130,13 +1130,13 @@
     service: climate.set_temperature
     data:
       entity_id: climate.bedroom_heater
-      temperature: 17
+      temperature: 18
 
 - alias: 'Turn down heat in bedroom'
   initial_state: true
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.master_bedroom_temperature.state | int >= 17 }}'
+      value_template: '{{ states.sensor.master_bedroom_temperature.state | int >= 18 }}'
     - platform: time
       at: '02:00:00'
     - platform: time
