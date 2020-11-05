@@ -461,8 +461,20 @@ climate:
       - switch.switch4
     actual_temp_sensor: sensor.master_bedroom_temperature
     min_temp: 14
-    max_temp: 18
+    max_temp: 20
     target_temp_sensor: sensor.thermostat_program
+    tolerance: 0.3
+    hvac_options: 7
+    auto_mode: all
+
+  - platform: programmable_thermostat
+    name: Jenroom Heater
+    heater:
+      - switch.switch6
+    actual_temp_sensor: sensor.jennifer_room_temperature
+    min_temp: 14
+    max_temp: 20
+    target_temp_sensor: sensor.thermostat_jen_program
     tolerance: 0.3
     hvac_options: 7
     auto_mode: all
@@ -545,11 +557,18 @@ sensor:
     value_template: '{{ (value|int / 1024 / 1024)|round(1) }}'
     scan_interval: 900
 
-  # Data for programmable thermostat
+  # Data for programmable thermostats
   - platform: file_restore
     unit_of_measurement: '°C'
     file_path: '/etc/homeassistant/file_restore/thermostat_program.csv'
     name: Thermostat Program
+    length: day
+    detail: hour
+
+  - platform: file_restore
+    unit_of_measurement: '°C'
+    file_path: '/etc/homeassistant/file_restore/thermostat_jen_program.csv'
+    name: Thermostat Jen Program
     length: day
     detail: hour
 

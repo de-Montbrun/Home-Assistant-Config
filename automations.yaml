@@ -182,6 +182,8 @@
   action:
     - service: light.turn_off
       entity_id: light.office_lights
+    - service: switch.turn_off
+      entity_id: switch.switch3
 
 - id: occupancy_no_one_home_turn_down_heat
   alias: 'Occupancy - no one home - turn down heat'
@@ -258,7 +260,7 @@
     service: climate.set_hvac_mode
     data:
       entity_id: climate.bedroom_heater
-      preset_mode: 'off'
+      hvac_mode: 'off'
 
 - id: occupancy_gandg_return_home_turn_on_bedroom_heater
   alias: 'Occupancy - GandG return home - turn on bedroom heater'
@@ -278,7 +280,46 @@
     service: climate.set_hvac_mode
     data:
       entity_id: climate.bedroom_heater
-      preset_mode: 'heat'
+      hvac_mode: 'heat'
+
+- id: occupancy_jennifer_not_home_turn_off_jenroom_heater
+  alias: 'Occupancy - Jennifer not home - turn off jenroom heater'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: person.jennifer
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("sensor.season") != "summer" }}'
+      - condition: template
+        value_template: '{{ states.sensor.temperature.state | int <= 5 }}'
+  action:
+    service: climate.set_hvac_mode
+    data:
+      entity_id: climate.jenroom_heater
+      hvac_mode: 'off'
+
+- id: occupancy_jennifer_return_home_turn_on_jenroom_heater
+  alias: 'Occupancy - Jennifer return home - turn on jenroom heater'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: person.jennifer
+    to: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("sensor.season") != "summer" }}'
+      - condition: template
+        value_template: '{{ states.sensor.temperature.state | int <= 5 }}'
+  action:
+    service: climate.set_hvac_mode
+    data:
+      entity_id: climate.jenroom_heater
+      hvac_mode: 'heat'
 
 - alias: 'Everyone home and gone to bed - Lights out'
   initial_state: true
