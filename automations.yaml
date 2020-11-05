@@ -104,9 +104,10 @@
 - id: turn_on_lights_hallway
   alias: 'Occupancy in hallway - turn on lights'
   initial_state: true
+  mode: restart
   trigger:
     platform: state
-    entity_id: binary_sensor.my_ecobee_occupancy
+    entity_id: binary_sensor.my_ecobee_occupancy,binary_sensor.upstair_hall_occupancy
     to: 'on'
   condition:
     - condition: state
@@ -116,8 +117,12 @@
       entity_id: sun.sun
       state: 'below_horizon'
   action:
-    service: light.turn_on
-    entity_id: light.hallway_lights
+    - service: light.turn_on
+      entity_id: light.hallway_lights
+    - delay: 00:15
+    - service: light.turn_off
+      entity_id: light.hallway_lights
+
 
 - id: turn_on_lights_bedroom
   alias: 'Occupancy in bedroom - turn on lights'
@@ -745,7 +750,7 @@
   action:
     - service: scene.turn_on
       entity_id: scene.sunroom_nightlight
-    - delay: '00:10:00'
+    - delay: '00:10'
     - service: light.turn_off
       entity_id: light.sunroom_lights
 
