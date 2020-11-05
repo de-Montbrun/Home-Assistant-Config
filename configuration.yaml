@@ -317,6 +317,7 @@ history:
     entities:
       - person.gail
       - person.gervais
+      - person.jennifer
 
 # Setup recorder and logbook
 recorder:
