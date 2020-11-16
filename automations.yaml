@@ -1161,18 +1161,30 @@
                 before: '10:00:00'
       - condition: or
         conditions:
-          - condition: state
-            entity_id: person.gail
-            state: 'home'
-          - condition: template
-            value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: person.gervais
-            state: 'home'
-          - condition: template
-            value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: person.gervais
+                state: 'home'
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: person.gail
+                    state: 'home'
+                  - condition: template
+                    value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: person.gail
+                state: 'home'
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity_id: person.gervais
+                    state: 'home'
+                  - condition: template
+                    value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
     service: climate.set_temperature
     data:
