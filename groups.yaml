@@ -46,5 +46,6 @@ jen_tracker:
     - device_tracker.jen_phone
     - device_tracker.jennifer2
     - device_tracker.jen_fing
+    - device_tracker.jennifersiphone
 
 # }}}
