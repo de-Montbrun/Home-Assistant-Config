@@ -43,6 +43,9 @@ alexa:
         - media_player.roku_3
         - media_player.roku_sunroom
         - media_player.sonos
+        - switch.switch6
+        - switch.switch7
+        - switch.switch8
 
 # }}}
 # {{{ Circadian Lighting & mqtt switch
