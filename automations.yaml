@@ -170,8 +170,6 @@
         value_template: '{{ states("person.gervais") != "home" }}'
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
-      - condition: template
-        value_template: '{{ states.sensor.temperature.state | int <= 5 }}'
   action:
     service: climate.set_hvac_mode
     data:
@@ -223,8 +221,9 @@
     data:
       hvac_mode: |
           {%- if (now().strftime("%H") | int < 17)
-            and (now().strftime("%H") | int > 9)
-            and is_state("person.gail", "home") -%}
+            and (now().strftime("%H") | int >= 8)
+            and is_state("person.gail", "home")
+            and states("sensor.season") != "summer" -%}
               heat_cool
           {%- else -%}
               off
@@ -235,21 +234,24 @@
   alias: 'Occupancy - Heating Jennifer Room'
   initial_state: true
   trigger:
-    platform: state
-    entity_id: group.jen_tracker
+    - platform: state
+      entity_id: group.jen_tracker
+    - platform: time
+      at: '03:00:00'
+    - platform: time
+      at: '09:00:00'
+    - platform: time
+      at: '18:00:00'
   condition:
-    condition: and
-    conditions:
-      - condition: template
-        value_template: '{{ states("sensor.season") != "summer" }}'
-      - condition: template
-        value_template: '{{ states.sensor.temperature.state | int <= 5 }}'
+    condition: template
+    value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: climate.set_hvac_mode
     data:
       entity_id: climate.jenroom_heater
       hvac_mode: |
-        {%- if trigger.to_state.state == 'home' -%}
+        {%- if states.group.jen_tracker.state == 'home'
+            and states.sensor.temperature.state | int <= 10 -%}
             heat_cool
         {%- else -%}
             off
