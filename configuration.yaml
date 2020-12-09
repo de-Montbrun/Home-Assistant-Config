@@ -43,9 +43,11 @@ alexa:
         - media_player.roku_3
         - media_player.roku_sunroom
         - media_player.sonos
+        - switch.switch1
         - switch.switch6
         - switch.switch7
         - switch.switch8
+        - switch.switch9
 
 # }}}
 # {{{ Circadian Lighting & mqtt switch
@@ -98,6 +100,11 @@ light:
   - platform: switch
     name: Basement Light
     entity_id: switch.basement_light
+
+  # Make dressingroom switch act like a light
+  - platform: switch
+    name: Gail Desk
+    entity_id: switch.switch6
 
   # Make Bathroom switches act like lights
   - platform: switch
@@ -167,6 +174,7 @@ light:
       - light.dressing_room1
       - light.dressing_room2
       - light.dressing_room3
+      - light.gail_desk
 
   - platform: group
     name: Hallway lights
@@ -178,6 +186,7 @@ light:
       - light.hallway_table
       - light.hallway_wall
       - light.hallway_upstairs
+      - light.hallway_upstairs_wall
 
   - platform: group
     name: Kitchen lights
@@ -726,7 +735,6 @@ binary_sensor:
 wemo:
   static:
     - 192.168.2.80
-    # Died - 192.168.2.81
     - 192.168.2.82
     - 192.168.2.83
 

@@ -274,7 +274,7 @@
       value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: switch.turn_off
-    entity_id: switch.switch3
+    entity_id: switch.switch1
 
 - id: occupancy_heating_gervais_away_heater_off
   alias: 'Gervais away - turn off heater'
@@ -289,7 +289,7 @@
   action:
     service: switch.turn_off
     entity_id:
-      - switch.switch3
+      - switch.switch1
 
 # }}}
 # {{{ Lighting
@@ -352,7 +352,6 @@
     entity_id:
       - light.bathroom_lights
       - light.bedroom_lights
-      - light.dressing_room_lights
 
 - id: occupancy_bedroom_gandg_not_home
   alias: 'GandG not home - Movement in Bedroom'
@@ -543,20 +542,20 @@
   alias: 'Occupancy in Office - turn on lights'
   initial_state: true
   trigger:
-    platform: state
-    entity_id: binary_sensor.office_occupancy
-    to: 'on'
+    - platform: state
+      entity_id: binary_sensor.office_occupancy
+      to: 'on'
+    - platform: time
+      at: '09:00:00'
   condition:
     condition: state
     entity_id: 'binary_sensor.workday_sensor'
     state: 'on'
   action:
     service: light.turn_on
-    entity_id: light.office_lights
-    data:
-      brightness: 1000
-      color_temp: 78
-      white_value: 255
+    entity_id:
+      - light.office_lights
+      - light.dressing_room_lights
 
 - id: turn_off_lights_office
   alias: 'No one in Office - turn off lights'
@@ -569,7 +568,7 @@
     - service: light.turn_off
       entity_id: light.office_lights
     - service: switch.turn_off
-      entity_id: switch.switch3
+      entity_id: switch.switch1
 
 # }}}
 # {{{ Outdoor
@@ -652,10 +651,8 @@
   alias: 'Lighting - TV play/pause'
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: media_player.plex_sunroom
-    - platform: state
-      entity_id: media_player.roku_sunroom
+    platform: state
+    entity_id: media_player.plex_sunroom
   condition:
     condition: and
     conditions:
@@ -670,9 +667,9 @@
     data:
       entity_id: |
         {%- if trigger.to_state.state == 'playing' -%}
-            scene.sunroom_dim
+              scene.sunroom_dim
         {%- else -%}
-            scene.sunroom_normal
+              scene.sunroom_normal
         {% endif %}
 
 - id: occupancy_lighting_motion_sunromm
@@ -786,6 +783,7 @@
         - light.main_floor_lights
         - light.office_lights
         - light.second_floor_lights
+        - switch.switch1
         - switch.switch3
     - service: climate.set_preset_mode
       data:
@@ -932,6 +930,8 @@
       data:
         brightness: 1000
         color_temp: 78
+    - service: switch.turn_on
+      entity_id: switch.switch3
 
 - id: misc_sabnzb_speed_limit
   alias: 'Set sabnzb speed limit'

@@ -204,6 +204,11 @@
       xy_color:
       - 0.137
       - 0.065
+    light.hallway_upstairs_wall:
+      friendly_name: Hallway Upstairs Wall
+      state: 'on'
+      supported_features: 41
+      brightness: 255
     light.kitchen_pots:
       brightness: 48
       device_id: '5'
