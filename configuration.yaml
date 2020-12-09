@@ -539,13 +539,6 @@ rest_command:
     url: http://192.168.2.92:8080/photo_save_only.jpg
 
 ## }}}
-# {{{ Ring
-
-ring:
-  username: !secret ring_username
-  password: !secret ring_password
-
-# }}}
 # {{{ Security Cams
 
 camera:
