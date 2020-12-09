@@ -22,7 +22,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.updater
+    entity_id: binary_sensor.updater, binary_sensor.instance02_updater
     from: 'off'
     to: 'on'
   action:
