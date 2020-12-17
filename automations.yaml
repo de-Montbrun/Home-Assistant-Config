@@ -707,6 +707,9 @@
     - service: scene.turn_on
       entity_id: scene.sunroom_nightlight
     - delay: '00:10'
+    - condition: state
+      entity_id: media_player.roku_sunroom
+      state: 'standby'
     - service: light.turn_off
       entity_id: light.sunroom_lights
 
