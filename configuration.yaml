@@ -48,6 +48,8 @@ alexa:
         - switch.switch7
         - switch.switch8
         - switch.switch9
+        - switch.switch10
+        - switch.switch11
 
 # }}}
 # {{{ Circadian Lighting & mqtt switch
@@ -465,12 +467,6 @@ device_tracker:
       track_new_devices: true
     hosts:
       jennifer_iphone_detect: 192.168.2.64
-
-  - platform: iphonedetect
-    consider_home: 420
-    new_device_defaults:
-      track_new_devices: true
-    hosts:
       jennifer_iphone_detect2: 192.168.2.10
 
 # }}}
@@ -508,7 +504,7 @@ climate:
       - switch.switch7
     actual_temp_sensor: sensor.jennifer_room_temperature
     min_temp: 14
-    max_temp: 21
+    max_temp: 22
     target_temp_sensor: sensor.thermostat_jen_program
     tolerance: 0.3
     hvac_options: 7
