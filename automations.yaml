@@ -802,6 +802,8 @@
         - light.second_floor_lights
         - switch.switch1
         - switch.switch3
+        - switch.switch10
+        - switch.switch11
     - service: climate.set_preset_mode
       data:
         entity_id: climate.my_ecobee
@@ -948,7 +950,10 @@
         brightness: 1000
         color_temp: 78
     - service: switch.turn_on
-      entity_id: switch.switch3
+      entity_id:
+        - switch.switch3
+        - switch.switch10
+        - switch.switch11
 
 - id: misc_sabnzb_speed_limit
   alias: 'Set sabnzb speed limit'
