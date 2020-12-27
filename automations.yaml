@@ -802,6 +802,7 @@
         - light.second_floor_lights
         - switch.switch1
         - switch.switch3
+        - switch.switch4
         - switch.switch10
         - switch.switch11
     - service: climate.set_preset_mode
@@ -895,6 +896,7 @@
       entity_id:
         - switch.switch0
         - switch.switch3
+        - switch.switch4
         - switch.switch10
         - switch.switch11
     - service: light.turn_off
@@ -955,6 +957,7 @@
     - service: switch.turn_on
       entity_id:
         - switch.switch3
+        - switch.switch4
         - switch.switch10
         - switch.switch11
 
