@@ -1129,9 +1129,9 @@
     - platform: template
       value_template: '{{ states.sensor.disk_use_percent.state | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.sensor.disk_use_percent_boot.state | int >= 95 }}'
+      value_template: '{{ states.sensor.disk_use_percent_boot.state | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.sensor.disk_use_percent_home.state | int >= 95 }}'
+      value_template: '{{ states.sensor.disk_use_percent_home.state | int >= 95 }}'
     - platform: template
       value_template: '{{ states.sensor.disk_use_percent_media_apple.state | int >= 95 }}'
     - platform: template
