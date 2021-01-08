@@ -246,6 +246,7 @@ light:
   - platform: group
     name: Second floor lights
     entities:
+      - light.bathroom_lights
       - light.bedroom_lights
       - light.dressing_room_lights
       - light.hallway_back
