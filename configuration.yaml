@@ -52,27 +52,9 @@ alexa:
         - switch.switch11
 
 # }}}
-# {{{ Circadian Lighting & mqtt switch
+# {{{ mqtt switch
 
-circadian_lighting:
 switch:
-  - platform: circadian_lighting
-    name: Bedroom Circadian
-    lights_xy:
-      - light.bedroom0
-      - light.bedroom1
-      - light.bedroom2
-      - light.bedroom3
-      - light.bedroom4
-
-  - platform: circadian_lighting
-    name: Office Circadian
-    disable_brightness_adjust: true
-    lights_xy:
-      - light.office0
-      - light.office1
-      - light.office2
-
   - platform: mqtt
     name: "Zigbee2mqtt Main join"
     state_topic: "zigbee2mqtt/bridge/config/permit_join"
