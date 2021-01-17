@@ -556,22 +556,6 @@ sensor:
       - type: last_boot
 
   - platform: command_line
-    name: 'Grater uptime'
-    command: cat /proc/uptime | awk '{ print $1 }'
-    scan_interval: 60
-    unit_of_measurement: minutes
-    value_template: >-
-      {% set uptime = value | int %}
-      {% set minutes = (uptime / 60 ) | int %}
-      {{ minutes }}
-
-  - platform: uptime
-    name: 'HASS uptime'
-    unit_of_measurement: hours
-
-  - platform: moon
-
-  - platform: command_line
     name: 'filesize_db'
     command: 'stat -c %s "/etc/homeassistant/home-assistant_v2.db"'
     unit_of_measurement: 'MB'
@@ -658,9 +642,6 @@ sensor:
             {{ distance(states.device_tracker.iphone, states.device_tracker.grdems_phone_2) | round(2) }}
           {% endif %}
         unit_of_measurement: 'km'
-        entity_id:
-          - device_tracker.grdems_phone_2
-          - device_tracker.iphone_2
 
   - platform: imap_email_content
     name: Fing State
