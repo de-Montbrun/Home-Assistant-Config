@@ -1036,29 +1036,6 @@
       command: power
 
 # }}}
-# {{{ TTS
-
-- alias: 'Tell Jen to turn off her TV'
-  initial_state: false
-  trigger:
-    platform: time
-    at: '08:10:00'
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: 'device_tracker.jen_tv'
-        state: 'home'
-      - condition: state
-        entity_id: 'binary_sensor.workday_sensor'
-        state: 'on'
-  action:
-    service: tts.voicerss_say
-    entity_id: media_player.jens_broken_chromecast
-    data:
-      message: 'Time to turn off your TV.'
-
-# }}}
 # {{{ Notifications
 
 - id: notify_bell_internet_issues_online
@@ -1319,6 +1296,29 @@
       data_template:
         entity_id: camera.front_door
         filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door.jpg'
+
+# }}}
+# {{{ TTS
+
+- alias: 'Tell Jen to turn off her TV'
+  initial_state: false
+  trigger:
+    platform: time
+    at: '08:10:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: 'device_tracker.jen_tv'
+        state: 'home'
+      - condition: state
+        entity_id: 'binary_sensor.workday_sensor'
+        state: 'on'
+  action:
+    service: tts.voicerss_say
+    entity_id: media_player.jens_broken_chromecast
+    data:
+      message: 'Time to turn off your TV.'
 
 # }}}
 # {{{ Zigbee
