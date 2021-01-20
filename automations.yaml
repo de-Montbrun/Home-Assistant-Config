@@ -385,14 +385,13 @@
   action:
     - service: light.turn_off
       entity_id:
-        - light.bathroom_lights
         - light.bedroom_lights
         - light.dressing_room_lights
     - condition: state
       entity_id: sun.sun
-      state: 'below_horizon'
-    - service: light.turn_on
-      entity_id: light.bathroom2
+      state: 'above_horizon'
+    - service: light.turn_off
+      entity_id: light.bathroom_lights
 
 - id: occupancy_bedroom_turn_on_lights
   alias: 'Occupancy in bedroom - turn on lights'
@@ -424,13 +423,12 @@
   action:
     - service: light.turn_off
       entity_id:
-        - light.bathroom_lights
         - light.bedroom_lights
     - condition: state
       entity_id: sun.sun
-      state: 'below_horizon'
-    - service: light.turn_on
-      entity_id: light.bathroom2
+      state: 'above_horizon'
+    - service: light.turn_off
+      entity_id: light.bathroom_lights
 
 - id: occupancy_bedroom_gandg_not_home
   alias: 'GandG not home - Movement in Bedroom'
