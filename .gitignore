@@ -33,6 +33,7 @@ known_devices.yaml
 nokia.json
 secrets.yaml
 
+blueprints
 components
 custom_components
 deps
