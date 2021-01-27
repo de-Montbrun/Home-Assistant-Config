@@ -61,7 +61,7 @@
     entity_id: light.sunroom_lights
 
 - id: tap0_button_2
-  alias: 'Tap0  Button 2'
+  alias: 'Tap0 Button 2'
   trigger:
     device_id: e98414b624b34e22c64f147d34a5088a
     domain: hue
@@ -839,20 +839,30 @@
           after: '22:00:00'
         - condition: time
           before: '02:00:00'
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: person.gail
-            state: 'home'
-          - condition: template
-            value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
-      - condition: or
+      - condition: and
         conditions:
           - condition: state
             entity_id: person.gervais
             state: 'home'
-          - condition: template
-            value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: person.gail
+              state: 'home'
+            - condition: template
+              value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: person.gail
+            state: 'home'
+          - condition: or
+            conditions:
+            - condition: state
+              entity_id: person.gervais
+              state: 'home'
+            - condition: template
+              value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
     - delay: '00:15:00'
     - service: homeassistant.turn_off
