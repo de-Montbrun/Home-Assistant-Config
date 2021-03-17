@@ -678,19 +678,34 @@ sensor:
     value_template: "{{ value_json.coordinator }}"
     icon: mdi:chip
 
+  - platform: fail2ban
+    jails:
+      - hass-iptables
+      - nginx-http-auth
+      - sshd
+    file_path: /var/log/fail2ban.log
 
 binary_sensor:
   - platform: workday
     country: CA
     province: PE
 
+  - platform: snowtire
+    weather: weather.saint_john
+
   - platform: huesensor
+
+  - platform: ffmpeg_motion
+    name: Basement Motion
+    input: http://pi3:8081
+    reset: 20
 
 # }}}
 # {{{ Switches
 
 # Wemo switches are not always being discovered automatically.
 wemo:
+  discovery: false
   static:
     - 192.168.2.80
     - 192.168.2.82
