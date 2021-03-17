@@ -520,6 +520,9 @@ rest_command:
 camera:
   - platform: ring
   - platform: environment_canada
+  - platform: mjpeg
+    mjpeg_url: http://pi3:8081
+    name: Basement Live cam
 
 # }}}
 # {{{ Sensors
