@@ -93,10 +93,13 @@ light:
     name: Bathroom2
     entity_id: switch.bathroom2
 
-  # Make Livingroom switch act like a light
+  # Make Livingroom switches act like a lights
   - platform: switch
     name: Livingroom Shelves
     entity_id: switch.switch2
+  - platform: switch
+    name: Livingroom Tree
+    entity_id: switch.switch3
 
   # Make Office Table switch act like a light
   - platform: switch
@@ -185,6 +188,7 @@ light:
       - light.livingroom_lamps
       - light.livingroom_chandeliers
       - light.livingroom_shelves
+      - light.livingroom_tree
 
   - platform: group
     name: Livingroom Chandeliers
