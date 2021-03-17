@@ -591,6 +591,12 @@ sensor:
         unit_of_measurement: '%'
         device_class: battery
 
+      dining_room_battery_level:
+        friendly_name: 'Dining Room Battery Level'
+        value_template: '{{ states.sensor.instance02_ble_temperature_dining_room.attributes.battery_level }}'
+        unit_of_measurement: '%'
+        device_class: battery
+
       kitchen_battery_level:
         friendly_name: 'Kitchen Battery Level'
         value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.battery }}'
@@ -601,6 +607,12 @@ sensor:
         value_template: '{{ states.binary_sensor.kitchen_motion_sensor.attributes.light_level }}'
         unit_of_measurement: Lumens
         device_class: illuminance
+
+      laundry_room_battery_level:
+        friendly_name: 'Laundry Room Battery Level'
+        value_template: '{{ states.sensor.instance02_ble_temperature_laundry_room.attributes.battery_level }}'
+        unit_of_measurement: '%'
+        device_class: battery
 
       spare_room_battery_level:
         friendly_name: 'Spare Room Battery Level'
