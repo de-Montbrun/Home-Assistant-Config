@@ -307,6 +307,7 @@ history:
 
 # Setup recorder and logbook
 recorder:
+  db_url: !secret db_url
 logbook:
   exclude:
     domains:
@@ -550,13 +551,6 @@ sensor:
       - type: load_15m
       - type: processor_use
       - type: last_boot
-
-  - platform: command_line
-    name: 'filesize_db'
-    command: 'stat -c %s "/etc/homeassistant/home-assistant_v2.db"'
-    unit_of_measurement: 'MB'
-    value_template: '{{ (value|int / 1024 / 1024)|round(1) }}'
-    scan_interval: 900
 
   # Data for programmable thermostats
   - platform: file_restore
