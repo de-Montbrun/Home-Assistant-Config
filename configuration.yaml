@@ -20,14 +20,6 @@ homeassistant:
 
 default_config:
 
-# {{{ Asus
-
-asuswrt:
-  host: 192.168.2.1
-  username: !secret router_username
-  ssh_key: /home/homeassistant/.ssh/id_rsa
-
-# }}}
 # {{{ Alexa
 
 alexa:
