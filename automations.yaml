@@ -597,7 +597,7 @@
         state: 'below_horizon'
   action:
     service: light.turn_on
-    entity_id: light.kitchen_pots
+    entity_id: light.kitchen_swirlies
     data:
       brightness: 255
 

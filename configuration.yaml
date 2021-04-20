@@ -176,6 +176,12 @@ light:
       - light.kitchen_swirly1
 
   - platform: group
+    name: Kitchen swirlies
+    entities:
+      - light.kitchen_swirly0
+      - light.kitchen_swirly1
+
+  - platform: group
     name: Livingroom lamps
     entities:
       - light.lamp0
