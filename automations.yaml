@@ -1311,7 +1311,7 @@
     - service: camera.snapshot
       data_template:
         entity_id: camera.front_door
-        filename: '/var/www/html/snapshots/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door.jpg'
+        filename: '/var/www/html/snapshots/frontdoor/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door.jpg'
 
 # }}}
 # {{{ TTS

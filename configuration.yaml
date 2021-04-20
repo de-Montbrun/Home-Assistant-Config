@@ -335,7 +335,7 @@ ffmpeg:
 mobile_app:
 
 downloader:
-  download_dir: /var/www/html/snapshots
+  download_dir: /var/www/html/snapshots/frontdoor
 
 system_health:
 
