@@ -14,8 +14,6 @@
       data:
         topic: "cmnd/tasmotas/backlog"
         payload: "power1 ;power2 ;power3 ;power4 ;power5; dimmer; state "
-    - delay: 00:02
-    - service: homekit.start
 
 - id: ha_notify_ha_update_available
   alias: Update Available Notification
@@ -838,7 +836,7 @@
 
 - id: bedtime
   alias: 'Bedtime'
-  initial_state: true
+  initial_state: false
   mode: restart
   trigger:
     platform: state
