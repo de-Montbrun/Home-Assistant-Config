@@ -432,13 +432,6 @@ device_tracker:
     new_device_defaults:
       track_new_devices: true
 
-  - platform: nmap_tracker
-    hosts: 192.168.2.250-254
-    home_interval: 5
-    interval_seconds: 120
-    new_device_defaults:
-      track_new_devices: true
-
   - platform: ping
     count: 3
     hosts:
@@ -515,9 +508,6 @@ remote_homeassistant:
 rest_command:
   sabnzb_api:
     url: !secret sabnzbd_rest_url
-
-  take_a_picture:
-    url: http://192.168.2.92:8080/photo_save_only.jpg
 
 ## }}}
 # {{{ Security Cams
@@ -712,17 +702,17 @@ binary_sensor:
 wemo:
   discovery: false
   static:
-    - 192.168.2.80
-    - 192.168.2.82
-    - 192.168.2.83
+    - 192.168.20.80
+    - 192.168.20.82
+    - 192.168.20.83
 
 tplink:
   switch:
-    - host: 192.168.2.84
-    - host: 192.168.2.85
-    - host: 192.168.2.87
-    - host: 192.168.2.88
-    - host: 192.168.2.89
+    - host: 192.168.20.84
+    - host: 192.168.20.85
+    - host: 192.168.20.87
+    - host: 192.168.20.88
+    - host: 192.168.20.89
 
 # }}}
 # {{{ Text-to-speech
