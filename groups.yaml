@@ -46,7 +46,7 @@ jen_tracker:
     - device_tracker.jen_phone
     - device_tracker.jen_fing
     - device_tracker.jennifersiphone
-    - device_tracker.jennifer_iphone_detect
-    - device_tracker.jennifer_iphone_detect2
+    - device_tracker.jennifer_iphone_detect3
+    - device_tracker.jennifersiphone_4
 
 # }}}
