@@ -333,9 +333,6 @@ ffmpeg:
 # Enable Mobile App component
 mobile_app:
 
-downloader:
-  download_dir: /var/www/html/snapshots/frontdoor
-
 system_health:
 
 # }}}
@@ -511,7 +508,6 @@ rest_command:
 # {{{ Security Cams
 
 camera:
-  - platform: ring
   - platform: environment_canada
   - platform: mjpeg
     mjpeg_url: http://pi3:8081

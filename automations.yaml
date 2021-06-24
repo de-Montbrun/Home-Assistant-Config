@@ -685,10 +685,9 @@
   mode: restart
   trigger:
     - platform: state
-      entity_id: binary_sensor.front_door_motion
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.front_door_ding
+      entity_id:
+        - binary_sensor.motion_doorbell
+        - binary_sensor.doorbell_doorbell
       to: 'on'
   condition:
     condition: and
@@ -920,12 +919,12 @@
         entity_id: climate.my_ecobee
         preset_mode: 'Sleep'
 
-- id: doorbell_ring
+- id: doorbell_doorbell
   alias: 'Doorbell rang - pause tv'
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.front_door_ding
+    entity_id: binary_sensor.doorbell_doorbell
     to: 'on'
   action:
     service: media_player.media_play_pause
@@ -1304,17 +1303,22 @@
         **Low:** {{ states.sensor.low_temperature.state }}{{ states.sensor.low_temperature.attributes.unit_of_measurement }}
       title: 'Weather'
 
-- id: notify_doorbell_action
-  alias: 'Doorbell notify'
+- id: notify_camera_action
+  alias: 'Camera notify'
   initial_state: true
   mode: parallel
   trigger:
     - platform: state
-      entity_id: binary_sensor.front_door_motion
+      entity_id:
+        - binary_sensor.basement_motion
+        - binary_sensor.doorbell_doorbell
+        - binary_sensor.motion_driveway
+        - binary_sensor.motion_mecklenburg_w
+        - binary_sensor.motion_rack
       to: 'on'
-    - platform: state
-      entity_id: binary_sensor.front_door_ding
-      to: 'on'
+  condition:
+    condition: template
+    value_template: '{{ states("person.gervais") != "home" }}'
   action:
     - service: notify.zulip
       data_template:
@@ -1324,15 +1328,6 @@
           {% elif trigger.to_state.attributes.device_class == 'occupancy' %} :bell:
           {% endif %}
         title: 'Security Alert'
-    - delay: '00:05:30'
-    - service: downloader.download_file
-      data_template:
-        url: '{{ states.camera.front_door.attributes.video_url }}'
-        filename: '{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door.mp4'
-    - service: camera.snapshot
-      data_template:
-        entity_id: camera.front_door
-        filename: '/var/www/html/snapshots/frontdoor/{{ now().strftime("%Y-%m-%d_%H:%M") }}_camera.front_door.jpg'
 
 # }}}
 # {{{ TTS
