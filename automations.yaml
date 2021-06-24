@@ -651,10 +651,13 @@
       after: '8:00'
       before: '20:00'
   action:
-    service: light.turn_on
-    entity_id:
-      - light.office_lights
-      - light.dressing_room_lights
+    - service: light.turn_on
+      entity_id: light.office_lights
+    - condition: state
+      entity_id: person.gail
+      state: 'home'
+    - service: light.turn_on
+      entity_id: light.dressing_room_lights
 
 - id: turn_off_lights_office
   alias: 'No one in Office - turn off lights'
@@ -668,6 +671,10 @@
       entity_id: light.office_lights
     - service: switch.turn_off
       entity_id: switch.switch1
+    - condition: template
+      value_template: '{{ states("person.gail") != "home" }}'
+    - service: light.turn_off
+      entity_id: light.dressing_room_lights
 
 # }}}
 # {{{ Outdoor
