@@ -599,7 +599,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.kitchen_motion_sensor
+    entity_id: binary_sensor.kitchen_sensor_motion
     to: 'on'
   condition:
     condition: and
@@ -621,7 +621,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.kitchen_motion_sensor
+    entity_id: binary_sensor.kitchen_sensor_motion
     to: 'off'
     for:
       minutes: 45
@@ -716,7 +716,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.spare_room_motion_sensor
+    entity_id: binary_sensor.spare_room_sensor_motion
     to: 'on'
   condition:
     condition: and
@@ -725,7 +725,7 @@
         entity_id: light.spare_room_lights
         state: 'off'
       - condition: template
-        value_template: '{{ states.binary_sensor.spare_room_motion_sensor.attributes.dark }}'
+        value_template: '{{ states.sensor.spare_room_sensor_light_level.attributes.dark }}'
   action:
     service: light.turn_on
     entity_id: light.spare_room_lights
@@ -735,7 +735,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.spare_room_motion_sensor
+    entity_id: binary_sensor.spare_room_sensor_motion
     to: 'off'
     for:
       minutes: 5
@@ -777,7 +777,7 @@
   mode: restart
   trigger:
     platform: state
-    entity_id: binary_sensor.sun_room_motion_sensor
+    entity_id: binary_sensor.sun_room_sensor_motion
     to: 'on'
   condition:
     condition: and
@@ -795,7 +795,7 @@
       entity_id: light.hallway_lights
     - delay: '00:10'
     - condition: state
-      entity_id: binary_sensor.kitchen_motion_sensor
+      entity_id: binary_sensor.kitchen_sensor_motion
       state: 'off'
     - condition: state
       entity_id: media_player.roku_sunroom
@@ -812,7 +812,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.sun_room_motion_sensor
+    entity_id: binary_sensor.sun_room_sensor_motion
     to: 'off'
     for:
       minutes: 10
@@ -834,9 +834,8 @@
   condition:
     condition: and
     conditions:
-      - condition: numeric_state
-        entity_id: 'sensor.sun_room_lumens'
-        below: '6500'
+      - condition: template
+        value_template: '{{ states.sensor.sun_room_sensor_light_level.attributes.lightlevel < 6500 }}'
       - condition: state
         entity_id: light.sunroom_lights
         state: 'off'
@@ -1107,7 +1106,7 @@
       - condition: template
         value_template: '{{ states("media_player.roku_sunroom") != "unavailable" }}'
       - condition: state
-        entity_id: binary_sensor.sun_room_motion_sensor
+        entity_id: binary_sensor.sun_room_sensor_motion
         state: 'off'
         for:
           minutes: 39
