@@ -446,16 +446,16 @@ device_tracker:
     hosts:
       jennifer_iphone_detect: 192.168.2.64
       jennifer_iphone_detect2: 192.168.2.10
+      jennifer_iphone_detect3: 192.168.2.152
 
 # }}}
 # {{{ Programmable thermostat
 
-# Commenting this out. It's messing with my window fan
 climate:
   - platform: programmable_thermostat
     name: Bedroom Heater
     heater:
-      - switch.switch8
+      - switch.switch88
     actual_temp_sensor: sensor.master_bedroom_temperature
     min_temp: 14
     max_temp: 22
@@ -467,7 +467,7 @@ climate:
   - platform: programmable_thermostat
     name: Dressing Room Heater
     heater:
-      - switch.switch9
+      - switch.switch99
     actual_temp_sensor: sensor.instance02_ble_temperature_dressing_room
     min_temp: 14
     max_temp: 26
@@ -479,7 +479,7 @@ climate:
   - platform: programmable_thermostat
     name: Jenroom Heater
     heater:
-      - switch.switch7
+      - switch.switch77
     actual_temp_sensor: sensor.jennifer_room_temperature
     min_temp: 14
     max_temp: 22

@@ -107,7 +107,7 @@
 
 - id: cooling_bedroom_fan_on
   alias: 'Bedroom Window fan on'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: template
     value_template: '{{ states.sensor.temperature.state < states.sensor.master_bedroom_temperature.state }}'
@@ -129,10 +129,11 @@
     service: switch.turn_on
     entity_id:
       - switch.switch8
+      - switch.switch9
 
 - id: cooling_bedroom_fan_off
   alias: 'Bedroom Window fan off'
-  initial_state: false
+  initial_state: true
   trigger:
     - platform: template
       value_template: '{{ states.sensor.temperature.state > states.sensor.master_bedroom_temperature.state }}'
@@ -164,13 +165,29 @@
     service: switch.turn_off
     entity_id:
       - switch.switch8
+      - switch.switch9
+
+- id: occupancy_cooling_jenroom_fan
+  alias: 'Occupancy - Cooling Jennifer Room'
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: group.jen_tracker
+  action:
+    service: |
+      {%- if trigger.to_state.state == 'home' -%}
+        switch.turn_on
+      {%- else -%}
+        switch.turn_off
+      {% endif %}
+    entity_id: switch.switch4
 
 # }}}
 # {{{ Heating
 
 - id: occupancy_heating_no_one_home_turn_down_heat
   alias: 'Occupancy - no one home - turn down heat'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
@@ -204,7 +221,7 @@
 
 - id: occupancy_heating_return_home_turn_up_heat
   alias: 'Occupancy - return home - turn up heat'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
@@ -228,7 +245,7 @@
 
 - id: occupancy_heating_gandg_not_home_turn_off_bedroom_heater
   alias: 'Occupancy - GandG not home - turn off bedroom heater'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: person.gail,person.gervais
@@ -249,7 +266,7 @@
 
 - id: occupancy_heating_gandg_return_home_turn_on_bedroom_heater
   alias: 'Occupancy - GandG return home - turn on bedroom heater'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: person.gail,person.gervais
@@ -269,7 +286,7 @@
 
 - id: occupancy_heating_work_day_dressing_room_heater
   alias: 'Work day dressing room heater schedule'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: time
       at: '08:00:00'
@@ -303,7 +320,7 @@
 
 - id: occupancy_heating_jenroom_heater
   alias: 'Occupancy - Heating Jennifer Room'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: state
       entity_id: group.jen_tracker
@@ -330,7 +347,7 @@
 
 - id: heating_office_heater_off
   alias: '6pm - heater off'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: time
       at: '18:00:00'
