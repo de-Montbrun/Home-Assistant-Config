@@ -109,8 +109,10 @@
   alias: 'Bedroom Window fan on'
   initial_state: true
   trigger:
-    platform: template
-    value_template: '{{ states.sensor.temperature.state < states.sensor.master_bedroom_temperature.state }}'
+    - platform: template
+      value_template: '{{ states.sensor.temperature.state < states.sensor.master_bedroom_temperature.state }}'
+    - platform: time
+      at: '20:00:00'
   condition:
     condition: and
     conditions:
