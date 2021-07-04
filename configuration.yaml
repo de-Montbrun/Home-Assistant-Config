@@ -603,12 +603,12 @@ sensor:
       distance_apart:
         friendly_name: 'GandG Apart'
         value_template: >-
-          {% if distance(states.device_tracker.iphone, states.device_tracker.grdems_phone_2) | int == 0 %}
+          {% if distance(states.device_tracker.iphone, states.device_tracker.gail_iphone) | int == 0 %}
             0
-          {% elif distance(states.device_tracker.iphone, states.device_tracker.grdems_phone_2) | round(2) < 0.09 %}
+          {% elif distance(states.device_tracker.iphone, states.device_tracker.gail_iphone) | round(2) < 0.09 %}
             0
           {% else %}
-            {{ distance(states.device_tracker.iphone, states.device_tracker.grdems_phone_2) | round(2) }}
+            {{ distance(states.device_tracker.iphone, states.device_tracker.gail_iphone) | round(2) }}
           {% endif %}
         unit_of_measurement: 'km'
 
