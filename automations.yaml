@@ -1313,6 +1313,7 @@
     - platform: state
       entity_id:
         - binary_sensor.basement_motion
+        - binary_sensor.motion_doorbell
         - binary_sensor.doorbell_doorbell
         - binary_sensor.motion_driveway
         - binary_sensor.motion_mecklenburg_w
