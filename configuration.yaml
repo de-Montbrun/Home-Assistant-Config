@@ -305,6 +305,8 @@ lutron_caseta:
 # Enables support for tracking state changes over time.
 history:
   include:
+    domains:
+      - light
     entities:
       - person.gail
       - person.gervais
