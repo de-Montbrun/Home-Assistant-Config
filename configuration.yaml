@@ -423,20 +423,13 @@ person:
 # {{{ Presence Trackers
 
 device_tracker:
-  - platform: nmap_tracker
-    hosts: 192.168.2.10-15
-    home_interval: 5
-    interval_seconds: 120
-    new_device_defaults:
-      track_new_devices: true
-
   - platform: ping
     count: 3
     hosts:
       bell_internet: 1.1.1.1
 
   - platform: iphonedetect
-    consider_home: 420
+    consider_home: 600
     new_device_defaults:
       track_new_devices: true
     hosts:

@@ -8,7 +8,7 @@ logs
 *.conf
 *.db*
 *.db-journal
-*.log
+*.log.*
 *.noload
 *.txt
 *.sqlite
