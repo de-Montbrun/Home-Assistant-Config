@@ -1323,7 +1323,7 @@
       to: 'on'
   condition:
     condition: template
-    value_template: '{{ states("person.gervais") != "home" }}'
+    value_template: '{{ states("group.householdmembers") != "home" }}'
   action:
     - service: notify.zulip
       data_template:
