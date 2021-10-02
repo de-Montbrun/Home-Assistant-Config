@@ -20,7 +20,7 @@
   initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.updater, binary_sensor.instance02_updater
+    entity_id: binary_sensor.updater, binary_sensor.instance02_updater, binary_sensor.cottage_updater
     from: 'off'
     to: 'on'
   action:
@@ -37,6 +37,8 @@
       value_template: '{{ states.sensor.hacs.state | int > 0 }}'
     - platform: template
       value_template: '{{ states.sensor.instance02_hacs.state | int > 0 }}'
+    - platform: template
+      value_template: '{{ states.sensor.cottage_hacs.state | int > 0 }}'
   action:
     service: notify.zulip
     data:
