@@ -72,3 +72,11 @@ sensor.humidity:
   icon: mdi:water-percent
 sensor.wind_gust:
   icon: mdi:weather-windy
+sensor.cottage_ble_battery_cottage:
+  friendly_name: Cottage Battery
+sensor.cottage_ble_temperature_cottage:
+  friendly_name: Cottage Temperature
+sensor.cottage_ble_humidity_cottage:
+  friendly_name: ' Cottage Humidity'
+sensor.cottage_ble_voltage_cottage:
+  friendly_name: Cottage Voltage
