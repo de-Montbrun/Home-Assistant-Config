@@ -22,8 +22,6 @@ householdmembers:
   entities:
     - person.gervais
     - person.gail
-    - group.cam_tracker
-    - group.jen_tracker
   icon: mdi:account-multiple
 
 grant_tracker:
