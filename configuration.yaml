@@ -478,20 +478,6 @@ climate:
     auto_mode: all
 
 # }}}
-# {{{ Remote Homeassistant
-
-remote_homeassistant:
-  instances:
-  - host: pi3.dem
-    access_token: !secret basement_ha_access_token
-    entity_prefix: "instance02_"
-    include:
-      entities:
-      - binary_sensor.updater
-      domains:
-      - sensor
-
-# }}}
 ## {{{ Rest Commands
 
 rest_command:
