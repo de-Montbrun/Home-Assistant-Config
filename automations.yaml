@@ -1289,19 +1289,19 @@
         **Low:** {{ states.sensor.low_temperature.state }}{{ states.sensor.low_temperature.attributes.unit_of_measurement }}
       title: 'Weather'
 
-- id: notify_camera_action
-  alias: 'Camera notify'
+- id: notify_alarm_action
+  alias: 'No one home motion notify'
   initial_state: true
   mode: parallel
   trigger:
     - platform: state
       entity_id:
         - binary_sensor.basement_motion
-        - binary_sensor.motion_doorbell
         - binary_sensor.doorbell_doorbell
-        - binary_sensor.motion_driveway
-        - binary_sensor.motion_mecklenburg_w
         - binary_sensor.motion_rack
+        - binary_sensor.kitchen_sensor_motion
+        - binary_sensor.spare_room_sensor_motion
+        - binary_sensor.sun_room_sensor_motion
       to: 'on'
   condition:
     condition: template
