@@ -136,6 +136,18 @@ light:
       - light.bedroom4
 
   - platform: group
+    name: Cottage lights
+    entities:
+      - light.cottage_bathroom
+      - light.cottage_bedroom
+      - light.cottage_driveway
+      - light.cottage_kitchen
+      - light.cottage_living_room
+      - light.cottage_muskoka
+      - light.cottage_spare_room
+      - light.cottage_switch1
+
+  - platform: group
     name: Dining room lights
     entities:
       - light.diningroom0
