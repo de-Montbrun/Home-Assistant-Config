@@ -168,13 +168,12 @@
       effect: '0'
       rgb_color:
       - 255
-      - 255
-      - 255
+      - 205
+      - 166
       xy_color:
-      - 0.323
-      - 0.329
+      - 0.421
+      - 0.364
       state: 'on'
-      white_value: 255
     light.hallway_upstairs:
       friendly_name: Hallway Upstairs
       white_value: 255
@@ -227,21 +226,21 @@
       - '3'
       - '4'
       friendly_name: Livingroom lamps
+      state: 'on'
       hs_color:
-      - 0
-      - 0
-      max_mireds: 500
-      min_mireds: 153
+      - 26.812
+      - 34.87
       rgb_color:
       - 255
-      - 255
-      - 255
-      state: 'on'
-      supported_features: 23
+      - 205
+      - 166
       xy_color:
-      - 0.323
-      - 0.329
-      white_value: 200
+      - 0.421
+      - 0.364
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
     light.livingroom_shelves:
       friendly_name: Livingroom Shelves
       state: 'on'
@@ -304,4 +303,12 @@
       friendly_name: UpstairsBathroom
       white_value: 255
     light.office_table:
+      state: 'on'
+    light.cottage_bedroom:
+      state: 'on'
+    light.cottage_driveway:
+      state: 'on'
+    light.cottage_kitchen:
+      state: 'on'
+    light.cottage_muskoka:
       state: 'on'
