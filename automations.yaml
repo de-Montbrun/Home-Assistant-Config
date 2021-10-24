@@ -444,6 +444,27 @@
 # }}}
 # {{{ Cottage
 
+- id: occupancy_cottage_turn_off_lights
+  alias: 'Occupancy - no one at cottage - turn off lights'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: person.gail,person.gervais
+    from: 'Cottage'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("person.gail") != "Cottage" }}'
+      - condition: template
+        value_template: '{{ states("person.gervais") != "Cottage" }}'
+  action:
+    - service: light.turn_off
+      entity_id: light.cottage_lights
+    - delay: '00:00:10'
+    - service: light.turn_off
+      entity_id: light.cottage_lights
+
 - id: occupancy_cottage_turn_on_lights
   alias: 'Occupancy at cottage - turn on lights'
   initial_state: true
@@ -460,6 +481,9 @@
       entity_id: sun.sun
       state: 'below_horizon'
   action:
+    - service: light.turn_on
+      entity_id: light.cottage_lights
+    - delay: '00:00:10'
     - service: light.turn_on
       entity_id: light.cottage_lights
 
@@ -815,6 +839,9 @@
       data:
         entity_id: climate.my_ecobee
         preset_mode: 'Sleep'
+    - delay: '00:00:10'
+    - service: light.turn_off
+      entity_id: light.cottage_lights
 
 - id: doorbell_doorbell
   alias: 'Doorbell rang - pause tv'
@@ -931,11 +958,6 @@
       entity_id:
         - scene.sunset
         - scene.sunroom_dim
-    - service: light.turn_on
-      entity_id: light.hallway_table
-      data:
-        brightness: 1000
-        color_temp: 78
     - service: switch.turn_on
       entity_id:
         - switch.switch3

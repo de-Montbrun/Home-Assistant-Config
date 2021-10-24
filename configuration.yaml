@@ -125,6 +125,7 @@ light:
       - light.bathroom0
       - light.bathroom1
       - light.bathroom2
+      - light.cottage_bathroom
 
   - platform: group
     name: Bedroom lights
@@ -134,6 +135,7 @@ light:
       - light.bedroom2
       - light.bedroom3
       - light.bedroom4
+      - light.cottage_bedroom
 
   - platform: group
     name: Cottage lights
