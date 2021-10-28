@@ -240,6 +240,7 @@ light:
       - light.front_door
       - light.backdoor
       - light.deck_lights
+      - light.cottage_driveway
 
   - platform: group
     name: Second floor lights
