@@ -976,6 +976,8 @@
       at: '18:00:00'
     - platform: 'time'
       at: '02:00:00'
+    - platform: template
+      value_template: "{{ states.media_player | select('match', '.*media_player.plex_.*') | list | selectattr('state', 'equalto', 'playing') | list | count | int > 2 }}"
   action:
     service: rest_command.sabnzb_api
 
