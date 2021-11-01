@@ -215,7 +215,7 @@
       state: 'on'
       supported_features: 1
       zone_id: '3'
-    light.livingroom_lamps:
+    light.lamp0:
       brightness: 255
       color_temp: 153
       effect: '0'
@@ -225,7 +225,6 @@
       - '0'
       - '3'
       - '4'
-      friendly_name: Livingroom lamps
       state: 'on'
       hs_color:
       - 26.812
