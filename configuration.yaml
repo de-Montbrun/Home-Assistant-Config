@@ -196,6 +196,12 @@ light:
       - light.kitchen_swirly1
 
   - platform: group
+    name: Livingroom Chandeliers
+    entities:
+      - light.living_room_pendants0
+      - light.living_room_pendants1
+
+  - platform: group
     name: Livingroom lamps
     entities:
       - light.lamp0
@@ -209,12 +215,6 @@ light:
       - light.livingroom_chandeliers
       - light.livingroom_shelves
       - light.livingroom_tree
-
-  - platform: group
-    name: Livingroom Chandeliers
-    entities:
-      - light.living_room_pendants0
-      - light.living_room_pendants1
 
   - platform: group
     name: Main floor lights
@@ -245,8 +245,14 @@ light:
   - platform: group
     name: Second floor lights
     entities:
-      - light.bathroom_lights
-      - light.bedroom_lights
+      - light.bathroom0
+      - light.bathroom1
+      - light.bathroom2
+      - light.bedroom0
+      - light.bedroom1
+      - light.bedroom2
+      - light.bedroom3
+      - light.bedroom4
       - light.dressing_room_lights
       - light.hallway_back
       - light.hallway_upstairs
