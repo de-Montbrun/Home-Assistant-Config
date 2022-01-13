@@ -26,7 +26,7 @@
   action:
     service: notify.zulip
     data:
-      message: 'Update for Home Assistant is available.'
+      message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
       title: 'Home Assistant'
 
 - id: ha_notify_hacs_update_available
