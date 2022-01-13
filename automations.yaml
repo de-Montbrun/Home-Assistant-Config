@@ -222,12 +222,6 @@
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: group.cam_tracker
-        state: not_home
-      - condition: state
-        entity_id: group.jen_tracker
-        state: not_home
       - condition: template
         value_template: '{{ states("person.gail") != "home" }}'
       - condition: template
@@ -272,7 +266,7 @@
 
 - id: occupancy_heating_gandg_not_home_turn_off_bedroom_heater
   alias: 'Occupancy - GandG not home - turn off bedroom heater'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: person.gail,person.gervais
@@ -293,7 +287,7 @@
 
 - id: occupancy_heating_gandg_return_home_turn_on_bedroom_heater
   alias: 'Occupancy - GandG return home - turn on bedroom heater'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: person.gail,person.gervais
@@ -611,7 +605,9 @@
       before: '20:00'
   action:
     - service: light.turn_on
-      entity_id: light.office_lights
+      data:
+        entity_id: light.office_lights
+        brightness: 255
     - condition: state
       entity_id: person.gail
       state: 'home'
@@ -647,7 +643,7 @@
   trigger:
     - platform: state
       entity_id:
-        - binary_sensor.motion_doorbell
+        - binary_sensor.doorbell_motion
         - binary_sensor.doorbell_doorbell
       to: 'on'
   condition:
@@ -965,7 +961,7 @@
 
 - id: sunrise
   alias: 'Sunrise - Lights out'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: sun
     event: sunrise
@@ -1021,9 +1017,9 @@
     - platform: template
       value_template: '{{ states.media_player | select("match", ".*media_player.plex_.*") | list | selectattr("state", "equalto", "playing") | list | count | int <= 2 }}'
     - platform: template
-      value_template: '{{ states.sensor.load_5m.state | int > 4 }}'
+      value_template: '{{ states.sensor.load_5m.state | int > 5 }}'
     - platform: template
-      value_template: '{{ states.sensor.load_5m.state | int <= 4 }}'
+      value_template: '{{ states.sensor.load_5m.state | int <= 5 }}'
   action:
     service: rest_command.sabnzb_api
 
