@@ -42,8 +42,46 @@
   action:
     service: notify.zulip
     data:
-      message: '{{ trigger.to_state.attributes.friendly_name }} update is available.'
+      message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
       title: 'Home Assistant'
+
+# }}}
+# {{{ Alarm
+
+- id: occupancy_alarm_no_one_home_alarm_alarm
+  alias: 'Occupancy - no one home - alarm alarm'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
+    from: 'home'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("person.gail") != "home" }}'
+      - condition: template
+        value_template: '{{ states("person.gervais") != "home" }}'
+      - condition: template
+        value_template: '{{ states("group.cam_tracker") != "home" }}'
+      - condition: template
+        value_template: '{{ states("group.jen_tracker") != "home" }}'
+  action:
+    service: alarm_control_panel.alarm_arm_away
+    target:
+      entity_id: alarm_control_panel.alarmo
+
+- id: occupancy_alarm_return_home_disarm_alarm
+  alias: 'Occupancy - return home - disarm alarm'
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
+    to: 'home'
+  action:
+    service: alarm_control_panel.alarm_disarm
+    target:
+      entity_id: alarm_control_panel.alarmo
 
 # }}}
 # {{{ Buttons
