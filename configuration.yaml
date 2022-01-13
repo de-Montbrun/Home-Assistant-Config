@@ -465,7 +465,7 @@ climate:
   - platform: programmable_thermostat
     name: Bedroom Heater
     heater:
-      - switch.switch88
+      - switch.switch8
     actual_temp_sensor: sensor.master_bedroom_temperature
     min_temp: 14
     max_temp: 22
@@ -477,7 +477,7 @@ climate:
   - platform: programmable_thermostat
     name: Dressing Room Heater
     heater:
-      - switch.switch99
+      - switch.switch9
     actual_temp_sensor: sensor.instance02_ble_temperature_dressing_room
     min_temp: 14
     max_temp: 26
@@ -489,7 +489,7 @@ climate:
   - platform: programmable_thermostat
     name: Jenroom Heater
     heater:
-      - switch.switch77
+      - switch.switch7
     actual_temp_sensor: sensor.jennifer_room_temperature
     min_temp: 14
     max_temp: 22
