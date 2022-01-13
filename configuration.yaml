@@ -509,7 +509,6 @@ rest_command:
 # {{{ Security Cams
 
 camera:
-  - platform: environment_canada
   - platform: mjpeg
     mjpeg_url: http://pi3:8081
     name: Basement Live cam
@@ -624,8 +623,6 @@ sensor:
       - alert@fing.io
       - alert@fing.com
 
-  - platform: environment_canada
-
   # Sensor for monitoring the bridge state
   - platform: mqtt
     name: Zigbee2mqtt Bridge state
@@ -683,12 +680,6 @@ tts:
 
   - platform: voicerss
     api_key: !secret voicerss_api_key
-
-# }}}
-# {{{ Weather
-
-weather:
-  - platform: environment_canada
 
 # }}}
 
