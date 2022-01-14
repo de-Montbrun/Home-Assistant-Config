@@ -233,7 +233,7 @@
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: template
-        value_template: '{{ states.sensor.temperature.state | int <= 5 }}'
+        value_template: '{{ states.sensor.saint_john_temperature.state | int <= 5 }}'
   action:
     service: climate.set_preset_mode
     data:
