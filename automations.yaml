@@ -150,7 +150,7 @@
   initial_state: false
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.temperature.state < states.sensor.master_bedroom_temperature.state }}'
+      value_template: '{{ states.sensor.saint_john_temperature.state < states.sensor.master_bedroom_temperature.state }}'
     - platform: time
       at: '20:00:00'
   condition:
@@ -178,7 +178,7 @@
   initial_state: false
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.temperature.state > states.sensor.master_bedroom_temperature.state }}'
+      value_template: '{{ states.sensor.saint_john_temperature.state > states.sensor.master_bedroom_temperature.state }}'
     - platform: template
       value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 18 }}'
     - platform: time
@@ -189,7 +189,7 @@
       - condition: template
         value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 18 }}'
       - condition: template
-        value_template: '{{ states.sensor.temperature.state > states.sensor.master_bedroom_temperature.state }}'
+        value_template: '{{ states.sensor.saint_john_temperature.state > states.sensor.master_bedroom_temperature.state }}'
       - condition: and
         conditions:
           - condition: state
@@ -253,7 +253,7 @@
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: template
-        value_template: '{{ states.sensor.temperature.state | int <= 5 }}'
+        value_template: '{{ states.sensor.saint_john_temperature.state | int <= 5 }}'
       - condition: time
         after: '16:30:00'
       - condition: time
@@ -298,7 +298,7 @@
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: template
-        value_template: '{{ states.sensor.temperature.state | int <= 5 }}'
+        value_template: '{{ states.sensor.saint_john_temperature.state | int <= 5 }}'
   action:
     service: climate.set_hvac_mode
     data:
@@ -1086,8 +1086,6 @@
     - platform: template
       value_template: '{{ states.sensor.disk_use_percent_media_apple.state | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.disk_use_percent_media_cracker.state | int >= 95 }}'
-    - platform: template
       value_template: '{{ states.sensor.disk_use_percent_media_wine.state | int >= 95 }}'
   action:
     service: notify.zulip
@@ -1172,17 +1170,17 @@
     service: notify.zulip
     data_template:
       message: >
-        **Weather Condition:** {{ states.sensor.condition.state }}
+        **Weather Condition:** {{ states.sensor.saint_john_condition.state }}
 
-        **Tempurature:** {{ states.sensor.temperature.state }}{{ states.sensor.temperature.attributes.unit_of_measurement }}
-        {% if states.sensor.humidex.state != 'unknown' or states.sensor.wind_chill.state != 'unknown' %}
+        **Tempurature:** {{ states.sensor.saint_john_temperature.state }}{{ states.sensor.saint_john_temperature.attributes.unit_of_measurement }}
+        {% if states.sensor.saint_john_humidex.state != 'unknown' or states.sensor.saint_john_wind_chill.state != 'unknown' %}
 
-        **Feels like:** {%- if states.sensor.humidex.state != 'unknown' %}
-        {{ states.sensor.wind_chill.state }}
-        {% elif states.sensor.temperature.state != 'unknown' %}
-        {{ states.sensor.temperature.state }}
+        **Feels like:** {%- if states.sensor.saint_john_humidex.state != 'unknown' %}
+        {{ states.sensor.saint_john_wind_chill.state }}
+        {% elif states.sensor.saint_john_temperature.state != 'unknown' %}
+        {{ states.sensor.saint_john_temperature.state }}
         {% endif %}
-        {{ states.sensor.temperature.attributes.unit_of_measurement }}
+        {{ states.sensor.saint_john_temperature.attributes.unit_of_measurement }}
         {% endif %}
       title: 'Weather'
 
@@ -1206,7 +1204,7 @@
     service: notify.zulip
     data:
       message: >
-        :sunny: UV Index is {{ states.sensor.uv_index.state }}. You better put on some sunscreen!
+        :sunny: UV Index is {{ states.sensor.saint_john_uv_index.state }}. You better put on some sunscreen!
       title: 'Weather'
 
 - id: notify_weather_forecast
@@ -1221,12 +1219,12 @@
       message: >
         **Forecast:**
 
-        {{ states.sensor.forecast.state }}
+        {{ states.sensor.saint_john_forecast.state }}
 
 
-        **High:** {{ states.sensor.high_temperature.state }}{{ states.sensor.high_temperature.attributes.unit_of_measurement }}
+        **High:** {{ states.sensor.saint_john_high_temperature.state }}{{ states.sensor.saint_john_high_temperature.attributes.unit_of_measurement }}
 
-        **Low:** {{ states.sensor.low_temperature.state }}{{ states.sensor.low_temperature.attributes.unit_of_measurement }}
+        **Low:** {{ states.sensor.saint_john_low_temperature.state }}{{ states.sensor.saint_john_low_temperature.attributes.unit_of_measurement }}
       title: 'Weather'
 
 - id: notify_alarm_action
