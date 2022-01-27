@@ -89,11 +89,12 @@
 - id: tap0_button_1
   alias: 'Tap0 Button 1'
   trigger:
-    device_id: e98414b624b34e22c64f147d34a5088a
-    domain: hue
-    platform: device
-    type: remote_button_short_press
-    subtype: button_1
+    - device_id: 2b533c9f9b279032d1907efe688c476d
+      domain: hue
+      platform: device
+      type: initial_press
+      subtype: 1
+      unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
   action:
     service: light.toggle
     entity_id: light.sunroom_lights
@@ -101,11 +102,12 @@
 - id: tap0_button_2
   alias: 'Tap0 Button 2'
   trigger:
-    device_id: e98414b624b34e22c64f147d34a5088a
-    domain: hue
-    platform: device
-    type: remote_button_short_press
-    subtype: button_2
+    - device_id: 2b533c9f9b279032d1907efe688c476d
+      domain: hue
+      platform: device
+      type: initial_press
+      subtype: 2
+      unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
   action:
     service: scene.turn_on
     entity_id: scene.sunroom_dim
@@ -113,11 +115,12 @@
 - id: tap0_button_3
   alias: 'Tap0 Button 3'
   trigger:
-    device_id: e98414b624b34e22c64f147d34a5088a
-    domain: hue
-    platform: device
-    type: remote_button_short_press
-    subtype: button_3
+    - device_id: 2b533c9f9b279032d1907efe688c476d
+      domain: hue
+      platform: device
+      type: initial_press
+      subtype: 3
+      unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
   action:
     - service: homeassistant.turn_on
       entity_id: automation.lighting_plex_play_pause
@@ -129,11 +132,12 @@
 - id: tap0_button_4
   alias: 'Tap0 Button 4'
   trigger:
-    device_id: e98414b624b34e22c64f147d34a5088a
-    domain: hue
-    platform: device
-    type: remote_button_short_press
-    subtype: button_4
+    - device_id: 2b533c9f9b279032d1907efe688c476d
+      domain: hue
+      platform: device
+      type: initial_press
+      subtype: 4
+      unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
   action:
     - service: homeassistant.turn_off
       entity_id: automation.lighting_plex_play_pause
