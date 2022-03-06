@@ -316,10 +316,14 @@
     light.office_table:
       state: 'on'
     light.cottage_bedroom:
+      brightness: 255
       state: 'on'
     light.cottage_driveway:
+      brightness: 255
       state: 'on'
     light.cottage_kitchen:
+      brightness: 255
       state: 'on'
     light.cottage_muskoka:
+      brightness: 255
       state: 'on'
