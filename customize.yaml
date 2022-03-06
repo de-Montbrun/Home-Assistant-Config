@@ -1,12 +1,3 @@
-binary_sensor.bedroom_motion:
-  friendly_name: Lost Occpancy
-  icon: mdi:home
-binary_sensor.kitchen_motion:
-  friendly_name: Kitchen Occpancy
-  icon: mdi:home
-binary_sensor.sunroom_motion:
-  friendly_name: Sun Room Occpancy
-  icon: mdi:home
 device_tracker.gail_iphone:
   hidden: false
   entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
@@ -52,26 +43,10 @@ light.stairs_back:
   icon: mdi:lightbulb
 light.main_floor_bathroom_light:
   friendly_name: Main Floor Bathroom
-sensor.deMontbrun_DNS_Expiry:
-  icon: mdi:dns
-sensor.grater_uptime:
-  friendly_name: Uptime
-  icon: mdi:clock
-sensor.swap_used:
-  icon: mdi:memory
-sensor.filesize_db:
-  friendly_name: SQLite DB size
-  icon: mdi:database
 sensor.fing_state:
   hidden: true
 sensor.distance_apart:
   icon: mdi:human-male-female
-sensor.warnings:
-  icon: mdi:cloud-alert
-sensor.humidity:
-  icon: mdi:water-percent
-sensor.wind_gust:
-  icon: mdi:weather-windy
 sensor.cottage_ble_battery_bedroom:
   friendly_name: Cottage Bedroom Battery
 sensor.cottage_ble_temperature_bedroom:
