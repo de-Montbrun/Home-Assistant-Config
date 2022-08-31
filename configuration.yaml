@@ -16,6 +16,8 @@ homeassistant:
   allowlist_external_dirs:
     - /var/www/html/snapshots
     - /etc/homeassistant/file_restore
+  media_dirs:
+    security: /var/www/html/snapshots
   customize: !include customize.yaml
 
 default_config:
@@ -39,20 +41,17 @@ alexa:
         - switch.switch6
         - switch.switch7
         - switch.switch8
-        - switch.switch9
-        - switch.switch10
-        - switch.switch11
 
 # }}}
 # {{{ mqtt switch
 
-switch:
-  - platform: mqtt
-    name: "Zigbee2mqtt Main join"
-    state_topic: "zigbee2mqtt/bridge/config/permit_join"
-    command_topic: "zigbee2mqtt/bridge/config/permit_join"
-    payload_on: "true"
-    payload_off: "false"
+#switch:
+#  - platform: mqtt
+#    name: "Zigbee2mqtt Main join"
+#    state_topic: "zigbee2mqtt/bridge/config/permit_join"
+#    command_topic: "zigbee2mqtt/bridge/config/permit_join"
+#    payload_on: "true"
+#    payload_off: "false"
 
 # }}}
 # {{{ frontend
@@ -72,11 +71,6 @@ http:
 # {{{ Lights
 
 light:
-  # Make basement switch act like a light
-  - platform: switch
-    name: Basement Light
-    entity_id: switch.basement_light
-
   # Make dressingroom switch act like a light
   - platform: switch
     name: Gail Desk
@@ -93,48 +87,70 @@ light:
     name: Bathroom2
     entity_id: switch.bathroom2
 
+  # Make Garage switches act like lights
+  - platform: switch
+    name: Garage Eaves
+    entity_id: switch.garage_eaves
+
   # Make Livingroom switches act like a lights
   - platform: switch
-    name: Livingroom Shelves
-    entity_id: switch.switch2
-  - platform: switch
-    name: Livingroom Tree
-    entity_id: switch.switch3
-
-  # Make Office Table switch act like a light
-  - platform: switch
-    name: Office Table
+    name: Livingroom Table
     entity_id: switch.switch0
-
-  # Make Outdoor switches act like lights
-  - platform: switch
-    name: Backdoor
-    entity_id: switch.outdoor_backdoor
-  - platform: switch
-    name: Deck lights
-    entity_id: switch.outdoor_deck_lights
-
-  # Make Sunroom switch act like light
   - platform: switch
     name: Saltlick
     entity_id: switch.switch5
+
+  # Make OutdoorIn switches act like lights
+  - platform: switch
+    name: OutsideIn Tree
+    entity_id: switch.switch3
+
+  # Make Pantry switches act like lights
+  - platform: switch
+    name: Pantry Counter
+    entity_id: switch.switch2
 
   - platform: group
     name: Bathroom lights
     entities:
       - light.bathroom0
       - light.bathroom1
-      - light.bathroom2
+      - light.bathroom_sink
       - light.cottage_bathroom
+
+  - platform: group
+    name: Bathroom sink
+    entities:
+      - light.sink0
+      - light.sink1
+      - light.sink2
+      - light.cottage_bathroom
+
+  - platform: group
+    name: Bedroom ceiling
+    entities:
+      - light.bedroom4
+      - light.bedroom5
+      - light.bedroom6
+
+  - platform: group
+    name: Bedroom lamps
+    entities:
+      - light.bedroom2
+      - light.bedroom3
+
+  - platform: group
+    name: Bedroom wall
+    entities:
+      - light.bedroom0
+      - light.bedroom1
 
   - platform: group
     name: Bedroom lights
     entities:
-      - light.bedroom0
-      - light.bedroom1
-      - light.bedroom2
-      - light.bedroom3
-      - light.bedroom4
+      - light.bedroom_ceiling
+      - light.bedroom_lamps
+      - light.bedroom_wall
       - light.cottage_bedroom
 
   - platform: group
@@ -157,43 +173,57 @@ light:
       - light.diningroom2
       - light.diningroom3
       - light.diningroom4
-      - light.diningroom5
-      - light.diningroom6
 
   - platform: group
     name: Dressing room lights
     entities:
-      - light.dressing_room0
-      - light.dressing_room1
-      - light.dressing_room2
-      - light.dressing_room3
       - light.gail_desk
+
+  - platform: group
+    name: Garage lights
+    entities:
+      - light.garage_eaves
+      - light.garage_pots
+
+  # {{{ Hallway lights
+  - platform: group
+    name: Foyer Lights
+    entities:
+      - light.foyer0
+      - light.foyer1
+      - light.foyer2
+      - light.foyer3
+      - light.foyer4
+
+  - platform: group
+    name: Hallway Back Lights
+    entities:
+      - light.hall_back0
+      - light.hall_back1
+
+  - platform: group
+    name: Downstairs Hall Lights
+    entities:
+      - light.hallway0
+      - light.hallway1
+      - light.hallway2
+
+  - platform: group
+    name: Upstairs Hall Lights
+    entities:
+      - light.hall_up0
+      - light.hall_up1
+      - light.hall_up2
 
   - platform: group
     name: Hallway lights
     entities:
-      - light.stairs_back
-      - light.cherub
-      - light.foyer
-      - light.hallway_back
-      - light.hallway_table
-      - light.hallway_wall
-      - light.hallway_upstairs
-      - light.hallway_upstairs_wall
+      - light.foyer_lights
+      - light.hallway_back_lights
+      - light.downstairs_hall_lights
+      - light.upstairs_hall_lights
 
-  - platform: group
-    name: Kitchen lights
-    entities:
-      - light.kitchen_island
-      - light.kitchen_pots
-      - light.kitchen_swirly0
-      - light.kitchen_swirly1
-
-  - platform: group
-    name: Kitchen swirlies
-    entities:
-      - light.kitchen_swirly0
-      - light.kitchen_swirly1
+  # }}}
 
   - platform: group
     name: Livingroom Chandeliers
@@ -212,76 +242,60 @@ light:
     name: Livingroom lights
     entities:
       - light.livingroom_lamps
-      - light.livingroom_chandeliers
-      - light.livingroom_shelves
-      - light.livingroom_tree
+      - light.livingroom_table
+      - light.saltlick
 
   - platform: group
     name: Main floor lights
     entities:
       - light.dining_room_lights
-      - light.hallway_lights
+      - light.downstairs_hall_lights
+      - light.foyer_lights
       - light.kitchen_lights
+      - light.laundry_room
       - light.livingroom_lights
-      - light.office_lights
-      - light.main_floor_bathroom_light
+      - light.outsidein_lights
+      - light.pantry_lights
 
   - platform: group
     name: Office lights
     entities:
-      - light.office_lamp
-      - light.office_main_light
-      - light.office_wall
-      - light.office_table
+      - light.office0
 
   - platform: group
     name: Outdoor lights
     entities:
       - light.front_door
-      - light.backdoor
-      - light.deck_lights
       - light.cottage_driveway
+      - light.garage_eaves
+
+  - platform: group
+    name: OutsideIn lights
+    entities:
+      - light.outsidein0
+      - light.outsidein_tree
+
+  - platform: group
+    name: Pantry lights
+    entities:
+      - light.pantry_counter
 
   - platform: group
     name: Second floor lights
     entities:
-      - light.bathroom0
-      - light.bathroom1
-      - light.bathroom2
-      - light.bedroom0
-      - light.bedroom1
-      - light.bedroom2
-      - light.bedroom3
-      - light.bedroom4
-      - light.dressing_room_lights
-      - light.hallway_back
-      - light.hallway_upstairs
+      - light.bathroom_lights
+      - light.bedroom_lights
+      - light.hallway_back_lights
+      - light.upstairs_hall_lights
+      - light.office_lights
       - light.spare_room_lights
-      - light.sunroom_lights
-      - light.upstairsbathroom
-      - light.stairs_back
 
   - platform: group
     name: Spare room lights
     entities:
       - light.spare0
       - light.spare1
-
-  - platform: group
-    name: Sunroom lights
-    entities:
-      - light.saltlick
-      - light.sunroom0
-      - light.sunroom1
-      - light.sunroom2
-      - light.sunroom3
-      - light.sunroom4
-
-  - platform: group
-    name: Washroom lights
-    entities:
-      - light.main_floor_bathroom_light
-      - light.upstairsbathroom
+      - light.spare2
 
 #  }}}
 # {{{ Media Players
@@ -293,9 +307,6 @@ media_player:
 
 # Enable frontend configuration
 config:
-
-# Checks for available updates
-updater:
 
 # Discover some devices automatically
 discovery:
@@ -360,16 +371,6 @@ system_health:
 
 # }}}
 # {{{ mqtt
-
-mqtt:
-  discovery: true
-  broker: 127.0.0.1
-  birth_message:
-    topic: 'hass/status'
-    payload: 'online'
-  will_message:
-    topic: 'hass/status'
-    payload: 'offline'
 
 timer:
   zigbee_permit_join:
@@ -474,17 +475,17 @@ climate:
     hvac_options: 7
     auto_mode: all
 
-  - platform: programmable_thermostat
-    name: Dressing Room Heater
-    heater:
-      - switch.switch9
-    actual_temp_sensor: sensor.instance02_ble_temperature_dressing_room
-    min_temp: 14
-    max_temp: 26
-    target_temp_sensor: sensor.thermostat_dressing_program
-    tolerance: 0.3
-    hvac_options: 7
-    auto_mode: all
+    #- platform: programmable_thermostat
+    #- name: Dressing Room Heater
+    #- heater:
+    #-   - switch.switch9
+    #- actual_temp_sensor: sensor.instance02_ble_temperature_dressing_room
+    #- min_temp: 14
+    #- max_temp: 26
+    #- target_temp_sensor: sensor.thermostat_dressing_program
+    #- tolerance: 0.3
+    #- hvac_options: 7
+    #- auto_mode: all
 
   - platform: programmable_thermostat
     name: Jenroom Heater
@@ -511,15 +512,18 @@ rest_command:
 camera:
   - platform: mjpeg
     mjpeg_url: http://pi3:8081
-    name: Basement Live cam
+    name: Garage Live cam
 
 # }}}
 # {{{ Sensors
 
 sensor:
-  - platform: whois
-    domain: demontbrun.com
-    name: deMontbrun DNS Expiry
+  - platform: uptime
+    name: "HASS uptime"
+  #  - platform: command_line
+  #    name: "HASS uptime"
+  #    command: echo "$(($(date +%s) - $(date --date="`systemctl show home-assistant.service -p ActiveEnterTimestamp | awk -F'=' '{print $2}'`" "+%s")))"
+  #    scan_interval: 60
 
   - platform: season
 
@@ -608,23 +612,23 @@ sensor:
       - alert@fing.io
       - alert@fing.com
 
-  # Sensor for monitoring the bridge state
-  - platform: mqtt
-    name: Zigbee2mqtt Bridge state
-    state_topic: "zigbee2mqtt/bridge/state"
-    icon: mdi:router-wireless
-  # Sensor for Showing the Zigbee2mqtt Version
-  - platform: mqtt
-    name: Zigbee2mqtt Version
-    state_topic: "zigbee2mqtt/bridge/config"
-    value_template: "{{ value_json.version }}"
-    icon: mdi:zigbee
-  # Sensor for Showing the Coordinator Version
-  - platform: mqtt
-    name: Coordinator Version
-    state_topic: "zigbee2mqtt/bridge/config"
-    value_template: "{{ value_json.coordinator }}"
-    icon: mdi:chip
+#  # Sensor for monitoring the bridge state
+#  - platform: mqtt
+#    name: Zigbee2mqtt Bridge state
+#    state_topic: "zigbee2mqtt/bridge/state"
+#    icon: mdi:router-wireless
+#  # Sensor for Showing the Zigbee2mqtt Version
+#  - platform: mqtt
+#    name: Zigbee2mqtt Version
+#    state_topic: "zigbee2mqtt/bridge/config"
+#    value_template: "{{ value_json.version }}"
+#    icon: mdi:zigbee
+#  # Sensor for Showing the Coordinator Version
+#  - platform: mqtt
+#    name: Coordinator Version
+#    state_topic: "zigbee2mqtt/bridge/config"
+#    value_template: "{{ value_json.coordinator }}"
+#    icon: mdi:chip
 
   - platform: fail2ban
     jails:
@@ -638,11 +642,8 @@ binary_sensor:
     country: CA
     province: PE
 
-  - platform: snowtire
-    weather: weather.saint_john
-
   - platform: ffmpeg_motion
-    name: Basement Motion
+    name: Garage Motion
     input: http://pi3:8081
     reset: 20
 

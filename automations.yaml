@@ -17,10 +17,10 @@
 
 - id: ha_notify_ha_update_available
   alias: Update Available Notification
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
-    entity_id: binary_sensor.updater, binary_sensor.instance02_updater, binary_sensor.cottage_updater
+    entity_id: binary_sensor.python_package_index_pypi_update_available, binary_sensor.instance02_python_package_index_pypi_update_available, binary_sensor.cottage_python_package_index_pypi_update_available
     from: 'off'
     to: 'on'
   action:
@@ -31,7 +31,7 @@
 
 - id: ha_notify_hacs_update_available
   alias: HACS Update Available Notification
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: template
       value_template: '{{ states.sensor.hacs.state | int > 0 }}'
@@ -175,7 +175,6 @@
     service: switch.turn_on
     entity_id:
       - switch.switch8
-      - switch.switch9
 
 - id: cooling_bedroom_fan_off
   alias: 'Bedroom Window fan off'
@@ -211,7 +210,6 @@
     service: switch.turn_off
     entity_id:
       - switch.switch8
-      - switch.switch9
 
 # }}}
 # {{{ Heating
@@ -311,7 +309,7 @@
 
 - id: occupancy_heating_work_day_dressing_room_heater
   alias: 'Work day dressing room heater schedule'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: time
       at: '08:00:00'
@@ -452,7 +450,7 @@
 
 - id: lighting_basement_timed_on
   alias: 'Timed basement light - Chris Home'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: person.chris
@@ -466,7 +464,7 @@
 
 - id: lighting_basement_times_off
   alias: 'Timed basement light'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: ligh.basement_light
@@ -528,7 +526,6 @@
 
 - id: occupancy_hallway_turn_on_lights
   alias: 'Occupancy in hallway - turn on lights'
-  initial_state: true
   mode: restart
   trigger:
     platform: state
@@ -593,7 +590,7 @@
 
 - id: turn_on_lights_office
   alias: 'Occupancy in Office - turn on lights'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: state
       entity_id: binary_sensor.office_occupancy
@@ -740,7 +737,6 @@
 
 - id: occupancy_lighting_motion_sunromm
   alias: 'Timed lights - Movement in Sunroom'
-  initial_state: true
   mode: restart
   trigger:
     platform: state
@@ -815,7 +811,7 @@
 # }}}}
 
 # }}}
-# {{{ Misc
+# {{{ Misczo
 
 - id: bedtime
   alias: 'Bedtime'
@@ -873,8 +869,6 @@
         - light.second_floor_lights
         - switch.switch1
         - switch.switch3
-        - switch.switch10
-        - switch.switch11
     - service: climate.set_preset_mode
       data:
         entity_id: climate.my_ecobee
@@ -955,13 +949,53 @@
       entity_id:
         - switch.switch0
         - switch.switch3
-        - switch.switch10
-        - switch.switch11
     - service: light.turn_off
       entity_id: all
     - delay: '00:00:05'
     - service: homeassistant.turn_on
       entity_id: automation.timed_lights_movement_front_door
+
+- id: showing
+  alias: 'Showing - Lights on'
+  initial_state: false
+  trigger:
+    - platform: time
+      at: '08:00:00'
+    - platform: time
+      at: '09:00:00'
+    - platform: time
+      at: '10:00:00'
+    - platform: time
+      at: '11:00:00'
+    - platform: time
+      at: '12:00:00'
+    - platform: time
+      at: '13:00:00'
+    - platform: time
+      at: '14:00:00'
+    - platform: time
+      at: '15:00:00'
+    - platform: time
+      at: '16:00:00'
+    - platform: time
+      at: '17:00:00'
+    - platform: time
+      at: '18:00:00'
+    - platform: time
+      at: '19:00:00'
+    - platform: time
+      at: '20:00:00'
+    - platform: time
+      at: '21:00:00'
+    - platform: time
+      at: '22:00:00'
+    - platform: sun
+      event: sunset
+      offset: '-00:30:00'
+  action:
+    - service: scene.turn_on
+      entity_id:
+        - scene.showing
 
 - id: sunrise
   alias: 'Sunrise - Lights out'
@@ -1001,8 +1035,6 @@
     - service: switch.turn_on
       entity_id:
         - switch.switch3
-        - switch.switch10
-        - switch.switch11
 
 - id: misc_sabnzb_speed_limit
   alias: 'Set sabnzb speed limit'
@@ -1079,7 +1111,7 @@
 
 - id: notify_drive_filling
   alias: 'Drive is filling'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: template
       value_template: '{{ states.sensor.disk_use_percent.state | int >= 95 }}'
@@ -1108,7 +1140,7 @@
 
 - id: notify_home_presence
   alias: 'Home presence notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,group.grant_tracker
@@ -1129,7 +1161,7 @@
 
 - id: notify_phone_presence
   alias: 'Phones presence notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: person.gervais,person.gail
@@ -1157,7 +1189,7 @@
   initial_state: false
   trigger:
     platform: state
-    entity_id: sensor.condition
+    entity_id: sensor.saint_john_condition
   condition:
     condition: and
     conditions:
@@ -1193,7 +1225,7 @@
   initial_state: false
   trigger:
     platform: numeric_state
-    entity_id: sensor.uv_index
+    entity_id: sensor.saint_john_uv_index
     above: '5'
   condition:
     condition: and
@@ -1213,7 +1245,7 @@
 
 - id: notify_weather_forecast
   alias: 'Weather forecast notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: time
     at: '08:00:00'
@@ -1233,7 +1265,7 @@
 
 - id: notify_alarm_action
   alias: 'No one home motion notify'
-  initial_state: true
+  initial_state: false
   mode: parallel
   trigger:
     - platform: state
@@ -1244,7 +1276,7 @@
         - binary_sensor.kitchen_sensor_motion
         - binary_sensor.living_room_occupancy
         - binary_sensor.master_bedroom_occupancy
-        - binary_sensor.motion_rack
+        - binary_sensor.rack_motion
         - binary_sensor.my_ecobee_occupancy
         - binary_sensor.office_occupancy
         - binary_sensor.spare_room_sensor_motion
@@ -1263,6 +1295,56 @@
           {% elif trigger.to_state.attributes.device_class == 'occupancy' %} :bell:
           {% endif %}
         title: 'Security Alert'
+
+# }}}
+# {{{ Vacuum
+
+- id: vacuum_no_one_home
+  alias: Vacuum No One Home
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: person.gail,person.gervais
+      from: 'home'
+      for: '00:05:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ states("person.gail") != "home" }}'
+      - condition: template
+        value_template: '{{ states("person.gervais") != "home" }}'
+      - condition: state
+        entity_id: vacuum.consuela
+        state: docked
+      - condition: template
+        value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.vacuum_no_one_home.attributes.last_triggered) | int > 432000 }}'
+  action:
+    service: vacuum.start
+    data: {}
+    entity_id: vacuum.consuela
+
+- id: vacuum_stop
+  alias: Vacuum Stop
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: group.jen_tracker,person.gail,person.gervais
+    to: 'home'
+  condition:
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: vacuum.consuela
+      state: cleaning
+    - condition: state
+      entity_id: vacuum.consuela
+      state: cleaning
+  action:
+    - service: vacuum.stop
+      entity_id: all
+    - service: vacuum.return_to_base
+      entity_id: all
 
 # }}}
 # {{{ Zigbee
