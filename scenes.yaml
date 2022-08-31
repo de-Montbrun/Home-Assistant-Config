@@ -115,54 +115,32 @@
 - id: '1586910709551'
   name: Sunset
   entities:
-    light.bathroom2:
-      friendly_name: Bathroom2
+    light.sink1:
+      friendly_name: Sink1
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 250
+      hs_color:
+        - 26.812
+        - 34.87
+      rgb_color:
+        - 255
+        - 205
+        - 166
+      xy_color:
+        - 0.421
+        - 0.364
       state: 'on'
       supported_features: 0
-    light.cherub:
-      brightness: 255
-      color_temp: 153
-      effect: '0'
-      effect_list:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      friendly_name: Cherub
-      hs_color:
-      - 225.176
-      - 100
-      max_mireds: 500
-      min_mireds: 153
-      rgb_color:
-      - 0
-      - 63
-      - 255
+    light.hallway_lights:
       state: 'on'
-      supported_features: 23
-      xy_color:
-      - 0.137
-      - 0.065
-    light.foyer:
-      friendly_name: Foyer
-      state: 'on'
-      supported_features: 41
       brightness: 255
     light.front_door:
       brightness: 255
       friendly_name: Front door
       state: 'on'
       supported_features: 41
-    light.hallway_back:
-      brightness: 255
-      friendly_name: Hallway Back
-      xy_color:
-      - 0.323
-      - 0.329
-      white_value: 255
-      state: 'on'
-    light.hallway_table:
+    light.laundry_room:
       brightness: 255
       color_temp: 153
       effect: '0'
@@ -187,47 +165,6 @@
       - color_temp
       - hs
       color_mode: color_temp
-    light.hallway_upstairs:
-      friendly_name: Hallway Upstairs
-      white_value: 255
-      state: 'on'
-    light.hallway_wall:
-      brightness: 255
-      color_temp: 182
-      effect: '0'
-      effect_list:
-      - '0'
-      - '1'
-      - '2'
-      - '3'
-      - '4'
-      friendly_name: Hallway Wall
-      hs_color:
-      - 225.176
-      - 100
-      max_mireds: 500
-      min_mireds: 153
-      rgb_color:
-      - 0
-      - 63
-      - 255
-      state: 'on'
-      supported_features: 23
-      xy_color:
-      - 0.137
-      - 0.065
-    light.hallway_upstairs_wall:
-      friendly_name: Hallway Upstairs Wall
-      state: 'on'
-      supported_features: 41
-      brightness: 255
-    light.kitchen_pots:
-      brightness: 48
-      device_id: '5'
-      friendly_name: Kitchen_Pots
-      state: 'on'
-      supported_features: 1
-      zone_id: '3'
     light.lamp0:
       brightness: 255
       color_temp: 153
@@ -253,20 +190,9 @@
       - color_temp
       - hs
       color_mode: color_temp
-    light.livingroom_shelves:
-      friendly_name: Livingroom Shelves
-      state: 'on'
-      supported_features: 0
-    light.main_floor_bathroom_light:
+    light.lamp1:
       brightness: 255
-      device_id: '11'
-      friendly_name: Main Floor Bathroom
-      state: 'on'
-      supported_features: 1
-      zone_id: '7'
-    light.office_wall:
-      brightness: 255
-      color_temp: 500
+      color_temp: 153
       effect: '0'
       effect_list:
       - '2'
@@ -289,32 +215,47 @@
       - color_temp
       - hs
       color_mode: color_temp
+    light.lamp2:
+      brightness: 255
+      color_temp: 153
+      effect: '0'
+      effect_list:
+      - '2'
+      - '1'
+      - '0'
+      - '3'
+      - '4'
+      state: 'on'
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
+      xy_color:
+      - 0.421
+      - 0.364
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
+    light.livingroom_table:
+      friendly_name: Livingroom Table
+      state: 'on'
+      supported_features: 0
     light.outdoor_lights:
       brightness: 255
       friendly_name: Outdoor lights
+      state: 'on'
+    light.outsidein_lights:
+      state: 'on'
+    light.pantry_counter:
       state: 'on'
     light.saltlick:
       friendly_name: Saltlick
       state: 'on'
       supported_features: 0
-    light.stairs_back:
-      brightness: 255
-      device_id: '7'
-      friendly_name: Back Stairs
-      icon: mdi:lightbulb
-      state: 'on'
-      supported_features: 1
-      zone_id: '4'
-      xy_color:
-      - 0.323
-      - 0.329
-    light.upstairsbathroom:
-      state: 'on'
-      brightness: 255
-      friendly_name: UpstairsBathroom
-      white_value: 255
-    light.office_table:
-      state: 'on'
     light.cottage_bedroom:
       brightness: 255
       state: 'on'
