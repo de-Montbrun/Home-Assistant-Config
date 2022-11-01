@@ -115,6 +115,8 @@
 - id: '1586910709551'
   name: Sunset
   entities:
+    light.dining_room_table:
+      state: on
     light.sink1:
       friendly_name: Sink1
       color_mode: color_temp
@@ -252,6 +254,31 @@
       state: 'on'
     light.pantry_counter:
       state: 'on'
+    light.spare1:
+      brightness: 255
+      color_temp: 153
+      effect: '0'
+      effect_list:
+      - '2'
+      - '1'
+      - '0'
+      - '3'
+      - '4'
+      state: 'on'
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
+      xy_color:
+      - 0.421
+      - 0.364
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
     light.saltlick:
       friendly_name: Saltlick
       state: 'on'
