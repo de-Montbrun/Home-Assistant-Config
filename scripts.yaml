@@ -1,22 +1,121 @@
-##################################################################
-#### Scripts
-##################################################################
-
 zigbee2mqtt_rename:
   alias: Zigbee2mqtt Rename
   sequence:
     service: mqtt.publish
     data_template:
       topic: zigbee2mqtt/bridge/config/rename
-      payload_template: >-
-        {
-          "old": "{{ states.input_text.zigbee2mqtt_old_name.state | string }}",
-          "new": "{{ states.input_text.zigbee2mqtt_new_name.state | string }}"
-        }
+      payload_template: "{\n  \"old\": \"{{ states.input_text.zigbee2mqtt_old_name.state
+        | string }}\",\n  \"new\": \"{{ states.input_text.zigbee2mqtt_new_name.state
+        | string }}\"\n}"
 zigbee2mqtt_remove:
   alias: Zigbee2mqtt Remove
   sequence:
     service: mqtt.publish
     data_template:
       topic: zigbee2mqtt/bridge/config/remove
-      payload_template: "{{ states.input_text.zigbee2mqtt_remove.state | string }}"
+      payload_template: '{{ states.input_text.zigbee2mqtt_remove.state | string }}'
+learn_garage:
+  sequence:
+  - service: remote.learn_command
+    data:
+      command:
+      - lock
+      device: ram
+      command_type: rf
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  alias: eRemote Garage Learn Script
+  mode: single
+  icon: mdi:remote
+lock_ram:
+  alias: Lock Ram
+  sequence:
+  - service: remote.send_command
+    data:
+      device: ram
+      command:
+      - lock
+      - unlock
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  mode: single
+  icon: mdi:car-pickup
+unlock_ram:
+  alias: Unlock Ram
+  sequence:
+  - service: remote.send_command
+    data:
+      device: ram
+      command: unlock
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  mode: single
+  icon: mdi:car-pickup
+garage_fan_toggle:
+  alias: garage fan off
+  sequence:
+  - service: remote.send_command
+    data:
+      device: fan
+      command: 'off'
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  mode: single
+  icon: mdi:ceiling-fan
+garage_fan_high:
+  alias: garage fan high
+  sequence:
+  - service: remote.send_command
+    data:
+      device: fan
+      command: hi
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  mode: single
+  icon: mdi:ceiling-fan
+garage_fan_med:
+  alias: garage fan med
+  sequence:
+  - service: remote.send_command
+    data:
+      device: fan
+      command: med
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  mode: single
+  icon: mdi:ceiling-fan
+garage_fan_low:
+  alias: garage fan low
+  sequence:
+  - service: remote.send_command
+    data:
+      device: fan
+      command: low
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  mode: single
+  icon: mdi:ceiling-fan
+garage_fan_light:
+  alias: garage fan light
+  sequence:
+  - service: remote.send_command
+    data:
+      device: fan_light
+      command: power
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  mode: single
+  icon: mdi:ceiling-fan-light
+eremote_garage_forget_script:
+  alias: eRemote Garage Forget Script
+  sequence:
+  - service: remote.delete_command
+    data:
+      device: ram
+      command:
+      - lock
+      - unlock
+    target:
+      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+  mode: single
+  icon: mdi:remote
