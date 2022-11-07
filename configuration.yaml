@@ -522,15 +522,6 @@ camera:
 # {{{ Sensors
 
 sensor:
-  - platform: uptime
-    name: "HASS uptime"
-  #  - platform: command_line
-  #    name: "HASS uptime"
-  #    command: echo "$(($(date +%s) - $(date --date="`systemctl show home-assistant.service -p ActiveEnterTimestamp | awk -F'=' '{print $2}'`" "+%s")))"
-  #    scan_interval: 60
-
-  - platform: season
-
   - platform: cert_expiry
     host: !secret http_base_url
 
