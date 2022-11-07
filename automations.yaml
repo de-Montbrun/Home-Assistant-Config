@@ -212,6 +212,33 @@
       - switch.switch8
 
 # }}}
+# {{{ Dehumidifiers
+
+- id: dehumidifiers_on
+  alias: 'Dehumidifier on - too moist'
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.temperature_humidity_sensor_dca4_humidity.state | int >= 70 }}'
+  action:
+    service: switch.turn_on
+    entity_id:
+      - switch.switch10
+      - switch.switch11
+
+- id: dehumidifiers_off
+  alias: 'Dehumidifier off - dry enough'
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ states.sensor.temperature_humidity_sensor_dca4_humidity.state | int <= 65 }}'
+  action:
+    service: switch.turn_off
+    entity_id:
+      - switch.switch10
+      - switch.switch11
+
+# }}}
 # {{{ Heating
 
 - id: occupancy_heating_no_one_home_turn_down_heat
