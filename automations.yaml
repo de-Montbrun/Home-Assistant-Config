@@ -807,10 +807,10 @@
     - service: light.turn_on
       entity_id: light.saltlick
 
-# }}}}
+# }}}
 
 # }}}
-# {{{ Misczo
+# {{{ Misc
 
 - id: bedtime
   alias: 'Bedtime'
