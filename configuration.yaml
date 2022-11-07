@@ -314,6 +314,7 @@ logger:
     homeassistant.components.camera: fatal
     homeassistant.components.media_player.roku: fatal
     homeassistant.components.http.ban: warning
+    homeassistant.components.wemo: fatal
 
 # Homekit
 homekit:
