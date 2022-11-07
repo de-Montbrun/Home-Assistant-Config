@@ -71,11 +71,6 @@ http:
 # {{{ Lights
 
 light:
-  # Make dressingroom switch act like a light
-  - platform: switch
-    name: Gail Desk
-    entity_id: switch.switch6
-
   # Make Bathroom switches act like lights
   - platform: switch
     name: Bathroom0
@@ -86,6 +81,11 @@ light:
   - platform: switch
     name: Bathroom2
     entity_id: switch.bathroom2
+
+  # Make Dining Room switch act like a light
+  - platform: switch
+    name: Dining room table
+    entity_id: switch.switch6
 
   # Make Garage switches act like lights
   - platform: switch
@@ -173,11 +173,7 @@ light:
       - light.diningroom2
       - light.diningroom3
       - light.diningroom4
-
-  - platform: group
-    name: Dressing room lights
-    entities:
-      - light.gail_desk
+      - light.dining_room_table
 
   - platform: group
     name: Garage lights
