@@ -474,34 +474,6 @@
 
 # }}}
 # {{{ Basement
-
-- id: lighting_basement_timed_on
-  alias: 'Timed basement light - Chris Home'
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: person.chris
-    to: 'home'
-  action:
-    - service: switch.turn_on
-      entity_id: switch.basement_light
-    - delay: '00:10:00'
-    - service: switch.turn_off
-      entity_id: switch.basement_light
-
-- id: lighting_basement_times_off
-  alias: 'Timed basement light'
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: ligh.basement_light
-    to: 'on'
-    for:
-      hours: 1
-  action:
-    service: light.turn_off
-    entity_id: light.basement_light
-
 # }}}
 # {{{ Cottage
 
