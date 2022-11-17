@@ -33,12 +33,8 @@
   alias: HACS Update Available Notification
   initial_state: false
   trigger:
-    - platform: template
-      value_template: '{{ states.sensor.hacs.state | int > 0 }}'
-    - platform: template
-      value_template: '{{ states.sensor.instance02_hacs.state | int > 0 }}'
-    - platform: template
-      value_template: '{{ states.sensor.cottage_hacs.state | int > 0 }}'
+    platform: template
+    value_template: '{{ states("sensor.hacs") | int > 0 }}'
   action:
     service: notify.zulip
     data:
@@ -154,14 +150,14 @@
   initial_state: false
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.saint_john_temperature.state < states.sensor.master_bedroom_temperature.state }}'
+      value_template: '{{ states("sensor.fredericton_temperature") < states("sensor.master_bedroom_temperature") }}'
     - platform: time
       at: '20:00:00'
   condition:
     condition: and
     conditions:
       - condition: template
-        value_template: '{{ states.sensor.master_bedroom_temperature.state | int >= 18 }}'
+        value_template: '{{ states("sensor.master_bedroom_temperature") | int >= 18 }}'
       - condition: state
         entity_id: sensor.season
         state: 'summer'
@@ -181,18 +177,18 @@
   initial_state: false
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.saint_john_temperature.state > states.sensor.master_bedroom_temperature.state }}'
+      value_template: '{{ states("sensor.fredericton_temperature") > states("sensor.master_bedroom_temperature") }}'
     - platform: template
-      value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 18 }}'
+      value_template: '{{ states("sensor.master_bedroom_temperature") | int < 18 }}'
     - platform: time
       at: '08:00:00'
   condition:
     condition: or
     conditions:
       - condition: template
-        value_template: '{{ states.sensor.master_bedroom_temperature.state | int < 18 }}'
+        value_template: '{{ states("sensor.master_bedroom_temperature") | int < 18 }}'
       - condition: template
-        value_template: '{{ states.sensor.saint_john_temperature.state > states.sensor.master_bedroom_temperature.state }}'
+        value_template: '{{ states("sensor.fredericton_temperature") > states("sensor.master_bedroom_temperature") }}'
       - condition: and
         conditions:
           - condition: state
@@ -219,7 +215,7 @@
   initial_state: true
   trigger:
     platform: template
-    value_template: '{{ states.sensor.temperature_humidity_sensor_dca4_humidity.state | int >= 70 }}'
+    value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity") | int >= 70 }}'
   action:
     service: switch.turn_on
     entity_id:
@@ -231,7 +227,7 @@
   initial_state: true
   trigger:
     platform: template
-    value_template: '{{ states.sensor.temperature_humidity_sensor_dca4_humidity.state | int <= 65 }}'
+    value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity") | int <= 65 }}'
   action:
     service: switch.turn_off
     entity_id:
@@ -262,7 +258,7 @@
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: template
-        value_template: '{{ states.sensor.saint_john_temperature.state | int <= 5 }}'
+        value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
   action:
     service: climate.set_preset_mode
     data:
@@ -282,7 +278,7 @@
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: template
-        value_template: '{{ states.sensor.saint_john_temperature.state | int <= 5 }}'
+        value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
       - condition: time
         after: '16:30:00'
       - condition: time
@@ -327,7 +323,7 @@
       - condition: template
         value_template: '{{ states("sensor.season") != "summer" }}'
       - condition: template
-        value_template: '{{ states.sensor.saint_john_temperature.state | int <= 5 }}'
+        value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
   action:
     service: climate.set_hvac_mode
     data:
@@ -676,7 +672,7 @@
 
 - id: occupancy_spare_room_on
   alias: 'Spareroom - Occupancy lights on'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.spare_room_sensor_motion
@@ -688,7 +684,7 @@
         entity_id: light.spare_room_lights
         state: 'off'
       - condition: template
-        value_template: '{{ states.sensor.spare_room_sensor_light_level.attributes.dark }}'
+        value_template: '{{ state_attr("sensor.spare_room_sensor_light_level", "dark") }}'
   action:
     service: light.turn_on
     entity_id: light.spare_room_lights
@@ -788,7 +784,7 @@
 
 - id: lighting_sunroom_lumens_low_lights_on
   alias: 'Sunroom lumens low - lights on'
-  initial_state: true
+  initial_state: false
   trigger:
     - platform: state
       entity_id: media_player.roku_sunroom
@@ -1052,9 +1048,9 @@
     - platform: template
       value_template: '{{ states.media_player | select("match", ".*media_player.plex_.*") | list | selectattr("state", "equalto", "playing") | list | count | int <= 2 }}'
     - platform: template
-      value_template: '{{ states.sensor.load_5m.state | int > 4 }}'
+      value_template: '{{ states("sensor.load_5m") | int > 4 }}'
     - platform: template
-      value_template: '{{ states.sensor.load_5m.state | int <= 4 }}'
+      value_template: '{{ states("sensor.load_5m") | int <= 4 }}'
   action:
     service: rest_command.sabnzb_api
 
@@ -1113,15 +1109,15 @@
   initial_state: false
   trigger:
     - platform: template
-      value_template: '{{ states.sensor.disk_use_percent.state | int >= 95 }}'
+      value_template: '{{ states("sensor.disk_use_percent") | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.disk_use_percent_boot.state | int >= 95 }}'
+      value_template: '{{ states("sensor.disk_use_percent_boot") | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.disk_use_percent_home.state | int >= 95 }}'
+      value_template: '{{ states("sensor.disk_use_percent_home") | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.disk_use_percent_media_apple.state | int >= 95 }}'
+      value_template: '{{ states("sensor.disk_use_percent_media_apple") | int >= 95 }}'
     - platform: template
-      value_template: '{{ states.sensor.disk_use_percent_media_wine.state | int >= 95 }}'
+      value_template: '{{ states("sensor.disk_use_percent_media_wine") | int >= 95 }}'
   action:
     service: notify.zulip
     data:
@@ -1160,7 +1156,7 @@
 
 - id: notify_phone_presence
   alias: 'Phones presence notification'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: person.gervais,person.gail
@@ -1224,7 +1220,7 @@
   initial_state: false
   trigger:
     platform: numeric_state
-    entity_id: sensor.saint_john_uv_index
+    entity_id: sensor.fredericton_uv_index
     above: '5'
   condition:
     condition: and
@@ -1239,7 +1235,7 @@
     service: notify.zulip
     data:
       message: >
-        :sunny: UV Index is {{ states.sensor.saint_john_uv_index.state }}. You better put on some sunscreen!
+        :sunny: UV Index is {{ states("sensor.fredericton_uv_index") }}. You better put on some sunscreen!
       title: 'Weather'
 
 - id: notify_weather_forecast
@@ -1254,12 +1250,12 @@
       message: >
         **Forecast:**
 
-        {{ states.sensor.saint_john_forecast.state }}
+        {{ states("sensor.saint_john_forecast") }}
 
 
-        **High:** {{ states.sensor.saint_john_high_temperature.state }}{{ states.sensor.saint_john_high_temperature.attributes.unit_of_measurement }}
+        **High:** {{ states("sensor.fredericton_high_temperature") }}{{ state_attr("sensor.fredericton_high_temperature" , "unit_of_measurement") }}
 
-        **Low:** {{ states.sensor.saint_john_low_temperature.state }}{{ states.sensor.saint_john_low_temperature.attributes.unit_of_measurement }}
+        **Low:** {{ states("sensor.fredericton_low_temperature") }}{{ state_attr("sensor.fredericton_low_temperature" , "unit_of_measurement") }}
       title: 'Weather'
 
 - id: notify_alarm_action
@@ -1314,30 +1310,55 @@
 # }}}
 # {{{ Vacuum
 
-- id: vacuum_no_one_home
-  alias: Vacuum No One Home
+- id: vacuum_start
+  alias: Vacuum Start
   initial_state: true
   trigger:
     - platform: state
       entity_id: person.gail,person.gervais
       from: 'home'
       for: '00:05:00'
+    - platform: template
+      value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99") }}'
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("person.gail") != "home" }}'
-      - condition: template
-        value_template: '{{ states("person.gervais") != "home" }}'
       - condition: state
         entity_id: vacuum.consuela
         state: docked
       - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.vacuum_no_one_home.attributes.last_triggered) | int > 432000 }}'
+        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start" , "last_triggered")) | int > 432000 }}'
+      - condition: template
+        value_template: '{{ states("person.gail") != "home" }}'
+      - condition: or
+        conditions:
+          - condition: template
+            value_template: '{{ states("person.gervais") != "home" }}'
+          - condition: template
+            value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99") }}'
   action:
     service: vacuum.start
     data: {}
     entity_id: vacuum.consuela
+
+- id: mop_start
+  alias: Mop Start
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: vacuum.consuela
+    to: docked
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start" , "last_triggered")) | int < 36000 }}'
+      - condition: template
+        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_stop", "last_triggered")) | int > 432000 }}'
+  action:
+    service: vacuum.start
+    data: {}
+    entity_id: vacuum.alice
 
 - id: vacuum_stop
   alias: Vacuum Stop
@@ -1350,14 +1371,15 @@
     condition: or
     conditions:
     - condition: state
-      entity_id: vacuum.consuela
+      entity_id: vacuum.alice
       state: cleaning
     - condition: state
       entity_id: vacuum.consuela
       state: cleaning
   action:
-    - service: vacuum.stop
-      entity_id: all
+    #    - service: vacuum.stop
+    #      entity_id: all
+    #    - delay: '00:00:10'
     - service: vacuum.return_to_base
       entity_id: all
 
