@@ -502,13 +502,6 @@ climate:
 rest_command:
   sabnzb_api:
     url: !secret sabnzbd_rest_url
-  set_cottage_person_state_via_api:
-    url: http://localhost:8124/api/states/person.{{ person }}
-    method: POST
-    headers:
-      authorization: !secret cottage_ha_update_via_api_token
-      content-type: 'application/json'
-    payload: '{"state":"{{ state }}"}'
 
 ## }}}
 # {{{ Security Cams

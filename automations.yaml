@@ -1250,22 +1250,6 @@
         title: 'Security Alert'
 
 # }}}
-# {{{ Push state to Cottage
-
-- id: cottage-push-person-state
-  alias: 'cottage_push_person_state'
-  initial_state: true
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: person.gervais,person.gail
-  action:
-    service: rest_command.set_cottage_person_state_via_api
-    data:
-      person: "{{ trigger.to_state.name }}"
-      state: "{{ trigger.to_state.state }}"
-
-# }}}
 # {{{ Vacuum
 
 - id: vacuum_start
