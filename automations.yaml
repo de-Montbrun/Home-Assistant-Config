@@ -515,9 +515,11 @@
         state: 'below_horizon'
   action:
     service: light.turn_on
-    entity_id: light.kitchen_swirlies
-    data:
-      brightness: 255
+    entity_id:
+      - light.cabinets_lower
+      - light.cabinets_upper
+      - light.kitchen_sink
+      - light.pantry_counter
 
 - id: occupancy_lighting_kitchen_off
   alias: 'Kitchen - No occupancy lights off'
