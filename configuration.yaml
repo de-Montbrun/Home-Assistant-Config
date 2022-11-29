@@ -72,6 +72,15 @@ http:
 # {{{ Lights
 
 light:
+  # Make Barn switches act like lights
+  - platform: switch
+    name: Barn Light
+    entity_id: switch.barn
+
+  - platform: switch
+    name: Barn Tree
+    entity_id: switch.switch3
+
   # Make Bathroom switches act like lights
   - platform: switch
     name: Bathroom0
@@ -79,14 +88,16 @@ light:
   - platform: switch
     name: Bathroom1
     entity_id: switch.bathroom1
-  - platform: switch
-    name: Bathroom2
-    entity_id: switch.bathroom2
 
   # Make Dining Room switch act like a light
   - platform: switch
     name: Dining room table
     entity_id: switch.switch6
+
+  # Make Entryway switch act like a light
+  - platform: switch
+    name: Entryway
+    entity_id: switch.entryway
 
   # Make Garage switches act like lights
   - platform: switch
@@ -207,6 +218,7 @@ light:
   - platform: group
     name: Hallway lights
     entities:
+      - light.entryway
       - light.foyer_lights
       - light.hallway_back_lights
       - light.downstairs_hall_lights
@@ -215,10 +227,10 @@ light:
   # }}}
 
   - platform: group
-    name: Livingroom Chandeliers
+    name: Laundry Room Lights
     entities:
-      - light.living_room_pendants0
-      - light.living_room_pendants1
+      - light.laundry_room
+      - light.laundry_room_lamp
 
   - platform: group
     name: Livingroom lamps
@@ -235,15 +247,26 @@ light:
       - light.saltlick
 
   - platform: group
+    name: Kitchen lights
+    entities:
+      - light.cabinets_lower
+      - light.cabinets_upper
+      - light.kitchen_island
+      - light.kitchen_pots
+      - light.kitchen_sink
+      - light.kitchen_table
+
+  - platform: group
     name: Main floor lights
     entities:
+      - light.barn_lights
       - light.dining_room_lights
       - light.downstairs_hall_lights
+      - light.entryway
       - light.foyer_lights
       - light.kitchen_lights
-      - light.laundry_room
+      - light.laundry_room_lights
       - light.livingroom_lights
-      - light.outsidein_lights
       - light.pantry_lights
 
   - platform: group
@@ -256,17 +279,13 @@ light:
     entities:
       - light.front_door
       - light.garage_eaves
-
-  - platform: group
-    name: OutsideIn lights
-    entities:
-      - light.outsidein0
-      - light.outsidein_tree
+      - light.porch_lights
 
   - platform: group
     name: Pantry lights
     entities:
       - light.pantry_counter
+      - light.pantry
 
   - platform: group
     name: Second floor lights

@@ -250,7 +250,7 @@
       brightness: 255
       friendly_name: Outdoor lights
       state: 'on'
-    light.outsidein_lights:
+    light.barn_tree:
       state: 'on'
     light.pantry_counter:
       state: 'on'
