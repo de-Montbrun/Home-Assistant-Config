@@ -142,7 +142,7 @@
       friendly_name: Front door
       state: 'on'
       supported_features: 41
-    light.laundry_room:
+    light.laundry_room_lamp:
       brightness: 255
       color_temp: 153
       effect: '0'
@@ -283,3 +283,21 @@
       friendly_name: Saltlick
       state: 'on'
       supported_features: 0
+    light.cabinets_lower:
+      friendly_name: 'Cabinets Lower'
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
+    light.cabinets_upper:
+      friendly_name: 'Cabinets Upper'
+      supported_features: 32
+      color_mode: brightness
+      brightness: 128
+      state: 'on'
+    light.kitchen_sink:
+      friendly_name: 'Kitchen Sink'
+      supported_features: 32
+      color_mode: brightness
+      brightness: 255
+      state: 'on'
