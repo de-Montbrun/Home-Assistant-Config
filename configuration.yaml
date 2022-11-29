@@ -35,7 +35,8 @@ alexa:
         - scene
       include_entities:
         - media_player.roku_3
-        - media_player.roku_sunroom
+        - media_player.roku_bedroomtv
+        - media_player.roku_living_roomtv
         - media_player.sonos
         - switch.switch1
         - switch.switch6
