@@ -100,15 +100,22 @@ light:
     name: Saltlick
     entity_id: switch.switch5
 
-  # Make OutdoorIn switches act like lights
-  - platform: switch
-    name: OutsideIn Tree
-    entity_id: switch.switch3
-
   # Make Pantry switches act like lights
   - platform: switch
     name: Pantry Counter
     entity_id: switch.switch2
+
+  # Make Porch switch act like a light
+  - platform: switch
+    name: Porch Lights
+    entity_id: switch.porch
+
+  - platform: group
+    name: Barn lights
+    entities:
+      - light.barn
+      - light.barn0
+      - light.barn_tree
 
   - platform: group
     name: Bathroom lights
@@ -116,7 +123,6 @@ light:
       - light.bathroom0
       - light.bathroom1
       - light.bathroom_sink
-      - light.cottage_bathroom
 
   - platform: group
     name: Bathroom sink
@@ -124,7 +130,6 @@ light:
       - light.sink0
       - light.sink1
       - light.sink2
-      - light.cottage_bathroom
 
   - platform: group
     name: Bedroom ceiling
@@ -151,19 +156,6 @@ light:
       - light.bedroom_ceiling
       - light.bedroom_lamps
       - light.bedroom_wall
-      - light.cottage_bedroom
-
-  - platform: group
-    name: Cottage lights
-    entities:
-      - light.cottage_bathroom
-      - light.cottage_bedroom
-      - light.cottage_driveway
-      - light.cottage_kitchen
-      - light.cottage_living_room
-      - light.cottage_muskoka
-      - light.cottage_spare_room
-      - light.cottage_switch1
 
   - platform: group
     name: Dining room lights
@@ -262,7 +254,6 @@ light:
     name: Outdoor lights
     entities:
       - light.front_door
-      - light.cottage_driveway
       - light.garage_eaves
 
   - platform: group

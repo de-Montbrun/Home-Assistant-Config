@@ -20,7 +20,7 @@
   initial_state: false
   trigger:
     platform: state
-    entity_id: binary_sensor.python_package_index_pypi_update_available, binary_sensor.instance02_python_package_index_pypi_update_available, binary_sensor.cottage_python_package_index_pypi_update_available
+    entity_id: binary_sensor.python_package_index_pypi_update_available, binary_sensor.instance02_python_package_index_pypi_update_available
     from: 'off'
     to: 'on'
   action:
@@ -471,52 +471,6 @@
 # }}}
 # {{{ Basement
 # }}}
-# {{{ Cottage
-
-- id: occupancy_cottage_turn_off_lights
-  alias: 'Occupancy - no one at cottage - turn off lights'
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: person.gail,person.gervais
-    from: 'Cottage'
-  condition:
-    condition: and
-    conditions:
-      - condition: template
-        value_template: '{{ states("person.gail") != "Cottage" }}'
-      - condition: template
-        value_template: '{{ states("person.gervais") != "Cottage" }}'
-  action:
-    - service: light.turn_off
-      entity_id: light.cottage_lights
-    - delay: '00:00:10'
-    - service: light.turn_off
-      entity_id: light.cottage_lights
-
-- id: occupancy_cottage_turn_on_lights
-  alias: 'Occupancy at cottage - turn on lights'
-  initial_state: true
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: person.gervais,person.gail
-    to: 'Cottage'
-  condition:
-    - condition: state
-      entity_id: light.cottage_lights
-      state: 'off'
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-  action:
-    - service: light.turn_on
-      entity_id: light.cottage_lights
-    - delay: '00:00:10'
-    - service: light.turn_on
-      entity_id: light.cottage_lights
-
-# }}}
 # {{{ Hallway
 
 - id: occupancy_hallway_turn_on_lights
@@ -857,7 +811,6 @@
       entity_id:
         - light.basement_light
         - light.bathroom_lights
-        - light.cottage_lights
         - light.livingroom_shelves
         - light.main_floor_lights
         - light.office_lights
@@ -868,9 +821,6 @@
       data:
         entity_id: climate.my_ecobee
         preset_mode: 'Sleep'
-    - delay: '00:00:10'
-    - service: light.turn_off
-      entity_id: light.cottage_lights
 
 - id: doorbell_doorbell
   alias: 'Doorbell rang - pause tv'

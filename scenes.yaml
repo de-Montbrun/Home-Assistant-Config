@@ -283,15 +283,3 @@
       friendly_name: Saltlick
       state: 'on'
       supported_features: 0
-    light.cottage_bedroom:
-      brightness: 255
-      state: 'on'
-    light.cottage_driveway:
-      brightness: 255
-      state: 'on'
-    light.cottage_kitchen:
-      brightness: 255
-      state: 'on'
-    light.cottage_muskoka:
-      brightness: 255
-      state: 'on'

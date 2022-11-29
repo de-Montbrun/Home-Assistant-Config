@@ -47,35 +47,3 @@ sensor.fing_state:
   hidden: true
 sensor.distance_apart:
   icon: mdi:human-male-female
-sensor.cottage_ble_battery_bedroom:
-  friendly_name: Cottage Bedroom Battery
-sensor.cottage_ble_temperature_bedroom:
-  friendly_name: Cottage Bedroom Temperature
-sensor.cottage_ble_humidity_bedroom:
-  friendly_name: Cottage Bedroom Humidity
-sensor.cottage_ble_voltage_bedroom:
-  friendly_name: Cottage Bedroom Voltage
-sensor.cottage_ble_battery_kitchen:
-  friendly_name: Cottage Kitchen Battery
-sensor.cottage_ble_temperature_kitchen:
-  friendly_name: Cottage Kitchen Temperature
-sensor.cottage_ble_humidity_kitchen:
-  friendly_name: Cottage Kitchen Humidity
-sensor.cottage_ble_voltage_kitchen:
-  friendly_name: Cottage Kitchen Voltage
-sensor.cottage_ble_battery_linen_closet:
-  friendly_name: Cottage Linen Closet Battery
-sensor.cottage_ble_temperature_linen_closet:
-  friendly_name: Cottage Linen Closet Temperature
-sensor.cottage_ble_humidity_linen_closet:
-  friendly_name: Cottage Linen Closet Humidity
-sensor.cottage_ble_voltage_Linen_closet:
-  friendly_name: Cottage Linen Closet Voltage
-sensor.cottage_ble_battery_spare_room:
-  friendly_name: Cottage Spare Room Battery
-sensor.cottage_ble_temperature_spare_room:
-  friendly_name: Cottage Spare Room Temperature
-sensor.cottage_ble_humidity_spare_room:
-  friendly_name: Cottage Spare Room Humidity
-sensor.cottage_ble_voltage_spare_room:
-  friendly_name: Cottage Spare Room Voltage
