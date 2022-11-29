@@ -1269,11 +1269,8 @@
       entity_id: vacuum.consuela
       state: cleaning
   action:
-    #    - service: vacuum.stop
-    #      entity_id: all
-    #    - delay: '00:00:10'
-    - service: vacuum.return_to_base
-      entity_id: all
+    service: vacuum.return_to_base
+    entity_id: all
 
 # }}}
 # {{{ Zigbee
