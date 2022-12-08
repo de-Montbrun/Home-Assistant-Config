@@ -1,72 +1,98 @@
-- name: Sunroom normal
+- name: Living room normal
   entities:
-    light.sunroom0:
-      state: true
-      transition: 2
+    light.lamp0:
       brightness: 255
+      color_temp: 153
+      effect: '0'
+      effect_list:
+      - '2'
+      - '1'
+      - '0'
+      - '3'
+      - '4'
+      state: 'on'
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
       xy_color:
-      - 0.4448
-      - 0.4066
-    light.sunroom1:
-      state: true
-      transition: 2
+      - 0.421
+      - 0.364
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
+    light.lamp1:
       brightness: 255
+      color_temp: 153
+      effect: '0'
+      effect_list:
+      - '2'
+      - '1'
+      - '0'
+      - '3'
+      - '4'
+      state: 'on'
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
       xy_color:
-      - 0.4448
-      - 0.4066
-    light.sunroom2:
-      state: true
-      transition: 2
+      - 0.421
+      - 0.364
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
+    light.lamp2:
       brightness: 255
+      color_temp: 153
+      effect: '0'
+      effect_list:
+      - '2'
+      - '1'
+      - '0'
+      - '3'
+      - '4'
+      state: 'on'
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
       xy_color:
-      - 0.4448
-      - 0.4066
-    light.sunroom3:
-      state: true
-      transition: 2
-      brightness: 255
-      xy_color:
-      - 0.4448
-      - 0.4066
-    light.sunroom4:
-      state: true
-      transition: 2
-      brightness: 255
-      xy_color:
-      - 0.4448
-      - 0.4066
+      - 0.421
+      - 0.364
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
   id: 9875c4420310427ab3228ac9fe1d46d0
-- name: Sunroom dim
+- name: Living room dim
   entities:
-    light.sunroom0:
+    light.lamp0:
       state: true
       transition: 2
       brightness: 255
       xy_color:
       - 0.167
       - 0.137
-    light.sunroom1:
+    light.lamp1:
       state: true
       transition: 2
       brightness: 255
       xy_color:
       - 0.167
       - 0.137
-    light.sunroom2:
-      state: true
-      transition: 2
-      brightness: 255
-      xy_color:
-      - 0.167
-      - 0.137
-    light.sunroom3:
-      state: true
-      transition: 2
-      brightness: 255
-      xy_color:
-      - 0.167
-      - 0.137
-    light.sunroom4:
+    light.lamp2:
       state: true
       transition: 2
       brightness: 255
@@ -250,7 +276,7 @@
       brightness: 255
       friendly_name: Outdoor lights
       state: 'on'
-    light.barn_tree:
+    light.barn_trees:
       state: 'on'
     light.pantry_counter:
       state: 'on'
