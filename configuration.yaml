@@ -360,13 +360,6 @@ lutron_caseta:
 
 # Enables support for tracking state changes over time.
 history:
-  include:
-    domains:
-      - light
-    entities:
-      - person.gail
-      - person.gervais
-      - person.jennifer
 
 # Setup recorder and logbook
 recorder:
@@ -590,12 +583,6 @@ sensor:
       kitchen_lumens:
         friendly_name: 'Kitchen Lumens'
         value_template: '{{ states.sensor.kitchen_sensor_light_level.attributes.lightlevel }}'
-        unit_of_measurement: Lumens
-        device_class: illuminance
-
-      spare_room_lumens:
-        friendly_name: 'Spare Room Lumens'
-        value_template: '{{ states.sensor.spare_room_sensor_light_level.attributes.lightlevel }}'
         unit_of_measurement: Lumens
         device_class: illuminance
 
