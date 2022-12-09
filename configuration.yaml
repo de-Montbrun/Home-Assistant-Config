@@ -78,8 +78,12 @@ light:
     entity_id: switch.barn
 
   - platform: switch
-    name: Barn Tree
+    name: Barn Tree0
     entity_id: switch.switch3
+
+  - platform: switch
+    name: Barn Tree1
+    entity_id: switch.switch4
 
   # Make Bathroom switches act like lights
   - platform: switch
@@ -128,7 +132,18 @@ light:
     entities:
       - light.barn
       - light.barn0
-      - light.barn_tree
+      - light.barn_trees
+
+  - platform: group
+    name: Barn trees
+    entities:
+      - light.barn_tree0
+      - light.barn_tree1
+
+  - platform: group
+    name: Basement lights
+    entities:
+      - light.basement0
 
   - platform: group
     name: Bathroom lights
