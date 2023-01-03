@@ -280,7 +280,7 @@
       state: 'on'
     light.pantry_counter:
       state: 'on'
-    light.spare1:
+    light.spare_room_lights:
       brightness: 255
       color_temp: 153
       effect: '0'
