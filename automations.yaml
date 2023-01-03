@@ -554,6 +554,21 @@
     - service: light.turn_off
       entity_id: light.basement_lights
 
+- id: lighting_basement_sync_up
+  alias: 'Basement - Light sync up'
+  initial_state: true
+  trigger:
+    - platform: state
+      entity_id: light.basement0
+      to: 'off'
+      #  condition:
+      #    condition: state
+      #    entity_id: binary_sensor.basement_sensor_motion
+      #    state: "off"
+  action:
+    service: light.turn_off
+    entity_id: light.basement_lights
+
 # }}}
 # {{{ Hallway
 
