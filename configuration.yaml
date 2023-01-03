@@ -144,6 +144,8 @@ light:
     name: Basement lights
     entities:
       - light.basement0
+      - light.basement1
+      - light.basement2
 
   - platform: group
     name: Bathroom lights
