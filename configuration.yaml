@@ -372,8 +372,6 @@ logbook:
       - device_tracker
       - sun
 
-image:
-
 # Track the sun
 sun:
 
