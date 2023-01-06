@@ -1324,6 +1324,31 @@
           {% endif %}
         title: 'Security Alert'
 
+- id: notify_low_battery
+  alias: Low battery level detection & notification for all battery sensors
+  use_blueprint:
+    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      threshold: 10
+      time: "19:00:00"
+      exclude:
+        entity_id:
+          - sensor.internal_battery_level
+          - sensor.alice_battery_level
+          - sensor.consuela_battery_level
+          - sensor.gail_iphone_battery_level
+          - sensor.gail_iphone_battery_state
+          - sensor.ipad_battery_level
+          - sensor.jennifers_iphone_battery_level
+          - sensor.jennifers_iphone_battery_state
+          - sensor.iphone_battery_level
+          - sensor.iphone_battery_state
+      actions:
+        - service: notify.zulip
+          data:
+            message: Low batter on {{sensors}}.
+            title: HA Sensor
+
 # }}}
 # {{{ Vacuum
 
