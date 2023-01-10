@@ -15,7 +15,6 @@ homeassistant:
   # Allow homeassistant to write to snapshots dir
   allowlist_external_dirs:
     - /var/www/html/snapshots
-    - /etc/homeassistant/file_restore
   media_dirs:
     security: /var/www/html/snapshots
   customize: !include customize.yaml
@@ -477,46 +476,6 @@ device_tracker:
       jennifer_iphone_detect3: 192.168.2.152
 
 # }}}
-# {{{ Programmable thermostat
-
-climate:
-  - platform: programmable_thermostat
-    name: Bedroom Heater
-    heater:
-      - switch.switch8
-    actual_temp_sensor: sensor.master_bedroom_temperature
-    min_temp: 14
-    max_temp: 22
-    target_temp_sensor: sensor.thermostat_program
-    tolerance: 0.3
-    hvac_options: 7
-    auto_mode: all
-
-    #- platform: programmable_thermostat
-    #- name: Dressing Room Heater
-    #- heater:
-    #-   - switch.switch9
-    #- actual_temp_sensor: sensor.instance02_ble_temperature_dressing_room
-    #- min_temp: 14
-    #- max_temp: 26
-    #- target_temp_sensor: sensor.thermostat_dressing_program
-    #- tolerance: 0.3
-    #- hvac_options: 7
-    #- auto_mode: all
-
-  - platform: programmable_thermostat
-    name: Jenroom Heater
-    heater:
-      - switch.switch7
-    actual_temp_sensor: sensor.jennifer_room_temperature
-    min_temp: 14
-    max_temp: 22
-    target_temp_sensor: sensor.thermostat_jen_program
-    tolerance: 0.3
-    hvac_options: 7
-    auto_mode: all
-
-# }}}
 ## {{{ Rest Commands
 
 rest_command:
@@ -555,28 +514,6 @@ sensor:
       - type: load_15m
       - type: processor_use
       - type: last_boot
-
-  # Data for programmable thermostats
-  - platform: file_restore
-    unit_of_measurement: '°C'
-    file_path: '/etc/homeassistant/file_restore/thermostat_program.csv'
-    name: Thermostat Program
-    length: day
-    detail: hour
-
-  - platform: file_restore
-    unit_of_measurement: '°C'
-    file_path: '/etc/homeassistant/file_restore/thermostat_dressing_program.csv'
-    name: Thermostat Dressing Program
-    length: week
-    detail: day
-
-  - platform: file_restore
-    unit_of_measurement: '°C'
-    file_path: '/etc/homeassistant/file_restore/thermostat_jen_program.csv'
-    name: Thermostat Jen Program
-    length: day
-    detail: hour
 
   - platform: template
     sensors:
