@@ -40,7 +40,6 @@ alexa:
         - switch.switch1
         - switch.switch6
         - switch.switch7
-        - switch.switch8
 
 # }}}
 # {{{ mqtt switch
@@ -106,6 +105,10 @@ light:
   - platform: switch
     name: Garage Eaves
     entity_id: switch.garage_eaves
+
+  - platform: switch
+    name: Garage Lamp
+    entity_id: switch.switch8
 
   # Make Livingroom switches act like a lights
   - platform: switch
@@ -200,6 +203,7 @@ light:
     name: Garage lights
     entities:
       - light.garage_eaves
+      - light.garage_lamp
       - light.garage_pots
 
   # {{{ Hallway lights
