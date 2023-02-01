@@ -507,6 +507,20 @@
     entity_id: light.basement_lights
 
 # }}}
+# {{{ Garage
+
+- id: occupancy_garage_turn_off_lights
+  alias: 'Occupance in Garage - turn off lights'
+  trigger:
+    platform: template
+    value_template: '{{ state_attr("device_tracker.jjn66qf9lo", "ap_mac") != "d0:21:f9:61:26:99" }}'
+  action:
+    service: light.turn_off
+    entity_id:
+      - light.garage_lamp
+      - light.garage_pots
+
+#  }}}
 # {{{ Hallway
 
 - id: occupancy_hallway_turn_on_lights
