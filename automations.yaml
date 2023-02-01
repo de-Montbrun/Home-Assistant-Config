@@ -1240,39 +1240,6 @@
         **Low:** {{ states("sensor.fredericton_low_temperature") }}{{ state_attr("sensor.fredericton_low_temperature" , "unit_of_measurement") }}
       title: 'Weather'
 
-- id: notify_alarm_action
-  alias: 'No one home motion notify'
-  initial_state: false
-  mode: parallel
-  trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.basement_motion
-        - binary_sensor.doorbell_doorbell
-        - binary_sensor.jennifer_room_occupancy
-        - binary_sensor.kitchen_sensor_motion
-        - binary_sensor.living_room_occupancy
-        - binary_sensor.master_bedroom_occupancy
-        - binary_sensor.rack_motion
-        - binary_sensor.my_ecobee_occupancy
-        - binary_sensor.office_occupancy
-        - binary_sensor.spare_room_sensor_motion
-        - binary_sensor.sun_room_sensor_motion
-        - binary_sensor.upstair_hall_occupancy
-      to: 'on'
-  condition:
-    condition: template
-    value_template: '{{ states("group.householdmembers") != "home" }}'
-  action:
-    - service: notify.zulip
-      data_template:
-        message: >
-          :door: {{ trigger.to_state.attributes.friendly_name }}
-          {% if trigger.to_state.attributes.device_class == 'motion' %} :wave:
-          {% elif trigger.to_state.attributes.device_class == 'occupancy' %} :bell:
-          {% endif %}
-        title: 'Security Alert'
-
 - id: notify_low_battery
   alias: Low battery level detection & notification for all battery sensors
   use_blueprint:
