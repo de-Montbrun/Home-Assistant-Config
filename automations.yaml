@@ -476,7 +476,7 @@
   mode: restart
   trigger:
     - platform: state
-      entity_id: binary_sensor.rack_motion
+      entity_id: binary_sensor.network_rack_motion
       to: 'on'
     - platform: state
       entity_id: binary_sensor.basement_sensor_motion
