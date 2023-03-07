@@ -495,16 +495,18 @@
   alias: 'Basement - Light sync up'
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: light.basement0
-      to: 'off'
-      #  condition:
-      #    condition: state
-      #    entity_id: binary_sensor.basement_sensor_motion
-      #    state: "off"
+    platform: state
+    entity_id: light.basement0
   action:
-    service: light.turn_off
-    entity_id: light.basement_lights
+    - variables:
+        myService: |
+          {%- if trigger.to_state.state == 'on' -%}
+                light.turn_on
+          {%- else -%}
+                light.turn_off
+          {% endif %}
+    - service: '{{ myService }}'
+      entity_id: light.basement_lights
 
 # }}}
 # {{{ Garage
