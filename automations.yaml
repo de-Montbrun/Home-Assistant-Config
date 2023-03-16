@@ -1141,7 +1141,7 @@
 
 - id: notify_phone_presence
   alias: 'Phones presence notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: person.gervais,person.gail
@@ -1165,7 +1165,7 @@
 
 - id: notify_current_weather
   alias: 'Current weather notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: sensor.fredericton_condition
@@ -1224,7 +1224,7 @@
 
 - id: notify_weather_forecast
   alias: 'Weather forecast notification'
-  initial_state: true
+  initial_state: false
   trigger:
     platform: time
     at: '08:00:00'
@@ -1244,6 +1244,7 @@
 
 - id: notify_low_battery
   alias: Low battery level detection & notification for all battery sensors
+  initial_state: false
   use_blueprint:
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
