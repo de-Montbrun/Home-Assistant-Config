@@ -33,8 +33,7 @@ alexa:
         - light
         - scene
       include_entities:
-        - media_player.roku_3
-        - media_player.roku_bedroomtv
+        - media_player.bedroomtv
         - media_player.roku_living_roomtv
         - media_player.sonos
         - switch.switch1
@@ -65,6 +64,81 @@ http:
   use_x_forwarded_for: true
   trusted_proxies:
     - 127.0.0.1
+
+# }}}
+# {{{ Homekit
+
+homekit:
+  filter:
+    include_domains:
+      - climate
+      - light
+      - scene
+    include_entities:
+      - media_player.bedroomtv
+      - media_player.roku_living_roomtv
+      - media_player.sonos
+    include_entity_globs:
+      - binary_sensor.*_occupancy
+      - sensor.*_humidity
+      - sensor.*_temperature
+    exclude_entity_globs:
+      - camera.*_sd_*
+      - sensor.fredericton_*
+    exclude_entities:
+      - camera.doorbell_high
+      - sensor.garage_temperature
+
+# }}}
+#  {{{ InfluxDB
+
+influxdb:
+  host: pi4.dem
+  port: 8086
+  username: homeassistant
+  password: !secret influxdb_password
+  max_retries: 3
+  include:
+    domains:
+      - binary_sensor
+      - sensor
+  exclude:
+    entities:
+      - sensor.displays
+      - sensor.frontmost_app
+      - sensor.python_package_index_pypi
+      - sensor.last_update_trigger
+      - sensor.season
+    entity_globs:
+      - binary_sensor.*_detections_motion
+      - binary_sensor.*_detections_motion
+      - binary_sensor.*_hdr_mode
+      - binary_sensor.*_is_dark
+      - binary_sensor.*_motion
+      - binary_sensor.*_overlay_show_bitrate
+      - binary_sensor.*_overlay_show_date
+      - binary_sensor.*_overlay_show_logo
+      - binary_sensor.*_overlay_show_name
+      - binary_sensor.*_status_light_on
+      - sensor.*_infrared_mode
+      - sensor.*_recording_mode
+      - sensor.*_energy_factor
+      - sensor.*_energy_totalstarttime
+      - sensor.*_last_restart_time
+      - sensor.*_mqtt_connect_count
+      - sensor.*_restart_reason
+      - sensor.*_ssid
+      - sensor.*_wifi_connect_count
+      - sensor.*_steps
+      - sensor.*_last_restart_time_2
+      - sensor.*_mqtt_connect_count_2
+      - sensor.*_restart_reason_2
+      - sensor.*_ssid_2
+      - sensor.*_wifi_connect_count_2
+      - sensor.active_*
+      - sensor.fail2ban_*
+      - sensor.primary_display_*
+      - sensor.sun_*
 
 # }}}
 # {{{ Lights
@@ -348,14 +422,6 @@ logger:
     homeassistant.components.http.ban: warning
     homeassistant.components.wemo: fatal
 
-# Homekit
-homekit:
-  filter:
-    include_domains:
-      - light
-      - media_player
-      - switch
-
 # Lutron Caseta
 lutron_caseta:
   host: 192.168.2.121
@@ -377,9 +443,6 @@ logbook:
 
 # Track the sun
 sun:
-
-ifttt:
-  key: !secret ifttt_key
 
 ffmpeg:
   ffmpeg_bin: /usr/bin/ffmpeg
@@ -445,18 +508,15 @@ person:
     id: cam1995
     device_trackers:
       - device_tracker.camphone
-      - device_tracker.cam_fing
   - name: Grant
     id: grant1994
     device_trackers:
       - device_tracker.grantphone
-      - device_tracker.grant_fing
   - name: Jennifer
     id: jen2000
     user_id: 10f174a6c6db401babe419a388e8eaa8
     device_trackers:
       - device_tracker.jen_phone
-      - device_tracker.jen_fing
       - device_tracker.jennifersiphone
       - device_tracker.jennifer_iphone_detect3
       - device_tracker.jennifersiphone_4
@@ -545,16 +605,6 @@ sensor:
           {% endif %}
         unit_of_measurement: 'km'
 
-  - platform: imap_email_content
-    name: Fing State
-    server: !secret fing_email_server
-    port: 993
-    username: !secret fing_email_username
-    password: !secret fing_email_password
-    senders:
-      - alert@fing.io
-      - alert@fing.com
-
 #  # Sensor for monitoring the bridge state
 #  - platform: mqtt
 #    name: Zigbee2mqtt Bridge state
@@ -581,10 +631,6 @@ sensor:
     file_path: /var/log/fail2ban.log
 
 binary_sensor:
-  - platform: workday
-    country: CA
-    province: PE
-
   - platform: ffmpeg_motion
     name: Garage Motion
     input: http://pi3:8081

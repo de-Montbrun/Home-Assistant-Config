@@ -27,30 +27,6 @@ learn_garage:
   alias: eRemote Garage Learn Script
   mode: single
   icon: mdi:remote
-lock_ram:
-  alias: Lock Ram
-  sequence:
-  - service: remote.send_command
-    data:
-      device: ram
-      command:
-      - lock
-      - unlock
-    target:
-      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  mode: single
-  icon: mdi:car-pickup
-unlock_ram:
-  alias: Unlock Ram
-  sequence:
-  - service: remote.send_command
-    data:
-      device: ram
-      command: unlock
-    target:
-      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  mode: single
-  icon: mdi:car-pickup
 garage_fan_toggle:
   alias: garage fan off
   sequence:

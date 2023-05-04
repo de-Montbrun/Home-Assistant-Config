@@ -17,10 +17,10 @@
 
 - id: ha_notify_ha_update_available
   alias: Update Available Notification
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
-    entity_id: binary_sensor.python_package_index_pypi_update_available, binary_sensor.instance02_python_package_index_pypi_update_available
+    entity_id: binary_sensor.python_package_index_pypi_update_available
     from: 'off'
     to: 'on'
   action:
@@ -31,7 +31,7 @@
 
 - id: ha_notify_hacs_update_available
   alias: HACS Update Available Notification
-  initial_state: false
+  initial_state: true
   trigger:
     platform: template
     value_template: '{{ states("sensor.hacs") | int > 0 }}'
@@ -1144,7 +1144,7 @@
 
 - id: notify_phone_presence
   alias: 'Phones presence notification'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: person.gervais,person.gail
@@ -1168,7 +1168,7 @@
 
 - id: notify_current_weather
   alias: 'Current weather notification'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: state
     entity_id: sensor.fredericton_condition
@@ -1205,7 +1205,7 @@
 
 - id: notify_current_uv_index
   alias: 'Current UV index notification'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: numeric_state
     entity_id: sensor.fredericton_uv_index
@@ -1227,7 +1227,7 @@
 
 - id: notify_weather_forecast
   alias: 'Weather forecast notification'
-  initial_state: false
+  initial_state: true
   trigger:
     platform: time
     at: '08:00:00'
@@ -1247,7 +1247,7 @@
 
 - id: notify_low_battery
   alias: Low battery level detection & notification for all battery sensors
-  initial_state: false
+  initial_state: true
   use_blueprint:
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
@@ -1318,7 +1318,7 @@
       - condition: template
         value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start" , "last_triggered")) | int < 36000 }}'
       - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_stop", "last_triggered")) | int > 432000 }}'
+        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_stop", "last_triggered")) | int > 1800 }}'
   action:
     service: vacuum.start
     data: {}
@@ -1326,7 +1326,7 @@
 
 - id: vacuum_stop
   alias: Vacuum Stop
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: group.jen_tracker,person.gail,person.gervais
@@ -1387,23 +1387,5 @@
         entity_id: timer.zigbee_permit_join
     - service: switch.turn_off
       entity_id: switch.zigbee2mqtt_main_join
-
-# }}}
-# {{{ Fing
-
-- id: occupancy_fing_update_user
-  alias: 'Fing update user'
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: sensor.fing_state
-  action:
-    service: device_tracker.see
-    data_template:
-      dev_id: '{{ (trigger.to_state.state.split(": ")[1]).split(" ")[0]}}'
-      location_name: >-
-        {% if trigger.to_state.state.split(": ")[0] == 'Offline' %} not_home
-        {% elif trigger.to_state.state.split(": ")[0] == 'In range' or trigger.to_state.state.split(": ")[0] == 'Online' %} home
-        {% endif %}
 
 # }}}
