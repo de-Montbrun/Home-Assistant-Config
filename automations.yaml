@@ -198,9 +198,10 @@
   alias: 'Dehumidifier on - too moist'
   initial_state: true
   trigger:
-    platform: template
-    value_template: '{{ ((states("sensor.temperature_humidity_sensor_dca4_humidity") | float
-                    + states("sensor.temperature_humidity_sensor_604e_humidity") | float) /2) | int >= 70 }}'
+    - platform: template
+      value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity") | int >= 70 }}'
+    - platform: template
+      value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity") | int >= 70 }}'
   condition:
     condition: template
     value_template: >
@@ -219,9 +220,10 @@
   alias: 'Dehumidifier off - dry enough'
   initial_state: true
   trigger:
-    platform: template
-    value_template: '{{ ((states("sensor.temperature_humidity_sensor_dca4_humidity") | float
-                    + states("sensor.temperature_humidity_sensor_604e_humidity") | float) /2) | int <= 65 }}'
+    - platform: template
+      value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity") | int <= 65 }}'
+    - platform: template
+      value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity") | int <= 65 }}'
   action:
     service: switch.turn_off
     entity_id:
