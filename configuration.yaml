@@ -581,18 +581,6 @@ sensor:
 
   - platform: template
     sensors:
-      kitchen_lumens:
-        friendly_name: 'Kitchen Lumens'
-        value_template: '{{ states.sensor.kitchen_sensor_light_level.attributes.lightlevel }}'
-        unit_of_measurement: Lumens
-        device_class: illuminance
-
-      sun_room_lumens:
-        friendly_name: 'Sun Room Lumens'
-        value_template: '{{ states.sensor.sun_room_sensor_light_level.attributes.lightlevel }}'
-        unit_of_measurement: Lumens
-        device_class: illuminance
-
       distance_apart:
         friendly_name: 'GandG Apart'
         value_template: >-
