@@ -200,10 +200,13 @@
   trigger:
     - platform: template
       value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity") | int >= 70 }}'
+      alias: Basement0 Humidity at 70 or more
     - platform: template
       value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity") | int >= 70 }}'
+      alias: Basement1 Humidity at 70 or more
   condition:
     condition: template
+    alias: Not raining
     value_template: >
       {% if states("weather.home") in ["hail", "pouring", "rainy", "snowy", "snowy-rainy", "lightning-rainy"] %}
         false
