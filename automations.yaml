@@ -1,20 +1,13 @@
-#################################################################
-#### Automations
-#################################################################
-
-# {{{ Home Assistant
-
 - id: ha_startup_items
-  alias: "Home Assistant Startup Item"
+  alias: Home Assistant Startup Item
   trigger:
     platform: homeassistant
     event: start
   action:
-    - service: mqtt.publish
-      data:
-        topic: "cmnd/tasmotas/backlog"
-        payload: "power1 ;power2 ;power3 ;power4 ;power5; dimmer; state "
-
+  - service: mqtt.publish
+    data:
+      topic: cmnd/tasmotas/backlog
+      payload: 'power1 ;power2 ;power3 ;power4 ;power5; dimmer; state '
 - id: ha_notify_ha_update_available
   alias: Update Available Notification
   initial_state: true
@@ -27,8 +20,7 @@
     service: notify.zulip
     data:
       message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
-      title: 'Home Assistant'
-
+      title: Home Assistant
 - id: ha_notify_hacs_update_available
   alias: HACS Update Available Notification
   initial_state: true
@@ -39,58 +31,42 @@
     service: notify.zulip
     data:
       message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
-      title: 'Home Assistant'
-
-# }}}
-# {{{ Alarm
-
+      title: Home Assistant
 - id: occupancy_alarm_no_one_home_alarm_alarm
-  alias: 'Occupancy - no one home - alarm alarm'
+  alias: Occupancy - no one home - alarm alarm
   initial_state: true
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
-    from: 'home'
+    from: home
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("person.gail") != "home" }}'
-      - condition: template
-        value_template: '{{ states("person.gervais") != "home" }}'
-      - condition: template
-        value_template: '{{ states("group.cam_tracker") != "home" }}'
-      - condition: template
-        value_template: '{{ states("group.jen_tracker") != "home" }}'
+    - condition: template
+      value_template: '{{ states("person.gail") != "home" }}'
+    - condition: template
+      value_template: '{{ states("person.gervais") != "home" }}'
+    - condition: template
+      value_template: '{{ states("group.cam_tracker") != "home" }}'
+    - condition: template
+      value_template: '{{ states("group.jen_tracker") != "home" }}'
   action:
     service: alarm_control_panel.alarm_arm_away
     target:
       entity_id: alarm_control_panel.alarmo
-
 - id: occupancy_alarm_return_home_disarm_alarm
-  alias: 'Occupancy - return home - disarm alarm'
+  alias: Occupancy - return home - disarm alarm
   initial_state: true
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
-    to: 'home'
+    to: home
   action:
     service: alarm_control_panel.alarm_disarm
     target:
       entity_id: alarm_control_panel.alarmo
-
-      #- id: camera_privacy
-      #  alias: Camera Privacy
-      #  initial_state: true
-      #  trigger:
-      #    platform: template
-      #    value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99") }}'
-
-# }}}
-# {{{ Buttons
-
 - id: tap0_button_1
-  alias: 'Tap0 Button 1'
+  alias: Tap0 Button 1
   trigger:
     device_id: 2b533c9f9b279032d1907efe688c476d
     domain: hue
@@ -101,195 +77,197 @@
   action:
     service: light.toggle
     entity_id: light.sunroom_lights
-
 - id: tap0_button_2
-  alias: 'Tap0 Button 2'
+  alias: Tap0 Button 2
   trigger:
-    - device_id: 2b533c9f9b279032d1907efe688c476d
-      domain: hue
-      platform: device
-      type: initial_press
-      subtype: 2
-      unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
+  - device_id: 2b533c9f9b279032d1907efe688c476d
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 2
+    unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
   action:
     service: scene.turn_on
     entity_id: scene.sunroom_dim
-
 - id: tap0_button_3
-  alias: 'Tap0 Button 3'
+  alias: Tap0 Button 3
   trigger:
-    - device_id: 2b533c9f9b279032d1907efe688c476d
-      domain: hue
-      platform: device
-      type: initial_press
-      subtype: 3
-      unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
+  - device_id: 2b533c9f9b279032d1907efe688c476d
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 3
+    unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
   action:
-    - service: homeassistant.turn_on
-      entity_id: automation.lighting_plex_play_pause
-    - service: homeassistant.turn_on
-      entity_id: automation.sunroom_no_occupancy_lights_off
-    - service: scene.turn_on
-      entity_id: scene.sunroom_dim
-
+  - service: homeassistant.turn_on
+    entity_id: automation.lighting_plex_play_pause
+  - service: homeassistant.turn_on
+    entity_id: automation.sunroom_no_occupancy_lights_off
+  - service: scene.turn_on
+    entity_id: scene.sunroom_dim
 - id: tap0_button_4
-  alias: 'Tap0 Button 4'
+  alias: Tap0 Button 4
   trigger:
-    - device_id: 2b533c9f9b279032d1907efe688c476d
-      domain: hue
-      platform: device
-      type: initial_press
-      subtype: 4
-      unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
+  - device_id: 2b533c9f9b279032d1907efe688c476d
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 4
+    unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
   action:
-    - service: homeassistant.turn_off
-      entity_id: automation.lighting_plex_play_pause
-    - service: homeassistant.turn_off
-      entity_id: automation.sunroom_no_occupancy_lights_off
-    - service: scene.turn_on
-      entity_id: scene.sunroom_normal
-
+  - service: homeassistant.turn_off
+    entity_id: automation.lighting_plex_play_pause
+  - service: homeassistant.turn_off
+    entity_id: automation.sunroom_no_occupancy_lights_off
+  - service: scene.turn_on
+    entity_id: scene.sunroom_normal
 - id: tap1_buttons
-  alias: "Tap1 Doorbell"
+  alias: Tap1 Doorbell
   trigger:
-    - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
-      domain: hue
-      platform: device
-      type: initial_press
-      subtype: 1
-      unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
-    - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
-      domain: hue
-      platform: device
-      type: initial_press
-      subtype: 2
-      unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
-    - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
-      domain: hue
-      platform: device
-      type: initial_press
-      subtype: 3
-      unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
-    - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
-      domain: hue
-      platform: device
-      type: initial_press
-      subtype: 4
-      unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
+  - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 1
+    unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
+  - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 2
+    unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
+  - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 3
+    unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
+  - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
+    domain: hue
+    platform: device
+    type: initial_press
+    subtype: 4
+    unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
   action:
-    - service: notify.mobile_app_iphone
-      data:
-        message: Someone is at the front door. 🔔
-    - service: notify.mobile_app_gail_iphone
-      data:
-        message: Someone is at the front door. 🔔
-    - condition: state
-      entity_id: media_player.roku_living_roomtv
-      state: playing
-    - service: remote.send_command
-      data:
-        entity_id: remote.roku_livingroom
-        command: play
-
-# }}}
-# {{{ Dehumidifiers
-
+  - service: notify.mobile_app_iphone
+    data:
+      message: "Someone is at the front door. \U0001F514"
+  - service: notify.mobile_app_gail_iphone
+    data:
+      message: "Someone is at the front door. \U0001F514"
+  - condition: state
+    entity_id: media_player.roku_living_roomtv
+    state: playing
+  - service: remote.send_command
+    data:
+      entity_id: remote.roku_livingroom
+      command: play
 - id: dehumidifiers_on
-  alias: 'Dehumidifier on - too moist'
+  alias: Dehumidifier on - too moist
   initial_state: true
   trigger:
-    - platform: template
-      value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity") | int >= 70 }}'
-      alias: Basement0 Humidity at 70 or more
-    - platform: template
-      value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity") | int >= 70 }}'
-      alias: Basement1 Humidity at 70 or more
+  - platform: template
+    value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
+      | int >= 70 }}'
+    alias: Basement0 Humidity at 70 or more
+  - platform: template
+    value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
+      | int >= 70 }}'
+    alias: Basement1 Humidity at 70 or more
+  - platform: time_pattern
+    hours: /1
+    minutes: 0
+    seconds: 0
   condition:
-    condition: template
-    alias: Not raining
-    value_template: >
-      {% if states("weather.home") in ["hail", "pouring", "rainy", "snowy", "snowy-rainy", "lightning-rainy"] %}
-        false
-      {%- else -%}
-        true
-      {%- endif %}
+    condition: and
+    conditions:
+    - condition: template
+      alias: Not raining
+      value_template: "{% if states(\"weather.home\") in [\"hail\", \"pouring\", \"rainy\",
+        \"snowy\", \"snowy-rainy\", \"lightning-rainy\"] %}\n  false\n{%- else -%}\n
+        \ true\n{%- endif %}\n"
+    - condition: or
+      conditions:
+      - condition: template
+        value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
+          | int >= 70 }}'
+        alias: Basement0 Humidity at 70 or more
+      - condition: template
+        value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
+          | int >= 70 }}'
+        alias: Basement1 Humidity at 70 or more
   action:
     service: switch.turn_on
     entity_id:
-      - switch.switch10
-      - switch.switch11
-
+    - switch.switch10
+    - switch.switch11
 - id: dehumidifiers_off
-  alias: 'Dehumidifier off - dry enough'
+  alias: Dehumidifier off - dry enough
   initial_state: true
   trigger:
-    - platform: template
-      value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity") | int <= 65 }}'
-    - platform: template
-      value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity") | int <= 65 }}'
+  - platform: template
+    value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
+      | int <= 65 }}'
+  - platform: template
+    value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
+      | int <= 65 }}'
   action:
     service: switch.turn_off
     entity_id:
-      - switch.switch10
-      - switch.switch11
-
-# }}}
-# {{{ Heating
-
+    - switch.switch10
+    - switch.switch11
 - id: occupancy_heating_no_one_home_turn_down_heat
-  alias: 'Occupancy - no one home - turn down heat'
+  alias: Occupancy - no one home - turn down heat
   initial_state: true
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
-    from: 'home'
+    from: home
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("person.gail") != "home" }}'
-      - condition: template
-        value_template: '{{ states("person.gervais") != "home" }}'
-      - condition: template
-        value_template: '{{ states("group.cam_tracker") != "home" }}'
-      - condition: template
-        value_template: '{{ states("group.jen_tracker") != "home" }}'
-      - condition: template
-        value_template: '{{ states("sensor.season") != "summer" }}'
-      - condition: template
-        value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
+    - condition: template
+      value_template: '{{ states("person.gail") != "home" }}'
+    - condition: template
+      value_template: '{{ states("person.gervais") != "home" }}'
+    - condition: template
+      value_template: '{{ states("group.cam_tracker") != "home" }}'
+    - condition: template
+      value_template: '{{ states("group.jen_tracker") != "home" }}'
+    - condition: template
+      value_template: '{{ states("sensor.season") != "summer" }}'
+    - condition: template
+      value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
   action:
     service: climate.set_preset_mode
     data:
       entity_id: climate.my_ecobee
-      preset_mode: 'Away'
-
+      preset_mode: Away
 - id: occupancy_heating_return_home_turn_up_heat
-  alias: 'Occupancy - return home - turn up heat'
+  alias: Occupancy - return home - turn up heat
   initial_state: true
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
-    to: 'home'
+    to: home
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("sensor.season") != "summer" }}'
-      - condition: template
-        value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
-      - condition: time
-        after: '16:30:00'
-      - condition: time
-        before: '23:20:00'
+    - condition: template
+      value_template: '{{ states("sensor.season") != "summer" }}'
+    - condition: template
+      value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
+    - condition: time
+      after: '16:30:00'
+    - condition: time
+      before: '23:20:00'
   action:
     service: climate.set_preset_mode
     data:
       entity_id: climate.my_ecobee
-      preset_mode: 'Home'
-
+      preset_mode: Home
 - id: occupancy_heating_gandg_not_home_turn_off_bedroom_heater
-  alias: 'Occupancy - GandG not home - turn off bedroom heater'
+  alias: Occupancy - GandG not home - turn off bedroom heater
   initial_state: true
   trigger:
     platform: state
@@ -297,82 +275,73 @@
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("person.gail") != "home" }}'
-      - condition: template
-        value_template: '{{ states("person.gervais") != "home" }}'
-      - condition: template
-        value_template: '{{ states("sensor.season") != "summer" }}'
+    - condition: template
+      value_template: '{{ states("person.gail") != "home" }}'
+    - condition: template
+      value_template: '{{ states("person.gervais") != "home" }}'
+    - condition: template
+      value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: climate.set_hvac_mode
     data:
       entity_id: climate.bedroom_heater
       hvac_mode: 'off'
-
 - id: occupancy_heating_gandg_return_home_turn_on_bedroom_heater
-  alias: 'Occupancy - GandG return home - turn on bedroom heater'
+  alias: Occupancy - GandG return home - turn on bedroom heater
   initial_state: true
   trigger:
     platform: state
     entity_id: person.gail,person.gervais
-    to: 'home'
+    to: home
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("sensor.season") != "summer" }}'
-      - condition: template
-        value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
+    - condition: template
+      value_template: '{{ states("sensor.season") != "summer" }}'
+    - condition: template
+      value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
   action:
     service: climate.set_hvac_mode
     data:
       entity_id: climate.bedroom_heater
-      hvac_mode: 'heat_cool'
-
+      hvac_mode: heat_cool
 - id: occupancy_heating_work_day_dressing_room_heater
-  alias: 'Work day dressing room heater schedule'
+  alias: Work day dressing room heater schedule
   initial_state: false
   trigger:
-    - platform: time
-      at: '08:00:00'
-    - platform: time
-      at: '17:15:00'
-    - platform: time
-      at: '22:15:00'
-    - platform: state
-      entity_id: person.gail
+  - platform: time
+    at: 08:00:00
+  - platform: time
+    at: '17:15:00'
+  - platform: time
+    at: '22:15:00'
+  - platform: state
+    entity_id: person.gail
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("sensor.season") != "summer" }}'
-      - condition: state
-        entity_id: binary_sensor.workday_sensor
-        state: 'on'
+    - condition: template
+      value_template: '{{ states("sensor.season") != "summer" }}'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
   action:
     service: climate.set_hvac_mode
     data:
-      hvac_mode: |
-          {%- if (now().strftime("%H") | int < 17)
-            and (now().strftime("%H") | int >= 8)
-            and is_state("person.gail", "home")
-            and states("sensor.season") != "summer" -%}
-              heat_cool
-          {%- else -%}
-              off
-          {% endif %}
+      hvac_mode: "{%- if (now().strftime(\"%H\") | int < 17)\n  and (now().strftime(\"%H\")
+        | int >= 8)\n  and is_state(\"person.gail\", \"home\")\n  and states(\"sensor.season\")
+        != \"summer\" -%}\n    heat_cool\n{%- else -%}\n    off\n{% endif %}\n"
       entity_id: climate.dressing_room_heater
-
 - id: heating_office_heater_off
-  alias: '6pm - heater off'
+  alias: 6pm - heater off
   initial_state: true
   trigger:
-    - platform: time
-      at: '18:00:00'
-    - platform: time
-      at: '18:30:00'
-    - platform: time
-      at: '19:00:00'
+  - platform: time
+    at: '18:00:00'
+  - platform: time
+    at: '18:30:00'
+  - platform: time
+    at: '19:00:00'
   condition:
     condition: and
     conditions:
@@ -381,79 +350,72 @@
   action:
     service: switch.turn_off
     entity_id: switch.switch1
-
 - id: occupancy_heating_gervais_away_heater_off
-  alias: 'Gervais away - turn off heater'
+  alias: Gervais away - turn off heater
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: person.gervais
-      from: 'home'
+  - platform: state
+    entity_id: person.gervais
+    from: home
   condition:
     condition: template
     value_template: '{{ states("sensor.season") != "summer" }}'
   action:
     service: switch.turn_off
     entity_id:
-      - switch.switch1
-
-# }}}
-# {{{ Lighting
-
-# {{{ Bedroom
-
+    - switch.switch1
 - id: occupancy_bedroom_gang_not_home
-  alias: 'GandG not home - turn off bedroom things'
+  alias: GandG not home - turn off bedroom things
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: person.gail
-      from: 'home'
-    - platform: state
-      entity_id: person.gervais
-      from: 'home'
-    - platform: template
-      value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99") }}'
+  - platform: state
+    entity_id: person.gail
+    from: home
+  - platform: state
+    entity_id: person.gervais
+    from: home
+  - platform: template
+    value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
+      }}'
   condition:
     condition: and
     conditions:
+    - condition: template
+      value_template: '{{ states("person.gail") != "home" }}'
+    - condition: or
+      conditions:
       - condition: template
-        value_template: '{{ states("person.gail") != "home" }}'
-      - condition: or
-        conditions:
-          - condition: template
-            value_template: '{{ states("person.gervais") != "home" }}'
-          - condition: template
-            value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99") }}'
+        value_template: '{{ states("person.gervais") != "home" }}'
+      - condition: template
+        value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
+          }}'
   action:
-    - service: light.turn_off
-      entity_id: light.bedroom_lights
-    - condition: state
-      entity_id: sun.sun
-      state: 'above_horizon'
-    - service: light.turn_off
-      entity_id: light.bathroom_lights
-
+  - service: light.turn_off
+    entity_id: light.bedroom_lights
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  - service: light.turn_off
+    entity_id: light.bathroom_lights
 - id: occupancy_bedroom_turn_on_lights
-  alias: 'Occupancy in bedroom - turn on lights'
+  alias: Occupancy in bedroom - turn on lights
   initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.master_bedroom_occupancy
     to: 'on'
   condition:
-    - condition: state
-      entity_id: light.bedroom_lights
-      state: 'off'
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
+  - condition: state
+    entity_id: light.bedroom_lights
+    state: 'off'
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
   action:
     service: light.turn_on
     entity_id: light.bedroom_lights
-
 - id: occupancy_bedroom_turn_off_lights
-  alias: 'No one in bedroom - turn off lights'
+  alias: No one in bedroom - turn off lights
   initial_state: true
   trigger:
     platform: state
@@ -462,103 +424,79 @@
     for:
       minutes: 30
   action:
-    - service: light.turn_off
-      entity_id:
-        - light.bedroom_lights
-    - condition: state
-      entity_id: sun.sun
-      state: 'above_horizon'
-    - service: light.turn_off
-      entity_id: light.bathroom_lights
-
-# }}}
-# {{{ Basement
-
-# Basement Stairs Sensor Motion
+  - service: light.turn_off
+    entity_id:
+    - light.bedroom_lights
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  - service: light.turn_off
+    entity_id: light.bathroom_lights
 - id: occupancy_lighting_basement_on
-  alias: 'Basement - Occupancy lights on'
+  alias: Basement - Occupancy lights on
   initial_state: true
   mode: restart
   trigger:
-    - platform: state
-      entity_id: binary_sensor.network_rack_motion
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.rack_motion
-      to: 'on'
-    - platform: state
-      entity_id: binary_sensor.basement_sensor_motion
-      to: 'on'
+  - platform: state
+    entity_id: binary_sensor.rack_motion
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.basement_sensor_motion
+    to: 'on'
   action:
-    - service: light.turn_on
-      entity_id: light.basement_lights
-    - delay: '00:10'
-    - condition: state
-      entity_id: binary_sensor.basement_sensor_motion
-      state: "off"
-    - service: light.turn_off
-      entity_id: light.basement_lights
-
+  - service: light.turn_on
+    entity_id: light.basement_lights
+  - delay: 00:10
+  - condition: state
+    entity_id: binary_sensor.basement_sensor_motion
+    state: 'off'
+  - service: light.turn_off
+    entity_id: light.basement_lights
 - id: lighting_basement_sync_up
-  alias: 'Basement - Light sync up'
+  alias: Basement - Light sync up
   initial_state: true
   trigger:
     platform: state
     entity_id: light.basement0
   action:
-    - variables:
-        myService: |
-          {%- if trigger.to_state.state == 'on' -%}
-                light.turn_on
-          {%- else -%}
-                light.turn_off
-          {% endif %}
-    - service: '{{ myService }}'
-      entity_id: light.basement_lights
-
-# }}}
-# {{{ Garage
-
+  - variables:
+      myService: "{%- if trigger.to_state.state == 'on' -%}\n      light.turn_on\n{%-
+        else -%}\n      light.turn_off\n{% endif %}\n"
+  - service: '{{ myService }}'
+    entity_id: light.basement_lights
 - id: occupancy_garage_turn_off_lights
-  alias: 'Occupance in Garage - turn off lights'
+  alias: Occupance in Garage - turn off lights
   trigger:
     platform: template
-    value_template: '{{ state_attr("device_tracker.jjn66qf9lo", "ap_mac") != "d0:21:f9:61:26:99" }}'
+    value_template: '{{ state_attr("device_tracker.jjn66qf9lo", "ap_mac") != "d0:21:f9:61:26:99"
+      }}'
   action:
     service: light.turn_off
     entity_id:
-      - light.garage_lamp
-      - light.garage_pots
-
-#  }}}
-# {{{ Hallway
-
+    - light.garage_lamp
+    - light.garage_pots
 - id: occupancy_hallway_turn_on_lights
-  alias: 'Occupancy in hallway - turn on lights'
+  alias: Occupancy in hallway - turn on lights
   mode: restart
   trigger:
     platform: state
     entity_id: binary_sensor.my_ecobee_occupancy,binary_sensor.upstair_hall_occupancy
     to: 'on'
   condition:
-    - condition: state
-      entity_id: light.hallway_lights
-      state: 'off'
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
+  - condition: state
+    entity_id: light.hallway_lights
+    state: 'off'
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
   action:
-    - service: light.turn_on
-      entity_id: light.hallway_lights
-    - delay: 00:15
-    - service: light.turn_off
-      entity_id: light.hallway_lights
-
-# }}}
-# {{{ Kitchen
-
+  - service: light.turn_on
+    entity_id: light.hallway_lights
+  - delay: 00:15
+  - service: light.turn_off
+    entity_id: light.hallway_lights
 - id: occupancy_lighting_kitchen_on
-  alias: 'Kitchen - Occupancy lights on'
+  alias: Kitchen - Occupancy lights on
   initial_state: true
   trigger:
     platform: state
@@ -567,22 +505,21 @@
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: light.kitchen_lights
-        state: 'off'
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
+    - condition: state
+      entity_id: light.kitchen_lights
+      state: 'off'
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
   action:
     service: light.turn_on
     entity_id:
-      - light.cabinets_lower
-      - light.cabinets_upper
-      - light.kitchen_sink
-      - light.pantry_counter
-
+    - light.cabinets_lower
+    - light.cabinets_upper
+    - light.kitchen_sink
+    - light.pantry_counter
 - id: occupancy_lighting_kitchen_off
-  alias: 'Kitchen - No occupancy lights off'
+  alias: Kitchen - No occupancy lights off
   initial_state: true
   trigger:
     platform: state
@@ -593,14 +530,10 @@
   action:
     service: light.turn_off
     entity_id:
-      - light.kitchen_lights
-      - light.pantry_lights
-
-# }}}
-# {{{ Living Room
-
+    - light.kitchen_lights
+    - light.pantry_lights
 - id: lighting_livingroomtv_play-pause
-  alias: 'Lighting - TV play/pause'
+  alias: Lighting - TV play/pause
   initial_state: false
   trigger:
     platform: state
@@ -608,24 +541,19 @@
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
-      - condition: state
-        entity_id: light.livingroom_lights
-        state: 'on'
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: state
+      entity_id: light.livingroom_lights
+      state: 'on'
   action:
     service: scene.turn_on
     data:
-      entity_id: |
-        {%- if trigger.to_state.state == 'playing' -%}
-              scene.living_room_dim
-        {%- else -%}
-              scene.living_room_normal
-        {% endif %}
-
+      entity_id: "{%- if trigger.to_state.state == 'playing' -%}\n      scene.living_room_dim\n{%-
+        else -%}\n      scene.living_room_normal\n{% endif %}\n"
 - id: occupancy_lighting_motion_livingroom
-  alias: 'Timed lights - Movement in Living'
+  alias: Timed lights - Movement in Living
   initial_state: false
   mode: restart
   trigger:
@@ -635,33 +563,32 @@
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: light.livingroom_lights
-        state: 'off'
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
-  action:
-    - service: scene.turn_on
-      entity_id: scene.sunroom_nightlight
-    - service: light.turn_on
-      entity_id: light.hallway_lights
-    - delay: '00:10'
     - condition: state
-      entity_id: binary_sensor.kitchen_sensor_motion
+      entity_id: light.livingroom_lights
       state: 'off'
     - condition: state
-      entity_id: media_player.roku_sunroom
-      state: 'standby'
-    - condition: time
-      after: '23:59'
-    - service: light.turn_off
-      entity_id:
-        - light.livingroom_lights
-        - light.hallway_lights
-
+      entity_id: sun.sun
+      state: below_horizon
+  action:
+  - service: scene.turn_on
+    entity_id: scene.sunroom_nightlight
+  - service: light.turn_on
+    entity_id: light.hallway_lights
+  - delay: 00:10
+  - condition: state
+    entity_id: binary_sensor.kitchen_sensor_motion
+    state: 'off'
+  - condition: state
+    entity_id: media_player.roku_sunroom
+    state: standby
+  - condition: time
+    after: '23:59'
+  - service: light.turn_off
+    entity_id:
+    - light.livingroom_lights
+    - light.hallway_lights
 - id: occupancy_lighting_sunroom_off
-  alias: 'Living room - No occupancy lights off'
+  alias: Living room - No occupancy lights off
   initial_state: false
   trigger:
     platform: state
@@ -672,64 +599,59 @@
   condition:
     condition: state
     entity_id: media_player.roku_living_roomtv
-    state: 'standby'
+    state: standby
   action:
     service: light.turn_off
     entity_id: light.livingroom_lights
-
 - id: lighting_sunroom_lumens_low_lights_on
-  alias: 'Sunroom lumens low - lights on'
+  alias: Sunroom lumens low - lights on
   initial_state: false
   trigger:
-    - platform: state
-      entity_id: media_player.roku_living_roomtv
-      from: 'standby'
+  - platform: state
+    entity_id: media_player.roku_living_roomtv
+    from: standby
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states.sensor.sun_room_sensor_light_level.attributes.lightlevel < 6500 }}'
-      - condition: state
-        entity_id: light.sunroom_lights
-        state: 'off'
+    - condition: template
+      value_template: '{{ states.sensor.sun_room_sensor_light_level.attributes.lightlevel
+        < 6500 }}'
+    - condition: state
+      entity_id: light.sunroom_lights
+      state: 'off'
   action:
-    - service: scene.turn_on
-      entity_id: scene.sunroom_normal
-    - service: light.turn_on
-      entity_id: light.saltlick
-
-# }}}
-# {{{ Office
-
+  - service: scene.turn_on
+    entity_id: scene.sunroom_normal
+  - service: light.turn_on
+    entity_id: light.saltlick
 - id: turn_on_lights_office
-  alias: 'Occupancy in Office - turn on lights'
+  alias: Occupancy in Office - turn on lights
   initial_state: false
   trigger:
-    - platform: state
-      entity_id: binary_sensor.office_occupancy
-      to: 'on'
-    - platform: time
-      at: '09:00:00'
+  - platform: state
+    entity_id: binary_sensor.office_occupancy
+    to: 'on'
+  - platform: time
+    at: 09:00:00
   condition:
-    - condition: state
-      entity_id: 'binary_sensor.workday_sensor'
-      state: 'on'
-    - condition: time
-      after: '8:00'
-      before: '20:00'
+  - condition: state
+    entity_id: binary_sensor.workday_sensor
+    state: 'on'
+  - condition: time
+    after: '8:00'
+    before: '20:00'
   action:
-    - service: light.turn_on
-      data:
-        entity_id: light.office_lights
-        brightness: 255
-    - condition: state
-      entity_id: person.gail
-      state: 'home'
-    - service: light.turn_on
-      entity_id: light.dressing_room_lights
-
+  - service: light.turn_on
+    data:
+      entity_id: light.office_lights
+      brightness: 255
+  - condition: state
+    entity_id: person.gail
+    state: home
+  - service: light.turn_on
+    entity_id: light.dressing_room_lights
 - id: turn_off_lights_office
-  alias: 'No one in Office - turn off lights'
+  alias: No one in Office - turn off lights
   initial_state: true
   trigger:
     platform: state
@@ -738,82 +660,76 @@
     for:
       minutes: 10
   action:
-    - service: light.turn_off
-      entity_id: light.office_lights
-    - service: switch.turn_off
-      entity_id: switch.switch1
-    - condition: template
-      value_template: '{{ states("person.gail") != "home" }}'
-    - service: light.turn_off
-      entity_id: light.dressing_room_lights
-
-# }}}
-# {{{ Outdoor
-
+  - service: light.turn_off
+    entity_id: light.office_lights
+  - service: switch.turn_off
+    entity_id: switch.switch1
+  - condition: template
+    value_template: '{{ states("person.gail") != "home" }}'
+  - service: light.turn_off
+    entity_id: light.dressing_room_lights
 - id: movement_front_door_timed_lights
-  alias: 'Timed lights - Movement Front Door'
+  alias: Timed lights - Movement Front Door
   initial_state: true
   mode: restart
   trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.doorbell_motion
-        - binary_sensor.doorbell_doorbell
-      to: 'on'
+  - platform: state
+    entity_id:
+    - binary_sensor.doorbell_motion
+    - binary_sensor.doorbell_doorbell
+    to: 'on'
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: light.outdoor_lights
-        state: 'off'
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
+    - condition: state
+      entity_id: light.outdoor_lights
+      state: 'off'
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
   action:
-    - service: homeassistant.turn_off
-      entity_id: automation.timed_lights_movement_front_door
-    - service: light.turn_on
-      data:
-        entity_id:
-          - light.outdoor_lights
-        brightness: 255
-    - delay: '00:10:00'
-    - service: light.turn_off
+  - service: homeassistant.turn_off
+    entity_id: automation.timed_lights_movement_front_door
+  - service: light.turn_on
+    data:
       entity_id:
-        - light.outdoor_lights
-    - delay: '00:00:04'
-    - service: homeassistant.turn_on
-      entity_id: automation.timed_lights_movement_front_door
-
+      - light.outdoor_lights
+      brightness: 255
+  - delay: 00:10:00
+  - service: light.turn_off
+    entity_id:
+    - light.outdoor_lights
+  - delay: 00:00:04
+  - service: homeassistant.turn_on
+    entity_id: automation.timed_lights_movement_front_door
 - id: movement_porch_timed_lights
-  alias: 'Timed lights - Movement Porch'
+  alias: Timed lights - Movement Porch
   initial_state: true
   mode: restart
   trigger:
-    - platform: state
-      entity_id: binary_sensor.porch_camera_motion
-      to: 'on'
+  - platform: state
+    entity_id: binary_sensor.porch0_motion
+    to: 'on'
+  - platform: state
+    entity_id: binary_sensor.porch1_motion
+    to: 'on'
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: light.outdoor_lights
-        state: 'off'
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
+    - condition: state
+      entity_id: light.outdoor_lights
+      state: 'off'
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
   action:
-    - service: light.turn_on
-      entity_id: light.outdoor_lights
-    - delay: '00:10:00'
-    - service: light.turn_off
-      entity_id: light.outdoor_lights
-
-# }}}
-# {{{ Spare Room
-
+  - service: light.turn_on
+    entity_id: light.outdoor_lights
+  - delay: 00:10:00
+  - service: light.turn_off
+    entity_id: light.outdoor_lights
 - id: occupancy_spare_room_on
-  alias: 'Spareroom - Occupancy lights on'
+  alias: Spareroom - Occupancy lights on
   initial_state: false
   trigger:
     platform: state
@@ -822,17 +738,17 @@
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: light.spare_room_lights
-        state: 'off'
-      - condition: template
-        value_template: '{{ state_attr("sensor.spare_room_sensor_light_level", "dark") }}'
+    - condition: state
+      entity_id: light.spare_room_lights
+      state: 'off'
+    - condition: template
+      value_template: '{{ state_attr("sensor.spare_room_sensor_light_level", "dark")
+        }}'
   action:
     service: light.turn_on
     entity_id: light.spare_room_lights
-
 - id: occupancy_spare_room_off
-  alias: 'Spareroom - No occupancy lights off'
+  alias: Spareroom - No occupancy lights off
   initial_state: true
   trigger:
     platform: state
@@ -843,74 +759,68 @@
   action:
     service: light.turn_off
     entity_id: light.spare_room_lights
-
-# }}}
-
-# }}}
-# {{{ Misc
-
 - id: bedtime
-  alias: 'Bedtime'
+  alias: Bedtime
   initial_state: false
   mode: restart
   trigger:
     platform: state
     entity_id: media_player.roku_sunroom
-    to: 'standby'
+    to: standby
     for:
       minutes: 5
   condition:
     condition: and
     conditions:
+    - condition: or
+      conditions:
+      - condition: time
+        after: '22:00:00'
+      - condition: time
+        before: 02:00:00
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: person.gervais
+        state: home
       - condition: or
         conditions:
-        - condition: time
-          after: '22:00:00'
-        - condition: time
-          before: '02:00:00'
-      - condition: and
+        - condition: state
+          entity_id: person.gail
+          state: home
+        - condition: template
+          value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10
+            }}'
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: person.gail
+        state: home
+      - condition: or
         conditions:
-          - condition: state
-            entity_id: person.gervais
-            state: 'home'
-          - condition: or
-            conditions:
-            - condition: state
-              entity_id: person.gail
-              state: 'home'
-            - condition: template
-              value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
-      - condition: and
-        conditions:
-          - condition: state
-            entity_id: person.gail
-            state: 'home'
-          - condition: or
-            conditions:
-            - condition: state
-              entity_id: person.gervais
-              state: 'home'
-            - condition: template
-              value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
+        - condition: state
+          entity_id: person.gervais
+          state: home
+        - condition: template
+          value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
-    - delay: '00:15:00'
-    - service: homeassistant.turn_off
-      entity_id:
-        - light.basement_light
-        - light.bathroom_lights
-        - light.livingroom_shelves
-        - light.main_floor_lights
-        - light.office_lights
-        - light.second_floor_lights
-        - switch.switch1
-        - switch.switch3
-    - service: climate.set_preset_mode
-      data:
-        entity_id: climate.my_ecobee
-        preset_mode: 'Sleep'
-
+  - delay: 00:15:00
+  - service: homeassistant.turn_off
+    entity_id:
+    - light.basement_light
+    - light.bathroom_lights
+    - light.livingroom_shelves
+    - light.main_floor_lights
+    - light.office_lights
+    - light.second_floor_lights
+    - switch.switch1
+    - switch.switch3
+  - service: climate.set_preset_mode
+    data:
+      entity_id: climate.my_ecobee
+      preset_mode: Sleep
 - id: doorbell_doorbell
-  alias: 'Doorbell rang - pause tv'
+  alias: Doorbell rang - pause tv
   initial_state: true
   trigger:
     platform: state
@@ -921,234 +831,199 @@
     data:
       entity_id: remote.roku_livingroom
       command: pause
-
 - id: everyone_home_and_gone_to_bed
-  alias: 'Everyone home and gone to bed - Lights out'
+  alias: Everyone home and gone to bed - Lights out
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: media_player.roku_living_roomtv
-      to: 'standby'
-      for:
-        minutes: 15
-    - platform: state
-      entity_id: person.gail,person.gervais
-      to: 'home'
+  - platform: state
+    entity_id: media_player.roku_living_roomtv
+    to: standby
+    for:
+      minutes: 15
+  - platform: state
+    entity_id: person.gail,person.gervais
+    to: home
   condition:
     condition: and
     conditions:
-      - condition: time
-        after: '22:30:00'
-      - condition: state
-        entity_id: media_player.roku_sunroom
-        state: 'standby'
-      - condition: or
-        conditions:
-          - condition: template
-            value_template: '{{ states("person.gail") != "home" }}'
-          - condition: template
-            value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
-      - condition: or
-        conditions:
-          - condition: template
-            value_template: '{{ states("person.gervais") != "home" }}'
-          - condition: template
-            value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
+    - condition: time
+      after: '22:30:00'
+    - condition: state
+      entity_id: media_player.roku_sunroom
+      state: standby
+    - condition: or
+      conditions:
+      - condition: template
+        value_template: '{{ states("person.gail") != "home" }}'
+      - condition: template
+        value_template: '{{ distance(states.device_tracker.grdems_phone_2) > 10 }}'
+    - condition: or
+      conditions:
+      - condition: template
+        value_template: '{{ states("person.gervais") != "home" }}'
+      - condition: template
+        value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
-    - delay: '00:10:00'
-    - service: homeassistant.turn_off
-      entity_id: automation.timed_lights_movement_front_door
-    - service: light.turn_off
-      entity_id: all
-    - service: homeassistant.turn_off
-      entity_id:
-        - light.bathroom_lights
-        - light.main_floor_lights
-        - light.outdoor_lights
-        - light.second_floor_lights
-    - delay: '00:00:04'
-    - service: homeassistant.turn_on
-      entity_id: automation.timed_lights_movement_front_door
-
+  - delay: 00:10:00
+  - service: homeassistant.turn_off
+    entity_id: automation.timed_lights_movement_front_door
+  - service: light.turn_off
+    entity_id: all
+  - service: homeassistant.turn_off
+    entity_id:
+    - light.bathroom_lights
+    - light.main_floor_lights
+    - light.outdoor_lights
+    - light.second_floor_lights
+  - delay: 00:00:04
+  - service: homeassistant.turn_on
+    entity_id: automation.timed_lights_movement_front_door
 - id: lighting_2am_lights_off
-  alias: '2am - Lights out'
+  alias: 2am - Lights out
   initial_state: true
   trigger:
     platform: time
-    at: '02:00:00'
+    at: 02:00:00
   action:
-    - service: homeassistant.turn_off
-      entity_id: automation.timed_lights_movement_front_door
-    - service: switch.turn_off
-      entity_id:
-        - switch.switch0
-        - switch.switch3
-    - service: light.turn_off
-      entity_id: all
-    - delay: '00:00:05'
-    - service: homeassistant.turn_on
-      entity_id: automation.timed_lights_movement_front_door
-
+  - service: homeassistant.turn_off
+    entity_id: automation.timed_lights_movement_front_door
+  - service: switch.turn_off
+    entity_id:
+    - switch.switch0
+    - switch.switch3
+  - service: light.turn_off
+    entity_id: all
+  - delay: 00:00:05
+  - service: homeassistant.turn_on
+    entity_id: automation.timed_lights_movement_front_door
 - id: sunrise
-  alias: 'Sunrise - Lights out'
+  alias: Sunrise - Lights out
   initial_state: false
   trigger:
     platform: sun
     event: sunrise
-    offset: '+00:30:00'
+    offset: +00:30:00
   action:
-    - service: light.turn_off
-      entity_id:
-        - light.hallway_lights
-        - light.garage_lights
-        - light.main_floor_lights
-        - light.outdoor_lights
-        - light.spare_room_lights
-    - condition: state
-      entity_id: binary_sensor.master_bedroom_occupancy
-      state: 'off'
-    - service: light.turn_off
-      entity_id: all
-
+  - service: light.turn_off
+    entity_id:
+    - light.hallway_lights
+    - light.garage_lights
+    - light.main_floor_lights
+    - light.outdoor_lights
+    - light.spare_room_lights
+  - condition: state
+    entity_id: binary_sensor.master_bedroom_occupancy
+    state: 'off'
+  - service: light.turn_off
+    entity_id: all
 - id: sunset
-  alias: 'Sunset - Lights on'
+  alias: Sunset - Lights on
   initial_state: true
   trigger:
     platform: sun
     event: sunset
-    offset: '-00:30:00'
+    offset: -00:30:00
   action:
-    - service: scene.turn_on
-      entity_id:
-        - scene.sunset
-    - service: switch.turn_on
-      entity_id:
-        - switch.switch3
-
+  - service: scene.turn_on
+    entity_id:
+    - scene.sunset
+  - service: switch.turn_on
+    entity_id:
+    - switch.switch3
 - id: misc_sabnzb_speed_limit
-  alias: 'Set sabnzb speed limit'
-  initial_state: true
+  alias: Set sabnzb speed limit
   trigger:
-    - platform: state
-      entity_id: person.gail,person.gervais,group.jen_tracker
-    - platform: 'time'
-      at: '10:00:00'
-    - platform: 'time'
-      at: '18:00:00'
-    - platform: 'time'
-      at: '02:00:00'
-    - platform: template
-      value_template: '{{ states.media_player | select("match", ".*media_player.plex_.*") | list | selectattr("state", "equalto", "playing") | list | count | int > 2 }}'
-    - platform: template
-      value_template: '{{ states.media_player | select("match", ".*media_player.plex_.*") | list | selectattr("state", "equalto", "playing") | list | count | int <= 2 }}'
-    - platform: template
-      value_template: '{{ states("sensor.load_5m") | int > 4 }}'
-    - platform: template
-      value_template: '{{ states("sensor.load_5m") | int <= 4 }}'
+  - platform: state
+    entity_id: person.gail,person.gervais,group.jen_tracker
+  - platform: time
+    at: '10:00:00'
+  - platform: time
+    at: '18:00:00'
+  - platform: time
+    at: 02:00:00
+  - platform: template
+    value_template: '{{ states.media_player | select("match", ".*media_player.plex_.*")
+      | list | selectattr("state", "equalto", "playing") | list | count | int > 2
+      }}'
+  - platform: template
+    value_template: '{{ states.media_player | select("match", ".*media_player.plex_.*")
+      | list | selectattr("state", "equalto", "playing") | list | count | int <= 2
+      }}'
+  - platform: template
+    value_template: '{{ states("sensor.load_5m") | int > 4 }}'
+  - platform: template
+    value_template: '{{ states("sensor.load_5m") | int <= 4 }}'
   action:
-    service: rest_command.sabnzb_api
-
+  - service: rest_command.sabnzb_api
+  initial_state: false
 - id: misc_living_room_turn_off_tv
-  alias: 'Turn off living room tv when idle'
+  alias: Turn off living room tv when idle
   initial_state: true
   trigger:
-    - platform: time_pattern
-      minutes: '/20'
-      seconds: 0
+  - platform: time_pattern
+    minutes: /20
+    seconds: 0
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ states("media_player.roku_living_roomtv") != "standby" }}'
-      - condition: template
-        value_template: '{{ states("media_player.roku_living_roomtv") != "unavailable" }}'
+    - condition: template
+      value_template: '{{ states("media_player.roku_living_roomtv") != "standby" }}'
+    - condition: template
+      value_template: '{{ states("media_player.roku_living_roomtv") != "unavailable"
+        }}'
+    - condition: state
+      entity_id: binary_sensor.sun_room_sensor_motion
+      state: 'off'
+      for:
+        minutes: 39
+    - condition: or
+      conditions:
       - condition: state
-        entity_id: binary_sensor.sun_room_sensor_motion
-        state: 'off'
+        entity_id: media_player.plex_living_room
+        state: idle
         for:
-          minutes: 39
-      - condition: or
-        conditions:
-          - condition: state
-            entity_id: media_player.plex_living_room
-            state: 'idle'
-            for:
-              minutes: 15
-          - condition: state
-            entity_id: media_player.roku_living_roomtv
-            state: 'idle'
-            for:
-              minutes: 15
-          - condition: state
-            entity_id: media_player.roku_living_roomtv
-            state: 'home'
-            for:
-              minutes: 15
-          - condition: state
-            entity_id: media_player.roku_living_roomtv
-            state: 'on'
-            for:
-              minutes: 15
+          minutes: 15
+      - condition: state
+        entity_id: media_player.roku_living_roomtv
+        state: idle
+        for:
+          minutes: 15
+      - condition: state
+        entity_id: media_player.roku_living_roomtv
+        state: home
+        for:
+          minutes: 15
+      - condition: state
+        entity_id: media_player.roku_living_roomtv
+        state: 'on'
+        for:
+          minutes: 15
   action:
     service: remote.send_command
     data:
       entity_id: remote.roku_livingroom
       command: power
-
-# }}}
-# {{{ Notifications
-
-- id: notify_drive_filling
-  alias: 'Drive is filling'
-  initial_state: false
-  trigger:
-    - platform: template
-      value_template: '{{ states("sensor.disk_use_percent") | int >= 95 }}'
-    - platform: template
-      value_template: '{{ states("sensor.disk_use_percent_boot") | int >= 95 }}'
-    - platform: template
-      value_template: '{{ states("sensor.disk_use_percent_home") | int >= 95 }}'
-    - platform: template
-      value_template: '{{ states("sensor.disk_use_percent_media_apple") | int >= 95 }}'
-    - platform: template
-      value_template: '{{ states("sensor.disk_use_percent_media_wine") | int >= 95 }}'
-  action:
-    service: notify.zulip
-    data:
-      message: >
-        :warning:
-        {% if trigger.to_state.attributes.friendly_name == 'Disk use (percent) /' %} Root
-        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /boot' %} Boot
-        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /home' %} Home
-        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/apple' %} Apple
-        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/cracker' %} Cracker
-        {% elif trigger.to_state.attributes.friendly_name == 'Disk use (percent) /media/wine' %} Wine
-        {% endif %}
-        drive is almost full.
-      title: 'Alert'
-
 - id: notify_home_presence
-  alias: 'Home presence notification'
+  alias: Home presence notification
   initial_state: false
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,group.grant_tracker
   condition:
     condition: template
-    value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state) | int > 5 }}'
+    value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state)
+      | int > 5 }}'
   action:
     service: notify.zulip
     data_template:
-      message: >
-        :{{ trigger.to_state.attributes.friendly_name | lower }}:
-        {{ trigger.to_state.attributes.friendly_name }} has
-        {%- if trigger.to_state.state == 'home' %} entered
-        {%- else %} exited
+      message: ':{{ trigger.to_state.attributes.friendly_name | lower }}: {{ trigger.to_state.attributes.friendly_name
+        }} has {%- if trigger.to_state.state == ''home'' %} entered {%- else %} exited
         {%- endif %} home.
-      title: 'Family Location'
 
+        '
+      title: Family Location
 - id: notify_phone_presence
-  alias: 'Phones presence notification'
+  alias: Phones presence notification
   initial_state: true
   trigger:
     platform: state
@@ -1156,23 +1031,23 @@
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state) | int > 5 }}'
-      - condition: template
-        value_template: '{{ trigger.from_state.state != trigger.to_state.state }}'
+    - condition: template
+      value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state)
+        | int > 5 }}'
+    - condition: template
+      value_template: '{{ trigger.from_state.state != trigger.to_state.state }}'
   action:
     service: notify.zulip
     data_template:
-      message: >
-        :{{ trigger.to_state.attributes.friendly_name | lower }}:
-        {{ trigger.to_state.attributes.friendly_name }} has
-        {%- if trigger.from_state.state == 'not_home' or trigger.from_state.state == 'Away' %} entered {{ trigger.to_state.state }}.
-        {%- else %} exited {{ trigger.from_state.state }}.
-        {%- endif %}
-      title: 'Family Location'
+      message: ':{{ trigger.to_state.attributes.friendly_name | lower }}: {{ trigger.to_state.attributes.friendly_name
+        }} has {%- if trigger.from_state.state == ''not_home'' or trigger.from_state.state
+        == ''Away'' %} entered {{ trigger.to_state.state }}. {%- else %} exited {{
+        trigger.from_state.state }}. {%- endif %}
 
+        '
+      title: Family Location
 - id: notify_current_weather
-  alias: 'Current weather notification'
+  alias: Current weather notification
   initial_state: true
   trigger:
     platform: state
@@ -1180,36 +1055,39 @@
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state) | int > 5 }}'
-      - condition: template
-        value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
-      - condition: template
-        value_template: '{{ trigger.to_state.state != "unknown" }}'
-      - condition: template
-        value_template: '{{ states("sensor.fredericton_condition") != "unavailable" }}'
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.current_weather_notification.attributes.last_triggered) | int > 3600 }}'
+    - condition: template
+      value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state)
+        | int > 5 }}'
+    - condition: template
+      value_template: '{{ trigger.to_state.state != trigger.from_state.state }}'
+    - condition: template
+      value_template: '{{ trigger.to_state.state != "unknown" }}'
+    - condition: template
+      value_template: '{{ states("sensor.fredericton_condition") != "unavailable"
+        }}'
+    - condition: template
+      value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.current_weather_notification.attributes.last_triggered)
+        | int > 3600 }}'
   action:
     service: notify.zulip
     data_template:
-      message: >
-        **Weather Condition:** {{ states.sensor.fredericton_condition.state }}
+      message: '**Weather Condition:** {{ states.sensor.fredericton_condition.state
+        }}
 
-        **Tempurature:** {{ states.sensor.fredericton_temperature.state }}{{ states.sensor.fredericton_temperature.attributes.unit_of_measurement }}
-        {% if states.sensor.fredericton_humidex.state != 'unknown' or states.sensor.fredericton_wind_chill.state != 'unknown' %}
+        **Tempurature:** {{ states.sensor.fredericton_temperature.state }}{{ states.sensor.fredericton_temperature.attributes.unit_of_measurement
+        }} {% if states.sensor.fredericton_humidex.state != ''unknown'' or states.sensor.fredericton_wind_chill.state
+        != ''unknown'' %}
 
-        **Feels like:** {%- if states.sensor.fredericton_humidex.state != 'unknown' %}
-        {{ states.sensor.fredericton_wind_chill.state }}
-        {% elif states.sensor.fredericton_temperature.state != 'unknown' %}
-        {{ states.sensor.fredericton_temperature.state }}
-        {% endif %}
-        {{ states.sensor.fredericton_temperature.attributes.unit_of_measurement }}
-        {% endif %}
-      title: 'Weather'
+        **Feels like:** {%- if states.sensor.fredericton_humidex.state != ''unknown''
+        %} {{ states.sensor.fredericton_wind_chill.state }} {% elif states.sensor.fredericton_temperature.state
+        != ''unknown'' %} {{ states.sensor.fredericton_temperature.state }} {% endif
+        %} {{ states.sensor.fredericton_temperature.attributes.unit_of_measurement
+        }} {% endif %}
 
+        '
+      title: Weather
 - id: notify_current_uv_index
-  alias: 'Current UV index notification'
+  alias: Current UV index notification
   initial_state: true
   trigger:
     platform: numeric_state
@@ -1218,38 +1096,42 @@
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state) | int > 5 }}'
-      - condition: state
-        entity_id: sun.sun
-        state: 'above_horizon'
+    - condition: template
+      value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state)
+        | int > 5 }}'
+    - condition: state
+      entity_id: sun.sun
+      state: above_horizon
   action:
     service: notify.zulip
     data:
-      message: >
-        :sunny: UV Index is {{ states("sensor.fredericton_uv_index") }}. You better put on some sunscreen!
-      title: 'Weather'
+      message: ':sunny: UV Index is {{ states("sensor.fredericton_uv_index") }}. You
+        better put on some sunscreen!
 
+        '
+      title: Weather
 - id: notify_weather_forecast
-  alias: 'Weather forecast notification'
+  alias: Weather forecast notification
   initial_state: true
   trigger:
     platform: time
-    at: '08:00:00'
+    at: 08:00:00
   action:
     service: notify.zulip
     data:
-      message: >
-        **Forecast:**
+      message: '**Forecast:**
 
         {{ states("sensor.fredericton_forecast") }}
 
 
-        **High:** {{ states("sensor.fredericton_high_temperature") }}{{ state_attr("sensor.fredericton_high_temperature" , "unit_of_measurement") }}
+        **High:** {{ states("sensor.fredericton_high_temperature") }}{{ state_attr("sensor.fredericton_high_temperature"
+        , "unit_of_measurement") }}
 
-        **Low:** {{ states("sensor.fredericton_low_temperature") }}{{ state_attr("sensor.fredericton_low_temperature" , "unit_of_measurement") }}
-      title: 'Weather'
+        **Low:** {{ states("sensor.fredericton_low_temperature") }}{{ state_attr("sensor.fredericton_low_temperature"
+        , "unit_of_measurement") }}
 
+        '
+      title: Weather
 - id: notify_low_battery
   alias: Low battery level detection & notification for all battery sensors
   initial_state: true
@@ -1257,59 +1139,57 @@
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
       threshold: 10
-      time: "19:00:00"
+      time: '19:00:00'
       exclude:
         entity_id:
-          - sensor.internal_battery_level
-          - sensor.alice_battery_level
-          - sensor.consuela_battery_level
-          - sensor.gail_iphone_battery_level
-          - sensor.gail_iphone_battery_state
-          - sensor.ipad_battery_level
-          - sensor.jennifers_iphone_battery_level
-          - sensor.jennifers_iphone_battery_state
-          - sensor.iphone_battery_level
-          - sensor.iphone_battery_state
+        - sensor.internal_battery_level
+        - sensor.alice_battery_level
+        - sensor.consuela_battery_level
+        - sensor.gail_iphone_battery_level
+        - sensor.gail_iphone_battery_state
+        - sensor.ipad_battery_level
+        - sensor.jennifers_iphone_battery_level
+        - sensor.jennifers_iphone_battery_state
+        - sensor.iphone_battery_level
+        - sensor.iphone_battery_state
       actions:
-        - service: notify.zulip
-          data:
-            message: Low batter on {{sensors}}.
-            title: HA Sensor
-
-# }}}
-# {{{ Vacuum
-
+      - service: notify.zulip
+        data:
+          message: Low batter on {{sensors}}.
+          title: HA Sensor
 - id: vacuum_start
   alias: Vacuum Start
   initial_state: true
   trigger:
-    - platform: state
-      entity_id: person.gail,person.gervais
-      from: 'home'
-      for: '00:05:00'
-    - platform: template
-      value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99") }}'
+  - platform: state
+    entity_id: person.gail,person.gervais
+    from: home
+    for: 00:05:00
+  - platform: template
+    value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
+      }}'
   condition:
     condition: and
     conditions:
-      - condition: state
-        entity_id: vacuum.consuela
-        state: docked
+    - condition: state
+      entity_id: vacuum.consuela
+      state: docked
+    - condition: template
+      value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start"
+        , "last_triggered")) | int > 432000 }}'
+    - condition: template
+      value_template: '{{ states("person.gail") != "home" }}'
+    - condition: or
+      conditions:
       - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start" , "last_triggered")) | int > 432000 }}'
+        value_template: '{{ states("person.gervais") != "home" }}'
       - condition: template
-        value_template: '{{ states("person.gail") != "home" }}'
-      - condition: or
-        conditions:
-          - condition: template
-            value_template: '{{ states("person.gervais") != "home" }}'
-          - condition: template
-            value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99") }}'
+        value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
+          }}'
   action:
     service: vacuum.start
     data: {}
     entity_id: vacuum.consuela
-
 - id: mop_start
   alias: Mop Start
   initial_state: true
@@ -1320,22 +1200,23 @@
   condition:
     condition: and
     conditions:
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start" , "last_triggered")) | int < 36000 }}'
-      - condition: template
-        value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_stop", "last_triggered")) | int > 1800 }}'
+    - condition: template
+      value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start"
+        , "last_triggered")) | int < 36000 }}'
+    - condition: template
+      value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_stop",
+        "last_triggered")) | int > 1800 }}'
   action:
     service: vacuum.start
     data: {}
     entity_id: vacuum.alice
-
 - id: vacuum_stop
   alias: Vacuum Stop
   initial_state: false
   trigger:
     platform: state
     entity_id: group.jen_tracker,person.gail,person.gervais
-    to: 'home'
+    to: home
   condition:
     condition: or
     conditions:
@@ -1348,49 +1229,39 @@
   action:
     service: vacuum.return_to_base
     entity_id: all
-
-# }}}
-# {{{ Zigbee
-
 - id: zigbee_log_level
   alias: Zigbee2mqtt Log Level
-  initial_state: "on"
+  initial_state: 'on'
   trigger:
     platform: state
     entity_id: input_select.zigbee2mqtt_log_level
   action:
     service: mqtt.publish
     data:
-      payload_template: "{{ states('input_select.zigbee2mqtt_log_level') }}"
+      payload_template: '{{ states(''input_select.zigbee2mqtt_log_level'') }}'
       topic: zigbee2mqtt/bridge/config/log_level
-
-# Automation to start timer when enable join is turned on
 - id: zigbee_join_enabled
   alias: Zigbee Join Enabled
   trigger:
     platform: state
     entity_id: switch.zigbee2mqtt_main_join
-    to: "on"
+    to: 'on'
   action:
     service: timer.start
     entity_id: timer.zigbee_permit_join
-
-# Automation to stop timer when switch turned off and turn off switch when timer finished
 - id: zigbee_join_disabled
   alias: Zigbee Join Disabled
   trigger:
-    - platform: event
-      event_type: timer.finished
-      event_data:
-        entity_id: timer.zigbee_permit_join
-    - platform: state
-      entity_id: switch.zigbee2mqtt_main_join
-      to: "off"
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.zigbee_permit_join
+  - platform: state
+    entity_id: switch.zigbee2mqtt_main_join
+    to: 'off'
   action:
-    - service: timer.cancel
-      data:
-        entity_id: timer.zigbee_permit_join
-    - service: switch.turn_off
-      entity_id: switch.zigbee2mqtt_main_join
-
-# }}}
+  - service: timer.cancel
+    data:
+      entity_id: timer.zigbee_permit_join
+  - service: switch.turn_off
+    entity_id: switch.zigbee2mqtt_main_join
