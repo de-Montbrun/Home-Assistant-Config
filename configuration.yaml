@@ -12,11 +12,6 @@ homeassistant:
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Halifax
-  # Allow homeassistant to write to snapshots dir
-  #allowlist_external_dirs:
-  #  - /var/www/html/snapshots
-  #media_dirs:
-  #  security: /var/www/html/snapshots
   customize: !include customize.yaml
 
 default_config:
@@ -539,21 +534,6 @@ device_tracker:
       jennifer_iphone_detect3: 192.168.2.152
 
 # }}}
-## {{{ Rest Commands
-
-        #rest_command:
-        #  sabnzb_api:
-        #    url: !secret sabnzbd_rest_url
-
-## }}}
-# {{{ Security Cams
-
-      #camera:
-      #  - platform: mjpeg
-      #    mjpeg_url: http://pi3:8081
-      #    name: Garage Live cam
-
-# }}}
 # {{{ Sensors
 
 sensor:
@@ -591,13 +571,6 @@ sensor:
 #    state_topic: "zigbee2mqtt/bridge/config"
 #    value_template: "{{ value_json.coordinator }}"
 #    icon: mdi:chip
-
-#  - platform: fail2ban
-#    jails:
-#      - hass-iptables
-#      - nginx-http-auth
-#      - sshd
-#    file_path: /var/log/fail2ban.log
 
 binary_sensor:
   - platform: ffmpeg_motion
