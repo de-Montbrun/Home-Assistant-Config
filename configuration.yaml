@@ -58,7 +58,7 @@ http:
   #ssl_key: !secret http_ssl_key
   use_x_forwarded_for: true
   trusted_proxies:
-    - 192.168.2.150
+    - 192.168.2.80
 
 # }}}
 # {{{ Homekit
@@ -403,9 +403,6 @@ media_player:
 
 # Enable frontend configuration
 config:
-
-# Discover some devices automatically
-discovery:
 
 # Set logging level
 logger:
