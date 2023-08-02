@@ -34,13 +34,16 @@
       title: Home Assistant
 - id: occupancy_alarm_no_one_home_alarm_alarm
   alias: Occupancy - no one home - alarm alarm
-  initial_state: true
   trigger:
-    platform: state
-    entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
+  - platform: state
+    entity_id:
+    - person.gail
+    - person.gervais
+    - group.cam_tracker
+    - group.jen_tracker
     from: home
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: template
       value_template: '{{ states("person.gail") != "home" }}'
@@ -51,20 +54,27 @@
     - condition: template
       value_template: '{{ states("group.jen_tracker") != "home" }}'
   action:
-    service: alarm_control_panel.alarm_arm_away
+  - service: alarm_control_panel.alarm_arm_away
     target:
       entity_id: alarm_control_panel.alarmo
+    data: {}
+  initial_state: true
 - id: occupancy_alarm_return_home_disarm_alarm
   alias: Occupancy - return home - disarm alarm
-  initial_state: true
   trigger:
-    platform: state
-    entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
+  - platform: state
+    entity_id:
+    - group.cam_tracker
+    - group.jen_tracker
+    - person.gail
+    - person.gervais
     to: home
   action:
-    service: alarm_control_panel.alarm_disarm
+  - service: alarm_control_panel.alarm_disarm
     target:
       entity_id: alarm_control_panel.alarmo
+    data: {}
+  initial_state: true
 - id: tap0_button_1
   alias: Tap0 Button 1
   trigger:
@@ -164,22 +174,29 @@
       command: play
 - id: dehumidifiers_on
   alias: Dehumidifier on - too moist
-  initial_state: true
   trigger:
   - platform: template
     value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
       | int >= 70 }}'
     alias: Basement0 Humidity at 70 or more
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
   - platform: template
     value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
       | int >= 70 }}'
     alias: Basement1 Humidity at 70 or more
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
   - platform: time_pattern
     hours: /1
     minutes: 0
     seconds: 0
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: template
       alias: Not raining
@@ -197,25 +214,39 @@
           | int >= 70 }}'
         alias: Basement1 Humidity at 70 or more
   action:
-    service: switch.turn_on
+  - service: switch.turn_on
     entity_id:
     - switch.switch10
     - switch.switch11
+  initial_state: true
 - id: dehumidifiers_off
   alias: Dehumidifier off - dry enough
-  initial_state: true
   trigger:
   - platform: template
-    value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
+    value_template: '  {{ states("sensor.temperature_humidity_sensor_dca4_humidity")
       | int <= 65 }}'
   - platform: template
     value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
       | int <= 65 }}'
+  - platform: time_pattern
+    hours: /1
+  condition:
+  - condition: or
+    conditions:
+    - condition: template
+      value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
+        | int <= 65 }}'
+    - condition: template
+      value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
+        | int <= 65 }}'
   action:
-    service: switch.turn_off
-    entity_id:
-    - switch.switch10
-    - switch.switch11
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id:
+      - switch.switch11
+      - switch.switch10
+  initial_state: true
 - id: occupancy_heating_no_one_home_turn_down_heat
   alias: Occupancy - no one home - turn down heat
   initial_state: true
@@ -454,16 +485,19 @@
     entity_id: light.basement_lights
 - id: lighting_basement_sync_up
   alias: Basement - Light sync up
-  initial_state: true
   trigger:
-    platform: state
-    entity_id: light.basement0
+  - platform: state
+    entity_id:
+    - light.basement0
+    - light.basement1
+    - light.basement2
   action:
   - variables:
       myService: "{%- if trigger.to_state.state == 'on' -%}\n      light.turn_on\n{%-
         else -%}\n      light.turn_off\n{% endif %}\n"
   - service: '{{ myService }}'
     entity_id: light.basement_lights
+  initial_state: true
 - id: occupancy_garage_turn_off_lights
   alias: Occupance in Garage - turn off lights
   trigger:
@@ -704,17 +738,14 @@
     entity_id: automation.timed_lights_movement_front_door
 - id: movement_porch_timed_lights
   alias: Timed lights - Movement Porch
-  initial_state: true
-  mode: restart
   trigger:
   - platform: state
-    entity_id: binary_sensor.porch0_motion
-    to: 'on'
-  - platform: state
-    entity_id: binary_sensor.porch1_motion
+    entity_id:
+    - binary_sensor.porch0_motion
+    - binary_sensor.porch1_cell_motion_detection
     to: 'on'
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: state
       entity_id: light.outdoor_lights
@@ -728,6 +759,8 @@
   - delay: 00:10:00
   - service: light.turn_off
     entity_id: light.outdoor_lights
+  initial_state: true
+  mode: restart
 - id: occupancy_spare_room_on
   alias: Spareroom - Occupancy lights on
   initial_state: false
@@ -1048,12 +1081,11 @@
       title: Family Location
 - id: notify_current_weather
   alias: Current weather notification
-  initial_state: true
   trigger:
-    platform: state
+  - platform: state
     entity_id: sensor.fredericton_condition
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state)
@@ -1069,7 +1101,7 @@
       value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.current_weather_notification.attributes.last_triggered)
         | int > 3600 }}'
   action:
-    service: notify.zulip
+  - service: notify.zulip
     data_template:
       message: '**Weather Condition:** {{ states.sensor.fredericton_condition.state
         }}
@@ -1078,14 +1110,15 @@
         }} {% if states.sensor.fredericton_humidex.state != ''unknown'' or states.sensor.fredericton_wind_chill.state
         != ''unknown'' %}
 
-        **Feels like:** {%- if states.sensor.fredericton_humidex.state != ''unknown''
-        %} {{ states.sensor.fredericton_wind_chill.state }} {% elif states.sensor.fredericton_temperature.state
-        != ''unknown'' %} {{ states.sensor.fredericton_temperature.state }} {% endif
-        %} {{ states.sensor.fredericton_temperature.attributes.unit_of_measurement
+        **Feels like:** {% if states.sensor.fredericton_humidex.state != ''unknown''
+        %} {{ states.sensor.fredericton_humidex.state }}{% elif states.sensor.fredericton_wind_chill.state
+        != ''unknown'' %}{{ states.sensor.fredericton_wind_chill.state }}{% endif
+        %}{{ states.sensor.fredericton_temperature.attributes.unit_of_measurement
         }} {% endif %}
 
         '
       title: Weather
+  initial_state: true
 - id: notify_current_uv_index
   alias: Current UV index notification
   initial_state: true
@@ -1112,12 +1145,18 @@
       title: Weather
 - id: notify_weather_forecast
   alias: Weather forecast notification
-  initial_state: true
   trigger:
-    platform: time
+  - platform: time
     at: 08:00:00
+  condition:
+  - condition: template
+    value_template: '{{ sensor.fredericton_forecast != ''unknown'' }}'
+  - condition: template
+    value_template: '{{ sensor.fredericton_high_temperature != ''unknown'' }}'
+  - condition: template
+    value_template: '{{ sensor.fredericton_low_temperature != ''unknown'' }}'
   action:
-    service: notify.zulip
+  - service: notify.zulip
     data:
       message: '**Forecast:**
 
@@ -1132,6 +1171,7 @@
 
         '
       title: Weather
+  initial_state: true
 - id: notify_low_battery
   alias: Low battery level detection & notification for all battery sensors
   initial_state: true
