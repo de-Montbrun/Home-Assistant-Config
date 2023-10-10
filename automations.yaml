@@ -976,19 +976,15 @@
     at: 02:00:00
   - platform: template
     value_template: '{{ states.media_player | select("match", ".*media_player.plex_.*")
-      | list | selectattr("state", "equalto", "playing") | list | count | int > 2
+      | list | selectattr("state", "equalto", "playing") | list | count | int >= 1
       }}'
   - platform: template
     value_template: '{{ states.media_player | select("match", ".*media_player.plex_.*")
-      | list | selectattr("state", "equalto", "playing") | list | count | int <= 2
+      | list | selectattr("state", "equalto", "playing") | list | count | int == 0
       }}'
-  - platform: template
-    value_template: '{{ states("sensor.load_5m") | int > 4 }}'
-  - platform: template
-    value_template: '{{ states("sensor.load_5m") | int <= 4 }}'
   action:
   - service: rest_command.sabnzb_api
-  initial_state: false
+  initial_state: true
 - id: misc_living_room_turn_off_tv
   alias: Turn off living room tv when idle
   initial_state: true

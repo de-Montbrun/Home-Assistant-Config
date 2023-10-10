@@ -85,6 +85,13 @@ homekit:
       - sensor.garage_temperature
 
 # }}}
+## {{{ Rest Commands
+
+rest_command:
+  sabnzb_api:
+    url: !secret sabnzbd_rest_url
+
+# }}}
 #  {{{ InfluxDB
 
 influxdb:
