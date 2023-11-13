@@ -95,8 +95,9 @@ rest_command:
 #  {{{ InfluxDB
 
 influxdb:
-  host: pi4.dem
+  host: blackbird.dem
   port: 8086
+  database: homeassistant
   username: homeassistant
   password: !secret influxdb_password
   max_retries: 3
@@ -145,18 +146,22 @@ influxdb:
 # {{{ Lights
 
 light:
-  # Make Barn switches act like lights
+  - platform: switch
+    name: Unknown
+    entity_id: switch.switch4
+      
   - platform: switch
     name: Barn Light
     entity_id: switch.barn
 
+  # Make Loft switches act like lights
   - platform: switch
-    name: Barn Tree0
-    entity_id: switch.switch3
+    name: Loft Tree0
+    entity_id: switch.switch2
 
   - platform: switch
-    name: Barn Tree1
-    entity_id: switch.switch4
+    name: Loft Tree1
+    entity_id: switch.switch3
 
   # Make Bathroom switches act like lights
   - platform: switch
@@ -193,11 +198,6 @@ light:
     name: Saltlick
     entity_id: switch.switch5
 
-  # Make Pantry switches act like lights
-  - platform: switch
-    name: Pantry Counter
-    entity_id: switch.switch2
-
   # Make Porch switch act like a light
   - platform: switch
     name: Porch Lights
@@ -209,13 +209,12 @@ light:
     entities:
       - light.barn
       - light.barn0
-      - light.barn_trees
 
   - platform: group
-    name: Barn trees
+    name: Loft trees
     entities:
-      - light.barn_tree0
-      - light.barn_tree1
+      - light.loft_tree0
+      - light.loft_tree1
 
   - platform: group
     name: Basement lights

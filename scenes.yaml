@@ -481,13 +481,13 @@
       friendly_name: Outdoor lights
       supported_features: 0
       state: 'on'
-    light.barn_trees:
+    light.loft_trees:
       supported_color_modes:
       - onoff
       color_mode: onoff
       entity_id:
-      - light.barn_tree0
-      - light.barn_tree1
+      - light.loft_tree0
+      - light.loft_tree1
       icon: mdi:lightbulb-group
       friendly_name: Barn trees
       supported_features: 0

@@ -984,7 +984,8 @@
       }}'
   action:
   - service: rest_command.sabnzb_api
-  initial_state: true
+    data: {}
+  initial_state: false
 - id: misc_living_room_turn_off_tv
   alias: Turn off living room tv when idle
   initial_state: true
