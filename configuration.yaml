@@ -95,12 +95,20 @@ rest_command:
 #  {{{ InfluxDB
 
 influxdb:
+  api_version: 2
   host: blackbird.dem
   port: 8086
-  database: homeassistant
-  username: homeassistant
-  password: !secret influxdb_password
+  ssl: false
+  verify_ssl: false
+  token: !secret influxdb_token
+  organization: 04c1799f5fa78557
+  bucket: homeassistant
+  tags:
+    source: ha
+  tags_attributes:
+    - friendly_name
   max_retries: 3
+  default_measurement: units
   include:
     domains:
       - binary_sensor
