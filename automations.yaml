@@ -173,6 +173,7 @@
       entity_id: remote.roku_livingroom
       command: play
 - id: dehumidifiers_on
+  initial_state: false
   alias: Dehumidifier on - too moist
   trigger:
   - platform: template
@@ -218,8 +219,8 @@
     entity_id:
     - switch.switch10
     - switch.switch11
-  initial_state: true
 - id: dehumidifiers_off
+  initial_state: false
   alias: Dehumidifier off - dry enough
   trigger:
   - platform: template
@@ -246,7 +247,6 @@
       entity_id:
       - switch.switch11
       - switch.switch10
-  initial_state: true
 - id: occupancy_heating_no_one_home_turn_down_heat
   alias: Occupancy - no one home - turn down heat
   initial_state: true
@@ -299,7 +299,7 @@
       preset_mode: Home
 - id: occupancy_heating_gandg_not_home_turn_off_bedroom_heater
   alias: Occupancy - GandG not home - turn off bedroom heater
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: person.gail,person.gervais
@@ -319,7 +319,7 @@
       hvac_mode: 'off'
 - id: occupancy_heating_gandg_return_home_turn_on_bedroom_heater
   alias: Occupancy - GandG return home - turn on bedroom heater
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: person.gail,person.gervais
@@ -465,7 +465,7 @@
     entity_id: light.bathroom_lights
 - id: occupancy_lighting_basement_on
   alias: Basement - Occupancy lights on
-  initial_state: true
+  initial_state: false
   mode: restart
   trigger:
   - platform: state
@@ -485,6 +485,7 @@
     entity_id: light.basement_lights
 - id: lighting_basement_sync_up
   alias: Basement - Light sync up
+  initial_state: false
   trigger:
   - platform: state
     entity_id:
@@ -497,9 +498,9 @@
         else -%}\n      light.turn_off\n{% endif %}\n"
   - service: '{{ myService }}'
     entity_id: light.basement_lights
-  initial_state: true
 - id: occupancy_garage_turn_off_lights
   alias: Occupance in Garage - turn off lights
+  initial_state: false
   trigger:
     platform: template
     value_template: '{{ state_attr("device_tracker.jjn66qf9lo", "ap_mac") != "d0:21:f9:61:26:99"
@@ -511,6 +512,7 @@
     - light.garage_pots
 - id: occupancy_hallway_turn_on_lights
   alias: Occupancy in hallway - turn on lights
+  initial_state: false
   mode: restart
   trigger:
     platform: state
@@ -531,7 +533,7 @@
     entity_id: light.hallway_lights
 - id: occupancy_lighting_kitchen_on
   alias: Kitchen - Occupancy lights on
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.kitchen_sensor_motion
@@ -554,7 +556,7 @@
     - light.pantry_counter
 - id: occupancy_lighting_kitchen_off
   alias: Kitchen - No occupancy lights off
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.kitchen_sensor_motion
@@ -686,7 +688,7 @@
     entity_id: light.dressing_room_lights
 - id: turn_off_lights_office
   alias: No one in Office - turn off lights
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.office_occupancy
@@ -704,7 +706,7 @@
     entity_id: light.dressing_room_lights
 - id: movement_front_door_timed_lights
   alias: Timed lights - Movement Front Door
-  initial_state: true
+  initial_state: false
   mode: restart
   trigger:
   - platform: state
@@ -738,6 +740,7 @@
     entity_id: automation.timed_lights_movement_front_door
 - id: movement_porch_timed_lights
   alias: Timed lights - Movement Porch
+  initial_state: false
   trigger:
   - platform: state
     entity_id:
@@ -759,7 +762,6 @@
   - delay: 00:10:00
   - service: light.turn_off
     entity_id: light.outdoor_lights
-  initial_state: true
   mode: restart
 - id: occupancy_spare_room_on
   alias: Spareroom - Occupancy lights on
@@ -782,7 +784,7 @@
     entity_id: light.spare_room_lights
 - id: occupancy_spare_room_off
   alias: Spareroom - No occupancy lights off
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.spare_room_sensor_motion
@@ -1197,7 +1199,7 @@
           title: HA Sensor
 - id: vacuum_start
   alias: Vacuum Start
-  initial_state: true
+  initial_state: false
   trigger:
   - platform: state
     entity_id: person.gail,person.gervais
@@ -1230,7 +1232,7 @@
     entity_id: vacuum.consuela
 - id: mop_start
   alias: Mop Start
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: vacuum.consuela
