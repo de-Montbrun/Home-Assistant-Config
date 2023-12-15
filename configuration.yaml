@@ -246,11 +246,24 @@ light:
       - light.sink2
 
   - platform: group
-    name: Bedroom ceiling
+    name: Bedroom ceiling0
+    entities:
+      - light.bedroom0
+      - light.bedroom1
+      - light.bedroom7
+
+  - platform: group
+    name: Bedroom ceiling1
     entities:
       - light.bedroom4
       - light.bedroom5
       - light.bedroom6
+
+  - platform: group
+    name: Bedroom ceiling
+    entities:
+      - light.bedroom_ceiling0
+      - light.bedroom_ceiling1
 
   - platform: group
     name: Bedroom lamps
@@ -259,17 +272,10 @@ light:
       - light.bedroom3
 
   - platform: group
-    name: Bedroom wall
-    entities:
-      - light.bedroom0
-      - light.bedroom1
-
-  - platform: group
     name: Bedroom lights
     entities:
       - light.bedroom_ceiling
       - light.bedroom_lamps
-      - light.bedroom_wall
 
   - platform: group
     name: Dining room lights
@@ -352,12 +358,9 @@ light:
   - platform: group
     name: Kitchen lights
     entities:
-      - light.cabinets_lower
-      - light.cabinets_upper
+      - light.kitchen_counter
       - light.kitchen_island
       - light.kitchen_pots
-      - light.kitchen_sink
-      - light.kitchen_table
 
   - platform: group
     name: Main floor lights
@@ -373,22 +376,16 @@ light:
       - light.pantry_lights
 
   - platform: group
-    name: Office lights
-    entities:
-      - light.office0
-
-  - platform: group
     name: Outdoor lights
     entities:
       - light.front_door
-      - light.garage_eaves
-      - light.porch_lights
+      - light.back_door
 
   - platform: group
     name: Pantry lights
     entities:
-      - light.pantry_counter
-      - light.pantry
+      - light.kitchen_counter
+      - light.kitchen_pantry
 
   - platform: group
     name: Second floor lights
@@ -397,7 +394,6 @@ light:
       - light.bedroom_lights
       - light.hallway_back_lights
       - light.upstairs_hall_lights
-      - light.office_lights
       - light.spare_room_lights
 
   - platform: group
@@ -530,11 +526,6 @@ person:
 # {{{ Presence Trackers
 
 device_tracker:
-  - platform: ping
-    count: 3
-    hosts:
-      bell_internet: 1.1.1.1
-
   - platform: iphonedetect
     consider_home: 600
     new_device_defaults:
