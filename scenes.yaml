@@ -100,383 +100,22 @@
       - 0.167
       - 0.137
   id: 22d592f249a84cdabd4d20d816b94013
-- name: Sunroom nightlight
-  entities:
-    light.sunroom0:
-      state: true
-      transition: 2
-      brightness: 50
-      xy_color:
-      - 0.5424
-      - 0.4197
-    light.sunroom1:
-      state: true
-      transition: 2
-      brightness: 50
-      xy_color:
-      - 0.5424
-      - 0.4197
-    light.sunroom2:
-      state: true
-      transition: 2
-      brightness: 50
-      xy_color:
-      - 0.5424
-      - 0.4197
-    light.sunroom3:
-      state: true
-      transition: 2
-      brightness: 50
-      xy_color:
-      - 0.5424
-      - 0.4197
-    light.sunroom4:
-      state: true
-      transition: 2
-      brightness: 50
-      xy_color:
-      - 0.5424
-      - 0.4197
-  id: bb8450516daf4640bd4e4a097145c973
 - id: '1586910709551'
   name: Sunset
   entities:
-    light.dining_room_table:
-      supported_color_modes:
-      - onoff
-      friendly_name: Dining room table
-      supported_features: 0
-      state: unavailable
-    light.sink0:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - Solid
-      - Wake up
-      - Cycle up
-      - Cycle down
-      - Random
-      supported_color_modes:
-      - color_temp
-      - hs
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      effect: Solid
-      friendly_name: Sink1 Sink1
-      supported_features: 36
-      state: 'on'
-    light.sink1:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - Solid
-      - Wake up
-      - Cycle up
-      - Cycle down
-      - Random
-      supported_color_modes:
-      - color_temp
-      - hs
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      effect: Solid
-      friendly_name: Sink1 Sink1
-      supported_features: 36
-      state: 'on'
     light.hallway_lights:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - None
-      - Cycle down
-      - Cycle up
-      - Random
-      - Solid
-      - Wake up
-      - candle
       supported_color_modes:
-      - brightness
-      - color_temp
-      - hs
       - onoff
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      effect: None
-      entity_id:
-      - light.entryway
-      - light.foyer_lights
-      - light.hallway_back_lights
-      - light.downstairs_hall_lights
-      - light.upstairs_hall_lights
       icon: mdi:lightbulb-group
       friendly_name: Hallway lights
-      supported_features: 44
-      state: 'on'
-    light.laundry_room_lamp:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - Solid
-      - Wake up
-      - Cycle up
-      - Cycle down
-      - Random
-      supported_color_modes:
-      - color_temp
-      - hs
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 6535
-      color_temp: 153
-      hs_color:
-      - 54.768
-      - 1.6
-      rgb_color:
-      - 255
-      - 254
-      - 250
-      xy_color:
-      - 0.326
-      - 0.333
-      effect: Solid
-      friendly_name: Laundry Room Lamp Laundry Room Lamp
-      supported_features: 36
-      state: 'on'
-    light.lamp0:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 454
-      effect_list:
-      - Ocean
-      - Romance
-      - Sunset
-      - Party
-      - Fireplace
-      - Cozy
-      - Forest
-      - Pastel Colors
-      - Wake up
-      - Bedtime
-      - Warm White
-      - Daylight
-      - Cool white
-      - Night light
-      - Focus
-      - Relax
-      - True colors
-      - TV time
-      - Plantgrowth
-      - Spring
-      - Summer
-      - Fall
-      - Deepdive
-      - Jungle
-      - Mojito
-      - Club
-      - Christmas
-      - Halloween
-      - Candlelight
-      - Golden white
-      - Pulse
-      - Steampunk
-      - Rhythm
-      supported_color_modes:
-      - color_temp
-      - rgbw
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      friendly_name: Lamp0
-      supported_features: 4
-      state: 'on'
-    light.lamp1:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 454
-      effect_list:
-      - Ocean
-      - Romance
-      - Sunset
-      - Party
-      - Fireplace
-      - Cozy
-      - Forest
-      - Pastel Colors
-      - Wake up
-      - Bedtime
-      - Warm White
-      - Daylight
-      - Cool white
-      - Night light
-      - Focus
-      - Relax
-      - True colors
-      - TV time
-      - Plantgrowth
-      - Spring
-      - Summer
-      - Fall
-      - Deepdive
-      - Jungle
-      - Mojito
-      - Club
-      - Christmas
-      - Halloween
-      - Candlelight
-      - Golden white
-      - Pulse
-      - Steampunk
-      - Rhythm
-      supported_color_modes:
-      - color_temp
-      - rgbw
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      friendly_name: Lamp1
-      supported_features: 4
-      state: 'on'
-    light.lamp2:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 454
-      effect_list:
-      - Ocean
-      - Romance
-      - Sunset
-      - Party
-      - Fireplace
-      - Cozy
-      - Forest
-      - Pastel Colors
-      - Wake up
-      - Bedtime
-      - Warm White
-      - Daylight
-      - Cool white
-      - Night light
-      - Focus
-      - Relax
-      - True colors
-      - TV time
-      - Plantgrowth
-      - Spring
-      - Summer
-      - Fall
-      - Deepdive
-      - Jungle
-      - Mojito
-      - Club
-      - Christmas
-      - Halloween
-      - Candlelight
-      - Golden white
-      - Pulse
-      - Steampunk
-      - Rhythm
-      supported_color_modes:
-      - color_temp
-      - rgbw
-      color_mode: color_temp
-      brightness: 255
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      friendly_name: Lamp2
-      supported_features: 4
-      state: 'on'
-    light.livingroom_table:
-      supported_color_modes:
-      - onoff
-      friendly_name: Livingroom Table
       supported_features: 0
       state: unavailable
     light.outdoor_lights:
-      supported_color_modes:
-      - onoff
-      color_mode: onoff
+      supported_color_modes: []
+      color_mode: unknown
       entity_id:
       - light.front_door
-      - light.garage_eaves
-      - light.porch_lights
+      - light.back_door
       icon: mdi:lightbulb-group
       friendly_name: Outdoor lights
       supported_features: 0
@@ -489,73 +128,37 @@
       - light.loft_tree0
       - light.loft_tree1
       icon: mdi:lightbulb-group
-      friendly_name: Barn trees
+      friendly_name: Loft trees
       supported_features: 0
       state: 'on'
-    light.pantry_counter:
-      supported_color_modes:
-      - onoff
-      friendly_name: Pantry Counter
-      supported_features: 0
-      state: 'off'
-    light.spare_room_lights:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - Cycle down
-      - Cycle up
-      - Random
-      - Solid
-      - Wake up
-      supported_color_modes:
-      - color_temp
-      - hs
-      icon: mdi:lightbulb-group
-      friendly_name: Spare room lights
-      supported_features: 36
-      state: unavailable
     light.saltlick:
       supported_color_modes:
       - onoff
+      color_mode: onoff
       friendly_name: Saltlick
       supported_features: 0
       state: 'on'
-    light.cabinets_lower:
+    light.dining_room_shelves:
       supported_color_modes:
-      - brightness
-      friendly_name: ' Cabinets Lower'
-      supported_features: 32
-      state: 'off'
-    light.cabinets_upper:
-      supported_color_modes:
-      - brightness
-      friendly_name: ' Cabinets Upper'
-      supported_features: 32
-      state: 'off'
-    light.kitchen_sink:
-      supported_color_modes:
-      - brightness
-      friendly_name: ' Kitchen Sink'
-      supported_features: 32
-      state: 'off'
-    light.diningroom0:
+      - onoff
+      color_mode: onoff
+      friendly_name: Dining Room Shelves
+      supported_features: 0
+      state: 'on'
+    light.bathroom_sink:
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6535
       min_mireds: 153
       max_mireds: 500
       effect_list:
+      - Cycle down
+      - Cycle up
+      - Random
       - Solid
       - Wake up
-      - Cycle up
-      - Cycle down
-      - Random
       supported_color_modes:
       - color_temp
       - hs
-      friendly_name: Diningroom0 Diningroom0
-      supported_features: 36
       color_mode: color_temp
       brightness: 255
       color_temp_kelvin: 4000
@@ -571,8 +174,189 @@
       - 0.421
       - 0.364
       effect: Solid
+      entity_id:
+      - light.sink0
+      - light.sink1
+      icon: mdi:lightbulb-group
+      friendly_name: Bathroom sink
+      supported_features: 36
+      state: 'on'
+    light.spare0:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - Solid
+      - Wake up
+      - Cycle up
+      - Cycle down
+      - Random
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 4000
+      color_temp: 250
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
+      xy_color:
+      - 0.421
+      - 0.364
+      effect: Solid
+      friendly_name: Spare0
+      supported_features: 36
+      state: 'on'
+    light.spare1:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - Solid
+      - Wake up
+      - Cycle up
+      - Cycle down
+      - Random
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 4000
+      color_temp: 250
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
+      xy_color:
+      - 0.421
+      - 0.364
+      effect: Solid
+      friendly_name: Spare1
+      supported_features: 36
+      state: 'on'
+    light.livingroom_lamps:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - Bedtime
+      - Candlelight
+      - Christmas
+      - Club
+      - Cool white
+      - Cozy
+      - Daylight
+      - Deepdive
+      - Fall
+      - Fireplace
+      - Focus
+      - Forest
+      - Golden white
+      - Halloween
+      - Jungle
+      - Mojito
+      - Night light
+      - Ocean
+      - Party
+      - Pastel Colors
+      - Plantgrowth
+      - Pulse
+      - Relax
+      - Rhythm
+      - Romance
+      - Spring
+      - Steampunk
+      - Summer
+      - Sunset
+      - TV time
+      - True colors
+      - Wake up
+      - Warm White
+      supported_color_modes:
+      - color_temp
+      - rgbw
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 4000
+      color_temp: 250
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
+      xy_color:
+      - 0.421
+      - 0.364
+      rgbw_color:
+      effect:
+      entity_id:
+      - light.lamp0
+      - light.lamp1
+      - light.lamp2
+      icon: mdi:lightbulb-group
+      friendly_name: Livingroom lamps
+      supported_features: 4
+      state: 'on'
+    light.kitchen_counter:
+      supported_color_modes: []
+      color_mode: unknown
+      friendly_name: Kitchen Counter
+      supported_features: 0
+      state: 'on'
+    light.kitchen_pots:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      friendly_name: Kitchen Pots
+      supported_features: 0
+      state: 'on'
+    light.spare_room_ceiling_upper:
+      effect_list:
+      - None
+      - candle
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 255
+      effect: None
+      entity_id:
+      - light.spare_ceiling_up0
+      - light.spare_ceiling_up1
+      - light.spare_ceiling_up2
+      icon: mdi:lightbulb-group
+      friendly_name: Spare room ceiling upper
+      supported_features: 44
       state: 'on'
   metadata:
-    light.diningroom0:
+    light.dining_room_shelves:
+      entity_only: true
+    light.bathroom_sink:
+      entity_only: true
+    light.spare0:
+      entity_only: true
+    light.spare1:
+      entity_only: true
+    light.livingroom_lamps:
+      entity_only: true
+    light.kitchen_counter:
+      entity_only: true
+    light.kitchen_pots:
+      entity_only: true
+    light.spare_room_ceiling_upper:
       entity_only: true
   icon: mdi:weather-sunset

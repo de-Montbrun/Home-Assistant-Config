@@ -28,6 +28,7 @@ alexa:
         - light
         - scene
       include_entities:
+        - lock.yv4162uk5l2256988_door_lock
         - media_player.bedroomtv
         - media_player.roku_living_roomtv
         - media_player.sonos
@@ -157,29 +158,11 @@ light:
   - platform: switch
     name: Unknown
     entity_id: switch.switch4
-      
-  - platform: switch
-    name: Barn Light
-    entity_id: switch.barn
-
-  # Make Loft switches act like lights
-  - platform: switch
-    name: Loft Tree0
-    entity_id: switch.switch2
-
-  - platform: switch
-    name: Loft Tree1
-    entity_id: switch.switch3
-
-  # Make Bathroom switches act like lights
-  - platform: switch
-    name: Bathroom0
-    entity_id: switch.bathroom0
-  - platform: switch
-    name: Bathroom1
-    entity_id: switch.bathroom1
 
   # Make Dining Room switch act like a light
+  - platform: switch
+    name: Dining Room Shelves
+    entity_id: switch.switch0
   - platform: switch
     name: Dining room table
     entity_id: switch.switch6
@@ -191,20 +174,22 @@ light:
 
   # Make Garage switches act like lights
   - platform: switch
-    name: Garage Eaves
-    entity_id: switch.garage_eaves
-
-  - platform: switch
     name: Garage Lamp
     entity_id: switch.switch8
 
   # Make Livingroom switches act like a lights
   - platform: switch
-    name: Livingroom Table
-    entity_id: switch.switch0
-  - platform: switch
     name: Saltlick
     entity_id: switch.switch5
+
+  # Make Loft switches act like lights
+  - platform: switch
+    name: Loft Tree0
+    entity_id: switch.switch2
+
+  - platform: switch
+    name: Loft Tree1
+    entity_id: switch.switch3
 
   # Make Porch switch act like a light
   - platform: switch
@@ -215,7 +200,6 @@ light:
   - platform: group
     name: Barn lights
     entities:
-      - light.barn
       - light.barn0
 
   - platform: group
@@ -234,8 +218,6 @@ light:
   - platform: group
     name: Bathroom lights
     entities:
-      - light.bathroom0
-      - light.bathroom1
       - light.bathroom_sink
 
   - platform: group
@@ -243,17 +225,16 @@ light:
     entities:
       - light.sink0
       - light.sink1
-      - light.sink2
 
   - platform: group
-    name: Bedroom ceiling0
+    name: Bedroom ceiling upper
     entities:
       - light.bedroom0
       - light.bedroom1
       - light.bedroom7
 
   - platform: group
-    name: Bedroom ceiling1
+    name: Bedroom ceiling lower
     entities:
       - light.bedroom4
       - light.bedroom5
@@ -262,8 +243,8 @@ light:
   - platform: group
     name: Bedroom ceiling
     entities:
-      - light.bedroom_ceiling0
-      - light.bedroom_ceiling1
+      - light.bedroom_ceiling_upper
+      - light.bedroom_ceiling_lower
 
   - platform: group
     name: Bedroom lamps
@@ -286,13 +267,12 @@ light:
       - light.diningroom3
       - light.diningroom4
       - light.dining_room_table
+      - light.dining_room_shelves
 
   - platform: group
     name: Garage lights
     entities:
-      - light.garage_eaves
       - light.garage_lamp
-      - light.garage_pots
 
   # {{{ Hallway lights
   - platform: group
@@ -305,33 +285,10 @@ light:
       - light.foyer4
 
   - platform: group
-    name: Hallway Back Lights
-    entities:
-      - light.hall_back0
-      - light.hall_back1
-
-  - platform: group
-    name: Downstairs Hall Lights
-    entities:
-      - light.hallway0
-      - light.hallway1
-      - light.hallway2
-
-  - platform: group
-    name: Upstairs Hall Lights
-    entities:
-      - light.hall_up0
-      - light.hall_up1
-      - light.hall_up2
-
-  - platform: group
     name: Hallway lights
     entities:
       - light.entryway
       - light.foyer_lights
-      - light.hallway_back_lights
-      - light.downstairs_hall_lights
-      - light.upstairs_hall_lights
 
   # }}}
 
@@ -360,6 +317,7 @@ light:
     entities:
       - light.kitchen_counter
       - light.kitchen_island
+      - light.kitchen_pantry
       - light.kitchen_pots
 
   - platform: group
@@ -367,7 +325,6 @@ light:
     entities:
       - light.barn_lights
       - light.dining_room_lights
-      - light.downstairs_hall_lights
       - light.entryway
       - light.foyer_lights
       - light.kitchen_lights
@@ -392,16 +349,34 @@ light:
     entities:
       - light.bathroom_lights
       - light.bedroom_lights
-      - light.hallway_back_lights
-      - light.upstairs_hall_lights
       - light.spare_room_lights
+
+  - platform: group
+    name: Spare room ceiling upper
+    entities:
+      - light.spare_ceiling_up0
+      - light.spare_ceiling_up1
+      - light.spare_ceiling_up2
+
+  - platform: group
+    name: Spare room ceiling lower
+    entities:
+      - light.spare_ceiling0
+      - light.spare_ceiling1
+      - light.spare_ceiling2
+
+  - platform: group
+    name: Spare room ceiling
+    entities:
+      - light.spare_room_ceiling_upper
+      - light.spare_room_ceiling_lower
 
   - platform: group
     name: Spare room lights
     entities:
       - light.spare0
       - light.spare1
-      - light.spare2
+      - light.spare_room_ceiling
 
 #  }}}
 # {{{ Media Players

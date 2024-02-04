@@ -268,7 +268,7 @@
     - condition: template
       value_template: '{{ states("sensor.season") != "summer" }}'
     - condition: template
-      value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
+      value_template: '{{ states("sensor.saint_john_temperature") | int <= 5 }}'
   action:
     service: climate.set_preset_mode
     data:
@@ -287,7 +287,7 @@
     - condition: template
       value_template: '{{ states("sensor.season") != "summer" }}'
     - condition: template
-      value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
+      value_template: '{{ states("sensor.saint_john_temperature") | int <= 5 }}'
     - condition: time
       after: '16:30:00'
     - condition: time
@@ -330,7 +330,7 @@
     - condition: template
       value_template: '{{ states("sensor.season") != "summer" }}'
     - condition: template
-      value_template: '{{ states("sensor.fredericton_temperature") | int <= 5 }}'
+      value_template: '{{ states("sensor.saint_john_temperature") | int <= 5 }}'
   action:
     service: climate.set_hvac_mode
     data:
@@ -365,36 +365,55 @@
       entity_id: climate.dressing_room_heater
 - id: heating_office_heater_off
   alias: 6pm - heater off
-  initial_state: true
   trigger:
-  - platform: time
-    at: '18:00:00'
-  - platform: time
-    at: '18:30:00'
   - platform: time
     at: '19:00:00'
   condition:
-    condition: and
+  - condition: and
     conditions:
-      condition: template
+    - condition: template
       value_template: '{{ states("sensor.season") != "summer" }}'
   action:
-    service: switch.turn_off
+  - service: switch.turn_off
     entity_id: switch.switch1
-- id: occupancy_heating_gervais_away_heater_off
-  alias: Gervais away - turn off heater
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.switch1
   initial_state: true
+- id: occupancy_heating_gail_away_heater_off
+  alias: Gail away - turn off heater
+  description: ''
   trigger:
   - platform: state
-    entity_id: person.gervais
+    entity_id: person.gail
     from: home
   condition:
-    condition: template
+  - condition: template
     value_template: '{{ states("sensor.season") != "summer" }}'
   action:
-    service: switch.turn_off
-    entity_id:
-    - switch.switch1
+  - service: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.switch1
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.switch1
+  initial_state: true
 - id: occupancy_bedroom_gang_not_home
   alias: GandG not home - turn off bedroom things
   initial_state: true
@@ -796,16 +815,15 @@
     entity_id: light.spare_room_lights
 - id: bedtime
   alias: Bedtime
-  initial_state: false
-  mode: restart
   trigger:
-    platform: state
-    entity_id: media_player.roku_sunroom
+  - platform: state
+    entity_id:
+    - media_player.roku_living_roomtv
     to: standby
     for:
       minutes: 5
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: or
       conditions:
@@ -841,19 +859,18 @@
   action:
   - delay: 00:15:00
   - service: homeassistant.turn_off
-    entity_id:
-    - light.basement_light
-    - light.bathroom_lights
-    - light.livingroom_shelves
-    - light.main_floor_lights
-    - light.office_lights
-    - light.second_floor_lights
-    - switch.switch1
-    - switch.switch3
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - light.main_floor_lights
+      - light.second_floor_lights
+      - switch.switch3
   - service: climate.set_preset_mode
     data:
       entity_id: climate.my_ecobee
       preset_mode: Sleep
+  mode: restart
 - id: doorbell_doorbell
   alias: Doorbell rang - pause tv
   initial_state: true
@@ -1103,18 +1120,18 @@
   action:
   - service: notify.zulip
     data_template:
-      message: '**Weather Condition:** {{ states.sensor.fredericton_condition.state
+      message: '**Weather Condition:** {{ states.sensor.saint_john_current_condition.state
         }}
 
-        **Tempurature:** {{ states.sensor.fredericton_temperature.state }}{{ states.sensor.fredericton_temperature.attributes.unit_of_measurement
-        }} {% if states.sensor.fredericton_humidex.state != ''unknown'' or states.sensor.fredericton_wind_chill.state
+        **Tempurature:** {{ states.sensor.saint_john_temperature.state }}{{ states.sensor.saint_john_temperature.attributes.unit_of_measurement
+        }} {% if states.sensor.saint_john_humidex.state != ''unknown'' or states.sensor.saint_john_wind_chill.state
         != ''unknown'' %}
 
-        **Feels like:** {% if states.sensor.fredericton_humidex.state != ''unknown''
-        %} {{ states.sensor.fredericton_humidex.state }}{% elif states.sensor.fredericton_wind_chill.state
-        != ''unknown'' %}{{ states.sensor.fredericton_wind_chill.state }}{% endif
-        %}{{ states.sensor.fredericton_temperature.attributes.unit_of_measurement
-        }} {% endif %}
+        **Feels like:** {% if states.sensor.saint_john_humidex.state != ''unknown''
+        %} {{ states.sensor.saint_john_humidex.state }}{% elif states.sensor.saint_john_wind_chill.state
+        != ''unknown'' %}{{ states.sensor.saint_john_wind_chill.state }}{% endif %}{{
+        states.sensor.saint_john_temperature.attributes.unit_of_measurement }} {%
+        endif %}
 
         '
       title: Weather
@@ -1124,7 +1141,7 @@
   initial_state: true
   trigger:
     platform: numeric_state
-    entity_id: sensor.fredericton_uv_index
+    entity_id: sensor.saint_john_uv_index
     above: '5'
   condition:
     condition: and
@@ -1138,7 +1155,7 @@
   action:
     service: notify.zulip
     data:
-      message: ':sunny: UV Index is {{ states("sensor.fredericton_uv_index") }}. You
+      message: ':sunny: UV Index is {{ states("sensor.saint_john_uv_index") }}. You
         better put on some sunscreen!
 
         '
@@ -1160,7 +1177,7 @@
     data:
       message: '**Forecast:**
 
-        {{ states("sensor.fredericton_forecast") }}
+        {{ states("sensor.saint_john_forecast") }}
 
 
         **High:** {{ states("sensor.saint_john_high_temperature") }}{{ state_attr("sensor.saint_john_high_temperature"
@@ -1305,3 +1322,31 @@
       entity_id: timer.zigbee_permit_join
   - service: switch.turn_off
     entity_id: switch.zigbee2mqtt_main_join
+- id: '1705282122548'
+  alias: Lock Volvo
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - device_tracker.yv4162uk5l2256988_position
+    to: home
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+  - platform: state
+    entity_id:
+    - device_tracker.yv4162uk5l2256988_position
+    to: Knowledge Park
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+  condition: []
+  action:
+  - service: lock.lock
+    metadata: {}
+    data: {}
+    target:
+      entity_id: lock.yv4162uk5l2256988_door_lock
+  mode: single

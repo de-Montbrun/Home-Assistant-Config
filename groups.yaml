@@ -2,19 +2,6 @@
 ### Groups
 #################################################################
 
-# {{{ Media players
-
-plex:
-  name: Plex
-  entities:
-    - media_player.plex_web_safari
-    - media_player.plex_livingroom
-    - media_player.keypear
-    - media_player.plexamp_gervais
-    - media_player.plex_sunroom
-    - media_player.plex_roku_3
-
-# }}}
 # {{{ People
 
 householdmembers:
