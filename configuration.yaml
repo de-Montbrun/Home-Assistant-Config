@@ -164,7 +164,7 @@ light:
     name: Dining Room Shelves
     entity_id: switch.switch0
   - platform: switch
-    name: Dining room table
+    name: Dining room lamp
     entity_id: switch.switch6
 
   # Make Entryway switch act like a light
@@ -261,12 +261,7 @@ light:
   - platform: group
     name: Dining room lights
     entities:
-      - light.diningroom0
-      - light.diningroom1
-      - light.diningroom2
-      - light.diningroom3
-      - light.diningroom4
-      - light.dining_room_table
+      - light.dining_room_lamp
       - light.dining_room_shelves
 
   - platform: group

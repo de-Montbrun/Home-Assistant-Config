@@ -1216,7 +1216,6 @@
           title: HA Sensor
 - id: vacuum_start
   alias: Vacuum Start
-  initial_state: false
   trigger:
   - platform: state
     entity_id: person.gail,person.gervais
@@ -1226,7 +1225,7 @@
     value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
       }}'
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: state
       entity_id: vacuum.consuela
@@ -1244,7 +1243,12 @@
         value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
           }}'
   action:
-    service: vacuum.start
+  - service: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.bedroom_lights
+  - service: vacuum.start
     data: {}
     entity_id: vacuum.consuela
 - id: mop_start

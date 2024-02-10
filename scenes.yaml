@@ -111,8 +111,9 @@
       supported_features: 0
       state: unavailable
     light.outdoor_lights:
-      supported_color_modes: []
-      color_mode: unknown
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
       entity_id:
       - light.front_door
       - light.back_door
@@ -159,6 +160,7 @@
       supported_color_modes:
       - color_temp
       - hs
+      effect: Solid
       color_mode: color_temp
       brightness: 255
       color_temp_kelvin: 4000
@@ -173,7 +175,6 @@
       xy_color:
       - 0.421
       - 0.364
-      effect: Solid
       entity_id:
       - light.sink0
       - light.sink1
@@ -195,6 +196,7 @@
       supported_color_modes:
       - color_temp
       - hs
+      effect: Solid
       color_mode: color_temp
       brightness: 255
       color_temp_kelvin: 4000
@@ -209,7 +211,6 @@
       xy_color:
       - 0.421
       - 0.364
-      effect: Solid
       friendly_name: Spare0
       supported_features: 36
       state: 'on'
@@ -227,6 +228,7 @@
       supported_color_modes:
       - color_temp
       - hs
+      effect: Solid
       color_mode: color_temp
       brightness: 255
       color_temp_kelvin: 4000
@@ -241,7 +243,6 @@
       xy_color:
       - 0.421
       - 0.364
-      effect: Solid
       friendly_name: Spare1
       supported_features: 36
       state: 'on'
@@ -287,6 +288,7 @@
       supported_color_modes:
       - color_temp
       - rgbw
+      effect:
       color_mode: color_temp
       brightness: 255
       color_temp_kelvin: 4000
@@ -302,7 +304,6 @@
       - 0.421
       - 0.364
       rgbw_color:
-      effect:
       entity_id:
       - light.lamp0
       - light.lamp1
@@ -312,8 +313,9 @@
       supported_features: 4
       state: 'on'
     light.kitchen_counter:
-      supported_color_modes: []
-      color_mode: unknown
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
       friendly_name: Kitchen Counter
       supported_features: 0
       state: 'on'
@@ -331,9 +333,9 @@
       - candle
       supported_color_modes:
       - brightness
+      effect: None
       color_mode: brightness
       brightness: 255
-      effect: None
       entity_id:
       - light.spare_ceiling_up0
       - light.spare_ceiling_up1
@@ -341,6 +343,13 @@
       icon: mdi:lightbulb-group
       friendly_name: Spare room ceiling upper
       supported_features: 44
+      state: 'on'
+    light.dining_room_lamp:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+      friendly_name: Dining room lamp
+      supported_features: 0
       state: 'on'
   metadata:
     light.dining_room_shelves:
@@ -358,5 +367,7 @@
     light.kitchen_pots:
       entity_only: true
     light.spare_room_ceiling_upper:
+      entity_only: true
+    light.dining_room_lamp:
       entity_only: true
   icon: mdi:weather-sunset
