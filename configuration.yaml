@@ -71,6 +71,7 @@ homekit:
       - light
       - scene
     include_entities:
+      - lock.yv4162uk5l2256988_door_lock
       - media_player.bedroomtv
       - media_player.roku_living_roomtv
       - media_player.sonos
@@ -155,10 +156,6 @@ influxdb:
 # {{{ Lights
 
 light:
-  - platform: switch
-    name: Unknown
-    entity_id: switch.switch4
-
   # Make Dining Room switch act like a light
   - platform: switch
     name: Dining Room Shelves
@@ -181,6 +178,10 @@ light:
   - platform: switch
     name: Saltlick
     entity_id: switch.switch5
+
+  - platform: switch
+    name: Tiffany
+    entity_id: switch.switch4
 
   # Make Loft switches act like lights
   - platform: switch
@@ -299,6 +300,7 @@ light:
       - light.lamp0
       - light.lamp1
       - light.lamp2
+      - light.tiffany
 
   - platform: group
     name: Livingroom lights
