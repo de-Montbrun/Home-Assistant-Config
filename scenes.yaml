@@ -1,81 +1,193 @@
-- name: Living room normal
+- id: 9875c4420310427ab3228ac9fe1d46d0
+  name: Living room normal
   entities:
     light.lamp0:
-      brightness: 255
-      color_temp: 155
-      effect: '0'
+      restored: true
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 454
       effect_list:
-      - '2'
-      - '1'
-      - '0'
-      - '3'
-      - '4'
-      state: 'on'
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
+      - Ocean
+      - Romance
+      - Sunset
+      - Party
+      - Fireplace
+      - Cozy
+      - Forest
+      - Pastel Colors
+      - Wake up
+      - Bedtime
+      - Warm White
+      - Daylight
+      - Cool white
+      - Night light
+      - Focus
+      - Relax
+      - True colors
+      - TV time
+      - Plantgrowth
+      - Spring
+      - Summer
+      - Fall
+      - Deepdive
+      - Jungle
+      - Mojito
+      - Club
+      - Christmas
+      - Halloween
+      - Candlelight
+      - Golden white
+      - Pulse
+      - Steampunk
+      - Rhythm
       supported_color_modes:
       - color_temp
-      - hs
-      color_mode: color_temp
+      - rgbw
+      supported_features: 4
+      state: unavailable
     light.lamp1:
-      brightness: 255
-      color_temp: 153
-      effect: '0'
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 454
       effect_list:
-      - '2'
-      - '1'
-      - '0'
-      - '3'
-      - '4'
-      state: 'on'
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
+      - Ocean
+      - Romance
+      - Sunset
+      - Party
+      - Fireplace
+      - Cozy
+      - Forest
+      - Pastel Colors
+      - Wake up
+      - Bedtime
+      - Warm White
+      - Daylight
+      - Cool white
+      - Night light
+      - Focus
+      - Relax
+      - True colors
+      - TV time
+      - Plantgrowth
+      - Spring
+      - Summer
+      - Fall
+      - Deepdive
+      - Jungle
+      - Mojito
+      - Club
+      - Christmas
+      - Halloween
+      - Candlelight
+      - Golden white
+      - Pulse
+      - Steampunk
+      - Rhythm
       supported_color_modes:
       - color_temp
-      - hs
+      - rgbw
+      effect:
       color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 6535
+      color_temp: 153
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 254
+      - 250
+      xy_color:
+      - 0.326
+      - 0.333
+      rgbw_color:
+      friendly_name: Lamp1
+      supported_features: 4
+      state: 'on'
     light.lamp2:
-      brightness: 255
-      color_temp: 153
-      effect: '0'
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 454
       effect_list:
-      - '2'
-      - '1'
-      - '0'
-      - '3'
-      - '4'
-      state: 'on'
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
+      - Ocean
+      - Romance
+      - Sunset
+      - Party
+      - Fireplace
+      - Cozy
+      - Forest
+      - Pastel Colors
+      - Wake up
+      - Bedtime
+      - Warm White
+      - Daylight
+      - Cool white
+      - Night light
+      - Focus
+      - Relax
+      - True colors
+      - TV time
+      - Plantgrowth
+      - Spring
+      - Summer
+      - Fall
+      - Deepdive
+      - Jungle
+      - Mojito
+      - Club
+      - Christmas
+      - Halloween
+      - Candlelight
+      - Golden white
+      - Pulse
+      - Steampunk
+      - Rhythm
       supported_color_modes:
       - color_temp
-      - hs
+      - rgbw
+      effect:
       color_mode: color_temp
-  id: 9875c4420310427ab3228ac9fe1d46d0
+      brightness: 255
+      color_temp_kelvin: 6535
+      color_temp: 153
+      hs_color:
+      - 54.768
+      - 1.6
+      rgb_color:
+      - 255
+      - 254
+      - 250
+      xy_color:
+      - 0.326
+      - 0.333
+      rgbw_color:
+      friendly_name: Lamp2
+      supported_features: 4
+      state: 'on'
+    light.tiffany:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+      icon: mdi:lamp
+      friendly_name: Tiffany
+      supported_features: 0
+      state: 'on'
+    light.saltlick:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+      friendly_name: Saltlick
+      supported_features: 0
+      state: 'on'
+  metadata:
+    light.tiffany:
+      entity_only: true
+    light.saltlick:
+      entity_only: true
 - name: Living room dim
   entities:
     light.lamp0:

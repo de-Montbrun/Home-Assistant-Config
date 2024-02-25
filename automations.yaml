@@ -249,40 +249,51 @@
       - switch.switch10
 - id: occupancy_heating_no_one_home_turn_down_heat
   alias: Occupancy - no one home - turn down heat
-  initial_state: true
   trigger:
-    platform: state
-    entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
+  - platform: state
+    entity_id:
+    - person.gail
+    - person.gervais
+    - person.cameron
+    - person.jennifer
     from: home
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: template
       value_template: '{{ states("person.gail") != "home" }}'
     - condition: template
       value_template: '{{ states("person.gervais") != "home" }}'
     - condition: template
-      value_template: '{{ states("group.cam_tracker") != "home" }}'
-    - condition: template
-      value_template: '{{ states("group.jen_tracker") != "home" }}'
-    - condition: template
       value_template: '{{ states("sensor.season") != "summer" }}'
     - condition: template
       value_template: '{{ states("sensor.saint_john_temperature") | int <= 5 }}'
   action:
-    service: climate.set_preset_mode
+  - service: climate.set_preset_mode
     data:
       entity_id: climate.my_ecobee
       preset_mode: Away
+  - service: climate.set_temperature
+    metadata: {}
+    data:
+      temperature: 10
+    target:
+      entity_id:
+      - climate.mysa_bathroom_thermostat
+      - climate.mysa_dressing_room_thermostat
+  initial_state: true
 - id: occupancy_heating_return_home_turn_up_heat
   alias: Occupancy - return home - turn up heat
-  initial_state: true
   trigger:
-    platform: state
-    entity_id: group.cam_tracker,group.jen_tracker,person.gail,person.gervais
+  - platform: state
+    entity_id:
+    - person.gail
+    - group.cam_tracker
+    - group.jen_tracker
+    - person.gervais
     to: home
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: template
       value_template: '{{ states("sensor.season") != "summer" }}'
@@ -293,63 +304,30 @@
     - condition: time
       before: '23:20:00'
   action:
-    service: climate.set_preset_mode
+  - service: climate.set_preset_mode
     data:
       entity_id: climate.my_ecobee
       preset_mode: Home
-- id: occupancy_heating_gandg_not_home_turn_off_bedroom_heater
-  alias: Occupancy - GandG not home - turn off bedroom heater
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: person.gail,person.gervais
-  condition:
-    condition: and
-    conditions:
-    - condition: template
-      value_template: '{{ states("person.gail") != "home" }}'
-    - condition: template
-      value_template: '{{ states("person.gervais") != "home" }}'
-    - condition: template
-      value_template: '{{ states("sensor.season") != "summer" }}'
-  action:
-    service: climate.set_hvac_mode
+  - service: climate.set_temperature
+    metadata: {}
     data:
-      entity_id: climate.bedroom_heater
-      hvac_mode: 'off'
-- id: occupancy_heating_gandg_return_home_turn_on_bedroom_heater
-  alias: Occupancy - GandG return home - turn on bedroom heater
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: person.gail,person.gervais
-    to: home
-  condition:
-    condition: and
-    conditions:
-    - condition: template
-      value_template: '{{ states("sensor.season") != "summer" }}'
-    - condition: template
-      value_template: '{{ states("sensor.saint_john_temperature") | int <= 5 }}'
-  action:
-    service: climate.set_hvac_mode
-    data:
-      entity_id: climate.bedroom_heater
-      hvac_mode: heat_cool
-- id: occupancy_heating_work_day_dressing_room_heater
-  alias: Work day dressing room heater schedule
-  initial_state: false
+      temperature: 15
+    target:
+      entity_id:
+      - climate.mysa_bathroom_thermostat
+      - climate.mysa_dressing_room_thermostat
+  initial_state: true
+- id: occupancy_heating_work_day_dressing_bath_room_heater
+  alias: Work day dressing bathroom room heater schedule
   trigger:
   - platform: time
     at: 08:00:00
   - platform: time
-    at: '17:15:00'
+    at: 09:15:00
   - platform: time
     at: '22:15:00'
-  - platform: state
-    entity_id: person.gail
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: template
       value_template: '{{ states("sensor.season") != "summer" }}'
@@ -357,12 +335,15 @@
       entity_id: binary_sensor.workday_sensor
       state: 'on'
   action:
-    service: climate.set_hvac_mode
+  - service: climate.set_temperature
     data:
-      hvac_mode: "{%- if (now().strftime(\"%H\") | int < 17)\n  and (now().strftime(\"%H\")
+      temperature: "{%- if (now().strftime(\"%H\") | int < 9)\n  and (now().strftime(\"%H\")
         | int >= 8)\n  and is_state(\"person.gail\", \"home\")\n  and states(\"sensor.season\")
-        != \"summer\" -%}\n    heat_cool\n{%- else -%}\n    off\n{% endif %}\n"
-      entity_id: climate.dressing_room_heater
+        != \"summer\" -%}\n    23\n{%- else -%}\n    14\n{% endif %}\n"
+    target:
+      entity_id:
+      - climate.mysa_bathroom_thermostat
+      - climate.mysa_dressing_room_thermostat
 - id: heating_office_heater_off
   alias: 6pm - heater off
   trigger:
@@ -416,37 +397,34 @@
   initial_state: true
 - id: occupancy_bedroom_gang_not_home
   alias: GandG not home - turn off bedroom things
-  initial_state: true
   trigger:
   - platform: state
-    entity_id: person.gail
+    entity_id:
+    - person.gail
+    - person.gervais
     from: home
-  - platform: state
-    entity_id: person.gervais
-    from: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
   - platform: template
     value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
       }}'
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: template
       value_template: '{{ states("person.gail") != "home" }}'
-    - condition: or
-      conditions:
-      - condition: template
-        value_template: '{{ states("person.gervais") != "home" }}'
-      - condition: template
-        value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
-          }}'
+    - condition: template
+      value_template: '{{ states("person.gervais") != "home" }}'
   action:
   - service: light.turn_off
-    entity_id: light.bedroom_lights
-  - condition: state
-    entity_id: sun.sun
-    state: above_horizon
-  - service: light.turn_off
-    entity_id: light.bathroom_lights
+    data: {}
+    target:
+      entity_id:
+      - light.bedroom_lights
+      - light.bathroom_lights
+  initial_state: true
 - id: occupancy_bedroom_turn_on_lights
   alias: Occupancy in bedroom - turn on lights
   initial_state: false
@@ -576,24 +554,25 @@
 - id: occupancy_lighting_kitchen_off
   alias: Kitchen - No occupancy lights off
   trigger:
-    platform: state
+  - platform: state
     entity_id: binary_sensor.kitchen_sensor_motion
     to: 'off'
     for:
       minutes: 30
   action:
-    service: light.turn_off
-    entity_id:
-    - light.kitchen_lights
-    - light.pantry_lights
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.kitchen_lights
 - id: lighting_livingroomtv_play-pause
   alias: Lighting - TV play/pause
-  initial_state: false
   trigger:
-    platform: state
-    entity_id: media_player.plex_living_room
+  - platform: state
+    entity_id:
+    - media_player.plex_plex_for_roku_living_roomtv
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: state
       entity_id: sun.sun
@@ -602,20 +581,19 @@
       entity_id: light.livingroom_lights
       state: 'on'
   action:
-    service: scene.turn_on
+  - service: scene.turn_on
     data:
       entity_id: "{%- if trigger.to_state.state == 'playing' -%}\n      scene.living_room_dim\n{%-
         else -%}\n      scene.living_room_normal\n{% endif %}\n"
+  initial_state: false
 - id: occupancy_lighting_motion_livingroom
   alias: Timed lights - Movement in Living
-  initial_state: false
-  mode: restart
   trigger:
-    platform: state
+  - platform: state
     entity_id: binary_sensor.sun_room_sensor_motion
     to: 'on'
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: state
       entity_id: light.livingroom_lights
@@ -624,26 +602,21 @@
       entity_id: sun.sun
       state: below_horizon
   action:
-  - service: scene.turn_on
-    entity_id: scene.sunroom_nightlight
   - service: light.turn_on
-    entity_id: light.hallway_lights
+    data:
+      brightness_pct: 29
+    target:
+      entity_id: light.livingroom_lamps
   - delay: 00:10
-  - condition: state
-    entity_id: binary_sensor.kitchen_sensor_motion
-    state: 'off'
-  - condition: state
-    entity_id: media_player.roku_sunroom
-    state: standby
   - condition: time
-    after: '23:59'
+    after: '23:59:00'
   - service: light.turn_off
     entity_id:
     - light.livingroom_lights
     - light.hallway_lights
+  mode: restart
 - id: occupancy_lighting_sunroom_off
   alias: Living room - No occupancy lights off
-  initial_state: false
   trigger:
     platform: state
     entity_id: binary_sensor.sun_room_sensor_motion
@@ -659,25 +632,24 @@
     entity_id: light.livingroom_lights
 - id: lighting_sunroom_lumens_low_lights_on
   alias: Sunroom lumens low - lights on
-  initial_state: false
   trigger:
   - platform: state
     entity_id: media_player.roku_living_roomtv
     from: standby
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: template
-      value_template: '{{ states.sensor.sun_room_sensor_light_level.attributes.lightlevel
-        < 6500 }}'
+      value_template: '{{ states.sensor.sun_room_sensor_light_level.attributes.light_level  <
+        6500 }}'
     - condition: state
-      entity_id: light.sunroom_lights
+      entity_id: light.livingroom_lights
       state: 'off'
   action:
   - service: scene.turn_on
-    entity_id: scene.sunroom_normal
-  - service: light.turn_on
-    entity_id: light.saltlick
+    metadata: {}
+    target:
+      entity_id: scene.living_room_normal
 - id: turn_on_lights_office
   alias: Occupancy in Office - turn on lights
   initial_state: false
@@ -900,7 +872,7 @@
     - condition: time
       after: '22:30:00'
     - condition: state
-      entity_id: media_player.roku_sunroom
+      entity_id: media_player.roku_living_roomtv
       state: standby
     - condition: or
       conditions:
@@ -1027,7 +999,7 @@
     - condition: or
       conditions:
       - condition: state
-        entity_id: media_player.plex_living_room
+        entity_id: media_player.plex_plex_for_roku_living_roomtv
         state: idle
         for:
           minutes: 15
@@ -1347,4 +1319,26 @@
     data: {}
     target:
       entity_id: lock.yv4162uk5l2256988_door_lock
+  mode: single
+- id: '1708818994369'
+  alias: Heat - Turn down at bed time
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.season
+      state: summer
+  action:
+  - service: climate.set_temperature
+    metadata: {}
+    data:
+      temperature: 10
+    target:
+      entity_id:
+      - climate.mysa_bathroom_thermostat
+      - climate.mysa_dressing_room_thermostat
   mode: single

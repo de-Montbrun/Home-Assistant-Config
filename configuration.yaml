@@ -289,12 +289,6 @@ light:
   # }}}
 
   - platform: group
-    name: Laundry Room Lights
-    entities:
-      - light.laundry_room_main_lights
-      - light.laundry_room_lamp
-
-  - platform: group
     name: Livingroom lamps
     entities:
       - light.lamp0
@@ -306,7 +300,6 @@ light:
     name: Livingroom lights
     entities:
       - light.livingroom_lamps
-      - light.livingroom_table
       - light.saltlick
 
   - platform: group
@@ -325,7 +318,6 @@ light:
       - light.entryway
       - light.foyer_lights
       - light.kitchen_lights
-      - light.laundry_room_lights
       - light.livingroom_lights
       - light.pantry_lights
 
