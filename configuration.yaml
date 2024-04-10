@@ -32,6 +32,7 @@ alexa:
         - media_player.bedroomtv
         - media_player.roku_living_roomtv
         - media_player.sonos
+        - script.kitchen_fireplace_lights_on
         - switch.switch1
         - switch.switch6
         - switch.switch7
@@ -156,13 +157,14 @@ influxdb:
 # {{{ Lights
 
 light:
-  # Make Dining Room switch act like a light
-  - platform: switch
-    name: Dining Room Shelves
-    entity_id: switch.switch0
+  # Make Dining Room switches act like a lights
   - platform: switch
     name: Dining room lamp
     entity_id: switch.switch6
+
+  - platform: switch
+    name: Dining room shelves
+    entity_id: switch.switch0
 
   # Make Entryway switch act like a light
   - platform: switch
@@ -178,10 +180,6 @@ light:
   - platform: switch
     name: Saltlick
     entity_id: switch.switch5
-
-  - platform: switch
-    name: Tiffany
-    entity_id: switch.switch4
 
   # Make Loft switches act like lights
   - platform: switch
@@ -225,7 +223,7 @@ light:
     name: Bathroom sink
     entities:
       - light.sink0
-      - light.sink1
+      - light.sink2
 
   - platform: group
     name: Bedroom ceiling upper
@@ -264,6 +262,7 @@ light:
     entities:
       - light.dining_room_lamp
       - light.dining_room_shelves
+      - light.dining_room_table
 
   - platform: group
     name: Garage lights
@@ -300,6 +299,7 @@ light:
     name: Livingroom lights
     entities:
       - light.livingroom_lamps
+      - light.living_room_main
       - light.saltlick
 
   - platform: group
@@ -320,6 +320,7 @@ light:
       - light.kitchen_lights
       - light.livingroom_lights
       - light.pantry_lights
+      - light.powder_room
 
   - platform: group
     name: Outdoor lights
@@ -366,6 +367,12 @@ light:
       - light.spare0
       - light.spare1
       - light.spare_room_ceiling
+
+  - platform: group
+    name: Third floor lights
+    entities:
+      - light.loft_trees
+
 
 #  }}}
 # {{{ Media Players

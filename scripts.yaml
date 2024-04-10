@@ -19,79 +19,92 @@ learn_garage:
   - service: remote.learn_command
     data:
       command:
-      - lock
-      device: ram
-      command_type: rf
+      - power
+      - timer
+      - heat_lvl
+      device: kitchen_fireplace
+      command_type: ir
     target:
       device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  alias: eRemote Garage Learn Script
+  alias: eRemote Dining Room Learn Script
   mode: single
   icon: mdi:remote
-garage_fan_toggle:
-  alias: garage fan off
-  sequence:
-  - service: remote.send_command
-    data:
-      device: fan
-      command: 'off'
-    target:
-      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  mode: single
-  icon: mdi:ceiling-fan
-garage_fan_high:
-  alias: garage fan high
-  sequence:
-  - service: remote.send_command
-    data:
-      device: fan
-      command: hi
-    target:
-      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  mode: single
-  icon: mdi:ceiling-fan
-garage_fan_med:
-  alias: garage fan med
-  sequence:
-  - service: remote.send_command
-    data:
-      device: fan
-      command: med
-    target:
-      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  mode: single
-  icon: mdi:ceiling-fan
-garage_fan_low:
-  alias: garage fan low
-  sequence:
-  - service: remote.send_command
-    data:
-      device: fan
-      command: low
-    target:
-      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  mode: single
-  icon: mdi:ceiling-fan
-garage_fan_light:
-  alias: garage fan light
-  sequence:
-  - service: remote.send_command
-    data:
-      device: fan_light
-      command: power
-    target:
-      device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  mode: single
-  icon: mdi:ceiling-fan-light
 eremote_garage_forget_script:
-  alias: eRemote Garage Forget Script
+  alias: eRemote Dining Room Forget Script
   sequence:
   - service: remote.delete_command
     data:
-      device: ram
+      device: fan
       command:
-      - lock
-      - unlock
+      - med
     target:
       device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
   mode: single
   icon: mdi:remote
+dining_shelf_power:
+  alias: Dining Shelf Led Power
+  sequence:
+  - service: remote.send_command
+    metadata: {}
+    data:
+      device: shelf_led
+      command:
+      - power
+    target:
+      entity_id: remote.diningroom_remote
+  mode: single
+dining_room_shelf_blue:
+  alias: Dining Shelf Blue
+  sequence:
+  - service: remote.send_command
+    metadata: {}
+    data:
+      command:
+      - blue
+      device: shelf_led
+      num_repeats: 1
+      delay_secs: 0.4
+    target:
+      entity_id: remote.diningroom_remote
+  mode: single
+dining_shelf_candles_on:
+  alias: Dining Shelf Candles On
+  sequence:
+  - service: remote.send_command
+    metadata: {}
+    data:
+      device: shelf_candles
+      command:
+      - 'on'
+      num_repeats: 1
+      delay_secs: 0.4
+    target:
+      entity_id: remote.diningroom_remote
+  mode: single
+  icon: mdi:candle
+kitchen_fireplace_lights_on:
+  alias: Kitchen Fireplace Lights on
+  sequence:
+  - service: remote.send_command
+    metadata: {}
+    data:
+      device: kitchen_fireplace
+      command: power
+      hold_secs: 0
+    target:
+      entity_id: remote.diningroom_remote
+  mode: single
+  icon: mdi:fire
+dining_shelf_candles_off:
+  alias: Dining Shelf Candles off
+  sequence:
+  - service: remote.send_command
+    metadata: {}
+    data:
+      device: shelf_candles
+      command:
+      - 'off'
+    target:
+      entity_id: remote.diningroom_remote
+  mode: single
+  icon: mdi:candle

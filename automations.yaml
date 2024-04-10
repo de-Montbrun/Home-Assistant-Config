@@ -172,81 +172,6 @@
     data:
       entity_id: remote.roku_livingroom
       command: play
-- id: dehumidifiers_on
-  initial_state: false
-  alias: Dehumidifier on - too moist
-  trigger:
-  - platform: template
-    value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
-      | int >= 70 }}'
-    alias: Basement0 Humidity at 70 or more
-    for:
-      hours: 0
-      minutes: 2
-      seconds: 0
-  - platform: template
-    value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
-      | int >= 70 }}'
-    alias: Basement1 Humidity at 70 or more
-    for:
-      hours: 0
-      minutes: 2
-      seconds: 0
-  - platform: time_pattern
-    hours: /1
-    minutes: 0
-    seconds: 0
-  condition:
-  - condition: and
-    conditions:
-    - condition: template
-      alias: Not raining
-      value_template: "{% if states(\"weather.home\") in [\"hail\", \"pouring\", \"rainy\",
-        \"snowy\", \"snowy-rainy\", \"lightning-rainy\"] %}\n  false\n{%- else -%}\n
-        \ true\n{%- endif %}\n"
-    - condition: or
-      conditions:
-      - condition: template
-        value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
-          | int >= 70 }}'
-        alias: Basement0 Humidity at 70 or more
-      - condition: template
-        value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
-          | int >= 70 }}'
-        alias: Basement1 Humidity at 70 or more
-  action:
-  - service: switch.turn_on
-    entity_id:
-    - switch.switch10
-    - switch.switch11
-- id: dehumidifiers_off
-  initial_state: false
-  alias: Dehumidifier off - dry enough
-  trigger:
-  - platform: template
-    value_template: '  {{ states("sensor.temperature_humidity_sensor_dca4_humidity")
-      | int <= 65 }}'
-  - platform: template
-    value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
-      | int <= 65 }}'
-  - platform: time_pattern
-    hours: /1
-  condition:
-  - condition: or
-    conditions:
-    - condition: template
-      value_template: '{{ states("sensor.temperature_humidity_sensor_dca4_humidity")
-        | int <= 65 }}'
-    - condition: template
-      value_template: '{{ states("sensor.temperature_humidity_sensor_604e_humidity")
-        | int <= 65 }}'
-  action:
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id:
-      - switch.switch11
-      - switch.switch10
 - id: occupancy_heating_no_one_home_turn_down_heat
   alias: Occupancy - no one home - turn down heat
   trigger:
@@ -269,18 +194,10 @@
     - condition: template
       value_template: '{{ states("sensor.saint_john_temperature") | int <= 5 }}'
   action:
-  - service: climate.set_preset_mode
-    data:
-      entity_id: climate.my_ecobee
-      preset_mode: Away
-  - service: climate.set_temperature
+  - service: scene.turn_on
     metadata: {}
-    data:
-      temperature: 10
     target:
-      entity_id:
-      - climate.mysa_bathroom_thermostat
-      - climate.mysa_dressing_room_thermostat
+      entity_id: scene.heat_away
   initial_state: true
 - id: occupancy_heating_return_home_turn_up_heat
   alias: Occupancy - return home - turn up heat
@@ -304,28 +221,31 @@
     - condition: time
       before: '23:20:00'
   action:
-  - service: climate.set_preset_mode
-    data:
-      entity_id: climate.my_ecobee
-      preset_mode: Home
-  - service: climate.set_temperature
+  - service: scene.turn_on
     metadata: {}
-    data:
-      temperature: 15
     target:
-      entity_id:
-      - climate.mysa_bathroom_thermostat
-      - climate.mysa_dressing_room_thermostat
+      entity_id: scene.heat_home
   initial_state: true
 - id: occupancy_heating_work_day_dressing_bath_room_heater
-  alias: Work day dressing bathroom room heater schedule
+  alias: Heat - Work day dressing bathroom room schedule
+  description: ''
   trigger:
+  - platform: time
+    at: 07:00:00
   - platform: time
     at: 08:00:00
   - platform: time
-    at: 09:15:00
+    at: 09:00:00
   - platform: time
     at: '22:15:00'
+  - platform: state
+    entity_id:
+    - person.gail
+    from: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
   condition:
   - condition: and
     conditions:
@@ -338,8 +258,8 @@
   - service: climate.set_temperature
     data:
       temperature: "{%- if (now().strftime(\"%H\") | int < 9)\n  and (now().strftime(\"%H\")
-        | int >= 8)\n  and is_state(\"person.gail\", \"home\")\n  and states(\"sensor.season\")
-        != \"summer\" -%}\n    23\n{%- else -%}\n    14\n{% endif %}\n"
+        | int >= 7)\n  and is_state(\"person.gail\", \"home\")\n  and states(\"sensor.season\")
+        != \"summer\" -%}\n    22\n{%- else -%}\n    15\n{% endif %}\n"
     target:
       entity_id:
       - climate.mysa_bathroom_thermostat
@@ -606,7 +526,9 @@
     data:
       brightness_pct: 29
     target:
-      entity_id: light.livingroom_lamps
+      entity_id:
+      - light.livingroom_lamps
+      - light.saltlick
   - delay: 00:10
   - condition: time
     after: '23:59:00'
@@ -941,18 +863,21 @@
     entity_id: all
 - id: sunset
   alias: Sunset - Lights on
-  initial_state: true
   trigger:
-    platform: sun
+  - platform: sun
     event: sunset
     offset: -00:30:00
   action:
   - service: scene.turn_on
-    entity_id:
-    - scene.sunset
+    target:
+      entity_id: scene.sunset
+    data: {}
   - service: switch.turn_on
-    entity_id:
-    - switch.switch3
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.switch3
+  initial_state: true
 - id: misc_sabnzb_speed_limit
   alias: Set sabnzb speed limit
   trigger:
@@ -1138,17 +1063,19 @@
     at: 08:00:00
   condition:
   - condition: template
-    value_template: '{{ weather.saint_john_forecast != ''unknown'' }}'
+    value_template: '{{ states("weather.saint_john_forecast") != ''unknown'' }}'
   - condition: template
-    value_template: '{{ sensor.saint_john_normal_high_temperature != ''unknown'' }}'
+    value_template: '{{ states("sensor.saint_john_normal_high_temperature") != ''unknown''
+      }}'
   - condition: template
-    value_template: '{{ sensor.saint_john_low_temperature != ''unknown'' }}'
+    value_template: '{{ states("sensor.saint_john_low_temperature") != ''unknown''
+      }}'
   action:
   - service: notify.zulip
     data:
       message: '**Forecast:**
 
-        {{ states("sensor.saint_john_forecast") }}
+        {{ states("sensor.saint_john_summary") }}
 
 
         **High:** {{ states("sensor.saint_john_high_temperature") }}{{ state_attr("sensor.saint_john_high_temperature"
@@ -1189,17 +1116,22 @@
   alias: Vacuum Start
   trigger:
   - platform: state
-    entity_id: person.gail,person.gervais
+    entity_id:
+    - person.gail
+    - person.gervais
     from: home
-    for: 00:05:00
-  - platform: template
-    value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
-      }}'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
   condition:
   - condition: and
     conditions:
     - condition: state
       entity_id: vacuum.consuela
+      state: docked
+    - condition: state
+      entity_id: vacuum.delicious
       state: docked
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start"
@@ -1216,10 +1148,12 @@
       entity_id: light.bedroom_lights
   - service: vacuum.start
     data: {}
-    entity_id: vacuum.consuela
+    target:
+      entity_id:
+      - vacuum.consuela
+      - vacuum.delicious
 - id: mop_start
   alias: Mop Start
-  initial_state: false
   trigger:
     platform: state
     entity_id: vacuum.consuela
@@ -1333,12 +1267,115 @@
       entity_id: sensor.season
       state: summer
   action:
-  - service: climate.set_temperature
+  - service: scene.turn_on
     metadata: {}
+    target:
+      entity_id: scene.heat_sleep
+  mode: single
+- id: misc_bed_room_turn_off_tv
+  alias: Turn off bed room tv when idle
+  trigger:
+  - platform: time_pattern
+    minutes: /20
+    seconds: 0
+  condition:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ states("media_player.bedroomtv") != "standby" }}'
+    - condition: template
+      value_template: '{{ states("media_player.bedroomtv") != "unavailable" }}'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: media_player.plex_plex_for_roku_bedroomtv
+        state: idle
+        for:
+          minutes: 15
+      - condition: state
+        entity_id: media_player.bedroomtv
+        state: idle
+        for:
+          minutes: 15
+      - condition: state
+        entity_id: media_player.bedroomtv
+        state: home
+        for:
+          minutes: 15
+      - condition: state
+        entity_id: media_player.bedroomtv
+        state: 'on'
+        for:
+          minutes: 15
+  action:
+  - service: remote.send_command
     data:
-      temperature: 10
+      command: power
+    target:
+      entity_id: remote.bedroomtv
+  mode: single
+  initial_state: true
+- id: '1709693054657'
+  alias: Heat - Not workday wake up
+  description: ''
+  trigger:
+  - platform: time
+    at: '10:00:00'
+  condition:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ states("sensor.season") != "summer" }}'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'off'
+  action:
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.heat_home
+  mode: single
+- id: '1709865400186'
+  alias: 'IR Sync up - Sunset '
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - scene.sunset
+  condition: []
+  action:
+  - service: script.turn_on
+    metadata: {}
+    data: {}
     target:
       entity_id:
-      - climate.mysa_bathroom_thermostat
-      - climate.mysa_dressing_room_thermostat
+      - script.kitchen_fireplace_lights_on
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 5
+      milliseconds: 0
+  - service: script.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - script.dining_room_shelf_blue
+  mode: single
+- id: '1709866403421'
+  alias: IR Sync up - Goodnight
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - scene.goodnight
+  condition: []
+  action:
+  - service: script.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - script.dining_shelf_candles_off
+      - script.kitchen_fireplace_lights_on
   mode: single
