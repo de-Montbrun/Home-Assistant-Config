@@ -32,21 +32,27 @@ alexa:
         - media_player.bedroomtv
         - media_player.roku_living_roomtv
         - media_player.sonos
-        - script.kitchen_fireplace_lights_on
         - switch.switch1
         - switch.switch6
         - switch.switch7
 
 # }}}
-# {{{ mqtt switch
+# {{{ switches
 
-#switch:
-#  - platform: mqtt
-#    name: "Zigbee2mqtt Main join"
-#    state_topic: "zigbee2mqtt/bridge/config/permit_join"
-#    command_topic: "zigbee2mqtt/bridge/config/permit_join"
-#    payload_on: "true"
-#    payload_off: "false"
+switch:
+  - platform: template
+    switches:
+      kitchen_fireplace:
+        friendly_name: Kitchen Fireplace Switch
+        unique_id: kitchen_fireplace_switch
+        turn_on:
+          service: script.turn_on
+          target:
+            entity_id: script.kitchen_fireplace_lights_on
+        turn_off:
+          service: script.turn_on
+          target:
+            entity_id: script.kitchen_fireplace_lights_on
 
 # }}}
 # {{{ frontend
@@ -176,6 +182,11 @@ light:
     name: Garage Lamp
     entity_id: switch.switch8
 
+  # Make Kitchen switches act like lights
+  - platform: switch
+    name: Kitchen Fireplace Light
+    entity_id: switch.kitchen_fireplace
+
   # Make Livingroom switches act like a lights
   - platform: switch
     name: Saltlick
@@ -269,7 +280,6 @@ light:
     entities:
       - light.garage_lamp
 
-  # {{{ Hallway lights
   - platform: group
     name: Foyer Lights
     entities:
@@ -284,8 +294,6 @@ light:
     entities:
       - light.entryway
       - light.foyer_lights
-
-  # }}}
 
   - platform: group
     name: Livingroom lamps

@@ -233,6 +233,8 @@
       - light.front_door
       - light.back_door
       state: 'on'
+    light.kitchen_fireplace_light:
+      state: 'on'
     light.loft_trees:
       supported_color_modes:
       - onoff
@@ -616,9 +618,7 @@
       - Warm White
       - candle
       supported_color_modes:
-      - brightness
       - color_temp
-      - onoff
       - rgbw
       effect:
       color_mode:
@@ -637,6 +637,7 @@
       - light.kitchen_lights
       - light.livingroom_lights
       - light.pantry_lights
+      - light.powder_room
       icon: mdi:lightbulb-group
       friendly_name: Main floor lights
       supported_features: 44
@@ -668,7 +669,6 @@
       - fire
       - prism
       supported_color_modes:
-      - brightness
       - color_temp
       - hs
       - xy
@@ -698,6 +698,13 @@
       friendly_name: Third floor lights
       supported_features: 0
       state: 'off'
+    light.kitchen_fireplace_light:
+      supported_color_modes:
+      - onoff
+      color_mode:
+      friendly_name: Kitchen Fireplace Light
+      supported_features: 0
+      state: 'off'
   icon: mdi:bed
   metadata:
     light.main_floor_lights:
@@ -707,4 +714,6 @@
     light.second_floor_lights:
       entity_only: true
     light.third_floor_lights:
+      entity_only: true
+    light.kitchen_fireplace_light:
       entity_only: true

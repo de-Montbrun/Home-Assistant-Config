@@ -825,22 +825,31 @@
     entity_id: automation.timed_lights_movement_front_door
 - id: lighting_2am_lights_off
   alias: 2am - Lights out
-  initial_state: true
   trigger:
-    platform: time
+  - platform: time
     at: 02:00:00
   action:
   - service: homeassistant.turn_off
     entity_id: automation.timed_lights_movement_front_door
   - service: switch.turn_off
-    entity_id:
-    - switch.switch0
-    - switch.switch3
+    data: {}
+    target:
+      entity_id:
+      - switch.switch0
+      - switch.switch3
   - service: light.turn_off
-    entity_id: all
+    data: {}
+    target:
+      entity_id:
+      - light.main_floor_lights
+      - light.second_floor_lights
+      - light.third_floor_lights
+      - light.outdoor_lights
+      - light.kitchen_fireplace_light
   - delay: 00:00:05
   - service: homeassistant.turn_on
     entity_id: automation.timed_lights_movement_front_door
+  initial_state: true
 - id: sunrise
   alias: Sunrise - Lights out
   initial_state: false
@@ -1344,12 +1353,6 @@
     - scene.sunset
   condition: []
   action:
-  - service: script.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id:
-      - script.kitchen_fireplace_lights_on
   - delay:
       hours: 0
       minutes: 0
@@ -1377,5 +1380,4 @@
     target:
       entity_id:
       - script.dining_shelf_candles_off
-      - script.kitchen_fireplace_lights_on
   mode: single
