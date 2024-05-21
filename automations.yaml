@@ -254,6 +254,9 @@
     - condition: state
       entity_id: binary_sensor.workday_sensor
       state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.saint_john_temperature
+      below: 5
   action:
   - service: climate.set_temperature
     data:
@@ -1275,6 +1278,9 @@
     - condition: state
       entity_id: sensor.season
       state: summer
+    - condition: numeric_state
+      entity_id: sensor.saint_john_temperature
+      below: 5
   action:
   - service: scene.turn_on
     metadata: {}
@@ -1338,6 +1344,9 @@
     - condition: state
       entity_id: binary_sensor.workday_sensor
       state: 'off'
+    - condition: numeric_state
+      entity_id: sensor.saint_john_temperature
+      below: 5
   action:
   - service: scene.turn_on
     metadata: {}

@@ -495,9 +495,12 @@
       - heat_cool
       min_temp: 5
       max_temp: 30
+      current_temperature: 20.2
+      temperature: 12.5
+      current_humidity: 54
+      hvac_action: idle
       friendly_name: Bathroom Thermostat
       supported_features: 385
-      temperature: 12.5
       state: heat
     climate.mysa_dressing_room_thermostat:
       hvac_modes:
@@ -507,14 +510,39 @@
       - heat_cool
       min_temp: 5
       max_temp: 30
+      current_temperature: 17.6
+      temperature: 12
+      current_humidity: 59
+      hvac_action: idle
       friendly_name: Dressing Room Thermostat
       supported_features: 385
-      current_temperature: 15
-      temperature: 12
-      current_humidity: 43
+      state: heat
+    climate.upstairs_hallway_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      min_temp: 7
+      max_temp: 30
+      fan_modes:
+      - Auto low
+      - Low
+      preset_modes:
+      - none
+      - Away
+      current_temperature: 19.4
+      temperature: 12.5
+      fan_mode: Auto low
+      hvac_action: idle
+      preset_mode: none
+      fan_state: Idle / off
+      friendly_name: 'Upstairs Hallway Thermostat '
+      supported_features: 409
+      hidden: false
       state: heat
   icon: mdi:heat-wave
-  metadata: {}
+  metadata:
+    climate.upstairs_hallway_thermostat:
+      entity_only: true
 - id: '1709355022476'
   name: Heat Sleep
   entities:
@@ -526,9 +554,12 @@
       - heat_cool
       min_temp: 5
       max_temp: 30
+      current_temperature: 18.5
+      temperature: 12.5
+      current_humidity: 57
+      hvac_action: idle
       friendly_name: Bathroom Thermostat
       supported_features: 385
-      temperature: 12.5
       state: heat
     climate.mysa_dressing_room_thermostat:
       hvac_modes:
@@ -538,12 +569,38 @@
       - heat_cool
       min_temp: 5
       max_temp: 30
+      current_temperature: 17.1
+      temperature: 12.5
+      current_humidity: 59
+      hvac_action: idle
       friendly_name: Dressing Room Thermostat
       supported_features: 385
-      temperature: 12
+      state: heat
+    climate.upstairs_hallway_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      min_temp: 7
+      max_temp: 25
+      fan_modes:
+      - Auto low
+      - Low
+      preset_modes:
+      - none
+      - Away
+      current_temperature: 20
+      temperature: 14
+      fan_mode: Auto low
+      hvac_action: idle
+      preset_mode: none
+      fan_state: Idle / off
+      friendly_name: 'Upstairs Hallway Thermostat '
+      supported_features: 409
       state: heat
   icon: mdi:heat-wave
-  metadata: {}
+  metadata:
+    climate.upstairs_hallway_thermostat:
+      entity_only: true
 - id: '1709355481321'
   name: Heat Home
   entities:
@@ -555,7 +612,10 @@
       - heat_cool
       min_temp: 5
       max_temp: 30
+      current_temperature: 20
       temperature: 15
+      current_humidity: 54
+      hvac_action: idle
       friendly_name: Bathroom Thermostat
       supported_features: 385
       state: heat
@@ -567,12 +627,39 @@
       - heat_cool
       min_temp: 5
       max_temp: 30
+      current_temperature: 17.6
       temperature: 15
+      current_humidity: 59
+      hvac_action: idle
       friendly_name: Dressing Room Thermostat
       supported_features: 385
       state: heat
+    climate.upstairs_hallway_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      min_temp: 7
+      max_temp: 30
+      fan_modes:
+      - Auto low
+      - Low
+      preset_modes:
+      - none
+      - Away
+      current_temperature: 19.4
+      temperature: 19
+      fan_mode: Auto low
+      hvac_action: idle
+      preset_mode: none
+      fan_state: Idle / off
+      friendly_name: 'Upstairs Hallway Thermostat '
+      supported_features: 409
+      hidden: false
+      state: heat
   icon: mdi:heat-wave
-  metadata: {}
+  metadata:
+    climate.upstairs_hallway_thermostat:
+      entity_only: true
 - id: '1709693520712'
   name: Goodnight
   entities:
@@ -702,6 +789,8 @@
       supported_color_modes:
       - onoff
       color_mode:
+      entity_id:
+      - light.kitchen_fireplace_light
       friendly_name: Kitchen Fireplace Light
       supported_features: 0
       state: 'off'

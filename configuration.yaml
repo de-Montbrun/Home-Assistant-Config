@@ -28,10 +28,8 @@ alexa:
         - light
         - scene
       include_entities:
-        - lock.yv4162uk5l2256988_door_lock
         - media_player.bedroomtv
         - media_player.roku_living_roomtv
-        - media_player.sonos
         - switch.switch1
         - switch.switch6
         - switch.switch7
@@ -40,6 +38,7 @@ alexa:
 # {{{ switches
 
 switch:
+  # Make script into a toggle switch
   - platform: template
     switches:
       kitchen_fireplace:
