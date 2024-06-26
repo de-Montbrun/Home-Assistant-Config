@@ -292,15 +292,18 @@
       entity_id: switch.switch1
   initial_state: true
 - id: occupancy_heating_gail_away_heater_off
-  alias: Gail away - turn off heater
+  alias: Gail away - toggle office switch
   description: ''
   trigger:
   - platform: state
-    entity_id: person.gail
+    entity_id:
+    - person.gail
     from: home
-  condition:
-  - condition: template
-    value_template: '{{ states("sensor.season") != "summer" }}'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
   action:
   - service: switch.turn_off
     metadata: {}
@@ -330,16 +333,19 @@
       hours: 0
       minutes: 5
       seconds: 0
-  - platform: template
-    value_template: '{{ is_state_attr("device_tracker.jjn66qf9lo", "ap_mac", "d0:21:f9:61:26:99")
-      }}'
   condition:
   - condition: and
     conditions:
-    - condition: template
-      value_template: '{{ states("person.gail") != "home" }}'
-    - condition: template
-      value_template: '{{ states("person.gervais") != "home" }}'
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: person.gail
+        state: home
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: device_tracker.iphone
+        state: home
   action:
   - service: light.turn_off
     data: {}
@@ -521,9 +527,9 @@
     - condition: state
       entity_id: light.livingroom_lights
       state: 'off'
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
+    - condition: numeric_state
+      entity_id: sensor.sun_room_sensor_light_level
+      below: 3
   action:
   - service: light.turn_on
     data:
@@ -848,7 +854,6 @@
       - light.second_floor_lights
       - light.third_floor_lights
       - light.outdoor_lights
-      - light.kitchen_fireplace_light
   - delay: 00:00:05
   - service: homeassistant.turn_on
     entity_id: automation.timed_lights_movement_front_door
@@ -879,6 +884,23 @@
   - platform: sun
     event: sunset
     offset: -00:30:00
+  - platform: numeric_state
+    entity_id:
+    - sensor.sun_room_sensor_light_level
+    below: 3
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: light.livingroom_lights
+      state: 'off'
+      for:
+        hours: 1
+        minutes: 0
+        seconds: 0
+    - condition: time
+      before: '23:00:00'
+      after: 08:00:00
   action:
   - service: scene.turn_on
     target:
@@ -1273,11 +1295,13 @@
   - platform: time
     at: '23:00:00'
   condition:
-  - condition: not
+  - condition: and
     conditions:
-    - condition: state
-      entity_id: sensor.season
-      state: summer
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: sensor.season
+        state: summer
     - condition: numeric_state
       entity_id: sensor.saint_john_temperature
       below: 5
@@ -1390,3 +1414,103 @@
       entity_id:
       - script.dining_shelf_candles_off
   mode: single
+- id: '1717197737888'
+  alias: Fan - turn off
+  description: ''
+  trigger:
+  - platform: time
+    at: 09:00:00
+  - platform: state
+    entity_id:
+    - person.gail
+    from: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  - platform: state
+    entity_id:
+    - person.gervais
+    from: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: or
+    conditions:
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: and
+        conditions:
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: person.gail
+            state: home
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: person.gervais
+            state: home
+    - condition: and
+      conditions:
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: person.gail
+          state: home
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: person.gervais
+          state: home
+  action:
+  - service: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.switch4
+  - delay:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+    enabled: true
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.switch4
+    enabled: true
+  mode: single
+- id: '1717456710664'
+  alias: Keep toggle switches on
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.switch4
+    to: 'off'
+  - platform: state
+    entity_id:
+    - switch.switch1
+    to: 'off'
+  condition: []
+  action:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 30
+      milliseconds: 0
+  - service: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - switch.switch4
+      - switch.switch1
+  mode: restart

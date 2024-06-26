@@ -212,12 +212,6 @@ light:
       - light.barn0
 
   - platform: group
-    name: Loft trees
-    entities:
-      - light.loft_tree0
-      - light.loft_tree1
-
-  - platform: group
     name: Basement lights
     entities:
       - light.basement0
@@ -295,6 +289,14 @@ light:
       - light.foyer_lights
 
   - platform: group
+    name: Kitchen lights
+    entities:
+      - light.kitchen_counter
+      - light.kitchen_island
+      - light.kitchen_pantry
+      - light.kitchen_pots
+
+  - platform: group
     name: Livingroom lamps
     entities:
       - light.lamp0
@@ -310,12 +312,10 @@ light:
       - light.saltlick
 
   - platform: group
-    name: Kitchen lights
+    name: Loft trees
     entities:
-      - light.kitchen_counter
-      - light.kitchen_island
-      - light.kitchen_pantry
-      - light.kitchen_pots
+      - light.loft_tree0
+      - light.loft_tree1
 
   - platform: group
     name: Main floor lights
@@ -328,6 +328,11 @@ light:
       - light.livingroom_lights
       - light.pantry_lights
       - light.powder_room
+
+  - platform: group
+    name: Office Lights
+    entities:
+      - light.office_lamp
 
   - platform: group
     name: Outdoor lights

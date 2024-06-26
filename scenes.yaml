@@ -233,8 +233,6 @@
       - light.front_door
       - light.back_door
       state: 'on'
-    light.kitchen_fireplace_light:
-      state: 'on'
     light.loft_trees:
       supported_color_modes:
       - onoff
@@ -785,15 +783,6 @@
       friendly_name: Third floor lights
       supported_features: 0
       state: 'off'
-    light.kitchen_fireplace_light:
-      supported_color_modes:
-      - onoff
-      color_mode:
-      entity_id:
-      - light.kitchen_fireplace_light
-      friendly_name: Kitchen Fireplace Light
-      supported_features: 0
-      state: 'off'
   icon: mdi:bed
   metadata:
     light.main_floor_lights:
@@ -803,6 +792,4 @@
     light.second_floor_lights:
       entity_only: true
     light.third_floor_lights:
-      entity_only: true
-    light.kitchen_fireplace_light:
       entity_only: true
