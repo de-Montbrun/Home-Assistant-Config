@@ -169,7 +169,7 @@ light:
 
   - platform: switch
     name: Dining room shelves
-    entity_id: switch.switch0
+    entity_id: switch.switch7
 
   # Make Entryway switch act like a light
   - platform: switch
@@ -326,6 +326,7 @@ light:
       - light.foyer_lights
       - light.kitchen_lights
       - light.livingroom_lights
+      - light.office_lights
       - light.pantry_lights
       - light.powder_room
 
@@ -407,11 +408,11 @@ logger:
     homeassistant.components.wemo: fatal
 
 # Lutron Caseta
-lutron_caseta:
-  host: 192.168.2.121
-  keyfile:  '/etc/homeassistant/lutron/caseta.key'
-  certfile: '/etc/homeassistant/lutron/caseta.crt'
-  ca_certs: '/etc/homeassistant/lutron/caseta-bridge.crt'
+#lutron_caseta:
+#  host: 192.168.2.121
+#  keyfile:  '/etc/homeassistant/lutron/caseta.key'
+#  certfile: '/etc/homeassistant/lutron/caseta.crt'
+#  ca_certs: '/etc/homeassistant/lutron/caseta-bridge.crt'
 
 # Enables support for tracking state changes over time.
 history:

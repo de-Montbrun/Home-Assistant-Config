@@ -353,6 +353,11 @@
       entity_id:
       - light.bedroom_lights
       - light.bathroom_lights
+  - service: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.switch4
   initial_state: true
 - id: occupancy_bedroom_turn_on_lights
   alias: Occupancy in bedroom - turn on lights
@@ -371,24 +376,6 @@
   action:
     service: light.turn_on
     entity_id: light.bedroom_lights
-- id: occupancy_bedroom_turn_off_lights
-  alias: No one in bedroom - turn off lights
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: binary_sensor.master_bedroom_occupancy
-    to: 'off'
-    for:
-      minutes: 30
-  action:
-  - service: light.turn_off
-    entity_id:
-    - light.bedroom_lights
-  - condition: state
-    entity_id: sun.sun
-    state: above_horizon
-  - service: light.turn_off
-    entity_id: light.bathroom_lights
 - id: occupancy_lighting_basement_on
   alias: Basement - Occupancy lights on
   initial_state: false
@@ -469,9 +456,14 @@
     - condition: state
       entity_id: light.kitchen_lights
       state: 'off'
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
+    - condition: or
+      conditions:
+      - condition: numeric_state
+        entity_id: sensor.kitchen_sensor_light_level
+        below: 3
+      - condition: state
+        entity_id: sun.sun
+        state: below_horizon
   action:
   - service: light.turn_on
     metadata: {}
@@ -484,16 +476,35 @@
   alias: Kitchen - No occupancy lights off
   trigger:
   - platform: state
-    entity_id: binary_sensor.kitchen_sensor_motion
+    entity_id:
+    - binary_sensor.kitchen_sensor_motion
     to: 'off'
     for:
-      minutes: 30
+      hours: 0
+      minutes: 20
+      seconds: 0
+  - platform: time
+    at: '23:59:00'
+  condition:
+  - condition: or
+    conditions:
+    - condition: sun
+      before: sunset
+    - condition: time
+      after: '23:00:00'
+    - condition: state
+      entity_id: binary_sensor.kitchen_sensor_motion
+      state: 'off'
+      for:
+        hours: 0
+        minutes: 30
+        seconds: 0
   action:
-  - service: light.turn_off
-    metadata: {}
+  - metadata: {}
     data: {}
     target:
       entity_id: light.kitchen_lights
+    action: light.turn_off
 - id: lighting_livingroomtv_play-pause
   alias: Lighting - TV play/pause
   trigger:
@@ -540,26 +551,30 @@
       - light.saltlick
   - delay: 00:10
   - condition: time
-    after: '23:59:00'
+    after: 00:01:00
+    before: 09:00:00
+  - condition: state
+    entity_id: media_player.roku_living_roomtv
+    state: standby
   - service: light.turn_off
     entity_id:
     - light.livingroom_lights
     - light.hallway_lights
-  mode: restart
+  mode: single
 - id: occupancy_lighting_sunroom_off
   alias: Living room - No occupancy lights off
   trigger:
-    platform: state
+  - platform: state
     entity_id: binary_sensor.sun_room_sensor_motion
     to: 'off'
     for:
       minutes: 10
   condition:
-    condition: state
+  - condition: state
     entity_id: media_player.roku_living_roomtv
     state: standby
   action:
-    service: light.turn_off
+  - service: light.turn_off
     entity_id: light.livingroom_lights
 - id: lighting_sunroom_lumens_low_lights_on
   alias: Sunroom lumens low - lights on
@@ -787,7 +802,6 @@
       command: pause
 - id: everyone_home_and_gone_to_bed
   alias: Everyone home and gone to bed - Lights out
-  initial_state: true
   trigger:
   - platform: state
     entity_id: media_player.roku_living_roomtv
@@ -798,7 +812,7 @@
     entity_id: person.gail,person.gervais
     to: home
   condition:
-    condition: and
+  - condition: and
     conditions:
     - condition: time
       after: '22:30:00'
@@ -822,16 +836,16 @@
   - service: homeassistant.turn_off
     entity_id: automation.timed_lights_movement_front_door
   - service: light.turn_off
-    entity_id: all
-  - service: homeassistant.turn_off
-    entity_id:
-    - light.bathroom_lights
-    - light.main_floor_lights
-    - light.outdoor_lights
-    - light.second_floor_lights
+    data: {}
+    target:
+      entity_id:
+      - light.main_floor_lights
+      - light.second_floor_lights
+      - light.third_floor_lights
   - delay: 00:00:04
   - service: homeassistant.turn_on
     entity_id: automation.timed_lights_movement_front_door
+  initial_state: true
 - id: lighting_2am_lights_off
   alias: 2am - Lights out
   trigger:
@@ -884,23 +898,7 @@
   - platform: sun
     event: sunset
     offset: -00:30:00
-  - platform: numeric_state
-    entity_id:
-    - sensor.sun_room_sensor_light_level
-    below: 3
-  condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: light.livingroom_lights
-      state: 'off'
-      for:
-        hours: 1
-        minutes: 0
-        seconds: 0
-    - condition: time
-      before: '23:00:00'
-      after: 08:00:00
+  condition: []
   action:
   - service: scene.turn_on
     target:
@@ -1003,7 +1001,7 @@
       title: Family Location
 - id: notify_phone_presence
   alias: Phones presence notification
-  initial_state: true
+  initial_state: false
   trigger:
     platform: state
     entity_id: person.gervais,person.gail
@@ -1420,6 +1418,8 @@
   trigger:
   - platform: time
     at: 09:00:00
+  - platform: time
+    at: '11:00:00'
   - platform: state
     entity_id:
     - person.gail
@@ -1439,23 +1439,13 @@
   condition:
   - condition: or
     conditions:
-    - condition: or
+    - condition: and
       conditions:
       - condition: state
         entity_id: binary_sensor.workday_sensor
         state: 'on'
-      - condition: and
-        conditions:
-        - condition: not
-          conditions:
-          - condition: state
-            entity_id: person.gail
-            state: home
-        - condition: not
-          conditions:
-          - condition: state
-            entity_id: person.gervais
-            state: home
+      - condition: time
+        after: 08:59:00
     - condition: and
       conditions:
       - condition: not
@@ -1468,24 +1458,14 @@
         - condition: state
           entity_id: person.gervais
           state: home
+    - condition: time
+      after: '10:50:00'
   action:
   - service: switch.turn_off
     metadata: {}
     data: {}
     target:
       entity_id: switch.switch4
-  - delay:
-      hours: 0
-      minutes: 1
-      seconds: 0
-      milliseconds: 0
-    enabled: true
-  - service: switch.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: switch.switch4
-    enabled: true
   mode: single
 - id: '1717456710664'
   alias: Keep toggle switches on

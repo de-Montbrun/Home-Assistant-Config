@@ -462,6 +462,38 @@
       supported_features: 0
       color_mode: onoff
       state: 'on'
+    light.office_lamp:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - Solid
+      - Wake up
+      - Cycle up
+      - Cycle down
+      - Random
+      supported_color_modes:
+      - color_temp
+      - hs
+      friendly_name: Office Lamp
+      supported_features: 36
+      effect: Solid
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 4000
+      color_temp: 250
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
+      xy_color:
+      - 0.421
+      - 0.364
+      state: 'on'
   metadata:
     light.dining_room_shelves:
       entity_only: true
