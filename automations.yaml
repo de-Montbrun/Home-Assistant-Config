@@ -488,17 +488,29 @@
   condition:
   - condition: or
     conditions:
-    - condition: sun
-      before: sunset
-    - condition: time
-      after: '23:00:00'
-    - condition: state
-      entity_id: binary_sensor.kitchen_sensor_motion
-      state: 'off'
-      for:
-        hours: 0
-        minutes: 30
-        seconds: 0
+    - condition: and
+      conditions:
+      - condition: sun
+        before: sunset
+      - condition: state
+        entity_id: binary_sensor.kitchen_sensor_motion
+        for:
+          hours: 0
+          minutes: 10
+          seconds: 0
+        state: 'off'
+    - condition: and
+      conditions:
+      - condition: time
+        after: '23:00:00'
+        before: 06:00:00
+      - condition: state
+        entity_id: binary_sensor.kitchen_sensor_motion
+        state: 'off'
+        for:
+          hours: 0
+          minutes: 10
+          seconds: 0
   action:
   - metadata: {}
     data: {}
@@ -738,7 +750,9 @@
     - media_player.roku_living_roomtv
     to: standby
     for:
-      minutes: 5
+      hours: 0
+      minutes: 30
+      seconds: 0
   condition:
   - condition: and
     conditions:
@@ -774,19 +788,18 @@
         - condition: template
           value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
   action:
-  - delay: 00:15:00
-  - service: homeassistant.turn_off
-    metadata: {}
+  - metadata: {}
     data: {}
     target:
       entity_id:
       - light.main_floor_lights
       - light.second_floor_lights
       - switch.switch3
-  - service: climate.set_preset_mode
-    data:
+    action: homeassistant.turn_off
+  - data:
       entity_id: climate.my_ecobee
       preset_mode: Sleep
+    action: climate.set_preset_mode
   mode: restart
 - id: doorbell_doorbell
   alias: Doorbell rang - pause tv
@@ -1066,7 +1079,7 @@
   initial_state: true
 - id: notify_current_uv_index
   alias: Current UV index notification
-  initial_state: true
+  initial_state: false
   trigger:
     platform: numeric_state
     entity_id: sensor.saint_john_uv_index
@@ -1418,8 +1431,10 @@
   trigger:
   - platform: time
     at: 09:00:00
+    enabled: true
   - platform: time
     at: '11:00:00'
+    enabled: true
   - platform: state
     entity_id:
     - person.gail
@@ -1461,11 +1476,11 @@
     - condition: time
       after: '10:50:00'
   action:
-  - service: switch.turn_off
-    metadata: {}
+  - metadata: {}
     data: {}
     target:
       entity_id: switch.switch4
+    action: switch.turn_off
   mode: single
 - id: '1717456710664'
   alias: Keep toggle switches on
