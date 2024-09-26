@@ -501,23 +501,19 @@ person:
     id: jen2000
     user_id: 10f174a6c6db401babe419a388e8eaa8
     device_trackers:
-      - device_tracker.jen_phone
-      - device_tracker.jennifersiphone
-      - device_tracker.jennifer_iphone_detect3
-      - device_tracker.jennifersiphone_4
-
+      - device_tracker.unifi_default_28_c5_38_bf_0f_00
 # }}}
 # {{{ Presence Trackers
 
-device_tracker:
-  - platform: iphonedetect
-    consider_home: 600
-    new_device_defaults:
-      track_new_devices: true
-    hosts:
-      jennifer_iphone_detect: 192.168.2.64
-      jennifer_iphone_detect2: 192.168.2.10
-      jennifer_iphone_detect3: 192.168.2.152
+#device_tracker:
+#  - platform: iphonedetect
+#    consider_home: 600
+#    new_device_defaults:
+#      track_new_devices: true
+#    hosts:
+#      jennifer_iphone_detect: 192.168.2.64
+#      jennifer_iphone_detect2: 192.168.2.10
+#      jennifer_iphone_detect3: 192.168.2.152
 
 # }}}
 # {{{ Sensors
