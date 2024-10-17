@@ -575,19 +575,47 @@
   mode: single
 - id: occupancy_lighting_sunroom_off
   alias: Living room - No occupancy lights off
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.sun_room_sensor_motion
+  triggers:
+  - entity_id: binary_sensor.sun_room_sensor_motion
     to: 'off'
     for:
       minutes: 10
-  condition:
-  - condition: state
-    entity_id: media_player.roku_living_roomtv
-    state: standby
-  action:
-  - service: light.turn_off
-    entity_id: light.livingroom_lights
+    trigger: state
+  conditions:
+  - condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: sun
+        before: sunset
+      - condition: state
+        entity_id: binary_sensor.sun_room_sensor_motion
+        for:
+          hours: 0
+          minutes: 10
+          seconds: 0
+        state: 'off'
+      - condition: state
+        entity_id: media_player.roku_living_roomtv
+        state: standby
+    - condition: and
+      conditions:
+      - condition: time
+        after: '23:50:00'
+        before: 06:00:00
+      - condition: state
+        entity_id: binary_sensor.sun_room_sensor_motion
+        state: 'off'
+        for:
+          hours: 0
+          minutes: 10
+          seconds: 0
+      - condition: state
+        entity_id: media_player.roku_living_roomtv
+        state: standby
+  actions:
+  - entity_id: light.livingroom_lights
+    action: light.turn_off
 - id: lighting_sunroom_lumens_low_lights_on
   alias: Sunroom lumens low - lights on
   trigger:
@@ -1428,30 +1456,32 @@
 - id: '1717197737888'
   alias: Fan - turn off
   description: ''
-  trigger:
-  - platform: time
-    at: 09:00:00
+  triggers:
+  - at: 09:00:00
     enabled: true
-  - platform: time
-    at: '11:00:00'
+    trigger: time
+  - at: '11:00:00'
     enabled: true
-  - platform: state
-    entity_id:
+    trigger: time
+  - entity_id:
     - person.gail
     from: home
     for:
       hours: 0
       minutes: 5
       seconds: 0
-  - platform: state
-    entity_id:
+    trigger: state
+    id: gail-not-home
+  - entity_id:
     - person.gervais
     from: home
     for:
       hours: 0
       minutes: 5
       seconds: 0
-  condition:
+    trigger: state
+    id: gervais-not-home
+  conditions:
   - condition: or
     conditions:
     - condition: and
@@ -1473,9 +1503,13 @@
         - condition: state
           entity_id: person.gervais
           state: home
+      - condition: trigger
+        id:
+        - gail-not-home
+        - gervais-not-home
     - condition: time
       after: '10:50:00'
-  action:
+  actions:
   - metadata: {}
     data: {}
     target:
