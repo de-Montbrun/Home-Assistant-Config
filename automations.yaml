@@ -229,24 +229,24 @@
 - id: occupancy_heating_work_day_dressing_bath_room_heater
   alias: Heat - Work day dressing bathroom room schedule
   description: ''
-  trigger:
-  - platform: time
-    at: 07:00:00
-  - platform: time
-    at: 08:00:00
-  - platform: time
-    at: 09:00:00
-  - platform: time
-    at: '22:15:00'
-  - platform: state
-    entity_id:
+  triggers:
+  - at: 07:00:00
+    trigger: time
+  - at: 08:00:00
+    trigger: time
+  - at: 09:00:00
+    trigger: time
+  - at: '22:15:00'
+    trigger: time
+  - entity_id:
     - person.gail
     from: home
     for:
       hours: 0
       minutes: 5
       seconds: 0
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: template
@@ -257,9 +257,13 @@
     - condition: numeric_state
       entity_id: sensor.saint_john_temperature
       below: 5
-  action:
-  - service: climate.set_temperature
-    data:
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.heat_home
+  - data:
       temperature: "{%- if (now().strftime(\"%H\") | int < 9)\n  and (now().strftime(\"%H\")
         | int >= 7)\n  and is_state(\"person.gail\", \"home\")\n  and states(\"sensor.season\")
         != \"summer\" -%}\n    22\n{%- else -%}\n    15\n{% endif %}\n"
@@ -267,6 +271,7 @@
       entity_id:
       - climate.mysa_bathroom_thermostat
       - climate.mysa_dressing_room_thermostat
+    action: climate.set_temperature
 - id: heating_office_heater_off
   alias: 6pm - heater off
   trigger:
@@ -446,11 +451,11 @@
     entity_id: light.hallway_lights
 - id: occupancy_lighting_kitchen_on
   alias: Kitchen - Occupancy lights on
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.kitchen_sensor_motion
+  triggers:
+  - entity_id: binary_sensor.kitchen_sensor_motion
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: state
@@ -460,18 +465,18 @@
       conditions:
       - condition: numeric_state
         entity_id: sensor.kitchen_sensor_light_level
-        below: 3
+        below: 5
       - condition: state
         entity_id: sun.sun
         state: below_horizon
-  action:
-  - service: light.turn_on
-    metadata: {}
+  actions:
+  - metadata: {}
     data: {}
     target:
       entity_id:
       - light.kitchen_counter
       - light.kitchen_pots
+    action: light.turn_on
 - id: occupancy_lighting_kitchen_off
   alias: Kitchen - No occupancy lights off
   trigger:
@@ -1066,11 +1071,11 @@
       title: Family Location
 - id: notify_current_weather
   alias: Current weather notification
-  trigger:
-  - platform: state
-    entity_id:
-    - sensor.saint_john_current_condition
-  condition:
+  triggers:
+  - entity_id:
+    - sensor.charlottetown_current_condition
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: template
@@ -1081,29 +1086,29 @@
     - condition: template
       value_template: '{{ trigger.to_state.state != "unknown" }}'
     - condition: template
-      value_template: '{{ states("sensor.saint_john_current_condition") != "unavailable"
+      value_template: '{{ states("sensor.charlottetown_current_condition") != "unavailable"
         }}'
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.current_weather_notification.attributes.last_triggered)
         | int > 3600 }}'
-  action:
-  - service: notify.zulip
-    data_template:
-      message: '**Weather Condition:** {{ states.sensor.saint_john_current_condition.state
+  actions:
+  - data_template:
+      message: '**Weather Condition:** {{ states.sensor.charlottetown_current_condition.state
         }}
 
-        **Tempurature:** {{ states.sensor.saint_john_temperature.state }}{{ states.sensor.saint_john_temperature.attributes.unit_of_measurement
-        }} {% if states.sensor.saint_john_humidex.state != ''unknown'' or states.sensor.saint_john_wind_chill.state
+        **Tempurature:** {{ states.sensor.charlottetown_temperature.state }}{{ states.sensor.charlottetown_temperature.attributes.unit_of_measurement
+        }} {% if states.sensor.charlottetown_humidex.state != ''unknown'' or states.sensor.charlottetown_wind_chill.state
         != ''unknown'' %}
 
-        **Feels like:** {% if states.sensor.saint_john_humidex.state != ''unknown''
-        %} {{ states.sensor.saint_john_humidex.state }}{% elif states.sensor.saint_john_wind_chill.state
-        != ''unknown'' %}{{ states.sensor.saint_john_wind_chill.state }}{% endif %}{{
-        states.sensor.saint_john_temperature.attributes.unit_of_measurement }} {%
-        endif %}
+        **Feels like:** {% if states.sensor.charlottetown_humidex.state != ''unknown''
+        %} {{ states.sensor.charlottetown_humidex.state }}{% elif states.sensor.charlottetown_wind_chill.state
+        != ''unknown'' %}{{ states.sensor.charlottetown_wind_chill.state }}{% endif
+        %}{{ states.sensor.charlottetown_temperature.attributes.unit_of_measurement
+        }} {% endif %}
 
         '
       title: Weather
+    action: notify.zulip
   initial_state: true
 - id: notify_current_uv_index
   alias: Current UV index notification
@@ -1131,34 +1136,34 @@
       title: Weather
 - id: notify_weather_forecast
   alias: Weather forecast notification
-  trigger:
-  - platform: time
-    at: 08:00:00
-  condition:
+  triggers:
+  - at: 08:00:00
+    trigger: time
+  conditions:
   - condition: template
-    value_template: '{{ states("weather.saint_john_forecast") != ''unknown'' }}'
+    value_template: '{{ states("weather.charlottetown_forecast") != ''unknown'' }}'
   - condition: template
-    value_template: '{{ states("sensor.saint_john_normal_high_temperature") != ''unknown''
+    value_template: '{{ states("sensor.charlottetown_high_temperature") != ''unknown''
       }}'
   - condition: template
-    value_template: '{{ states("sensor.saint_john_low_temperature") != ''unknown''
+    value_template: '{{ states("sensor.charlottetown_low_temperature") != ''unknown''
       }}'
-  action:
-  - service: notify.zulip
-    data:
+  actions:
+  - data:
       message: '**Forecast:**
 
-        {{ states("sensor.saint_john_summary") }}
+        {{ states("sensor.charlottetown_summary") }}
 
 
-        **High:** {{ states("sensor.saint_john_high_temperature") }}{{ state_attr("sensor.saint_john_high_temperature"
+        **High:** {{ states("sensor.charlottetown_high_temperature") }}{{ state_attr("sensor.charlottetown_high_temperature"
         , "unit_of_measurement") }}
 
-        **Low:** {{ states("sensor.saint_john_low_temperature") }}{{ state_attr("sensor.saint_john_low_temperature"
+        **Low:** {{ states("sensor.charlottetown_low_temperature") }}{{ state_attr("sensor.charlottetown_low_temperature"
         , "unit_of_measurement") }}
 
         '
       title: Weather
+    action: notify.zulip
   initial_state: true
 - id: notify_low_battery
   alias: Low battery level detection & notification for all battery sensors
@@ -1187,9 +1192,8 @@
           title: HA Sensor
 - id: vacuum_start
   alias: Vacuum Start
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - person.gail
     - person.gervais
     from: home
@@ -1197,7 +1201,8 @@
       hours: 0
       minutes: 5
       seconds: 0
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: state
@@ -1206,6 +1211,7 @@
     - condition: state
       entity_id: vacuum.delicious
       state: docked
+      enabled: false
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start"
         , "last_triggered")) | int > 432000 }}'
@@ -1213,18 +1219,25 @@
       value_template: '{{ states("person.gail") != "home" }}'
     - condition: template
       value_template: '{{ states("person.gervais") != "home" }}'
-  action:
-  - service: light.turn_on
-    metadata: {}
+  actions:
+  - metadata: {}
     data: {}
     target:
       entity_id: light.bedroom_lights
-  - service: vacuum.start
-    data: {}
+    action: light.turn_on
+  - data: {}
     target:
       entity_id:
       - vacuum.consuela
       - vacuum.delicious
+    action: vacuum.start
+  - action: media_player.play_media
+    metadata: {}
+    data:
+      media_content_id: HA tell Delicious to start vacuuming
+      media_content_type: routine
+    target:
+      entity_id: media_player.kitchen
 - id: mop_start
   alias: Mop Start
   trigger:
@@ -1246,13 +1259,12 @@
     entity_id: vacuum.alice
 - id: vacuum_stop
   alias: Vacuum Stop
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: group.jen_tracker,person.gail,person.gervais
+  triggers:
+  - entity_id: group.jen_tracker,person.gail,person.gervais
     to: home
-  condition:
-    condition: or
+    trigger: state
+  conditions:
+  - condition: or
     conditions:
     - condition: state
       entity_id: vacuum.alice
@@ -1260,9 +1272,17 @@
     - condition: state
       entity_id: vacuum.consuela
       state: cleaning
-  action:
-    service: vacuum.return_to_base
-    entity_id: all
+  actions:
+  - entity_id: all
+    action: vacuum.return_to_base
+  - action: media_player.play_media
+    target:
+      entity_id: media_player.kitchen
+    data:
+      media_content_id: HA tell Delicious to go home
+      media_content_type: ''
+    metadata: {}
+  initial_state: false
 - id: zigbee_log_level
   alias: Zigbee2mqtt Log Level
   initial_state: 'on'
@@ -1543,3 +1563,37 @@
       - switch.switch4
       - switch.switch1
   mode: restart
+- id: '1729385467304'
+  alias: Shut up
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    seconds: '05'
+    minutes: '*'
+    hours: '*'
+  - trigger: time_pattern
+    seconds: '10'
+  - trigger: time_pattern
+    seconds: '15'
+  - trigger: time_pattern
+    seconds: '20'
+  - trigger: time_pattern
+    seconds: '25'
+  - trigger: time_pattern
+    seconds: '30'
+  - trigger: time_pattern
+    seconds: '35'
+  - trigger: time_pattern
+    seconds: '40'
+  - trigger: time_pattern
+    seconds: '45'
+  - trigger: time_pattern
+    seconds: '50'
+  conditions: []
+  actions:
+  - action: script.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: script.turn_it_down
+  mode: single

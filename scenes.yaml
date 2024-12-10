@@ -563,7 +563,7 @@
       temperature: 12.5
       fan_mode: Auto low
       hvac_action: idle
-      preset_mode: none
+      preset_mode: Away
       fan_state: Idle / off
       friendly_name: 'Upstairs Hallway Thermostat '
       supported_features: 409
@@ -622,7 +622,7 @@
       temperature: 14
       fan_mode: Auto low
       hvac_action: idle
-      preset_mode: none
+      preset_mode: Away
       fan_state: Idle / off
       friendly_name: 'Upstairs Hallway Thermostat '
       supported_features: 409
@@ -677,7 +677,7 @@
       - none
       - Away
       current_temperature: 19.4
-      temperature: 19
+      temperature: 18
       fan_mode: Auto low
       hvac_action: idle
       preset_mode: none
