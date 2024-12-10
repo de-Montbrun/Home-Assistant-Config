@@ -108,3 +108,35 @@ dining_shelf_candles_off:
       entity_id: remote.diningroom_remote
   mode: single
   icon: mdi:candle
+turn_it_down:
+  alias: turn it down
+  sequence:
+  - action: media_player.volume_set
+    metadata: {}
+    data:
+      volume_level: 0.2
+    target:
+      device_id:
+      - f44ffcea0336fb336b7c579d6bd44c4a
+      - a95f3af60a1872492e3d231c0b5be7f5
+      - d9ca1bd9848ff3ab6eba10f18192ff90
+      - 68554dcd911479e5d6c558e77d30ae26
+      - 639bc7d1c713e34b0108b36ee8cfa2f6
+      - a08c91152f18a1841ac7b4f5422a8e7f
+      - f21ffb603d9cea155824997a47a29bc2
+      - 99da24ab29852816e4bbd1bb456dae60
+      - 753523139748a10b8074de2034294643
+      - 7e0ecfc7a4f21e653786cb3147a7a702
+      - b269974184ad1813e183fbf797ccdea8
+      - 99857cf5c32181f4d968785b6fcd09bd
+      - 5ceab9b638a7b822592eb72496d9875e
+      - ddf1ee8e668e0ee089aeef3a0ab24abe
+      - cb25663629a2440d9a2bc5754e8878dc
+      - 9f05f2d4aeb7d981224c127f01799cde
+      - a1da013badcd45c594666e1d42680831
+      - f53b4c7bff1feb031ec9f74f4f021c15
+      - 62a334e8167a603aeaac352008273a75
+      - 7ecbba8ad01c393cce02bdb92c80184a
+      - 34181d42d097b12300ee9c8ce105fa3f
+  description: ''
+  icon: mdi:ear-hearing
