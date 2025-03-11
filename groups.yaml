@@ -9,29 +9,7 @@ householdmembers:
   entities:
     - person.gervais
     - person.gail
+    - person.jennifer
   icon: mdi:account-multiple
-
-grant_tracker:
-  name: Grant
-  entities:
-    - device_tracker.grantphone
-    - device_tracker.grant2
-    - device_tracker.grant_fing
-
-cam_tracker:
-  name: Cameron
-  entities:
-    - device_tracker.camphone
-    - device_tracker.cameron2
-    - device_tracker.cam_fing
-
-jen_tracker:
-  name: Jennifer
-  entities:
-    - device_tracker.jen_phone
-    - device_tracker.jen_fing
-    - device_tracker.jennifersiphone
-    - device_tracker.jennifer_iphone_detect3
-    - device_tracker.jennifersiphone_4
 
 # }}}

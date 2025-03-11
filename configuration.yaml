@@ -29,29 +29,8 @@ alexa:
         - scene
       include_entities:
         - media_player.bedroomtv
-        - media_player.roku_living_roomtv
+        - media_player.tv_roomtv
         - switch.switch1
-        - switch.switch6
-        - switch.switch7
-
-# }}}
-# {{{ switches
-
-switch:
-  # Make script into a toggle switch
-  - platform: template
-    switches:
-      kitchen_fireplace:
-        friendly_name: Kitchen Fireplace Switch
-        unique_id: kitchen_fireplace_switch
-        turn_on:
-          service: script.turn_on
-          target:
-            entity_id: script.kitchen_fireplace_lights_on
-        turn_off:
-          service: script.turn_on
-          target:
-            entity_id: script.kitchen_fireplace_lights_on
 
 # }}}
 # {{{ frontend
@@ -61,11 +40,9 @@ frontend:
   themes: !include_dir_merge_named themes/
 
 http:
-  #ssl_certificate: !secret http_ssl_certificate
-  #ssl_key: !secret http_ssl_key
   use_x_forwarded_for: true
   trusted_proxies:
-    - 192.168.2.80
+    - 192.168.10.80
 
 # }}}
 # {{{ Homekit
@@ -74,6 +51,7 @@ homekit:
   filter:
     include_domains:
       - climate
+      - fan
       - light
       - scene
     include_entities:
@@ -100,6 +78,14 @@ rest_command:
     url: !secret sabnzbd_rest_url
 
 # }}}
+# {{{ wakeword
+
+      #wake_word:
+      #  - platform: openwakeword
+      #    model: hey_jarvis
+      #    # Optional - available models: alexa, hey jarvis, hey mycroft, ok google
+
+# }}}
 #  {{{ InfluxDB
 
 influxdb:
@@ -109,7 +95,7 @@ influxdb:
   ssl: false
   verify_ssl: false
   token: !secret influxdb_token
-  organization: 04c1799f5fa78557
+  organization: 6338b4c35d8af0a9
   bucket: homeassistant
   tags:
     source: ha
@@ -162,36 +148,51 @@ influxdb:
 # {{{ Lights
 
 light:
-  # Make Dining Room switches act like a lights
+  # Make Switches act like lights
   - platform: switch
-    name: Dining room lamp
-    entity_id: switch.switch6
+    name: Bathroom Shower
+    entity_id: switch.bathroom_shower
 
   - platform: switch
-    name: Dining room shelves
-    entity_id: switch.switch7
+    name: Bathroom Tub
+    entity_id: switch.bathroom_tub
 
-  # Make Entryway switch act like a light
   - platform: switch
-    name: Entryway
-    entity_id: switch.entryway
+    name: Basement Shower
+    entity_id: switch.basement_shower
 
-  # Make Garage switches act like lights
   - platform: switch
-    name: Garage Lamp
+    name: Basement Stairs
+    entity_id: switch.basement_stairs
+
+  - platform: switch
+    name: Dining Room Lamp0
+    entity_id: switch.switch10
+
+  - platform: switch
+    name: Dining Room Lamp1
+    entity_id: switch.switch11
+
+  - platform: switch
+    name: Garage Lights
+    entity_id: switch.garage_lights
+
+  - platform: switch
+    name: Hallway Lamp
     entity_id: switch.switch8
 
-  # Make Kitchen switches act like lights
   - platform: switch
-    name: Kitchen Fireplace Light
-    entity_id: switch.kitchen_fireplace
+    name: Kitchen Counter
+    entity_id: switch.kitchen_counter
 
-  # Make Livingroom switches act like a lights
   - platform: switch
-    name: Saltlick
-    entity_id: switch.switch5
+    name: Kitchen Sink
+    entity_id: switch.kitchen_sink
 
-  # Make Loft switches act like lights
+  - platform: switch
+    name: Livingroom Lamp
+    entity_id: switch.switch6
+
   - platform: switch
     name: Loft Tree0
     entity_id: switch.switch2
@@ -200,192 +201,218 @@ light:
     name: Loft Tree1
     entity_id: switch.switch3
 
-  # Make Porch switch act like a light
   - platform: switch
-    name: Porch Lights
-    entity_id: switch.porch
+    name: Office Desk Lamp
+    entity_id: switch.switch7
 
-  # Light Groups
-  - platform: group
-    name: Barn lights
-    entities:
-      - light.barn0
+  - platform: switch
+    name: Outdoor Driveway
+    entity_id: switch.outdoor_driveway
 
-  - platform: group
-    name: Basement lights
-    entities:
-      - light.basement0
-      - light.basement1
-      - light.basement2
+  - platform: switch
+    name: Saltlick
+    entity_id: switch.switch5
 
   - platform: group
-    name: Bathroom lights
+    name: Basement Lights
+    unique_id: basement_lights_group
     entities:
+      - light.basement_stairs
+      - light.basement_bathroom
+      - light.basement_shower
+      - light.basement_storage
+      - light.office_lights
+      - light.tv_room_lights
+
+  - platform: group
+    name: Bathroom Lights
+    unique_id: bathroom_lights_group
+    entities:
+      - light.bathroom_shower
       - light.bathroom_sink
+      - light.bathroom_tub
 
   - platform: group
-    name: Bathroom sink
-    entities:
-      - light.sink0
-      - light.sink2
-
-  - platform: group
-    name: Bedroom ceiling upper
+    name: Bedroom Ceiling
+    unique_id: bedroom_ceiling_group
     entities:
       - light.bedroom0
-      - light.bedroom1
       - light.bedroom7
 
   - platform: group
-    name: Bedroom ceiling lower
-    entities:
-      - light.bedroom4
-      - light.bedroom5
-      - light.bedroom6
-
-  - platform: group
-    name: Bedroom ceiling
-    entities:
-      - light.bedroom_ceiling_upper
-      - light.bedroom_ceiling_lower
-
-  - platform: group
-    name: Bedroom lamps
+    name: Bedroom Lamps
+    unique_id: bedroom_lamps_group
     entities:
       - light.bedroom2
       - light.bedroom3
 
   - platform: group
-    name: Bedroom lights
+    name: Bedroom Lights
+    unique_id: bedroom_room_lamps_group
     entities:
       - light.bedroom_ceiling
       - light.bedroom_lamps
 
   - platform: group
-    name: Dining room lights
+    name: Dining Room Lamps
+    unique_id: dining_room_lamps_group
     entities:
-      - light.dining_room_lamp
-      - light.dining_room_shelves
+      - light.dining_room_lamp0
+      - light.dining_room_lamp1
+
+  - platform: group
+    name: Dining Room Lights
+    unique_id: dining_room_lights_group
+    entities:
+      - light.dining_room_lamps
       - light.dining_room_table
 
   - platform: group
-    name: Garage lights
+    name: Dressing Room Lights
+    unique_id: dressing_room_lights_group
     entities:
-      - light.garage_lamp
+      - light.bedroom5
+      - light.bedroom6
+
+  - platform: group
+    name: Entryway Lights
+    unique_id: entryway_lights_group
+    entities:
+      - light.entryway0
+      - light.entryway1
+      - light.entryway2
+
+  - platform: group
+    name: Foyer Front
+    unique_id: foyer_front_group
+    entities:
+      - light.foyer0
+      - light.foyer1
+
+  - platform: group
+    name: Foyer Back
+    unique_id: foyer_back_group
+    entities:
+      - light.foyer2
+      - light.foyer3
 
   - platform: group
     name: Foyer Lights
+    unique_id: foyer_lights_group
     entities:
       - light.foyer0
       - light.foyer1
       - light.foyer2
       - light.foyer3
-      - light.foyer4
 
   - platform: group
-    name: Hallway lights
+    name: Hallway Lights
+    unique_id: hallway_lights_group
     entities:
-      - light.entryway
+      - light.entryway_lights
       - light.foyer_lights
+      - light.hallway_lamp
 
   - platform: group
-    name: Kitchen lights
+    name: Gail Office Lights
+    unique_id: gail_office_lights_group
+    entities:
+      - light.gail_office_lamp
+
+  - platform: group
+    name: Kitchen Lights
+    unique_id: kichen_lights_group
     entities:
       - light.kitchen_counter
       - light.kitchen_island
-      - light.kitchen_pantry
       - light.kitchen_pots
+      - light.kitchen_sink
 
   - platform: group
-    name: Livingroom lamps
+    name: Laundry Room Lights
+    unique_id: living_room_lights_group
     entities:
-      - light.lamp0
-      - light.lamp1
-      - light.lamp2
-      - light.tiffany
+      - light.laundry0
+      - light.laundry1
 
   - platform: group
-    name: Livingroom lights
+    name: Livingroom Lights
+    unique_id: livingroom_lights_group
     entities:
-      - light.livingroom_lamps
-      - light.living_room_main
+      - light.livingroom_lamp
+      - light.livingroom_main
+      - light.livingroom_pots
       - light.saltlick
 
   - platform: group
-    name: Loft trees
+    name: Loft Trees
+    unique_id: loft_trees_group
     entities:
       - light.loft_tree0
       - light.loft_tree1
 
   - platform: group
-    name: Main floor lights
+    name: Main Floor Lights
+    unique_id: main_floor_lights_group
     entities:
-      - light.barn_lights
       - light.dining_room_lights
-      - light.entryway
+      - light.entryway_lights
       - light.foyer_lights
+      - light.garage_lights
       - light.kitchen_lights
       - light.livingroom_lights
-      - light.office_lights
-      - light.pantry_lights
-      - light.powder_room
+      - light.loft_trees
+      - light.powder_room_light
 
   - platform: group
     name: Office Lights
+    unique_id: office_lights_group
     entities:
-      - light.office_lamp
+      - light.office_desk_lamp
+      - light.office_ceiling_light
+      - light.office_floor_lamp
+      - light.office_desk_lights
 
   - platform: group
-    name: Outdoor lights
+    name: Back Door Lights
+    unique_id: back_door_lights_group
     entities:
-      - light.front_door
-      - light.back_door
+      - light.back_door0
+      - light.back_door1
 
   - platform: group
-    name: Pantry lights
+    name: Outdoor Lights
+    unique_id: outdoor_lights_group
     entities:
-      - light.kitchen_counter
-      - light.kitchen_pantry
+      - light.outdoor_back_door
+      - light.outdoor_driveway
+      - light.outdoor_pots
 
   - platform: group
-    name: Second floor lights
+    name: Second Floor Lights
+    unique_id: second_floor_lights_group
     entities:
       - light.bathroom_lights
       - light.bedroom_lights
-      - light.spare_room_lights
+      - light.dressing_room_lights
+      - light.gail_office_lights
+      - light.hallway_lamp
+      - light.laundry_room_lights
 
   - platform: group
-    name: Spare room ceiling upper
+    name: TV Room Lamps
+    unique_id: tv_rooms_lamps_group
     entities:
-      - light.spare_ceiling_up0
-      - light.spare_ceiling_up1
-      - light.spare_ceiling_up2
+      - light.lamp1
+      - light.lamp2
+      - light.bedroom4
 
   - platform: group
-    name: Spare room ceiling lower
+    name: TV Room Lights
+    unique_id: tv_room_lights_group
     entities:
-      - light.spare_ceiling0
-      - light.spare_ceiling1
-      - light.spare_ceiling2
-
-  - platform: group
-    name: Spare room ceiling
-    entities:
-      - light.spare_room_ceiling_upper
-      - light.spare_room_ceiling_lower
-
-  - platform: group
-    name: Spare room lights
-    entities:
-      - light.spare0
-      - light.spare1
-      - light.spare_room_ceiling
-
-  - platform: group
-    name: Third floor lights
-    entities:
-      - light.loft_trees
-
+      - light.tv_room_lamps
+      - light.tv_room_pots
 
 #  }}}
 # {{{ Media Players
@@ -406,13 +433,6 @@ logger:
     homeassistant.components.media_player.roku: fatal
     homeassistant.components.http.ban: warning
     homeassistant.components.wemo: fatal
-
-# Lutron Caseta
-#lutron_caseta:
-#  host: 192.168.2.121
-#  keyfile:  '/etc/homeassistant/lutron/caseta.key'
-#  certfile: '/etc/homeassistant/lutron/caseta.crt'
-#  ca_certs: '/etc/homeassistant/lutron/caseta-bridge.crt'
 
 # Enables support for tracking state changes over time.
 history:
@@ -476,9 +496,6 @@ notify:
     method: POST_JSON
     title_param_name: topic
 
-  - name: ecobee
-    platform: ecobee
-
 # }}}
 # {{{ Persons
 
@@ -488,11 +505,10 @@ person:
     user_id: 09f60884ba844227a9b3c2d54fb341e2
     device_trackers:
       - device_tracker.gail_iphone
-      - device_tracker.gail3
   - name: Cameron
     id: cam1995
     device_trackers:
-      - device_tracker.camphone
+      - device_tracker.cameron_s_s23
   - name: Grant
     id: grant1994
     device_trackers:
@@ -501,27 +517,11 @@ person:
     id: jen2000
     user_id: 10f174a6c6db401babe419a388e8eaa8
     device_trackers:
-      - device_tracker.unifi_default_28_c5_38_bf_0f_00
-# }}}
-# {{{ Presence Trackers
-
-#device_tracker:
-#  - platform: iphonedetect
-#    consider_home: 600
-#    new_device_defaults:
-#      track_new_devices: true
-#    hosts:
-#      jennifer_iphone_detect: 192.168.2.64
-#      jennifer_iphone_detect2: 192.168.2.10
-#      jennifer_iphone_detect3: 192.168.2.152
-
+      - device_tracker.jennifer
 # }}}
 # {{{ Sensors
 
 sensor:
-  - platform: cert_expiry
-    host: !secret http_base_url
-
   - platform: template
     sensors:
       distance_apart:
@@ -536,29 +536,25 @@ sensor:
           {% endif %}
         unit_of_measurement: 'km'
 
-#  # Sensor for monitoring the bridge state
-#  - platform: mqtt
-#    name: Zigbee2mqtt Bridge state
-#    state_topic: "zigbee2mqtt/bridge/state"
-#    icon: mdi:router-wireless
-#  # Sensor for Showing the Zigbee2mqtt Version
-#  - platform: mqtt
-#    name: Zigbee2mqtt Version
-#    state_topic: "zigbee2mqtt/bridge/config"
-#    value_template: "{{ value_json.version }}"
-#    icon: mdi:zigbee
-#  # Sensor for Showing the Coordinator Version
-#  - platform: mqtt
-#    name: Coordinator Version
-#    state_topic: "zigbee2mqtt/bridge/config"
-#    value_template: "{{ value_json.coordinator }}"
-#    icon: mdi:chip
-
-binary_sensor:
-  - platform: ffmpeg_motion
-    name: Garage Motion
-    input: http://pi3:8081
-    reset: 20
+  - platform: template
+    sensors:
+      delicious_docked:
+        unique_id: delicious_docked_sensor
+        friendly_name: 'Delicious Docked'
+        value_template: >-
+          {% if states('switch.delicious_paused') == 'on' -%}
+            Paused
+          {% else %}
+            {% if states('binary_sensor.delicious_docked') == 'off' -%}
+              {% if states('fan.delicious') == 'on' -%}
+                Vacuuming
+              {% else -%}
+                Returning to Dock
+              {% endif %}
+            {% else -%}
+              Docked
+            {% endif %}
+          {% endif %}
 
 # }}}
 # {{{ Switches
@@ -573,12 +569,12 @@ wemo:
 
 # }}}
 # {{{ Text-to-speech
-tts:
-  - platform: google_translate
-    service_name: google_say
-
-  - platform: voicerss
-    api_key: !secret voicerss_api_key
+#tts:
+#  - platform: google_translate
+#    service_name: google_say
+#
+#  - platform: voicerss
+#    api_key: !secret voicerss_api_key
 
 # }}}
 

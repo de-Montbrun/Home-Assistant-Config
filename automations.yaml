@@ -61,32 +61,34 @@
   initial_state: true
 - id: occupancy_alarm_return_home_disarm_alarm
   alias: Occupancy - return home - disarm alarm
-  trigger:
-  - platform: state
-    entity_id:
-    - group.cam_tracker
-    - group.jen_tracker
+  triggers:
+  - entity_id:
+    - person.cameron
+    - person.jennifer
     - person.gail
     - person.gervais
     to: home
-  action:
-  - service: alarm_control_panel.alarm_disarm
-    target:
+    trigger: state
+  actions:
+  - target:
       entity_id: alarm_control_panel.alarmo
     data: {}
+    action: alarm_control_panel.alarm_disarm
   initial_state: true
 - id: tap0_button_1
   alias: Tap0 Button 1
-  trigger:
-    device_id: 2b533c9f9b279032d1907efe688c476d
+  triggers:
+  - device_id: 2b533c9f9b279032d1907efe688c476d
     domain: hue
-    platform: device
     type: initial_press
     subtype: 1
     unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
-  action:
-    service: light.toggle
-    entity_id: light.sunroom_lights
+    trigger: device
+  actions:
+  - action: light.toggle
+    data: {}
+    target:
+      entity_id: light.tv_room_lights
 - id: tap0_button_2
   alias: Tap0 Button 2
   trigger:
@@ -101,77 +103,83 @@
     entity_id: scene.sunroom_dim
 - id: tap0_button_3
   alias: Tap0 Button 3
-  trigger:
+  triggers:
   - device_id: 2b533c9f9b279032d1907efe688c476d
     domain: hue
-    platform: device
     type: initial_press
     subtype: 3
     unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
-  action:
-  - service: homeassistant.turn_on
-    entity_id: automation.lighting_plex_play_pause
-  - service: homeassistant.turn_on
-    entity_id: automation.sunroom_no_occupancy_lights_off
-  - service: scene.turn_on
-    entity_id: scene.sunroom_dim
+    trigger: device
+  actions:
+  - action: homeassistant.turn_on
+    data: {}
+    target:
+      entity_id: automation.lighting_tv_play_pause
+  - entity_id: automation.sunroom_no_occupancy_lights_off
+    action: homeassistant.turn_on
+  - entity_id: scene.sunroom_dim
+    action: scene.turn_on
 - id: tap0_button_4
   alias: Tap0 Button 4
-  trigger:
+  triggers:
   - device_id: 2b533c9f9b279032d1907efe688c476d
     domain: hue
-    platform: device
     type: initial_press
     subtype: 4
     unique_id: a9cd78d6-bb3c-404b-9091-af08cc7a2b45
-  action:
-  - service: homeassistant.turn_off
-    entity_id: automation.lighting_plex_play_pause
-  - service: homeassistant.turn_off
-    entity_id: automation.sunroom_no_occupancy_lights_off
-  - service: scene.turn_on
-    entity_id: scene.sunroom_normal
+    trigger: device
+  actions:
+  - action: homeassistant.turn_off
+    data: {}
+    target:
+      entity_id:
+      - automation.lighting_tv_play_pause
+  - entity_id: automation.sunroom_no_occupancy_lights_off
+    action: homeassistant.turn_off
+  - entity_id: scene.sunroom_normal
+    action: scene.turn_on
 - id: tap1_buttons
   alias: Tap1 Doorbell
-  trigger:
+  triggers:
   - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
     domain: hue
-    platform: device
     type: initial_press
     subtype: 1
     unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
+    trigger: device
   - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
     domain: hue
-    platform: device
     type: initial_press
     subtype: 2
     unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
+    trigger: device
   - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
     domain: hue
-    platform: device
     type: initial_press
     subtype: 3
     unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
+    trigger: device
   - device_id: 34639f5aa92cbec96fe2fb0a0ec6cf7c
     domain: hue
-    platform: device
     type: initial_press
     subtype: 4
     unique_id: 0d35c07b-3179-486a-87cc-787794d0b994
-  action:
-  - service: notify.mobile_app_iphone
-    data:
+    trigger: device
+  actions:
+  - data:
       message: "Someone is at the front door. \U0001F514"
-  - service: notify.mobile_app_gail_iphone
-    data:
+    action: notify.mobile_app_iphone
+  - data:
       message: "Someone is at the front door. \U0001F514"
+    action: notify.mobile_app_gail_iphone
   - condition: state
-    entity_id: media_player.roku_living_roomtv
+    entity_id: media_player.tv_roomtv
     state: playing
-  - service: remote.send_command
-    data:
-      entity_id: remote.roku_livingroom
+  - data:
       command: play
+    action: remote.send_command
+    target:
+      entity_id: remote.tv_roomtv
 - id: occupancy_heating_no_one_home_turn_down_heat
   alias: Occupancy - no one home - turn down heat
   trigger:
@@ -226,52 +234,6 @@
     target:
       entity_id: scene.heat_home
   initial_state: true
-- id: occupancy_heating_work_day_dressing_bath_room_heater
-  alias: Heat - Work day dressing bathroom room schedule
-  description: ''
-  triggers:
-  - at: 07:00:00
-    trigger: time
-  - at: 08:00:00
-    trigger: time
-  - at: 09:00:00
-    trigger: time
-  - at: '22:15:00'
-    trigger: time
-  - entity_id:
-    - person.gail
-    from: home
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
-    trigger: state
-  conditions:
-  - condition: and
-    conditions:
-    - condition: template
-      value_template: '{{ states("sensor.season") != "summer" }}'
-    - condition: state
-      entity_id: binary_sensor.workday_sensor
-      state: 'on'
-    - condition: numeric_state
-      entity_id: sensor.saint_john_temperature
-      below: 5
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.heat_home
-  - data:
-      temperature: "{%- if (now().strftime(\"%H\") | int < 9)\n  and (now().strftime(\"%H\")
-        | int >= 7)\n  and is_state(\"person.gail\", \"home\")\n  and states(\"sensor.season\")
-        != \"summer\" -%}\n    22\n{%- else -%}\n    15\n{% endif %}\n"
-    target:
-      entity_id:
-      - climate.mysa_bathroom_thermostat
-      - climate.mysa_dressing_room_thermostat
-    action: climate.set_temperature
 - id: heating_office_heater_off
   alias: 6pm - heater off
   trigger:
@@ -297,34 +259,34 @@
       entity_id: switch.switch1
   initial_state: true
 - id: occupancy_heating_gail_away_heater_off
-  alias: Gail away - toggle office switch
+  alias: Gail away - toggle Gail office switch
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - person.gail
     from: home
     for:
       hours: 0
       minutes: 5
       seconds: 0
-  condition: []
-  action:
-  - service: switch.turn_off
-    metadata: {}
+    trigger: state
+  conditions: []
+  actions:
+  - metadata: {}
     data: {}
     target:
       entity_id: switch.switch1
+    action: switch.turn_off
   - delay:
       hours: 0
       minutes: 1
       seconds: 0
       milliseconds: 0
-  - service: switch.turn_on
-    metadata: {}
+  - metadata: {}
     data: {}
     target:
       entity_id: switch.switch1
+    action: switch.turn_on
   initial_state: true
 - id: occupancy_bedroom_gang_not_home
   alias: GandG not home - turn off bedroom things
@@ -364,23 +326,6 @@
     target:
       entity_id: switch.switch4
   initial_state: true
-- id: occupancy_bedroom_turn_on_lights
-  alias: Occupancy in bedroom - turn on lights
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: binary_sensor.master_bedroom_occupancy
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: light.bedroom_lights
-    state: 'off'
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
-  action:
-    service: light.turn_on
-    entity_id: light.bedroom_lights
 - id: occupancy_lighting_basement_on
   alias: Basement - Occupancy lights on
   initial_state: false
@@ -401,54 +346,6 @@
     state: 'off'
   - service: light.turn_off
     entity_id: light.basement_lights
-- id: lighting_basement_sync_up
-  alias: Basement - Light sync up
-  initial_state: false
-  trigger:
-  - platform: state
-    entity_id:
-    - light.basement0
-    - light.basement1
-    - light.basement2
-  action:
-  - variables:
-      myService: "{%- if trigger.to_state.state == 'on' -%}\n      light.turn_on\n{%-
-        else -%}\n      light.turn_off\n{% endif %}\n"
-  - service: '{{ myService }}'
-    entity_id: light.basement_lights
-- id: occupancy_garage_turn_off_lights
-  alias: Occupance in Garage - turn off lights
-  initial_state: false
-  trigger:
-    platform: template
-    value_template: '{{ state_attr("device_tracker.jjn66qf9lo", "ap_mac") != "d0:21:f9:61:26:99"
-      }}'
-  action:
-    service: light.turn_off
-    entity_id:
-    - light.garage_lamp
-    - light.garage_pots
-- id: occupancy_hallway_turn_on_lights
-  alias: Occupancy in hallway - turn on lights
-  initial_state: false
-  mode: restart
-  trigger:
-    platform: state
-    entity_id: binary_sensor.my_ecobee_occupancy,binary_sensor.upstair_hall_occupancy
-    to: 'on'
-  condition:
-  - condition: state
-    entity_id: light.hallway_lights
-    state: 'off'
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
-  action:
-  - service: light.turn_on
-    entity_id: light.hallway_lights
-  - delay: 00:15
-  - service: light.turn_off
-    entity_id: light.hallway_lights
 - id: occupancy_lighting_kitchen_on
   alias: Kitchen - Occupancy lights on
   triggers:
@@ -458,9 +355,14 @@
   conditions:
   - condition: and
     conditions:
-    - condition: state
-      entity_id: light.kitchen_lights
-      state: 'off'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: light.entryway_lights
+        state: 'off'
+      - condition: state
+        entity_id: light.kitchen_lights
+        state: 'off'
     - condition: or
       conditions:
       - condition: numeric_state
@@ -476,21 +378,23 @@
       entity_id:
       - light.kitchen_counter
       - light.kitchen_pots
+      - light.entryway2
+      - light.entryway0
     action: light.turn_on
 - id: occupancy_lighting_kitchen_off
   alias: Kitchen - No occupancy lights off
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - binary_sensor.kitchen_sensor_motion
     to: 'off'
     for:
       hours: 0
       minutes: 20
       seconds: 0
-  - platform: time
-    at: '23:59:00'
-  condition:
+    trigger: state
+  - at: '23:59:00'
+    trigger: time
+  conditions:
   - condition: or
     conditions:
     - condition: and
@@ -516,72 +420,82 @@
           hours: 0
           minutes: 10
           seconds: 0
-  action:
+  actions:
   - metadata: {}
     data: {}
     target:
-      entity_id: light.kitchen_lights
+      entity_id:
+      - light.kitchen_lights
+      - light.entryway_lights
     action: light.turn_off
 - id: lighting_livingroomtv_play-pause
   alias: Lighting - TV play/pause
-  trigger:
-  - platform: state
-    entity_id:
-    - media_player.plex_plex_for_roku_living_roomtv
-  condition:
+  triggers:
+  - entity_id:
+    - media_player.plex_plex_for_roku_tv_roomtv
+    trigger: state
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  conditions:
   - condition: and
     conditions:
     - condition: state
       entity_id: sun.sun
       state: below_horizon
     - condition: state
-      entity_id: light.livingroom_lights
+      entity_id: light.tv_room_lights
       state: 'on'
-  action:
-  - service: scene.turn_on
-    data:
-      entity_id: "{%- if trigger.to_state.state == 'playing' -%}\n      scene.living_room_dim\n{%-
-        else -%}\n      scene.living_room_normal\n{% endif %}\n"
-  initial_state: false
+  actions:
+  - data:
+      entity_id: "{%- if trigger.to_state.state == 'playing' -%}\n  scene.tv_room_dim\n{%-
+        else -%}\n  scene.tv_room_normal\n{% endif %}\n"
+    action: scene.turn_on
+  initial_state: true
 - id: occupancy_lighting_motion_livingroom
-  alias: Timed lights - Movement in Living
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.sun_room_sensor_motion
+  alias: Timed lights - Movement in TV Room
+  description: ''
+  triggers:
+  - entity_id:
+    - binary_sensor.occupancy0_occupancy
+    - binary_sensor.occupancy0_motion
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: state
-      entity_id: light.livingroom_lights
+      entity_id: light.tv_room_lights
       state: 'off'
     - condition: numeric_state
-      entity_id: sensor.sun_room_sensor_light_level
-      below: 3
-  action:
-  - service: light.turn_on
-    data:
+      entity_id: sensor.occupancy0_illuminance
+      below: 300
+  actions:
+  - data:
       brightness_pct: 29
+    action: light.turn_on
     target:
-      entity_id:
-      - light.livingroom_lamps
-      - light.saltlick
+      entity_id: light.tv_room_lamps
   - delay: 00:10
   - condition: time
     after: 00:01:00
     before: 09:00:00
   - condition: state
-    entity_id: media_player.roku_living_roomtv
+    entity_id: media_player.tv_roomtv
     state: standby
-  - service: light.turn_off
-    entity_id:
-    - light.livingroom_lights
-    - light.hallway_lights
-  mode: single
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.tv_room_lights
+  mode: restart
 - id: occupancy_lighting_sunroom_off
-  alias: Living room - No occupancy lights off
+  alias: TV room - No occupancy lights off
+  description: ''
   triggers:
-  - entity_id: binary_sensor.sun_room_sensor_motion
+  - entity_id:
+    - binary_sensor.occupancy0_occupancy
     to: 'off'
     for:
       minutes: 10
@@ -593,15 +507,16 @@
       conditions:
       - condition: sun
         before: sunset
+        before_offset: '30'
       - condition: state
-        entity_id: binary_sensor.sun_room_sensor_motion
+        entity_id: binary_sensor.occupancy0_occupancy
         for:
           hours: 0
           minutes: 10
           seconds: 0
         state: 'off'
       - condition: state
-        entity_id: media_player.roku_living_roomtv
+        entity_id: media_player.tv_roomtv
         state: standby
     - condition: and
       conditions:
@@ -609,25 +524,28 @@
         after: '23:50:00'
         before: 06:00:00
       - condition: state
-        entity_id: binary_sensor.sun_room_sensor_motion
+        entity_id: binary_sensor.occupancy0_occupancy
         state: 'off'
         for:
           hours: 0
           minutes: 10
           seconds: 0
       - condition: state
-        entity_id: media_player.roku_living_roomtv
+        entity_id: media_player.tv_roomtv
         state: standby
   actions:
-  - entity_id: light.livingroom_lights
-    action: light.turn_off
+  - action: light.turn_off
+    data: {}
+    target:
+      entity_id: light.tv_room_lights
 - id: lighting_sunroom_lumens_low_lights_on
   alias: Sunroom lumens low - lights on
-  trigger:
-  - platform: state
-    entity_id: media_player.roku_living_roomtv
+  triggers:
+  - entity_id:
+    - media_player.tv_roomtv
     from: standby
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: template
@@ -636,55 +554,115 @@
     - condition: state
       entity_id: light.livingroom_lights
       state: 'off'
-  action:
-  - service: scene.turn_on
-    metadata: {}
+  actions:
+  - metadata: {}
     target:
       entity_id: scene.living_room_normal
+    action: scene.turn_on
+    data: {}
 - id: turn_on_lights_office
   alias: Occupancy in Office - turn on lights
-  initial_state: false
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.office_occupancy
+  triggers:
+  - entity_id:
+    - binary_sensor.basement_sensor_motion
     to: 'on'
-  - platform: time
-    at: 09:00:00
-  condition:
-  - condition: state
-    entity_id: binary_sensor.workday_sensor
-    state: 'on'
-  - condition: time
-    after: '8:00'
-    before: '20:00'
-  action:
-  - service: light.turn_on
-    data:
-      entity_id: light.office_lights
+    trigger: state
+  - at: 09:00:00
+    trigger: time
+  conditions:
+  - condition: or
+    conditions:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.workday_sensor
+        state: 'on'
+      - condition: time
+        after: 08:00:00
+        before: '20:00:00'
+      - condition: state
+        entity_id: light.office_lights
+        state: 'off'
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.occupancy0_motion
+        state: 'on'
+      - condition: state
+        entity_id: light.office_lights
+        state: 'off'
+  actions:
+  - data:
       brightness: 255
-  - condition: state
-    entity_id: person.gail
-    state: home
-  - service: light.turn_on
-    entity_id: light.dressing_room_lights
+      color_name: white
+    action: light.turn_on
+    target:
+      entity_id:
+      - light.office_desk_lights
+      - light.office_desk_lamp
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: time
+      before: '18:00:00'
+  - action: light.turn_on
+    metadata: {}
+    data:
+      brightness: 255
+    target:
+      entity_id:
+      - light.office_main
+      - light.office_ceiling_light
+      - light.office_floor_lamp
 - id: turn_off_lights_office
-  alias: No one in Office - turn off lights
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: binary_sensor.office_occupancy
+  alias: 'Occupancy - Turn off lights no one in Office '
+  description: ''
+  triggers:
+  - entity_id:
+    - binary_sensor.basement_sensor_motion
     to: 'off'
     for:
       minutes: 10
-  action:
-  - service: light.turn_off
-    entity_id: light.office_lights
-  - service: switch.turn_off
-    entity_id: switch.switch1
-  - condition: template
-    value_template: '{{ states("person.gail") != "home" }}'
-  - service: light.turn_off
-    entity_id: light.dressing_room_lights
+    trigger: state
+  - trigger: time_pattern
+    minutes: '00'
+  - trigger: zone
+    entity_id: person.gervais
+    zone: zone.home
+    event: leave
+  conditions:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.audio_input_in_use
+      state: 'off'
+    - condition: or
+      conditions:
+      - condition: not
+        conditions:
+        - condition: zone
+          entity_id: person.gervais
+          zone: zone.home
+      - condition: and
+        conditions:
+        - condition: time
+          before: 08:00:00
+          after: '18:00:00'
+        - condition: state
+          entity_id: binary_sensor.basement_sensor_motion
+          state: 'off'
+          for:
+            hours: 0
+            minutes: 9
+            seconds: 30
+    - condition: state
+      entity_id: binary_sensor.audio_input_in_use_greenapple
+      state: 'off'
+  actions:
+  - entity_id: light.office_lights
+    action: light.turn_off
 - id: movement_front_door_timed_lights
   alias: Timed lights - Movement Front Door
   initial_state: false
@@ -721,14 +699,12 @@
     entity_id: automation.timed_lights_movement_front_door
 - id: movement_porch_timed_lights
   alias: Timed lights - Movement Porch
-  initial_state: false
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.porch0_motion
-    - binary_sensor.porch1_cell_motion_detection
+  triggers:
+  - entity_id:
+    - binary_sensor.rack_motion
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: state
@@ -737,56 +713,26 @@
     - condition: state
       entity_id: sun.sun
       state: below_horizon
-  action:
-  - service: light.turn_on
-    entity_id: light.outdoor_lights
+  actions:
+  - entity_id: light.outdoor_lights
+    action: light.turn_on
   - delay: 00:10:00
-  - service: light.turn_off
-    entity_id: light.outdoor_lights
+  - entity_id: light.outdoor_lights
+    action: light.turn_off
+  initial_state: false
   mode: restart
-- id: occupancy_spare_room_on
-  alias: Spareroom - Occupancy lights on
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: binary_sensor.spare_room_sensor_motion
-    to: 'on'
-  condition:
-    condition: and
-    conditions:
-    - condition: state
-      entity_id: light.spare_room_lights
-      state: 'off'
-    - condition: template
-      value_template: '{{ state_attr("sensor.spare_room_sensor_light_level", "dark")
-        }}'
-  action:
-    service: light.turn_on
-    entity_id: light.spare_room_lights
-- id: occupancy_spare_room_off
-  alias: Spareroom - No occupancy lights off
-  initial_state: false
-  trigger:
-    platform: state
-    entity_id: binary_sensor.spare_room_sensor_motion
-    to: 'off'
-    for:
-      minutes: 5
-  action:
-    service: light.turn_off
-    entity_id: light.spare_room_lights
 - id: bedtime
   alias: Bedtime
-  trigger:
-  - platform: state
-    entity_id:
-    - media_player.roku_living_roomtv
+  triggers:
+  - entity_id:
+    - media_player.tv_roomtv
     to: standby
     for:
       hours: 0
       minutes: 30
       seconds: 0
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: or
@@ -820,7 +766,7 @@
           state: home
         - condition: template
           value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
-  action:
+  actions:
   - metadata: {}
     data: {}
     target:
@@ -828,42 +774,43 @@
       - light.main_floor_lights
       - light.second_floor_lights
       - switch.switch3
+      - light.basement_lights
     action: homeassistant.turn_off
-  - data:
-      entity_id: climate.my_ecobee
-      preset_mode: Sleep
-    action: climate.set_preset_mode
   mode: restart
 - id: doorbell_doorbell
   alias: Doorbell rang - pause tv
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: binary_sensor.doorbell_doorbell
+  triggers:
+  - entity_id: binary_sensor.doorbell_doorbell
     to: 'on'
-  action:
-    service: remote.send_command
-    data:
-      entity_id: remote.roku_livingroom
+    trigger: state
+  actions:
+  - data:
       command: pause
+    action: remote.send_command
+    target:
+      entity_id: remote.tv_roomtv
+  initial_state: true
 - id: everyone_home_and_gone_to_bed
   alias: Everyone home and gone to bed - Lights out
-  trigger:
-  - platform: state
-    entity_id: media_player.roku_living_roomtv
+  triggers:
+  - entity_id:
+    - media_player.tv_roomtv
     to: standby
     for:
       minutes: 15
-  - platform: state
-    entity_id: person.gail,person.gervais
+    trigger: state
+  - entity_id:
+    - person.gail
+    - person.gervais
     to: home
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: time
       after: '22:30:00'
     - condition: state
-      entity_id: media_player.roku_living_roomtv
+      entity_id: media_player.tv_roomtv
       state: standby
     - condition: or
       conditions:
@@ -877,67 +824,68 @@
         value_template: '{{ states("person.gervais") != "home" }}'
       - condition: template
         value_template: '{{ distance(states.device_tracker.iphone) > 10 }}'
-  action:
-  - delay: 00:10:00
-  - service: homeassistant.turn_off
-    entity_id: automation.timed_lights_movement_front_door
-  - service: light.turn_off
-    data: {}
+  actions:
+  - delay:
+      hours: 0
+      minutes: 20
+      seconds: 0
+  - entity_id: automation.timed_lights_movement_front_door
+    action: homeassistant.turn_off
+  - data: {}
     target:
       entity_id:
       - light.main_floor_lights
       - light.second_floor_lights
-      - light.third_floor_lights
+      - light.basement_lights
+      - light.outdoor_lights
+    action: light.turn_off
   - delay: 00:00:04
-  - service: homeassistant.turn_on
-    entity_id: automation.timed_lights_movement_front_door
+  - entity_id: automation.timed_lights_movement_front_door
+    action: homeassistant.turn_on
   initial_state: true
 - id: lighting_2am_lights_off
   alias: 2am - Lights out
-  trigger:
-  - platform: time
-    at: 02:00:00
-  action:
-  - service: homeassistant.turn_off
-    entity_id: automation.timed_lights_movement_front_door
-  - service: switch.turn_off
-    data: {}
+  triggers:
+  - at: 02:00:00
+    trigger: time
+  actions:
+  - entity_id: automation.timed_lights_movement_front_door
+    action: homeassistant.turn_off
+  - data: {}
     target:
       entity_id:
       - switch.switch0
       - switch.switch3
-  - service: light.turn_off
-    data: {}
+    action: switch.turn_off
+  - data: {}
     target:
       entity_id:
       - light.main_floor_lights
       - light.second_floor_lights
-      - light.third_floor_lights
       - light.outdoor_lights
+      - light.basement_lights
+    action: light.turn_off
   - delay: 00:00:05
-  - service: homeassistant.turn_on
-    entity_id: automation.timed_lights_movement_front_door
+  - entity_id: automation.timed_lights_movement_front_door
+    action: homeassistant.turn_on
   initial_state: true
 - id: sunrise
   alias: Sunrise - Lights out
-  initial_state: false
-  trigger:
-    platform: sun
-    event: sunrise
+  triggers:
+  - event: sunrise
     offset: +00:30:00
-  action:
-  - service: light.turn_off
-    entity_id:
+    trigger: sun
+  actions:
+  - entity_id:
     - light.hallway_lights
     - light.garage_lights
     - light.main_floor_lights
     - light.outdoor_lights
     - light.spare_room_lights
-  - condition: state
-    entity_id: binary_sensor.master_bedroom_occupancy
-    state: 'off'
-  - service: light.turn_off
-    entity_id: all
+    action: light.turn_off
+  - entity_id: all
+    action: light.turn_off
+  initial_state: false
 - id: sunset
   alias: Sunset - Lights on
   trigger:
@@ -980,52 +928,48 @@
     data: {}
   initial_state: false
 - id: misc_living_room_turn_off_tv
-  alias: Turn off living room tv when idle
-  initial_state: true
-  trigger:
-  - platform: time_pattern
-    minutes: /20
+  alias: Turn off TV room tv when idle
+  description: ''
+  triggers:
+  - minutes: /20
     seconds: 0
-  condition:
-    condition: and
+    trigger: time_pattern
+  conditions:
+  - condition: and
     conditions:
     - condition: template
-      value_template: '{{ states("media_player.roku_living_roomtv") != "standby" }}'
+      value_template: '{{ states("media_player.tv_roomtv") != "standby" }}'
     - condition: template
-      value_template: '{{ states("media_player.roku_living_roomtv") != "unavailable"
-        }}'
+      value_template: '{{ states("media_player.tv_roomtv") != "unavailable" }}'
     - condition: state
-      entity_id: binary_sensor.sun_room_sensor_motion
+      entity_id: binary_sensor.occupancy0_occupancy
       state: 'off'
       for:
         minutes: 39
-    - condition: or
+    - condition: and
       conditions:
       - condition: state
-        entity_id: media_player.plex_plex_for_roku_living_roomtv
+        entity_id: media_player.plex_plex_for_roku_tv_roomtv
         state: idle
         for:
           minutes: 15
       - condition: state
-        entity_id: media_player.roku_living_roomtv
-        state: idle
-        for:
-          minutes: 15
-      - condition: state
-        entity_id: media_player.roku_living_roomtv
+        entity_id: device_tracker.tvroomtv
         state: home
         for:
           minutes: 15
       - condition: state
-        entity_id: media_player.roku_living_roomtv
-        state: 'on'
+        entity_id: media_player.tv_roomtv
+        state: idle
         for:
           minutes: 15
-  action:
-    service: remote.send_command
-    data:
-      entity_id: remote.roku_livingroom
+  actions:
+  - data:
       command: power
+    action: remote.send_command
+    target:
+      entity_id: remote.tv_roomtv
+  initial_state: true
 - id: notify_home_presence
   alias: Home presence notification
   initial_state: false
@@ -1047,7 +991,6 @@
       title: Family Location
 - id: notify_phone_presence
   alias: Phones presence notification
-  initial_state: false
   trigger:
     platform: state
     entity_id: person.gervais,person.gail
@@ -1209,9 +1152,9 @@
       entity_id: vacuum.consuela
       state: docked
     - condition: state
-      entity_id: vacuum.delicious
-      state: docked
-      enabled: false
+      entity_id: fan.delicious
+      state: 'off'
+      enabled: true
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start"
         , "last_triggered")) | int > 432000 }}'
@@ -1220,24 +1163,17 @@
     - condition: template
       value_template: '{{ states("person.gervais") != "home" }}'
   actions:
-  - metadata: {}
-    data: {}
-    target:
-      entity_id: light.bedroom_lights
-    action: light.turn_on
   - data: {}
     target:
       entity_id:
       - vacuum.consuela
-      - vacuum.delicious
     action: vacuum.start
-  - action: media_player.play_media
+  - action: fan.set_percentage
     metadata: {}
     data:
-      media_content_id: HA tell Delicious to start vacuuming
-      media_content_type: routine
+      percentage: 70
     target:
-      entity_id: media_player.kitchen
+      entity_id: fan.delicious
 - id: mop_start
   alias: Mop Start
   trigger:
@@ -1272,16 +1208,17 @@
     - condition: state
       entity_id: vacuum.consuela
       state: cleaning
+    - condition: state
+      entity_id: fan.delicious
+      state: 'on'
   actions:
   - entity_id: all
     action: vacuum.return_to_base
-  - action: media_player.play_media
-    target:
-      entity_id: media_player.kitchen
-    data:
-      media_content_id: HA tell Delicious to go home
-      media_content_type: ''
+  - action: fan.turn_off
     metadata: {}
+    data: {}
+    target:
+      entity_id: fan.delicious
   initial_state: false
 - id: zigbee_log_level
   alias: Zigbee2mqtt Log Level
@@ -1294,58 +1231,25 @@
     data:
       payload_template: '{{ states(''input_select.zigbee2mqtt_log_level'') }}'
       topic: zigbee2mqtt/bridge/config/log_level
-- id: zigbee_join_enabled
-  alias: Zigbee Join Enabled
-  trigger:
-    platform: state
-    entity_id: switch.zigbee2mqtt_main_join
-    to: 'on'
-  action:
-    service: timer.start
-    entity_id: timer.zigbee_permit_join
-- id: zigbee_join_disabled
-  alias: Zigbee Join Disabled
-  trigger:
-  - platform: event
-    event_type: timer.finished
-    event_data:
-      entity_id: timer.zigbee_permit_join
-  - platform: state
-    entity_id: switch.zigbee2mqtt_main_join
-    to: 'off'
-  action:
-  - service: timer.cancel
-    data:
-      entity_id: timer.zigbee_permit_join
-  - service: switch.turn_off
-    entity_id: switch.zigbee2mqtt_main_join
 - id: '1705282122548'
   alias: Lock Volvo
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - device_tracker.yv4162uk5l2256988_position
-    to: home
+  triggers:
+  - entity_id:
+    - binary_sensor.volvo_volvo_engine_status
+    to: 'off'
     for:
       hours: 0
-      minutes: 15
+      minutes: 30
       seconds: 0
-  - platform: state
-    entity_id:
-    - device_tracker.yv4162uk5l2256988_position
-    to: Knowledge Park
-    for:
-      hours: 0
-      minutes: 15
-      seconds: 0
-  condition: []
-  action:
-  - service: lock.lock
-    metadata: {}
+    trigger: state
+  conditions: []
+  actions:
+  - metadata: {}
     data: {}
+    action: lock.lock
     target:
-      entity_id: lock.yv4162uk5l2256988_door_lock
+      entity_id: lock.volvo_volvo_lock
   mode: single
 - id: '1708818994369'
   alias: Heat - Turn down at bed time
@@ -1436,43 +1340,6 @@
     target:
       entity_id: scene.heat_home
   mode: single
-- id: '1709865400186'
-  alias: 'IR Sync up - Sunset '
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - scene.sunset
-  condition: []
-  action:
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 5
-      milliseconds: 0
-  - service: script.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id:
-      - script.dining_room_shelf_blue
-  mode: single
-- id: '1709866403421'
-  alias: IR Sync up - Goodnight
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - scene.goodnight
-  condition: []
-  action:
-  - service: script.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id:
-      - script.dining_shelf_candles_off
-  mode: single
 - id: '1717197737888'
   alias: Fan - turn off
   description: ''
@@ -1539,61 +1406,366 @@
 - id: '1717456710664'
   alias: Keep toggle switches on
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - switch.switch4
     to: 'off'
-  - platform: state
-    entity_id:
+    trigger: state
+  - entity_id:
     - switch.switch1
     to: 'off'
-  condition: []
-  action:
+    trigger: state
+  - trigger: state
+    entity_id:
+    - switch.office_main
+    to: 'off'
+  conditions: []
+  actions:
   - delay:
       hours: 0
       minutes: 0
       seconds: 30
       milliseconds: 0
-  - service: switch.turn_on
-    metadata: {}
+  - metadata: {}
     data: {}
     target:
       entity_id:
       - switch.switch4
       - switch.switch1
+      - switch.office_main
+    action: switch.turn_on
   mode: restart
-- id: '1729385467304'
-  alias: Shut up
+- id: '1738108426886'
+  alias: On Air
   description: ''
   triggers:
-  - trigger: time_pattern
-    seconds: '05'
-    minutes: '*'
-    hours: '*'
-  - trigger: time_pattern
-    seconds: '10'
-  - trigger: time_pattern
-    seconds: '15'
-  - trigger: time_pattern
-    seconds: '20'
-  - trigger: time_pattern
-    seconds: '25'
-  - trigger: time_pattern
-    seconds: '30'
-  - trigger: time_pattern
-    seconds: '35'
-  - trigger: time_pattern
-    seconds: '40'
-  - trigger: time_pattern
-    seconds: '45'
-  - trigger: time_pattern
-    seconds: '50'
+  - type: turned_on
+    device_id: 58ed6404dd328113e9eba60ee42f700d
+    entity_id: 436f65b6469bf468c896827d5557574c
+    domain: binary_sensor
+    trigger: device
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+  - type: turned_on
+    device_id: 9e702f0b6d26018028c93f6658692ddd
+    entity_id: 497ce5a50e7f79011fdf7b3ae97f53a7
+    domain: binary_sensor
+    trigger: device
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+  - trigger: state
+    entity_id:
+    - sensor.frontmost_app_greenapple
+    - sensor.frontmost_app
+    to: zoom.us
+  - trigger: state
+    entity_id:
+    - sensor.frontmost_app_greenapple
+    - sensor.frontmost_app
+    to: Slack
+  - trigger: state
+    entity_id:
+    - sensor.frontmost_app_greenapple
+    - sensor.frontmost_app
+    to: Messenger
+  conditions:
+  - condition: and
+    conditions:
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: sensor.frontmost_app_greenapple
+        state: zoom.us
+      - condition: state
+        entity_id: sensor.frontmost_app_greenapple
+        state: Slack
+      - condition: state
+        entity_id: sensor.frontmost_app_greenapple
+        state: Messenger
+      - condition: state
+        entity_id: sensor.frontmost_app
+        state: zoom.us
+      - condition: state
+        entity_id: sensor.frontmost_app
+        state: Slack
+      - condition: state
+        entity_id: sensor.frontmost_app
+        state: Messenger
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.camera_in_use_greenapple
+        state: 'on'
+        for:
+          hours: 0
+          minutes: 2
+          seconds: 0
+      - condition: state
+        entity_id: binary_sensor.camera_in_use
+        state: 'on'
+        for:
+          hours: 0
+          minutes: 2
+          seconds: 0
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data:
+      rgb_color:
+      - 152
+      - 255
+      - 251
+      brightness_pct: 100
+    target:
+      entity_id:
+      - light.office_ceiling_light
+      - light.office_floor_lamp
+  mode: single
+- id: '1738458067745'
+  alias: Sync TV Backlight Kit to TV state
+  description: ''
+  triggers:
+  - entity_id:
+    - media_player.tv_roomtv
+    trigger: state
+    to: standby
+  - trigger: state
+    entity_id:
+    - media_player.tv_roomtv
+    to: 'on'
+  - trigger: state
+    entity_id:
+    - media_player.tv_roomtv
+    to: 'off'
+  - trigger: state
+    entity_id:
+    - media_player.tv_roomtv
+    from: playing
   conditions: []
   actions:
-  - action: script.turn_on
+  - variables:
+      tvroomtvstate: "{%- if trigger.to_state.state == 'standby' or trigger.to_state.state
+        == 'off' -%}\n      light.turn_off\n{%- else -%}\n      light.turn_on\n{%
+        endif %}\n"
+  - entity_id: light.tv_backlight_kit
+    action: '{{ tvroomtvstate }}'
+  mode: single
+  initial_state: true
+- id: '1738548638585'
+  alias: Sync Basement Bathroom
+  description: ''
+  triggers:
+  - entity_id:
+    - light.basement_bathroom
+    trigger: state
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  conditions: []
+  actions:
+  - action: light.turn_off
     metadata: {}
     data: {}
     target:
-      entity_id: script.turn_it_down
+      entity_id: light.basement_shower
+  mode: single
+  initial_state: true
+- id: '1739132526017'
+  alias: Sync Powder Room Fan
+  description: ''
+  triggers:
+  - entity_id:
+    - light.powder_room_light
+    trigger: state
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  conditions: []
+  actions:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.powder_room_fan
+  mode: single
+  initial_state: true
+- id: '1739134591755'
+  alias: Occupancy - Motion in Garage
+  description: ''
+  triggers:
+  - type: motion
+    device_id: f2b14e66dd6c2b0de54ce8265849dd90
+    entity_id: 07a527c9cfc1b9741826933bd820a6b9
+    domain: binary_sensor
+    metadata:
+      secondary: false
+    trigger: device
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+      for:
+        hours: 0
+        minutes: 30
+        seconds: 0
+    - condition: numeric_state
+      entity_id: sensor.hue_outdoor_motion_sensor_1_illuminance
+      attribute: light_level
+      below: 10000
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.garage_lights
+  - condition: state
+    entity_id: binary_sensor.hue_outdoor_motion_sensor_1_motion
+    state: 'off'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.garage_lights
+  mode: restart
+- id: '1739655330002'
+  alias: Sync Bathroom TubandShower
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - light.bathroom_shower
+    - light.bathroom_tub
+  conditions: []
+  actions:
+  - variables:
+      lightAction: "{%- if trigger.to_state.state == 'on' -%}\n      light.turn_on\n{%-
+        else -%}\n      light.turn_off\n{% endif %}\n"
+  - entity_id:
+    - light.bathroom_shower
+    - light.bathroom_tub
+    action: '{{ lightAction }}'
+  mode: single
+- id: '1739655519910'
+  alias: Sync Bathroom Lights to off with Bathroom Sink
+  description: ''
+  triggers:
+  - entity_id:
+    - light.bathroom_sink
+    trigger: state
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.bathroom_lights
+  mode: single
+  initial_state: true
+- id: '1740021343908'
+  alias: Occupancy - Living Room Lights
+  description: ''
+  triggers:
+  - entity_id: binary_sensor.living_room_sensor_motion
+    from: 'off'
+    to: 'on'
+    trigger: state
+  conditions:
+  - condition: and
+    conditions:
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: light.livingroom_lights
+        state: 'off'
+      - condition: state
+        entity_id: light.foyer_lights
+        state: 'off'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: below_horizon
+      - condition: numeric_state
+        entity_id: sensor.living_room_sensor_light_level
+        attribute: light_level
+        below: 8000
+  actions:
+  - target:
+      entity_id:
+      - light.livingroom_pots
+      - light.foyer_front
+      - light.loft_trees
+    action: light.turn_on
+    data: {}
+  - wait_for_trigger:
+      entity_id: binary_sensor.living_room_sensor_motion
+      from: 'on'
+      to: 'off'
+      trigger: state
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - target:
+      entity_id:
+      - light.livingroom_pots
+      - light.foyer_front
+      - light.loft_trees
+    action: light.turn_off
+    data: {}
+  mode: restart
+  max_exceeded: silent
+- id: '1741648529877'
+  alias: Occupancy - No Motion in Garage
+  description: ''
+  triggers:
+  - type: no_motion
+    device_id: f2b14e66dd6c2b0de54ce8265849dd90
+    entity_id: 07a527c9cfc1b9741826933bd820a6b9
+    domain: binary_sensor
+    trigger: device
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+      for:
+        hours: 0
+        minutes: 30
+        seconds: 0
+    - condition: numeric_state
+      entity_id: sensor.hue_outdoor_motion_sensor_1_illuminance
+      attribute: light_level
+      below: 10000
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.garage_lights
   mode: single
