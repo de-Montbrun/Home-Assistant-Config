@@ -1,21 +1,7 @@
 device_tracker.gail_iphone:
   hidden: false
-  entity_picture: https://www.gravatar.com/avatar/cfc778be50204005b79c0db7ee67dda0.jpg?s=80&d=wavata
 device_tracker.iphone:
   hidden: false
-  entity_picture: https://www.gravatar.com/avatar/5353fd4e9e6aa5b84af2fd5ca3231ada.jpg?s=80&d=wavatar
-group.grant_tracker:
-  entity_picture: https://avatars.io/facebook/Grannt
-device_tracker.grantphone:
-  hidden: true
-device_tracker.grant2:
-  hidden: true
-group.cam_tracker:
-  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
-device_tracker.camphone:
-  hidden: true
-device_tracker.cameron2:
-  hidden: true
 person.cameron:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/48.png
 person.gail:
@@ -26,13 +12,5 @@ person.grant:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/54.png
 person.jennifer:
   entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
-group.jen_tracker:
-  entity_picture: https://zulip.demontbrun.com/user_avatars/2/emoji/images/50.png
-device_tracker.jenphone:
-  hidden: true
-device_tracker.jennifer2:
-  hidden: true
-sensor.fing_state:
-  hidden: true
 sensor.distance_apart:
   icon: mdi:human-male-female
