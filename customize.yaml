@@ -1,3 +1,5 @@
+device_tracker.greenapple2:
+  friendly_name: 🍏
 device_tracker.gail_iphone:
   hidden: false
 device_tracker.iphone:
