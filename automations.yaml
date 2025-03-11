@@ -437,7 +437,7 @@
     for:
       hours: 0
       minutes: 0
-      seconds: 5
+      seconds: 3
   conditions:
   - condition: and
     conditions:
