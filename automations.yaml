@@ -34,30 +34,34 @@
       title: Home Assistant
 - id: occupancy_alarm_no_one_home_alarm_alarm
   alias: Occupancy - no one home - alarm alarm
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - person.gail
     - person.gervais
     - group.cam_tracker
     - group.jen_tracker
     from: home
-  condition:
-  - condition: and
+    trigger: state
+  conditions:
+  - condition: not
     conditions:
-    - condition: template
-      value_template: '{{ states("person.gail") != "home" }}'
-    - condition: template
-      value_template: '{{ states("person.gervais") != "home" }}'
-    - condition: template
-      value_template: '{{ states("group.cam_tracker") != "home" }}'
-    - condition: template
-      value_template: '{{ states("group.jen_tracker") != "home" }}'
-  action:
-  - service: alarm_control_panel.alarm_arm_away
-    target:
+    - condition: state
+      entity_id: person.cameron
+      state: home
+    - condition: state
+      entity_id: person.gail
+      state: home
+    - condition: state
+      entity_id: person.gervais
+      state: home
+    - condition: state
+      entity_id: person.jennifer
+      state: home
+  actions:
+  - target:
       entity_id: alarm_control_panel.alarmo
     data: {}
+    action: alarm_control_panel.alarm_arm_away
   initial_state: true
 - id: occupancy_alarm_return_home_disarm_alarm
   alias: Occupancy - return home - disarm alarm
@@ -447,6 +451,11 @@
     - condition: state
       entity_id: light.tv_room_lights
       state: 'on'
+    - condition: state
+      entity_id: media_player.plex_plex_for_roku_tv_roomtv
+      attribute: media_content_type
+      state: movie
+      enabled: false
   actions:
   - data:
       entity_id: "{%- if trigger.to_state.state == 'playing' -%}\n  scene.tv_room_dim\n{%-
@@ -627,7 +636,7 @@
       minutes: 10
     trigger: state
   - trigger: time_pattern
-    minutes: '00'
+    minutes: '1'
   - trigger: zone
     entity_id: person.gervais
     zone: zone.home
@@ -647,9 +656,6 @@
           zone: zone.home
       - condition: and
         conditions:
-        - condition: time
-          before: 08:00:00
-          after: '18:00:00'
         - condition: state
           entity_id: binary_sensor.basement_sensor_motion
           state: 'off'
@@ -657,9 +663,24 @@
             hours: 0
             minutes: 9
             seconds: 30
+        - condition: or
+          conditions:
+          - condition: time
+            before: 08:00:00
+            after: '18:00:00'
+          - condition: state
+            entity_id: binary_sensor.workday_sensor
+            state: 'off'
     - condition: state
       entity_id: binary_sensor.audio_input_in_use_greenapple
       state: 'off'
+    - condition: state
+      entity_id: binary_sensor.active_greenapple
+      state: 'off'
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
   actions:
   - entity_id: light.office_lights
     action: light.turn_off
@@ -1017,6 +1038,9 @@
   triggers:
   - entity_id:
     - sensor.charlottetown_current_condition
+    - sensor.fredericton_condition
+    - sensor.montreal_current_condition
+    - sensor.saint_john_current_condition
     trigger: state
   conditions:
   - condition: and
@@ -1029,28 +1053,38 @@
     - condition: template
       value_template: '{{ trigger.to_state.state != "unknown" }}'
     - condition: template
-      value_template: '{{ states("sensor.charlottetown_current_condition") != "unavailable"
-        }}'
+      value_template: "{{ states(state_attr('sensor.closest_city', 'condition_entity'))
+        != \"unavailable\" and \n   states(state_attr('sensor.closest_city', 'condition_entity'))
+        != \"unknown\" }}"
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.current_weather_notification.attributes.last_triggered)
         | int > 3600 }}'
   actions:
-  - data_template:
-      message: '**Weather Condition:** {{ states.sensor.charlottetown_current_condition.state
-        }}
+  - data:
+      message: '{% set closest_city = states(''sensor.closest_city'') %} {% set distance
+        = state_attr(''sensor.closest_city'', ''distance'') %} {% set condition_entity
+        = state_attr(''sensor.closest_city'', ''condition_entity'') %} {% set temperature_entity
+        = state_attr(''sensor.closest_city'', ''temperature_entity'') %} {% set humidex_entity
+        = state_attr(''sensor.closest_city'', ''humidex_entity'') %} {% set wind_chill_entity
+        = state_attr(''sensor.closest_city'', ''wind_chill_entity'') %}
 
-        **Tempurature:** {{ states.sensor.charlottetown_temperature.state }}{{ states.sensor.charlottetown_temperature.attributes.unit_of_measurement
-        }} {% if states.sensor.charlottetown_humidex.state != ''unknown'' or states.sensor.charlottetown_wind_chill.state
-        != ''unknown'' %}
+        **Current Weather for {{ closest_city }}:**
 
-        **Feels like:** {% if states.sensor.charlottetown_humidex.state != ''unknown''
-        %} {{ states.sensor.charlottetown_humidex.state }}{% elif states.sensor.charlottetown_wind_chill.state
-        != ''unknown'' %}{{ states.sensor.charlottetown_wind_chill.state }}{% endif
-        %}{{ states.sensor.charlottetown_temperature.attributes.unit_of_measurement
-        }} {% endif %}
+        **Weather Condition:** {{states(condition_entity) }}
+
+        **Temperature:** {{ states(temperature_entity) }}{{ state_attr(temperature_entity,
+        ''unit_of_measurement'') }}
+
+        {% if states(humidex_entity) != ''unknown'' or states(wind_chill_entity) !=
+        ''unknown'' %} **Feels like:** {% if states(humidex_entity) != ''unknown''
+        %}{{ states(humidex_entity) }}{% elif states(wind_chill_entity) != ''unknown''
+        %}{{ states(wind_chill_entity) }}{{ state_attr(temperature_entity, ''unit_of_measurement'')
+        }}{% endif %} {% endif %}
 
         '
       title: Weather
+      data:
+        topic: Bots
     action: notify.zulip
   initial_state: true
 - id: notify_current_uv_index
@@ -1082,30 +1116,49 @@
   triggers:
   - at: 08:00:00
     trigger: time
+  - trigger: time
+    at: '12:00:00'
+  - trigger: time
+    at: '18:00:00'
   conditions:
   - condition: template
-    value_template: '{{ states("weather.charlottetown_forecast") != ''unknown'' }}'
+    value_template: "{% set closest_city = states('sensor.closest_city') %} {% set
+      entities = {\n  'Charlottetown': 'weather.charlottetown_forecast',\n  'Fredericton':
+      'weather.fredericton_forecast',\n  'Saint John': 'weather.saint_john_forecast',\n
+      \ 'Montreal': 'weather.montreal_forecast'\n} %} {{ states(entities[closest_city])
+      != 'unknown' }}"
   - condition: template
-    value_template: '{{ states("sensor.charlottetown_high_temperature") != ''unknown''
-      }}'
+    value_template: "{% set closest_city = states('sensor.closest_city') %} {% set
+      entities = {\n  'Charlottetown': 'sensor.charlottetown_high_temperature',\n
+      \ 'Fredericton': 'sensor.fredericton_high_temperature',\n  'Saint John': 'sensor.saint_john_high_temperature',\n
+      \ 'Montreal': 'sensor.montreal_high_temperature'\n} %} {{ states(entities[closest_city])
+      != 'unknown' }}"
   - condition: template
-    value_template: '{{ states("sensor.charlottetown_low_temperature") != ''unknown''
-      }}'
+    value_template: "{% set closest_city = states('sensor.closest_city') %} {% set
+      entities = {\n  'Charlottetown': 'sensor.charlottetown_low_temperature',\n  'Fredericton':
+      'sensor.fredericton_low_temperature',\n  'Saint John': 'sensor.saint_john_low_temperature',\n
+      \ 'Montreal': 'sensor.montreal_low_temperature'\n} %} {{ states(entities[closest_city])
+      != 'unknown' }}"
   actions:
   - data:
-      message: '**Forecast:**
-
-        {{ states("sensor.charlottetown_summary") }}
-
-
-        **High:** {{ states("sensor.charlottetown_high_temperature") }}{{ state_attr("sensor.charlottetown_high_temperature"
-        , "unit_of_measurement") }}
-
-        **Low:** {{ states("sensor.charlottetown_low_temperature") }}{{ state_attr("sensor.charlottetown_low_temperature"
-        , "unit_of_measurement") }}
-
-        '
+      message: "{% set closest_city = states('sensor.closest_city') %} {% set distance
+        = state_attr('sensor.closest_city', 'distance') %}\n{% set summary_entities
+        = {\n  'Charlottetown': 'sensor.charlottetown_summary',\n  'Fredericton':
+        'sensor.fredericton_summary',\n  'Saint John': 'sensor.saint_john_summary',\n
+        \ 'Montreal': 'sensor.montreal_summary'\n} %}\n{% set high_temp_entities =
+        {\n  'Charlottetown': 'sensor.charlottetown_high_temperature',\n  'Fredericton':
+        'sensor.fredericton_high_temperature',\n  'Saint John': 'sensor.saint_john_high_temperature',\n
+        \ 'Montreal': 'sensor.montreal_high_temperature'\n} %}\n{% set low_temp_entities
+        = {\n  'Charlottetown': 'sensor.charlottetown_low_temperature',\n  'Fredericton':
+        'sensor.fredericton_low_temperature',\n  'Saint John': 'sensor.saint_john_low_temperature',\n
+        \ 'Montreal': 'sensor.montreal_low_temperature'\n} %}\n**Forecast for {{ closest_city
+        }}:**\n{{ states(summary_entities[closest_city]) }}\n**High:** {{ states(high_temp_entities[closest_city])
+        }}{{ state_attr(high_temp_entities[closest_city], \"unit_of_measurement\")
+        }}\n**Low:** {{ states(low_temp_entities[closest_city]) }}{{ state_attr(low_temp_entities[closest_city],
+        \"unit_of_measurement\") }}\n"
       title: Weather
+      data:
+        topic: Bots
     action: notify.zulip
   initial_state: true
 - id: notify_low_battery
@@ -1516,9 +1569,9 @@
     metadata: {}
     data:
       rgb_color:
-      - 152
-      - 255
-      - 251
+      - 97
+      - 23
+      - 124
       brightness_pct: 100
     target:
       entity_id:
@@ -1748,24 +1801,66 @@
       hours: 0
       minutes: 15
       seconds: 0
-  conditions:
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
-      for:
-        hours: 0
-        minutes: 30
-        seconds: 0
-    - condition: numeric_state
-      entity_id: sensor.hue_outdoor_motion_sensor_1_illuminance
-      attribute: light_level
-      below: 10000
+  conditions: []
   actions:
   - action: light.turn_off
     metadata: {}
     data: {}
     target:
       entity_id: light.garage_lights
+  mode: single
+- id: '1741834444675'
+  alias: Occupancy TV room - lights on
+  description: ''
+  triggers:
+  - entity_id:
+    - binary_sensor.occupancy0_occupancy
+    trigger: state
+    to: 'on'
+  conditions:
+  - condition: and
+    conditions:
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: media_player.tv_roomtv
+        state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.occupancy0_illuminance
+      below: 500
+  actions:
+  - action: scene.turn_on
+    target:
+      entity_id: scene.tv_room_dim
+    data: {}
+  mode: single
+- id: '1742166855479'
+  alias: Weather warning notification
+  description: ''
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.charlottetown_warnings
+    - sensor.fredericton_warnings
+    - sensor.saint_john_warnings
+    - sensor.montreal_warnings
+    above: 0
+  conditions: []
+  actions:
+  - data:
+      message: '{% if trigger.to_state.attributes.location == states(''sensor.closest_city'')
+        %} ‼️ NEARBY ALERT: {{ trigger.to_state.attributes.location }} ({{ state_attr(''sensor.closest_city'',
+        ''distance'') }} km away) {% else %} ⚠️ Weather Warning: {{ trigger.to_state.attributes.location
+        }} {% endif %}
+
+        {% if trigger.to_state.attributes.alert_1 is defined %} • {{ trigger.to_state.attributes.alert_1
+        }} ({{ trigger.to_state.attributes.alert_time_1 }}) {% endif %} {% if trigger.to_state.attributes.alert_2
+        is defined %} • {{ trigger.to_state.attributes.alert_2 }} ({{ trigger.to_state.attributes.alert_time_2
+        }}) {% endif %} {% if trigger.to_state.attributes.alert_3 is defined %} •
+        {{ trigger.to_state.attributes.alert_3 }} ({{ trigger.to_state.attributes.alert_time_3
+        }}) {% endif %}'
+      title: Weather
+      data:
+        topic: Weather Alerts
+    action: notify.zulip
   mode: single

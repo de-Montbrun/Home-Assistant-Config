@@ -524,6 +524,116 @@ person:
 sensor:
   - platform: template
     sensors:
+      closest_city:
+        unique_id: closest_city_sensor
+        friendly_name: "Closest City"
+        value_template: >-
+          {% set user_latitude = state_attr('person.gervais', 'latitude') | float %}
+          {% set user_longitude = state_attr('person.gervais', 'longitude') | float %}
+
+          {% set cities = {
+            'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
+            'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
+            'Saint John': {'lat': 45.2733, 'lon': -66.0633},
+            'Montreal': {'lat': 45.5017, 'lon': -73.5673}
+          } %}
+
+          {% set closest_city = namespace(name='', distance=999999) %}
+          {% for city_name, city_data in cities.items() %}
+            {% set distance = distance(user_latitude, user_longitude, city_data.lat, city_data.lon) %}
+            {% if distance < closest_city.distance %}
+              {% set closest_city.name = city_name %}
+              {% set closest_city.distance = distance %}
+            {% endif %}
+          {% endfor %}
+
+          {{ closest_city.name }}
+        attribute_templates:
+          distance: >-
+            {% set user_latitude = state_attr('person.gervais', 'latitude') | float %}
+            {% set user_longitude = state_attr('person.gervais', 'longitude') | float %}
+
+            {% set cities = {
+              'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
+              'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
+              'Saint John': {'lat': 45.2733, 'lon': -66.0633},
+              'Montreal': {'lat': 45.5017, 'lon': -73.5673}
+            } %}
+
+            {% set closest_city = namespace(name='', distance=999999) %}
+            {% for city_name, city_data in cities.items() %}
+              {% set distance = distance(user_latitude, user_longitude, city_data.lat, city_data.lon) %}
+              {% if distance < closest_city.distance %}
+                {% set closest_city.name = city_name %}
+                {% set closest_city.distance = distance %}
+              {% endif %}
+            {% endfor %}
+
+            {{ closest_city.distance | round(1) }}
+          latitude: >-
+            {% set cities = {
+              'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
+              'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
+              'Saint John': {'lat': 45.2733, 'lon': -66.0633},
+              'Montreal': {'lat': 45.5017, 'lon': -73.5673}
+            } %}
+
+            {{ cities[states('sensor.closest_city')]['lat'] }}
+          longitude: >-
+            {% set cities = {
+              'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
+              'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
+              'Saint John': {'lat': 45.2733, 'lon': -66.0633},
+              'Montreal': {'lat': 45.5017, 'lon': -73.5673}
+            } %}
+
+            {{ cities[states('sensor.closest_city')]['lon'] }}
+          condition_entity: >-
+            {% set entities = {
+              'Charlottetown': 'sensor.charlottetown_current_condition',
+              'Fredericton': 'sensor.fredericton_condition',
+              'Saint John': 'sensor.saint_john_current_condition',
+              'Montreal': 'sensor.montreal_current_condition'
+            } %}
+
+            {{ entities[states('sensor.closest_city')] }}
+          temperature_entity: >-
+            {% set entities = {
+              'Charlottetown': 'sensor.charlottetown_temperature',
+              'Fredericton': 'sensor.fredericton_temperature',
+              'Saint John': 'sensor.saint_john_temperature',
+              'Montreal': 'sensor.montreal_temperature'
+            } %}
+
+            {{ entities[states('sensor.closest_city')] }}
+          humidex_entity: >-
+            {% set entities = {
+              'Charlottetown': 'sensor.charlottetown_humidex',
+              'Fredericton': 'sensor.fredericton_humidex',
+              'Saint John': 'sensor.saint_john_humidex',
+              'Montreal': 'sensor.montreal_humidex'
+            } %}
+
+            {{ entities[states('sensor.closest_city')] }}
+          wind_chill_entity: >-
+            {% set entities = {
+              'Charlottetown': 'sensor.charlottetown_wind_chill',
+              'Fredericton': 'sensor.fredericton_wind_chill',
+              'Saint John': 'sensor.saint_john_wind_chill',
+              'Montreal': 'sensor.montreal_wind_chill'
+            } %}
+
+            {{ entities[states('sensor.closest_city')] }}
+          warnings_entity: >-
+            {% set entities = {
+              'Charlottetown': 'sensor.charlottetown_warnings',
+              'Fredericton': 'sensor.fredericton_warnings',
+              'Saint John': 'sensor.saint_john_warnings',
+              'Montreal': 'sensor.montreal_warnings'
+            } %}
+
+            {{ entities[states('sensor.closest_city')] }}
+
       distance_apart:
         friendly_name: 'GandG Apart'
         value_template: >-
@@ -536,8 +646,6 @@ sensor:
           {% endif %}
         unit_of_measurement: 'km'
 
-  - platform: template
-    sensors:
       delicious_docked:
         unique_id: delicious_docked_sensor
         friendly_name: 'Delicious Docked'
