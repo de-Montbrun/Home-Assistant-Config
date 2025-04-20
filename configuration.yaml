@@ -28,6 +28,7 @@ alexa:
         - light
         - scene
       include_entities:
+        - media_player.basement_tv
         - media_player.bedroomtv
         - media_player.tv_roomtv
         - switch.switch1
@@ -157,9 +158,9 @@ light:
     name: Bathroom Tub
     entity_id: switch.bathroom_tub
 
-  - platform: switch
-    name: Basement Shower
-    entity_id: switch.basement_shower
+      #  - platform: switch
+      #    name: Basement Shower
+      #    entity_id: switch.basement_shower
 
   - platform: switch
     name: Basement Stairs

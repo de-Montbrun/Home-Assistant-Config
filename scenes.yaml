@@ -25,7 +25,7 @@
       - candle
       supported_color_modes:
       - brightness
-      effect: None
+      effect: off
       color_mode: brightness
       brightness: 255
       entity_id:
@@ -87,7 +87,7 @@
       - color_temp
       - rgbw
       - xy
-      effect: None
+      effect: off
       color_mode: color_temp
       brightness: 178
       color_temp_kelvin: 4000
@@ -183,7 +183,7 @@
       supported_color_modes:
       - color_temp
       - rgbw
-      effect:
+      effect: off
       color_mode:
       brightness:
       color_temp_kelvin:
@@ -235,7 +235,7 @@
       - color_temp
       - hs
       - xy
-      effect:
+      effect: off
       color_mode:
       brightness:
       color_temp_kelvin:
@@ -264,7 +264,9 @@
 - id: '1741651027535'
   name: tv_room_dim
   entities:
-    light.tv_room_lamps:
+    light.lamp1:
+      state: 'off'
+    light.bedroom4:
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6535
       min_mireds: 153
@@ -314,7 +316,81 @@
       - color_temp
       - rgbw
       - xy
-      effect: None
+      effect: off
+      color_mode: color_temp
+      brightness: 76
+      color_temp_kelvin: 4000
+      color_temp: 250
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 206
+      - 166
+      xy_color:
+      - 0.42
+      - 0.365
+      rgbw_color:
+      entity_id:
+      - light.lamp1
+      - light.lamp2
+      - light.bedroom4
+      icon: mdi:lightbulb-group
+      friendly_name: TV Room Lamps
+      supported_features: 44
+      state: 'on'
+    light.lamp2:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - None
+      - Bedtime
+      - Candlelight
+      - Christmas
+      - Club
+      - Cool white
+      - Cozy
+      - Daylight
+      - Deepdive
+      - Fall
+      - Fireplace
+      - Focus
+      - Forest
+      - Golden white
+      - Halloween
+      - Jungle
+      - Mojito
+      - Night light
+      - Ocean
+      - Party
+      - Pastel Colors
+      - Plantgrowth
+      - Pulse
+      - Relax
+      - Rhythm
+      - Romance
+      - Spring
+      - Steampunk
+      - Summer
+      - Sunset
+      - TV time
+      - True colors
+      - Wake up
+      - Warm White
+      - candle
+      - fire
+      - glisten
+      - opal
+      - prism
+      - sparkle
+      supported_color_modes:
+      - color_temp
+      - rgbw
+      - xy
+      effect: off
       color_mode: color_temp
       brightness: 76
       color_temp_kelvin: 4000
@@ -404,7 +480,7 @@
       - color_temp
       - rgbw
       - xy
-      effect: None
+      effect: off
       color_mode: color_temp
       brightness: 178
       color_temp_kelvin: 4000

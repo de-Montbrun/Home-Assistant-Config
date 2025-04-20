@@ -121,8 +121,11 @@
       entity_id: automation.lighting_tv_play_pause
   - entity_id: automation.sunroom_no_occupancy_lights_off
     action: homeassistant.turn_on
-  - entity_id: scene.sunroom_dim
-    action: scene.turn_on
+  - action: scene.turn_on
+    data: {}
+    target:
+      entity_id:
+      - scene.tv_room_dim
 - id: tap0_button_4
   alias: Tap0 Button 4
   triggers:
@@ -467,8 +470,8 @@
   description: ''
   triggers:
   - entity_id:
-    - binary_sensor.occupancy0_occupancy
-    - binary_sensor.occupancy0_motion
+    - binary_sensor.tv_room_occupancy_motion
+    - binary_sensor.tv_room_occupancy_occupancy
     to: 'on'
     trigger: state
   conditions:
@@ -478,8 +481,8 @@
       entity_id: light.tv_room_lights
       state: 'off'
     - condition: numeric_state
-      entity_id: sensor.occupancy0_illuminance
-      below: 300
+      entity_id: sensor.tv_room_occupancy_illuminance
+      below: 600
   actions:
   - data:
       brightness_pct: 29
@@ -504,7 +507,7 @@
   description: ''
   triggers:
   - entity_id:
-    - binary_sensor.occupancy0_occupancy
+    - binary_sensor.tv_room_occupancy_occupancy
     to: 'off'
     for:
       minutes: 10
@@ -518,7 +521,7 @@
         before: sunset
         before_offset: '30'
       - condition: state
-        entity_id: binary_sensor.occupancy0_occupancy
+        entity_id: binary_sensor.tv_room_occupancy_occupancy
         for:
           hours: 0
           minutes: 10
@@ -533,7 +536,7 @@
         after: '23:50:00'
         before: 06:00:00
       - condition: state
-        entity_id: binary_sensor.occupancy0_occupancy
+        entity_id: binary_sensor.tv_room_occupancy_occupancy
         state: 'off'
         for:
           hours: 0
@@ -595,7 +598,7 @@
     - condition: and
       conditions:
       - condition: state
-        entity_id: binary_sensor.occupancy0_motion
+        entity_id: binary_sensor.tv_room_occupancy_motion
         state: 'on'
       - condition: state
         entity_id: light.office_lights
@@ -897,16 +900,10 @@
     offset: +00:30:00
     trigger: sun
   actions:
-  - entity_id:
-    - light.hallway_lights
-    - light.garage_lights
-    - light.main_floor_lights
-    - light.outdoor_lights
-    - light.spare_room_lights
-    action: light.turn_off
-  - entity_id: all
-    action: light.turn_off
-  initial_state: false
+  - action: light.turn_off
+    data: {}
+    target:
+      entity_id: light.outdoor_lights
 - id: sunset
   alias: Sunset - Lights on
   trigger:
@@ -963,7 +960,7 @@
     - condition: template
       value_template: '{{ states("media_player.tv_roomtv") != "unavailable" }}'
     - condition: state
-      entity_id: binary_sensor.occupancy0_occupancy
+      entity_id: binary_sensor.tv_room_occupancy_occupancy
       state: 'off'
       for:
         minutes: 39
@@ -1182,10 +1179,10 @@
         - sensor.iphone_battery_level
         - sensor.iphone_battery_state
       actions:
-      - service: notify.zulip
-        data:
+      - data:
           message: Low batter on {{sensors}}.
-          title: HA Sensor
+          title: Home Assistant
+        action: notify.zulip
 - id: vacuum_start
   alias: Vacuum Start
   triggers:
@@ -1569,9 +1566,9 @@
     metadata: {}
     data:
       rgb_color:
+      - 0
       - 97
-      - 23
-      - 124
+      - 255
       brightness_pct: 100
     target:
       entity_id:
@@ -1814,7 +1811,7 @@
   description: ''
   triggers:
   - entity_id:
-    - binary_sensor.occupancy0_occupancy
+    - binary_sensor.tv_room_occupancy_occupancy
     trigger: state
     to: 'on'
   conditions:
@@ -1826,8 +1823,8 @@
         entity_id: media_player.tv_roomtv
         state: 'on'
     - condition: numeric_state
-      entity_id: sensor.occupancy0_illuminance
-      below: 500
+      entity_id: sensor.tv_room_occupancy_illuminance
+      below: 600
   actions:
   - action: scene.turn_on
     target:
@@ -1849,14 +1846,14 @@
   actions:
   - data:
       message: '{% if trigger.to_state.attributes.location == states(''sensor.closest_city'')
-        %} ‼️ NEARBY ALERT: {{ trigger.to_state.attributes.location }} ({{ state_attr(''sensor.closest_city'',
-        ''distance'') }} km away) {% else %} ⚠️ Weather Warning: {{ trigger.to_state.attributes.location
+        %} :bangbang: NEARBY ALERT: {{ trigger.to_state.attributes.location }} ({{ state_attr(''sensor.closest_city'',
+        ''distance'') }} km away) {% else %} :warning: Weather Warning: {{ trigger.to_state.attributes.location
         }} {% endif %}
 
-        {% if trigger.to_state.attributes.alert_1 is defined %} • {{ trigger.to_state.attributes.alert_1
+        {% if trigger.to_state.attributes.alert_1 is defined %} {{ trigger.to_state.attributes.alert_1
         }} ({{ trigger.to_state.attributes.alert_time_1 }}) {% endif %} {% if trigger.to_state.attributes.alert_2
-        is defined %} • {{ trigger.to_state.attributes.alert_2 }} ({{ trigger.to_state.attributes.alert_time_2
-        }}) {% endif %} {% if trigger.to_state.attributes.alert_3 is defined %} •
+        is defined %} {{ trigger.to_state.attributes.alert_2 }} ({{ trigger.to_state.attributes.alert_time_2
+        }}) {% endif %} {% if trigger.to_state.attributes.alert_3 is defined %}
         {{ trigger.to_state.attributes.alert_3 }} ({{ trigger.to_state.attributes.alert_time_3
         }}) {% endif %}'
       title: Weather
