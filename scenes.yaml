@@ -20,21 +20,12 @@
       supported_features: 0
       state: 'on'
     light.outdoor_lights:
-      effect_list:
-      - None
-      - candle
       supported_color_modes:
       - brightness
-      effect: off
       color_mode: brightness
       brightness: 255
-      entity_id:
-      - light.outdoor_back_door
-      - light.outdoor_driveway
-      - light.outdoor_pots
       icon: mdi:lightbulb-group
       friendly_name: Outdoor lights
-      supported_features: 44
       state: 'on'
     light.loft_trees:
       supported_color_modes:

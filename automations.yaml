@@ -604,9 +604,7 @@
         entity_id: light.office_lights
         state: 'off'
   actions:
-  - data:
-      brightness: 255
-      color_name: white
+  - data: {}
     action: light.turn_on
     target:
       entity_id:
@@ -1573,7 +1571,6 @@
     target:
       entity_id:
       - light.office_ceiling_light
-      - light.office_floor_lamp
   mode: single
 - id: '1738458067745'
   alias: Sync TV Backlight Kit to TV state
@@ -1658,6 +1655,10 @@
     metadata:
       secondary: false
     trigger: device
+  - trigger: state
+    entity_id:
+    - binary_sensor.rack_motion
+    to: 'on'
   conditions:
   - condition: or
     conditions:
@@ -1846,18 +1847,66 @@
   actions:
   - data:
       message: '{% if trigger.to_state.attributes.location == states(''sensor.closest_city'')
-        %} :bangbang: NEARBY ALERT: {{ trigger.to_state.attributes.location }} ({{ state_attr(''sensor.closest_city'',
-        ''distance'') }} km away) {% else %} :warning: Weather Warning: {{ trigger.to_state.attributes.location
-        }} {% endif %}
+        %} :bangbang: NEARBY ALERT: {{ trigger.to_state.attributes.location }} ({{
+        state_attr(''sensor.closest_city'', ''distance'') }} km away) {% else %} :warning:
+        Weather Warning: {{ trigger.to_state.attributes.location }} {% endif %}
 
         {% if trigger.to_state.attributes.alert_1 is defined %} {{ trigger.to_state.attributes.alert_1
         }} ({{ trigger.to_state.attributes.alert_time_1 }}) {% endif %} {% if trigger.to_state.attributes.alert_2
         is defined %} {{ trigger.to_state.attributes.alert_2 }} ({{ trigger.to_state.attributes.alert_time_2
-        }}) {% endif %} {% if trigger.to_state.attributes.alert_3 is defined %}
-        {{ trigger.to_state.attributes.alert_3 }} ({{ trigger.to_state.attributes.alert_time_3
+        }}) {% endif %} {% if trigger.to_state.attributes.alert_3 is defined %} {{
+        trigger.to_state.attributes.alert_3 }} ({{ trigger.to_state.attributes.alert_time_3
         }}) {% endif %}'
       title: Weather
       data:
         topic: Weather Alerts
+    action: notify.zulip
+  mode: single
+- id: '1747956135120'
+  alias: Lost Swimmer iPhone Location Alert
+  description: Sends notification when lost Swimmer iPhone reports location again
+  triggers:
+  - entity_id: device_tracker.swimmer_iphone
+    from: not_home
+    to: home
+    trigger: state
+  - entity_id: device_tracker.swimmer_iphone
+    from: unavailable
+    to:
+    - home
+    - not_home
+    trigger: state
+  - entity_id: device_tracker.swimmer_iphone
+    attribute: latitude
+    trigger: state
+  conditions:
+  - condition: template
+    value_template: '{{ states(''device_tracker.swimmer_iphone'') != ''unavailable''
+      }}'
+  actions:
+  - data:
+      title: ⚠️ Lost Swimmer iPhone Detected!
+      message: 'Your lost Swimmer iPhone has been detected at  {{ states.device_tracker.swimmer_iphone.attributes.friendly_name
+        }} ({{ states.device_tracker.swimmer_iphone.state }}). Coordinates: {{ states.device_tracker.swimmer_iphone.attributes.latitude
+        }}, {{ states.device_tracker.swimmer_iphone.attributes.longitude }}
+
+        '
+      data:
+        url: https://www.google.com/maps/search/?api=1&query={{ states.device_tracker.swimmer_iphone.attributes.latitude
+          }},{{ states.device_tracker.swimmer_iphone.attributes.longitude }}
+        actions:
+        - action: URI
+          title: View on Map
+          uri: https://www.google.com/maps/search/?api=1&query={{ states.device_tracker.swimmer_iphone.attributes.latitude
+            }},{{ states.device_tracker.swimmer_iphone.attributes.longitude }}
+    action: notify.mobile_app_iphone
+  - data:
+      title: Lost Swimmer iPhone Detected!
+      message: 'Your lost Swimmer iPhone has been detected at location: {{ states.device_tracker.swimmer_iphone.attributes.latitude
+        }}, {{ states.device_tracker.swimmer_iphone.attributes.longitude }} Google
+        Maps: https://www.google.com/maps/search/?api=1&query={{ states.device_tracker.swimmer_iphone.attributes.latitude
+        }},{{ states.device_tracker.swimmer_iphone.attributes.longitude }}
+
+        '
     action: notify.zulip
   mode: single
