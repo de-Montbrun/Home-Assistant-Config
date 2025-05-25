@@ -616,6 +616,15 @@ sensor:
             } %}
 
             {{ entities[states('sensor.closest_city')] }}
+          uv_index_entity: >-
+            {% set entities = {
+              'Charlottetown': 'sensor.charlottetown_uv_index',
+              'Fredericton': 'sensor.fredericton_uv_index',
+              'Saint John': 'sensor.saint_john_uv_index',
+              'Montreal': 'sensor.montreal_uv_index'
+            } %}
+
+            {{ entities[states('sensor.closest_city')] }}
           wind_chill_entity: >-
             {% set entities = {
               'Charlottetown': 'sensor.charlottetown_wind_chill',

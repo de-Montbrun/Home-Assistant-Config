@@ -502,7 +502,7 @@
     target:
       entity_id: light.tv_room_lights
   mode: restart
-- id: occupancy_lighting_sunroom_off
+- id: occupancy_lighting_tv_room_off
   alias: TV room - No occupancy lights off
   description: ''
   triggers:
@@ -1084,13 +1084,13 @@
   initial_state: true
 - id: notify_current_uv_index
   alias: Current UV index notification
-  initial_state: false
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.saint_john_uv_index
-    above: '5'
-  condition:
-    condition: and
+  description: ''
+  triggers:
+  - trigger: template
+    value_template: '{{ states(state_attr(''sensor.closest_city'', ''uv_index_entity''))
+      | float > 4 }}'
+  conditions:
+  - condition: and
     conditions:
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state)
@@ -1098,14 +1098,14 @@
     - condition: state
       entity_id: sun.sun
       state: above_horizon
-  action:
-    service: notify.zulip
-    data:
-      message: ':sunny: UV Index is {{ states("sensor.saint_john_uv_index") }}. You
-        better put on some sunscreen!
+  actions:
+  - data:
+      message: ':sunny: UV Index is {{ states(state_attr(''sensor.closest_city'',
+        ''uv_index_entity'')) }}. You better put on some sunscreen!
 
         '
       title: Weather
+    action: notify.zulip
 - id: notify_weather_forecast
   alias: Weather forecast notification
   triggers:
@@ -1862,7 +1862,7 @@
         topic: Weather Alerts
     action: notify.zulip
   mode: single
-- id: '1747956135120'
+- id: '1748215562472'
   alias: Lost Swimmer iPhone Location Alert
   description: Sends notification when lost Swimmer iPhone reports location again
   triggers:
