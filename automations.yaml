@@ -333,26 +333,6 @@
     target:
       entity_id: switch.switch4
   initial_state: true
-- id: occupancy_lighting_basement_on
-  alias: Basement - Occupancy lights on
-  initial_state: false
-  mode: restart
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.rack_motion
-    to: 'on'
-  - platform: state
-    entity_id: binary_sensor.basement_sensor_motion
-    to: 'on'
-  action:
-  - service: light.turn_on
-    entity_id: light.basement_lights
-  - delay: 00:10
-  - condition: state
-    entity_id: binary_sensor.basement_sensor_motion
-    state: 'off'
-  - service: light.turn_off
-    entity_id: light.basement_lights
 - id: occupancy_lighting_kitchen_on
   alias: Kitchen - Occupancy lights on
   triggers:
@@ -550,28 +530,6 @@
     data: {}
     target:
       entity_id: light.tv_room_lights
-- id: lighting_sunroom_lumens_low_lights_on
-  alias: Sunroom lumens low - lights on
-  triggers:
-  - entity_id:
-    - media_player.tv_roomtv
-    from: standby
-    trigger: state
-  conditions:
-  - condition: and
-    conditions:
-    - condition: template
-      value_template: '{{ states.sensor.sun_room_sensor_light_level.attributes.light_level  <
-        6500 }}'
-    - condition: state
-      entity_id: light.livingroom_lights
-      state: 'off'
-  actions:
-  - metadata: {}
-    target:
-      entity_id: scene.living_room_normal
-    action: scene.turn_on
-    data: {}
 - id: turn_on_lights_office
   alias: Occupancy in Office - turn on lights
   triggers:
@@ -988,7 +946,6 @@
   initial_state: true
 - id: notify_home_presence
   alias: Home presence notification
-  initial_state: false
   trigger:
     platform: state
     entity_id: group.cam_tracker,group.jen_tracker,group.grant_tracker
@@ -1862,7 +1819,7 @@
         topic: Weather Alerts
     action: notify.zulip
   mode: single
-- id: '1748215562472'
+- id: '1748216683732'
   alias: Lost Swimmer iPhone Location Alert
   description: Sends notification when lost Swimmer iPhone reports location again
   triggers:
@@ -1901,7 +1858,7 @@
             }},{{ states.device_tracker.swimmer_iphone.attributes.longitude }}
     action: notify.mobile_app_iphone
   - data:
-      title: Lost Swimmer iPhone Detected!
+      title: ':warning: Lost Swimmer iPhone Detected!'
       message: 'Your lost Swimmer iPhone has been detected at location: {{ states.device_tracker.swimmer_iphone.attributes.latitude
         }}, {{ states.device_tracker.swimmer_iphone.attributes.longitude }} Google
         Maps: https://www.google.com/maps/search/?api=1&query={{ states.device_tracker.swimmer_iphone.attributes.latitude
