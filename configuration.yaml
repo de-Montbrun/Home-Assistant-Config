@@ -25,7 +25,9 @@ alexa:
     client_secret: !secret alexa_client_secret
     filter:
       include_domains:
+        - climate
         - light
+        - lock
         - scene
       include_entities:
         - media_player.basement_tv
@@ -54,12 +56,11 @@ homekit:
       - climate
       - fan
       - light
+      - lock
       - scene
     include_entities:
-      - lock.yv4162uk5l2256988_door_lock
       - media_player.bedroomtv
-      - media_player.roku_living_roomtv
-      - media_player.sonos
+      - media_player.tv_roomtv
     include_entity_globs:
       - binary_sensor.*_occupancy
       - sensor.*_humidity

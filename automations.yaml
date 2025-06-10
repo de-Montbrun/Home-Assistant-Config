@@ -38,8 +38,8 @@
   - entity_id:
     - person.gail
     - person.gervais
-    - group.cam_tracker
-    - group.jen_tracker
+    - person.cameron
+    - person.jennifer
     from: home
     trigger: state
   conditions:
@@ -58,6 +58,13 @@
       entity_id: person.jennifer
       state: home
   actions:
+  - action: lock.lock
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - lock.front_door_lock_lock_mechanism
+      - lock.garage_door_lock_lock_mechanism
   - target:
       entity_id: alarm_control_panel.alarmo
     data: {}
@@ -74,6 +81,11 @@
     to: home
     trigger: state
   actions:
+  - action: lock.unlock
+    metadata: {}
+    data: {}
+    target:
+      entity_id: lock.garage_door_lock_lock_mechanism
   - target:
       entity_id: alarm_control_panel.alarmo
     data: {}
@@ -1867,3 +1879,25 @@
         '
     action: notify.zulip
   mode: single
+- id: '1749436656275'
+  alias: Occupancy - Lock Doors on exit
+  description: ''
+  triggers:
+  - entity_id:
+    - person.gail
+    - person.gervais
+    - person.jennifer
+    - person.cameron
+    from: home
+    trigger: state
+  conditions: []
+  actions:
+  - action: lock.lock
+    metadata: {}
+    data: {}
+    target:
+      entity_id:
+      - lock.front_door_lock_lock_mechanism
+      - lock.garage_door_lock_lock_mechanism
+  mode: single
+  initial_state: true
