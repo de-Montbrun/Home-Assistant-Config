@@ -1260,7 +1260,10 @@
       minutes: 30
       seconds: 0
     trigger: state
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: lock.volvo_volvo_lock
+    state: unlocked
   actions:
   - metadata: {}
     data: {}
@@ -1290,17 +1293,19 @@
   actions:
   - action: notify.zulip
     data:
-      message: '🔓 {{ trigger.to_state.attributes.friendly_name }} was unlocked while no one is home!'
+      message: "\U0001F513 {{ trigger.to_state.attributes.friendly_name }} was unlocked
+        while no one is home!"
       title: Security Alert
   - action: notify.mobile_app_gail_iphone
     data:
-      message: '🔓 {{ trigger.to_state.attributes.friendly_name }} was unlocked while no one is home!'
+      message: "\U0001F513 {{ trigger.to_state.attributes.friendly_name }} was unlocked
+        while no one is home!"
       title: Security Alert
   - action: notify.mobile_app_iphone
     data:
-      message: '🔓 {{ trigger.to_state.attributes.friendly_name }} was unlocked while no one is home!'
+      message: "\U0001F513 {{ trigger.to_state.attributes.friendly_name }} was unlocked
+        while no one is home!"
       title: Security Alert
-  initial_state: true
 - id: '1708818994369'
   alias: Heat - Turn down at bed time
   description: ''
@@ -1923,7 +1928,10 @@
     - person.cameron
     from: home
     trigger: state
-  conditions: []
+  conditions:
+  - condition: template
+    value_template: '{{ as_timestamp(now()) - as_timestamp(states.automation.lock_doors_on_exit.attributes.last_triggered)
+      | int > 3600 }}'
   actions:
   - action: lock.lock
     metadata: {}
