@@ -45,7 +45,6 @@ frontend:
 # Lovelace UI configuration
 lovelace:
   mode: yaml
-  filename: lovelace.yaml
   resources:
     - url: /local/button-card.js
       type: module
