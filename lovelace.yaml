@@ -104,6 +104,15 @@ views:
                   action: navigate
                   navigation_path: /lovelace/security
                 template: nav_button
+          - type: horizontal-stack
+            cards:
+              - type: entities
+                title: Theme Selector
+                entities:
+                  - entity: input_select.theme_selector
+                    name: Current Theme
+                show_header_toggle: false
+                state_color: true
       - type: conditional
         conditions:
           - entity: sensor.closest_city
