@@ -606,6 +606,19 @@ views:
             show_header_toggle: false
             state_color: true
     cards: []
+  - title: Map
+    path: map
+    icon: mdi:map
+    badges: []
+    cards:
+      - type: map
+        entities:
+          - entity: person.gervais
+          - entity: person.gail
+          - entity: person.jennifer
+        default_zoom: 13
+        hours_to_show: 24
+        aspect_ratio: '16:9'
   - title: Robots
     path: robots
     icon: mdi:robot-vacuum
