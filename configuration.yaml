@@ -549,6 +549,40 @@ person:
 sensor:
   - platform: template
     sensors:
+      total_active_clients:
+        friendly_name: "Total Active Clients"
+        unit_of_measurement: "clients"
+        value_template: >
+          {{ (states('sensor.spitfire') | int(0)) + (states('sensor.arrow_active_clients') | int(0)) }}
+  - platform: template
+    sensors:  # This "sensors:" key is required
+      indoor_temperature_average:
+        friendly_name: "Indoor Temperature Average"
+        unit_of_measurement: "°C"
+        value_template: >
+          {% set sensors = [
+            states('sensor.bedroom_sensor_temperature'),
+            states('sensor.dining_room_sensor_temperature'),
+            states('sensor.kitchen_sensor_temperature'),
+            states('sensor.living_room_sensor_temperature'),
+            states('sensor.gail_office_sensor_temperature'),
+            states('sensor.temperature_humidity_sensor_dca4_temperature')
+          ] | select('is_number') | map('float') | list %}
+          {{ (sensors | sum / sensors | length) | round(1) if sensors else 'unknown' }}
+
+      indoor_humidity_average:
+        friendly_name: "Indoor Humidity Average"
+        unit_of_measurement: "%"
+        value_template: >
+          {% set sensors = [
+            states('sensor.bedroom_sensor_humidity'),
+            states('sensor.dining_room_sensor_humidity'),
+            states('sensor.gail_office_sensor_humidity'),
+            states('sensor.temperature_humidity_sensor_dca4_humidity')
+          ] | select('is_number') | map('float') | list %}
+          {{ (sensors | sum / sensors | length) | round(0) if sensors else 'unknown' }}
+  - platform: template
+    sensors:
       closest_city:
         unique_id: closest_city_sensor
         friendly_name: "Closest City"
