@@ -45,6 +45,7 @@ frontend:
 # Lovelace UI configuration
 lovelace:
   mode: yaml
+  filename: lovelace.yaml
   resources:
     - url: /local/button-card.js
       type: module
@@ -57,12 +58,6 @@ lovelace:
     - url: /local/stack-in-card.js
       type: module
   dashboards:
-    lovelace-yaml:
-      mode: yaml
-      title: Home
-      icon: mdi:home
-      show_in_sidebar: true
-      filename: lovelace.yaml
     lovelace-org:
       mode: yaml
       title: Organization
