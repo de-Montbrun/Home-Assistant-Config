@@ -1943,3 +1943,20 @@
       - lock.garage_door_lock_lock_mechanism
   mode: single
   initial_state: true
+- id: theme_selector_automation
+  alias: Change Theme Based on Selector
+  description: Automatically change the frontend theme when theme selector changes
+  trigger:
+    - platform: state
+      entity_id: input_select.theme_selector
+  action:
+    - service: frontend.set_theme
+      data:
+        name: >
+          {% if states('input_select.theme_selector') == 'default' %}
+            default
+          {% else %}
+            {{ states('input_select.theme_selector') }}
+          {% endif %}
+  mode: single
+  initial_state: true

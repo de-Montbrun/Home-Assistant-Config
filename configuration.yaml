@@ -480,6 +480,18 @@ input_select:
       - error
     initial: info
     icon: mdi:format-list-bulleted
+  
+  theme_selector:
+    name: Theme Selector
+    options:
+      - default
+      - Purple Haze
+      - dark_theme
+      - forest_gradient
+      - midnight_blue
+      - warm_sunset
+    initial: default
+    icon: mdi:palette
 
 # Input text to input Zigbee2mqtt friendly_name for scripts
 input_text:
