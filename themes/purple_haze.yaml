@@ -1,0 +1,74 @@
+---
+Purple Haze:
+  # Main Colors #
+  primary-color: "#9C27B0" # Purple primary
+  primary-background-color: "#1A0D1A" # Dark purple background
+  secondary-background-color: "#0F070F" # Even darker purple background
+  paper-card-background-color: "rgba(26, 13, 26, 0.9)" # Semi-transparent purple card
+  paper-item-icon-color: "#E1BEE7" # Light purple for icons
+  primary-text-color: "#F3E5F5" # Light purple-tinted white
+  secondary-text-color: "rgba(243, 229, 245, 0.7)" # Softer purple-white
+  disabled-text-color: "rgba(243, 229, 245, 0.5)" # Disabled text
+  divider-color: "rgba(156, 39, 176, 0.2)" # Purple divider
+  paper-card-header-color: "#F3E5F5" # Card header text
+  
+  # Card styling #
+  ha-card-background: "#1A0D1A"
+  card-background-color: "#1A0D1A"
+  
+  # Nav Menu #
+  paper-listbox-background-color: "rgba(26, 13, 26, 0.95)" # Purple listbox
+  paper-listbox-color: "#F3E5F5" # Light text
+  paper-grey-200: "#2E1A2E" # Selected item background
+  
+  # Switches #
+  paper-toggle-button-checked-ink-color: "#E1BEE7"
+  paper-toggle-button-checked-button-color: "#E1BEE7"
+  paper-toggle-button-checked-bar-color: "#AB47BC"
+  
+  # Sliders #
+  paper-slider-knob-color: "#E1BEE7"
+  paper-slider-knob-start-color: "#AB47BC"
+  paper-slider-pin-color: "#E1BEE7"
+  paper-slider-active-color: "#E1BEE7"
+  paper-slider-secondary-color: "#7B1FA2"
+  
+  # Sidebar #
+  sidebar-background-color: "#0F070F"
+  sidebar-icon-color: "#E1BEE7"
+  sidebar-text-color: "#F3E5F5"
+  sidebar-selected-background-color: "rgba(225, 190, 231, 0.1)"
+  sidebar-selected-icon-color: "#CE93D8"
+  sidebar-selected-text-color: "#F8BBD9"
+  
+  # States #
+  state-icon-color: "#E1BEE7"
+  state-icon-active-color: "#CE93D8"
+  state-icon-unavailable-color: "#455A64"
+  
+  # Badges #
+  label-badge-background-color: "#1A0D1A"
+  label-badge-text-color: "#F3E5F5"
+  label-badge-red: "#EF5350"
+  label-badge-blue: "#42A5F5"
+  label-badge-green: "#66BB6A"
+  label-badge-yellow: "#FDD835"
+  label-badge-grey: "#616161"
+  
+  # Cards #
+  ha-card-border-radius: "12px"
+  ha-card-box-shadow: "0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2)"
+  
+  # Dialogs #
+  mdc-dialog-backdrop-opacity: "0.8"
+  material-background-color: "#1A0D1A"
+  material-secondary-background-color: "#0F070F"
+  
+  # Tables #
+  table-row-background-color: "rgba(26, 13, 26, 0.5)"
+  table-row-alternative-background-color: "rgba(33, 20, 33, 0.3)"
+  
+  # Misc #
+  app-header-background-color: "#1A0D1A"
+  mdc-theme-primary: "#E1BEE7"
+  accent-color: "#E1BEE7"
