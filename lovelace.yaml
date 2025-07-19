@@ -6,64 +6,55 @@ views:
     type: masonry
     badges: []
     cards:
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
-          - type: vertical-stack
-            cards:
-              - type: entities
-                title: Who's Home
-                entities:
-                  - entity: person.gail
-                    secondary_info: last-changed
-                  - entity: person.gervais
-                    secondary_info: last-changed
-                  - entity: person.jennifer
-                    secondary_info: last-changed
-                state_color: true
-              - type: horizontal-stack
-                cards:
-                  - type: conditional
-                    conditions:
-                      - condition: numeric_state
-                        entity: sensor.distance_apart
-                        above: 0
-                      - condition: state
-                        entity: sensor.distance_apart
-                        state_not: unknown
-                      - condition: state
-                        entity: sensor.distance_apart
-                        state_not: unavailable
-                    card:
-                      type: custom:mini-graph-card
-                      entities:
-                        - entity: sensor.distance_apart
-                          name: Distance Apart
-                      hours_to_show: 24
-                      points_per_hour: 4
-                      line_color: var(--primary-color)
-                      line_width: 2
-                      font_size: 75
-                  - type: custom:button-card
-                    name: Location Map
-                    icon: mdi:map
-                    tap_action:
-                      action: navigate
-                      navigation_path: /lovelace/map
-                    styles:
-                      card:
-                        - height: 120px
-                      icon:
-                        - width: 40px
-                        - height: 40px
-                      name:
-                        - font-size: 14px
           - type: entities
-            title: Theme Selector
+            title: Who's Home
             entities:
-              - entity: input_select.theme_selector
-                name: Current Theme
-            show_header_toggle: false
+              - entity: person.gail
+                secondary_info: last-changed
+              - entity: person.gervais
+                secondary_info: last-changed
+              - entity: person.jennifer
+                secondary_info: last-changed
             state_color: true
+          - type: horizontal-stack
+            cards:
+              - type: conditional
+                conditions:
+                  - condition: numeric_state
+                    entity: sensor.distance_apart
+                    above: 0
+                  - condition: state
+                    entity: sensor.distance_apart
+                    state_not: unknown
+                  - condition: state
+                    entity: sensor.distance_apart
+                    state_not: unavailable
+                card:
+                  type: custom:mini-graph-card
+                  entities:
+                    - entity: sensor.distance_apart
+                      name: Distance Apart
+                  hours_to_show: 24
+                  points_per_hour: 4
+                  line_color: var(--primary-color)
+                  line_width: 2
+                  font_size: 75
+              - type: custom:button-card
+                name: Location Map
+                icon: mdi:map
+                tap_action:
+                  action: navigate
+                  navigation_path: /lovelace/map
+                styles:
+                  card:
+                    - height: 120px
+                  icon:
+                    - width: 40px
+                    - height: 40px
+                  name:
+                    - font-size: 14px
       - type: vertical-stack
         cards:
           - type: markdown
@@ -146,6 +137,13 @@ views:
           type: weather-forecast
           entity: weather.montreal_forecast
           show_forecast: false
+      - type: entities
+        title: Theme Selector
+        entities:
+          - entity: input_select.theme_selector
+            name: Current Theme
+        show_header_toggle: false
+        state_color: true
   - badges: []
     cards:
       - entities:
