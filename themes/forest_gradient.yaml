@@ -1,0 +1,76 @@
+---
+Forest:
+  # Main Colors #
+  primary-color: "#4A7C7E" # Forest teal
+  primary-background-color: "#1A2F1A" # Dark forest green background
+  secondary-background-color: "#0F1F0F" # Even darker forest background
+  paper-card-background-color: "rgba(26, 47, 26, 0.9)" # Semi-transparent forest card
+  paper-item-icon-color: "#7CB342" # Leaf green for icons
+  primary-text-color: "#E8F5E9" # Light green-tinted white
+  secondary-text-color: "rgba(232, 245, 233, 0.7)" # Softer green-white
+  disabled-text-color: "rgba(232, 245, 233, 0.5)" # Disabled text
+  divider-color: "rgba(76, 175, 80, 0.2)" # Green divider
+  paper-card-header-color: "#E8F5E9" # Card header text
+  
+  # Gradient Card Backgrounds using CSS #
+  ha-card-background: |
+    linear-gradient(145deg, rgba(26, 47, 26, 0.95) 0%, rgba(33, 66, 33, 0.95) 50%, rgba(15, 31, 15, 0.95) 100%)
+  card-background-color: |
+    linear-gradient(145deg, #1A2F1A 0%, #214221 100%)
+  
+  # Nav Menu #
+  paper-listbox-background-color: "rgba(26, 47, 26, 0.95)" # Forest listbox
+  paper-listbox-color: "#E8F5E9" # Light text
+  paper-grey-200: "#2E5E2E" # Selected item background
+  
+  # Switches #
+  paper-toggle-button-checked-ink-color: "#7CB342"
+  paper-toggle-button-checked-button-color: "#7CB342"
+  paper-toggle-button-checked-bar-color: "#558B2F"
+  
+  # Sliders #
+  paper-slider-knob-color: "#7CB342"
+  paper-slider-knob-start-color: "#558B2F"
+  paper-slider-pin-color: "#7CB342"
+  paper-slider-active-color: "#7CB342"
+  paper-slider-secondary-color: "#33691E"
+  
+  # Sidebar #
+  sidebar-background-color: "linear-gradient(180deg, #0F1F0F 0%, #1A2F1A 100%)"
+  sidebar-icon-color: "#7CB342"
+  sidebar-text-color: "#E8F5E9"
+  sidebar-selected-background-color: "rgba(124, 179, 66, 0.1)"
+  sidebar-selected-icon-color: "#AED581"
+  sidebar-selected-text-color: "#F1F8E9"
+  
+  # States #
+  state-icon-color: "#7CB342"
+  state-icon-active-color: "#AED581"
+  state-icon-unavailable-color: "#455A64"
+  
+  # Badges #
+  label-badge-background-color: "#1A2F1A"
+  label-badge-text-color: "#E8F5E9"
+  label-badge-red: "#EF5350"
+  label-badge-blue: "#42A5F5"
+  label-badge-green: "#7CB342"
+  label-badge-yellow: "#FDD835"
+  label-badge-grey: "#616161"
+  
+  # Cards #
+  ha-card-border-radius: "12px"
+  ha-card-box-shadow: "0 4px 6px rgba(0, 0, 0, 0.3), 0 1px 3px rgba(0, 0, 0, 0.2)"
+  
+  # Dialogs #
+  mdc-dialog-backdrop-opacity: "0.8"
+  material-background-color: "#1A2F1A"
+  material-secondary-background-color: "#0F1F0F"
+  
+  # Tables #
+  table-row-background-color: "rgba(26, 47, 26, 0.5)"
+  table-row-alternative-background-color: "rgba(33, 66, 33, 0.3)"
+  
+  # Misc #
+  app-header-background-color: "linear-gradient(180deg, #1A2F1A 0%, #0F1F0F 100%)"
+  mdc-theme-primary: "#7CB342"
+  accent-color: "#7CB342"
