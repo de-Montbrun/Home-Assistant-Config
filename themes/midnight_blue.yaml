@@ -1,0 +1,72 @@
+---
+Midnight Blue:
+  # Main Colors #
+  primary-color: "#64B5F6" # Light blue accent
+  primary-background-color: "#0D1117" # Very dark blue-black
+  secondary-background-color: "#161B22" # Dark blue-grey
+  paper-card-background-color: "#21262D" # Card background
+  paper-item-icon-color: "#64B5F6" # Icon color
+  primary-text-color: "#F0F6FC" # Almost white text
+  secondary-text-color: "rgba(240, 246, 252, 0.7)" # Dimmed white
+  disabled-text-color: "rgba(240, 246, 252, 0.4)" # Disabled text
+  divider-color: "rgba(100, 181, 246, 0.2)" # Blue divider
+  paper-card-header-color: "#F0F6FC" # Card header text
+  
+  # Card styling #
+  ha-card-background: "#21262D"
+  card-background-color: "#21262D"
+  ha-card-border-radius: "8px"
+  ha-card-box-shadow: "0 2px 8px rgba(0, 0, 0, 0.4)"
+  
+  # Nav Menu #
+  paper-listbox-background-color: "#161B22"
+  paper-listbox-color: "#F0F6FC"
+  paper-grey-200: "#30363D" # Selected item background
+  
+  # Switches #
+  paper-toggle-button-checked-ink-color: "#64B5F6"
+  paper-toggle-button-checked-button-color: "#64B5F6"
+  paper-toggle-button-checked-bar-color: "#42A5F5"
+  
+  # Sliders #
+  paper-slider-knob-color: "#64B5F6"
+  paper-slider-knob-start-color: "#42A5F5"
+  paper-slider-pin-color: "#64B5F6"
+  paper-slider-active-color: "#64B5F6"
+  paper-slider-secondary-color: "#1976D2"
+  
+  # Sidebar #
+  sidebar-background-color: "#0D1117"
+  sidebar-icon-color: "#64B5F6"
+  sidebar-text-color: "#F0F6FC"
+  sidebar-selected-background-color: "rgba(100, 181, 246, 0.1)"
+  sidebar-selected-icon-color: "#90CAF9"
+  sidebar-selected-text-color: "#FFFFFF"
+  
+  # States #
+  state-icon-color: "#64B5F6"
+  state-icon-active-color: "#90CAF9"
+  state-icon-unavailable-color: "#6E7681"
+  
+  # Badges #
+  label-badge-background-color: "#21262D"
+  label-badge-text-color: "#F0F6FC"
+  label-badge-red: "#F85149"
+  label-badge-blue: "#64B5F6"
+  label-badge-green: "#56D364"
+  label-badge-yellow: "#E3B341"
+  label-badge-grey: "#8B949E"
+  
+  # Dialogs #
+  mdc-dialog-backdrop-opacity: "0.7"
+  material-background-color: "#0D1117"
+  material-secondary-background-color: "#161B22"
+  
+  # Tables #
+  table-row-background-color: "rgba(33, 38, 45, 0.5)"
+  table-row-alternative-background-color: "rgba(48, 54, 61, 0.3)"
+  
+  # Header #
+  app-header-background-color: "#0D1117"
+  mdc-theme-primary: "#64B5F6"
+  accent-color: "#64B5F6"
