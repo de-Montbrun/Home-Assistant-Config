@@ -1,0 +1,986 @@
+---
+
+title: ''
+views:
+  - cards:
+      - cards:
+          - entities:
+              - entity: person.gail
+              - entity: person.gervais
+            show_header_toggle: false
+            title: Household Members
+            type: entities
+            state_color: false
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity: person.jennifer
+                    state: home
+                  - condition: state
+                    entity: person.cameron
+                    state: home
+                  - condition: state
+                    entity: person.grant
+                    state: home
+            card:
+              type: entity-filter
+              entities:
+                - person.cameron
+                - person.jennifer
+                - person.grant
+              conditions:
+                - condition: state
+                  state: home
+              card:
+                type: entities
+                title: VIPs
+          - card:
+              entity: sensor.distance_apart
+              max: 4000
+              min: 0
+              name: GandG Apart
+              severity:
+                green: 0
+                red: 1000
+                yellow: 200
+              theme: default
+              type: gauge
+            conditions:
+              - entity: sensor.distance_apart
+                state_not: '0'
+              - condition: state
+                entity: sensor.distance_apart
+                state_not: unknown
+              - condition: state
+                entity: sensor.distance_apart
+                state_not: unavailable
+            type: conditional
+        type: vertical-stack
+      - type: map
+        entities:
+          - entity: person.gervais
+          - entity: person.gail
+        hours_to_show: 2
+        theme_mode: auto
+    icon: mdi:account-multiple
+    panel: false
+    path: default-view
+    title: People
+    badges: []
+  - badges: []
+    cards:
+      - entities:
+          - entity: light.outdoor_lights
+          - entity: light.main_floor_lights
+          - entity: light.second_floor_lights
+          - entity: light.basement_lights
+          - entity: light.bathroom_lights
+          - entity: light.bedroom_lights
+          - entity: light.dining_room_lights
+          - entity: light.garage_lights
+          - entity: light.hallway_lights
+          - entity: light.kitchen_lights
+          - entity: light.laundry_room_lights
+          - entity: light.livingroom_lights
+          - entity: light.office_lights
+          - entity: light.spare_room_lights
+        card:
+          show_header_toggle: true
+          title: All Lights
+          state_color: true
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - type: entity-filter
+        entities:
+          - light.basement_bathroom
+          - light.basement_shower
+          - light.basement_storage
+        conditions:
+          - condition: state
+            state:
+              - 'off'
+              - 'on'
+        card:
+          type: entities
+          show_header_toggle: false
+          title: Basement
+          state_color: true
+      - card:
+          show_header_toggle: false
+          title: Bathroom
+        entities:
+          - entity: light.bathroom_lights
+          - entity: light.bathroom_shower
+          - entity: light.bathroom_sink
+          - entity: light.bathroom_tub
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Bedroom
+        entities:
+          - entity: light.bedroom_lights
+          - entity: light.bedroom_ceiling
+          - entity: light.bedroom_lamps
+          - switch.switch4
+        state_color: true
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Dining Room
+          state_color: true
+        entities:
+          - light.dining_room_lights
+          - light.dining_room_lamps
+          - light.dining_room_table
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Dressing Room
+          state_color: true
+        entities:
+          - light.dressing_room_lights
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - type: entities
+        entities:
+          - entity: light.garage_lights
+        title: Garage
+        show_header_toggle: false
+      - card:
+          show_header_toggle: false
+          title: Hallways
+          state_color: true
+        entities:
+          - light.hallway_lights
+          - light.basement_stairs
+          - light.entryway_lights
+          - light.foyer_lights
+          - light.hallway_lamp
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Kitchen
+          state_color: true
+        entities:
+          - light.kitchen_lights
+          - light.kitchen_counter
+          - light.kitchen_island
+          - light.kitchen_pots
+          - light.kitchen_sink
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Laundry Room
+          state_color: true
+        entities:
+          - entity: light.laundry_room_lights
+        state_color: true
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Livingroom
+          state_color: true
+        entities:
+          - entity: light.livingroom_lights
+          - entity: light.livingroom_main
+          - entity: light.livingroom_lamp
+          - entity: light.livingroom_pots
+          - entity: light.saltlick
+          - entity: light.tiffany
+        state_color: true
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Office - Gail
+          state_color: true
+        entities:
+          - light.gail_office_lights
+          - light.gail_office_lamp
+          - switch.switch1
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Office - Gervais
+          state_color: true
+        entities:
+          - light.office_lights
+          - light.office_ceiling_light
+          - light.office_desk_lamp
+          - light.office_desk_lights
+          - light.office_floor_lamp
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Outdoor
+          state_color: true
+        entities:
+          - entity: light.outdoor_lights
+          - entity: light.outdoor_back_door
+          - entity: light.outdoor_driveway
+          - entity: light.outdoor_pots
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Powder Room
+          state_color: true
+        entities:
+          - light.powder_room_light
+          - switch.powder_room_fan
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: Trees
+          state_color: true
+        entities:
+          - light.loft_trees
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+      - card:
+          show_header_toggle: false
+          title: TV Room
+          state_color: true
+        entities:
+          - entity: light.tv_room_lights
+          - entity: light.tv_room_lamps
+          - entity: light.tv_backlight_kit
+          - entity: light.tv_room_pots
+        state_color: true
+        state_filter:
+          - 'on'
+          - 'off'
+        type: entity-filter
+    icon: mdi:lightbulb
+    title: Lights and Switches
+  - icon: mdi:cloud
+    panel: false
+    title: Weather
+    badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:weather-chart-card
+            entity: weather.charlottetown_forecast
+            show_main: true
+            show_temperature: true
+            show_current_condition: true
+            show_attributes: false
+            show_time: false
+            show_time_seconds: false
+            show_day: false
+            show_date: false
+            show_humidity: true
+            show_pressure: true
+            show_wind_direction: true
+            show_wind_speed: true
+            show_sun: true
+            show_feels_like: false
+            show_dew_point: false
+            show_wind_gust_speed: false
+            show_visibility: true
+            show_last_changed: false
+            use_12hour_format: false
+            icons_size: 25
+            animated_icons: true
+            icon_style: style1
+            autoscroll: true
+            forecast:
+              precipitation_type: rainfall
+              show_probability: false
+              labels_font_size: '11'
+              precip_bar_size: '100'
+              style: style1
+              show_wind_forecast: false
+              condition_icons: true
+              round_temp: false
+              type: daily
+              number_of_forecasts: '0'
+              disable_animation: false
+            units:
+              speed: ''
+            title: Charlottetown Weather
+          - type: custom:weather-chart-card
+            entity: weather.charlottetown_forecast
+            show_main: false
+            show_temperature: true
+            show_current_condition: true
+            show_attributes: false
+            show_time: false
+            show_time_seconds: false
+            show_day: false
+            show_date: false
+            show_humidity: true
+            show_pressure: true
+            show_wind_direction: true
+            show_wind_speed: true
+            show_sun: true
+            show_feels_like: false
+            show_dew_point: false
+            show_wind_gust_speed: false
+            show_visibility: false
+            show_last_changed: false
+            use_12hour_format: false
+            icons_size: 25
+            animated_icons: true
+            icon_style: style1
+            autoscroll: false
+            forecast:
+              precipitation_type: rainfall
+              show_probability: false
+              labels_font_size: '11'
+              precip_bar_size: '100'
+              style: style1
+              show_wind_forecast: false
+              condition_icons: true
+              round_temp: false
+              type: hourly
+              number_of_forecasts: '0'
+              disable_animation: false
+            units:
+              speed: ''
+            title: Hourly
+          - type: entity-filter
+            state_filter:
+              - operator: '!='
+                value: unknown
+            entities:
+              - entity: weather.charlottetown_forecast
+              - entity: sensor.charlottetown_humidex
+              - entity: sensor.charlottetown_wind_chill
+              - entity: sensor.charlottetown_wind_gust
+              - entity: sensor.charlottetown_uv_index
+              - entity: sensor.charlottetown_advisory
+              - entity: sensor.charlottetown_warnings
+              - entity: sensor.charlottetown_watches
+      - type: vertical-stack
+        cards:
+          - type: custom:weather-chart-card
+            entity: weather.fredericton
+            forecast_type: daily
+            forecast:
+              precipitation_type: ''
+              show_wind_forecast: false
+              round_temp: false
+              disable_animation: false
+              type: daily
+              style: style1
+            units:
+              pressure: ''
+              speed: ''
+            animated_icons: true
+            icon_style: style1
+            use_12hour_format: false
+            show_time: false
+            show_time_seconds: false
+            show_day: false
+            show_date: false
+            show_main: true
+            show_temperature: true
+            show_current_condition: true
+            show_attributes: false
+            show_humidity: true
+            show_pressure: true
+            show_sun: true
+            show_wind_direction: true
+            show_wind_speed: true
+            title: Fredericton Weather
+          - type: custom:weather-chart-card
+            entity: weather.fredericton
+            show_main: false
+            show_temperature: true
+            show_current_condition: true
+            show_attributes: false
+            show_time: false
+            show_time_seconds: false
+            show_day: false
+            show_date: false
+            show_humidity: true
+            show_pressure: true
+            show_wind_direction: true
+            show_wind_speed: true
+            show_sun: true
+            show_feels_like: false
+            show_dew_point: false
+            show_wind_gust_speed: false
+            show_visibility: false
+            show_last_changed: false
+            use_12hour_format: false
+            icons_size: 25
+            animated_icons: true
+            icon_style: style1
+            autoscroll: false
+            forecast:
+              precipitation_type: rainfall
+              show_probability: false
+              labels_font_size: '11'
+              precip_bar_size: '100'
+              style: style1
+              show_wind_forecast: false
+              condition_icons: true
+              round_temp: false
+              type: hourly
+              number_of_forecasts: '0'
+              disable_animation: false
+            units:
+              speed: ''
+            title: Hourly
+          - type: entity-filter
+            state_filter:
+              - operator: '!='
+                value: unknown
+            entities:
+              - entity: weather.fredericton
+              - entity: sensor.fredericton_humidex
+              - entity: sensor.fredericton_wind_chill
+              - entity: sensor.fredericton_wind_gust
+              - entity: sensor.fredericton_uv_index
+              - entity: sensor.fredericton_advisories
+              - entity: sensor.fredericton_warnings
+              - entity: sensor.fredericton_watches
+      - type: vertical-stack
+        cards:
+          - show_current: true
+            show_forecast: true
+            type: custom:weather-chart-card
+            entity: weather.saint_john_forecast
+            forecast_type: daily
+            forecast:
+              precipitation_type: ''
+              type: daily
+              show_wind_forecast: false
+              condition_icons: true
+              round_temp: true
+            units:
+              pressure: ''
+              speed: ''
+            animated_icons: true
+            icon_style: style1
+            show_wind_speed: true
+            use_12hour_format: false
+            show_time: false
+            show_time_seconds: false
+            show_date: false
+            show_day: false
+            show_attributes: false
+            title: Saint John Weather
+          - type: custom:weather-chart-card
+            entity: weather.saint_john_forecast
+            show_main: false
+            show_temperature: true
+            show_current_condition: true
+            show_attributes: false
+            show_time: false
+            show_time_seconds: false
+            show_day: false
+            show_date: false
+            show_humidity: true
+            show_pressure: true
+            show_wind_direction: true
+            show_wind_speed: true
+            show_sun: true
+            show_feels_like: false
+            show_dew_point: false
+            show_wind_gust_speed: false
+            show_visibility: false
+            show_last_changed: false
+            use_12hour_format: false
+            icons_size: 25
+            animated_icons: true
+            icon_style: style1
+            autoscroll: false
+            forecast:
+              precipitation_type: rainfall
+              show_probability: false
+              labels_font_size: '11'
+              precip_bar_size: '100'
+              style: style1
+              show_wind_forecast: false
+              condition_icons: true
+              round_temp: false
+              type: hourly
+              number_of_forecasts: '0'
+              disable_animation: false
+            units:
+              speed: ''
+            title: Hourly
+          - type: entity-filter
+            state_filter:
+              - operator: '!='
+                value: unknown
+            entities:
+              - entity: weather.saint_john_forecast
+              - entity: sensor.saint_john_humidex
+              - entity: sensor.saint_john_wind_chill
+              - entity: sensor.saint_john_wind_gust
+              - entity: sensor.saint_john_uv_index
+              - entity: sensor.saint_john_advisory
+              - entity: sensor.saint_john_warnings
+              - entity: sensor.saint_john_watches
+      - type: vertical-stack
+        cards:
+          - type: custom:weather-chart-card
+            entity: weather.montreal_forecast
+            show_main: true
+            show_temperature: true
+            show_current_condition: true
+            show_attributes: false
+            show_time: false
+            show_time_seconds: false
+            show_day: false
+            show_date: false
+            show_humidity: true
+            show_pressure: true
+            show_wind_direction: true
+            show_wind_speed: true
+            show_sun: true
+            show_feels_like: false
+            show_dew_point: false
+            show_wind_gust_speed: false
+            show_visibility: true
+            show_last_changed: false
+            use_12hour_format: false
+            icons_size: 25
+            animated_icons: true
+            icon_style: style1
+            autoscroll: true
+            forecast:
+              precipitation_type: rainfall
+              show_probability: false
+              labels_font_size: '11'
+              precip_bar_size: '100'
+              style: style1
+              show_wind_forecast: false
+              condition_icons: true
+              round_temp: false
+              type: daily
+              number_of_forecasts: '0'
+              disable_animation: false
+            units:
+              speed: ''
+            title: Montréal Weather
+          - type: custom:weather-chart-card
+            entity: weather.montreal_forecast
+            show_main: false
+            show_temperature: true
+            show_current_condition: true
+            show_attributes: false
+            show_time: false
+            show_time_seconds: false
+            show_day: false
+            show_date: false
+            show_humidity: true
+            show_pressure: true
+            show_wind_direction: true
+            show_wind_speed: true
+            show_sun: true
+            show_feels_like: false
+            show_dew_point: false
+            show_wind_gust_speed: false
+            show_visibility: false
+            show_last_changed: false
+            use_12hour_format: false
+            icons_size: 25
+            animated_icons: true
+            icon_style: style1
+            autoscroll: false
+            forecast:
+              precipitation_type: rainfall
+              show_probability: false
+              labels_font_size: '11'
+              precip_bar_size: '100'
+              style: style1
+              show_wind_forecast: false
+              condition_icons: true
+              round_temp: false
+              type: hourly
+              number_of_forecasts: '0'
+              disable_animation: false
+            units:
+              speed: ''
+            title: Hourly
+          - type: entity-filter
+            state_filter:
+              - operator: '!='
+                value: unknown
+            entities:
+              - entity: weather.montreal_forecast
+              - entity: sensor.montreal_wind_chill
+              - entity: sensor.montreal_wind_gust
+              - entity: sensor.montreal_uv_index
+              - entity: sensor.montreal_advisory
+              - entity: sensor.montreal_warnings
+              - entity: sensor.montreal_watches
+  - title: Sensors
+    path: sensors
+    icon: mdi:timer
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: sensor.bedroom_sensor_temperature
+            name: Temperature
+          - entity: sensor.bedroom_sensor_humidity
+            name: Humidity
+          - entity: sensor.bedroom_sensor_battery
+        title: Bedroom Sensor
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.dining_room_sensor_temperature
+          - entity: sensor.dining_room_sensor_humidity
+          - entity: sensor.dining_room_sensor_battery
+        title: Dining Room Sensors
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.temperature_humidity_sensor_dca4_temperature
+            name: Temperature
+          - entity: sensor.temperature_humidity_sensor_dca4_humidity
+            name: Humidity
+          - entity: sensor.temperature_humidity_sensor_dca4_battery
+        title: G-Desk Sensors
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.gail_office_sensor_temperature
+            name: Temperature
+          - entity: sensor.gail_office_sensor_humidity
+            name: Humidity
+          - entity: sensor.gail_office_sensor_battery
+        title: Gail Office Sensor
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.temperature_humidity_sensor_2120_temperature
+            name: Temperature
+          - entity: sensor.temperature_humidity_sensor_2120_humidity
+            name: Humidity
+          - entity: sensor.temperature_humidity_sensor_2120_battery
+          - entity: binary_sensor.hue_outdoor_motion_sensor_1_motion
+          - entity: sensor.hue_outdoor_motion_sensor_1_temperature
+          - entity: sensor.hue_outdoor_motion_sensor_1_battery
+        title: Garage Sensors
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.lywsd03mmc_310b_temperature
+            name: Temperature
+          - entity: sensor.lywsd03mmc_310b_humidity
+            name: Humidity
+          - entity: sensor.lywsd03mmc_310b_battery
+        title: Spare Room
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.temperature_humidity_sensor_727f_temperature
+            name: Temperature
+          - entity: sensor.temperature_humidity_sensor_727f_humidity
+            name: Humidity
+          - entity: sensor.temperature_humidity_sensor_727f_battery
+        title: Laundry
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.kitchen_sensor_battery
+          - entity: sensor.living_room_sensor_battery
+          - entity: sensor.basement_sensor_battery
+        title: Battery Levels
+        show_header_toggle: false
+        state_color: true
+      - type: entities
+        entities:
+          - entity: binary_sensor.basement_sensor_motion
+          - entity: binary_sensor.kitchen_sensor_motion
+          - entity: binary_sensor.living_room_sensor_motion
+          - entity: binary_sensor.doorbell_doorbell
+          - entity: binary_sensor.doorbell_motion
+        title: Occupancy Sensors
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.kitchen_sensor_light_level
+          - entity: sensor.living_room_sensor_light_level
+        title: Light Sensors
+        state_color: true
+        show_header_toggle: false
+      - type: entities
+        entities:
+          - entity: sensor.kitchen_sensor_temperature
+          - entity: sensor.living_room_sensor_temperature
+        title: Temperatures
+        show_header_toggle: false
+        state_color: true
+      - type: entities
+        entities:
+          - entity: vacuum.alice
+          - entity: vacuum.consuela
+          - entity: sensor.delicious_docked
+          - entity: vacuum.robot
+          - entity: fan.delicious
+          - entity: sensor.alice_battery
+          - entity: sensor.consuela_battery
+          - entity: sensor.robot_battery
+          - entity: binary_sensor.consuela_bin_full
+        title: Robots
+        state_color: true
+      - type: entities
+        entities:
+          - entity: sensor.tv_room_occupancy_illuminance
+            name: Illuminance
+          - entity: binary_sensor.tv_room_occupancy_motion
+            name: Motion
+          - entity: binary_sensor.tv_room_occupancy_occupancy
+            name: Occupancy
+          - entity: sensor.tv_room_occupancy_battery
+        title: TV Room Occupancy
+        state_color: true
+      - type: entities
+        entities:
+          - entity: lock.front_door_lock_lock_mechanism
+          - entity: lock.garage_door_lock_lock_mechanism
+        title: Door Locks
+  - badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.arrow_active_clients
+                state_not: '0'
+              - condition: state
+                entity: sensor.arrow_active_clients
+                state_not: unavailable
+              - condition: state
+                entity: sensor.arrow_active_clients
+                state_not: unknown
+            card:
+              graph: line
+              type: sensor
+              entity: sensor.arrow_active_clients
+              detail: 1
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.spitfire
+                state_not: unavailable
+              - condition: state
+                entity: sensor.spitfire
+                state_not: unknown
+              - condition: state
+                entity: sensor.spitfire
+                state_not: '0'
+            card:
+              graph: line
+              type: sensor
+              entity: sensor.spitfire
+              detail: 1
+      - type: vertical-stack
+        cards:
+          - type: media-control
+            entity: media_player.tv_roomtv
+          - type: conditional
+            conditions:
+              - entity: media_player.plex_plex_for_roku_tv_roomtv
+                state_not: 'off'
+              - entity: media_player.plex_plex_for_roku_tv_roomtv
+                state: playing
+            card:
+              type: media-control
+              entity: media_player.plex_plex_for_roku_tv_roomtv
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: media_player.tv_room_tv
+                state: playing
+            card:
+              type: media-control
+              entity: media_player.tv_room_tv
+          - type: media-control
+            entity: media_player.bedroomtv
+          - type: conditional
+            conditions:
+              - entity: media_player.plex_plex_for_roku_bedroomtv
+                state_not: 'off'
+              - entity: media_player.plex_plex_for_roku_bedroomtv
+                state: playing
+            card:
+              type: media-control
+              entity: media_player.plex_plex_for_roku_bedroomtv
+    icon: mdi:play-circle-outline
+    title: Media Players
+  - title: Car
+    path: car
+    icon: mdi:car
+    badges: []
+    cards:
+      - type: entities
+        entities:
+          - entity: lock.volvo_volvo_lock
+            name: Central lock
+          - entity: button.volvo_volvo_flash
+            name: Flash
+          - entity: button.volvo_volvo_honk
+            name: Honk
+          - entity: button.volvo_volvo_honk_flash
+            name: Honk & flash
+        title: Volvo XC40 PETROL 2020
+      - type: grid
+        square: false
+        columns: 1
+        cards:
+          - type: entities
+            entities:
+              - entity: binary_sensor.volvo_volvo_brake_fluid_level_warning
+                name: Brake fluid
+              - entity: sensor.volvo_volvo_availability
+                name: Car connection
+              - entity: binary_sensor.volvo_volvo_coolant_level_warning
+                name: Coolant level
+              - entity: sensor.volvo_volvo_distance_to_empty_tank
+                name: Distance to empty tank
+              - entity: sensor.volvo_volvo_distance_to_service
+                name: Distance to service
+              - entity: binary_sensor.volvo_volvo_door_front_left
+                name: Door front left
+              - entity: binary_sensor.volvo_volvo_door_front_right
+                name: Door front right
+              - entity: binary_sensor.volvo_volvo_door_rear_left
+                name: Door rear left
+              - entity: binary_sensor.volvo_volvo_door_rear_right
+                name: Door rear right
+              - entity: binary_sensor.volvo_volvo_engine_status
+                name: Engine status
+              - entity: sensor.volvo_volvo_engine_time_to_service
+                name: Engine time to service
+              - entity: sensor.volvo_volvo_fuel_amount
+                name: Fuel amount
+              - entity: binary_sensor.volvo_volvo_hood
+                name: Hood
+              - entity: sensor.volvo_volvo_odometer
+                name: Odometer
+              - entity: binary_sensor.volvo_volvo_oil_level_warning
+                name: Oil level
+              - entity: binary_sensor.volvo_volvo_service_warning
+                name: Service
+              - entity: binary_sensor.volvo_volvo_sunroof
+                name: Sunroof
+              - entity: sensor.volvo_volvo_trip_meter_automatic
+                name: TA Distance
+              - entity: binary_sensor.volvo_volvo_tailgate
+                name: Tailgate
+              - entity: sensor.volvo_volvo_time_to_service
+                name: Time to service
+              - entity: sensor.volvo_volvo_average_fuel_consumption
+                name: TM Avg. fuel consumption
+              - entity: sensor.volvo_volvo_average_speed
+                name: TM Avg. speed
+              - entity: sensor.volvo_volvo_trip_meter_manual
+                name: TM Distance
+              - entity: binary_sensor.volvo_volvo_tyre_front_left
+                name: Tyre front left
+              - entity: binary_sensor.volvo_volvo_tyre_front_right
+                name: Tyre front right
+              - entity: binary_sensor.volvo_volvo_tyre_rear_left
+                name: Tyre rear left
+              - entity: binary_sensor.volvo_volvo_tyre_rear_right
+                name: Tyre rear right
+              - entity: binary_sensor.volvo_volvo_washer_fluid_level_warning
+                name: Washer fluid
+              - entity: binary_sensor.volvo_volvo_window_front_left
+                name: Window front left
+              - entity: binary_sensor.volvo_volvo_window_front_right
+                name: Window front right
+              - entity: binary_sensor.volvo_volvo_window_rear_left
+                name: Window rear left
+              - entity: binary_sensor.volvo_volvo_window_rear_right
+                name: Window rear right
+            title: Volvo XC40 PETROL 2020
+      - type: entities
+        entities:
+          - entity: sensor.volvo_volvo_api_request_count
+            name: API request count
+          - entity: sensor.volvo_volvo_api_status
+            name: API status
+        title: Volvo XC40 PETROL 2020
+  - icon: mdi:cctv
+    title: Security
+    badges: []
+    cards:
+      - show_state: false
+        show_name: true
+        camera_view: auto
+        type: picture-entity
+        entity: camera.driveway_medium_resolution_channel
+      - show_state: false
+        show_name: true
+        camera_view: auto
+        type: picture-entity
+        entity: camera.mecklenburg_west_medium_resolution_channel
+      - show_state: false
+        show_name: true
+        camera_view: auto
+        type: picture-entity
+        entity: camera.garage_medium_resolution_channel
+      - show_state: true
+        show_name: true
+        camera_view: auto
+        type: picture-entity
+        entity: camera.g3_flex_medium_resolution_channel
+        camera_image: camera.g3_flex_medium_resolution_channel
+      - camera_view: auto
+        type: picture-glance
+        entities:
+          - entity: binary_sensor.rack_motion
+          - entity: light.garage_lights
+        camera_image: camera.rack_medium_resolution_channel
+        title: Garage
+  - icon: mdi:shield-home-outline
+    type: panel
+    badges: []
+    cards:
+      - type: alarm-panel
+        states:
+          - arm_home
+          - arm_away
+        entity: alarm_control_panel.alarmo

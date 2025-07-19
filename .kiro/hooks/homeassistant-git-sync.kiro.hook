@@ -1,0 +1,22 @@
+{
+  "enabled": true,
+  "name": "Home Assistant Git Auto-Sync",
+  "description": "Automatically commits and pushes Home Assistant configuration changes to git repository when YAML files are modified",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "*.yaml",
+      "*.yml",
+      "*.py",
+      "*.json",
+      "*.txt",
+      "blueprints/**/*.yaml",
+      "themes/**/*.yaml"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Home Assistant configuration files have been modified. Please:\n\n1. Run `git add .` to stage all changes\n2. Create a meaningful commit message based on the files that were changed\n3. Run `git commit -m \"[your commit message]\"`\n4. Run `git push origin main` to push changes to the remote repository\n5. If there are any conflicts or errors, provide guidance on how to resolve them\n\nThe changes should be committed from the /root/homeassistant directory on the home-assistant virtual machine. Make sure to review the changes before committing to ensure they are intentional configuration updates."
+  }
+}
