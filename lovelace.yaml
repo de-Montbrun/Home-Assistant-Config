@@ -8,16 +8,20 @@ views:
     cards:
       - type: vertical-stack
         cards:
-          - type: entities
-            title: Who's Home
-            entities:
-              - entity: person.gail
-                secondary_info: last-changed
-              - entity: person.gervais
-                secondary_info: last-changed
-              - entity: person.jennifer
-                secondary_info: last-changed
-            state_color: true
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: person.jennifer
+                state_not: home
+            card:
+              type: entities
+              title: Who's Home
+              entities:
+                - entity: person.gail
+                  secondary_info: last-changed
+                - entity: person.gervais
+                  secondary_info: last-changed
+              state_color: true
           - type: horizontal-stack
             cards:
               - type: conditional
@@ -41,20 +45,14 @@ views:
                   line_color: var(--primary-color)
                   line_width: 2
                   font_size: 75
-              - type: custom:button-card
-                name: Location Map
-                icon: mdi:map
-                tap_action:
-                  action: navigate
-                  navigation_path: /lovelace/map
-                styles:
-                  card:
-                    - height: 120px
-                  icon:
-                    - width: 40px
-                    - height: 40px
-                  name:
-                    - font-size: 14px
+              - type: map
+                entities:
+                  - entity: person.gervais
+                  - entity: person.gail
+                  - entity: person.jennifer
+                default_zoom: 13
+                hours_to_show: 24
+                aspect_ratio: '16:9'
       - type: vertical-stack
         cards:
           - type: markdown
@@ -104,7 +102,6 @@ views:
                   action: navigate
                   navigation_path: /lovelace/security
                 template: nav_button
-
       - type: conditional
         conditions:
           - entity: sensor.closest_city
@@ -137,13 +134,6 @@ views:
           type: weather-forecast
           entity: weather.montreal_forecast
           show_forecast: false
-      - type: entities
-        title: Theme Selector
-        entities:
-          - entity: input_select.theme_selector
-            name: Current Theme
-        show_header_toggle: false
-        state_color: true
   - badges: []
     cards:
       - entities:
@@ -614,19 +604,6 @@ views:
             show_header_toggle: false
             state_color: true
     cards: []
-  - title: Map
-    path: map
-    icon: mdi:map
-    badges: []
-    cards:
-      - type: map
-        entities:
-          - entity: person.gervais
-          - entity: person.gail
-          - entity: person.jennifer
-        default_zoom: 13
-        hours_to_show: 24
-        aspect_ratio: '16:9'
   - title: Robots
     path: robots
     icon: mdi:robot-vacuum
@@ -1388,4 +1365,3 @@ button_card_templates:
         - font-size: 18px
         - font-weight: bold
         - padding-left: 10px
-
