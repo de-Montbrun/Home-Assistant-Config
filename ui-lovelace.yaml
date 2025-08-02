@@ -32,13 +32,16 @@ views:
             tap_action:
               action: none
           
-          # Multi-City Weather Display
-          - type: horizontal-stack
-            cards:
-              - type: weather-forecast
-                entity: weather.charlottetown_forecast
-                name: "🌊 Charlottetown"
-                show_forecast: false
+          # Weather for Closest City
+          - type: conditional
+            conditions:
+              - entity: sensor.closest_city
+                state: Charlottetown
+            card:
+              type: weather-forecast
+              entity: weather.charlottetown_forecast
+              show_forecast: false
+              card_mod:
                 style: |
                   ha-card {
                     background: linear-gradient(135deg, rgba(66, 165, 245, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%);
@@ -46,10 +49,16 @@ views:
                     border: 1px solid rgba(225, 190, 231, 0.3);
                     backdrop-filter: blur(10px);
                   }
-              - type: weather-forecast
-                entity: weather.fredericton
-                name: "🏛️ Fredericton"
-                show_forecast: false
+          
+          - type: conditional
+            conditions:
+              - entity: sensor.closest_city
+                state: Fredericton
+            card:
+              type: weather-forecast
+              entity: weather.fredericton
+              show_forecast: false
+              card_mod:
                 style: |
                   ha-card {
                     background: linear-gradient(135deg, rgba(102, 187, 106, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%);
@@ -57,24 +66,36 @@ views:
                     border: 1px solid rgba(225, 190, 231, 0.3);
                     backdrop-filter: blur(10px);
                   }
-              - type: weather-forecast
-                entity: weather.montreal_forecast
-                name: "🏙️ Montréal"
-                show_forecast: false
+          
+          - type: conditional
+            conditions:
+              - entity: sensor.closest_city
+                state: Saint John
+            card:
+              type: weather-forecast
+              entity: weather.saint_john_forecast
+              show_forecast: false
+              card_mod:
                 style: |
                   ha-card {
-                    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%);
+                    background: linear-gradient(135deg, rgba(239, 83, 80, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%);
                     border-radius: 16px;
                     border: 1px solid rgba(225, 190, 231, 0.3);
                     backdrop-filter: blur(10px);
                   }
-              - type: weather-forecast
-                entity: weather.saint_john_forecast
-                name: "⚓ Saint John"
-                show_forecast: false
+          
+          - type: conditional
+            conditions:
+              - entity: sensor.closest_city
+                state: Montreal
+            card:
+              type: weather-forecast
+              entity: weather.montreal_forecast
+              show_forecast: false
+              card_mod:
                 style: |
                   ha-card {
-                    background: linear-gradient(135deg, rgba(239, 83, 80, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%);
+                    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%);
                     border-radius: 16px;
                     border: 1px solid rgba(225, 190, 231, 0.3);
                     backdrop-filter: blur(10px);
