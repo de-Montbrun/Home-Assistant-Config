@@ -1,10 +1,10 @@
 {
-  "enabled": true,
+  "enabled": false,
   "name": "Home Assistant Git Auto-Sync",
   "description": "Automatically commits and pushes Home Assistant configuration changes to git repository when YAML files are modified",
   "version": "1",
   "when": {
-    "type": "fileEdited",
+    "type": "fileCreated",
     "patterns": [
       "*.yaml",
       "*.yml",

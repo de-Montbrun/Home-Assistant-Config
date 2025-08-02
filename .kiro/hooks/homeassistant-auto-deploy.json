@@ -18,6 +18,7 @@
   },
   "settings": {
     "auto_approve": false,
-    "debounce_ms": 2000
+    "debounce_ms": 2000,
+    "enabled": false
   }
 }

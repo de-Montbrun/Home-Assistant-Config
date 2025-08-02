@@ -1,0 +1,19 @@
+{
+  "name": "Home Assistant Manual Deploy",
+  "description": "Manually deploy Home Assistant configuration when you're ready",
+  "trigger": {
+    "type": "manual",
+    "button_text": "🚀 Deploy to Home Assistant"
+  },
+  "action": {
+    "type": "agent_execution",
+    "prompt": "The user wants to manually deploy their Home Assistant configuration. Please:\n\n1. Check git status to see what files have changed\n2. Ask the user to confirm they want to commit these changes\n3. If confirmed, add and commit the changes with a descriptive commit message\n4. Push the changes to the remote repository\n5. SSH into the 'home-assistant' virtual machine and navigate to /root/homeassistant\n6. Pull the latest changes from git\n7. Run 'hass.sh check' to validate the configuration\n8. If validation passes, run the hass.sh script to restart Home Assistant\n9. Verify the configuration loaded successfully\n\nOnly proceed with deployment if the user explicitly confirms they want to commit and deploy the changes.",
+    "context": [
+      "#Git",
+      "#Terminal"
+    ]
+  },
+  "settings": {
+    "auto_approve": false
+  }
+}
