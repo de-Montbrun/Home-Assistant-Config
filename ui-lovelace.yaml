@@ -436,6 +436,9 @@ views:
               - type: custom:button-card
                 name: "Spare Room"
                 icon: mdi:thermometer
+                custom_fields:
+                  temp: "[[[ return states['sensor.atc_310b_temperature'].state + '°C' ]]]"
+                  humidity: "[[[ return states['sensor.atc_310b_humidity'].state + '%' ]]]"
                 styles:
                   card:
                     - background: "linear-gradient(135deg, rgba(66, 165, 245, 0.2) 0%, rgba(225, 190, 231, 0.1) 100%)"
@@ -449,10 +452,6 @@ views:
                   icon:
                     - color: "#42A5F5"
                     - size: "24px"
-                custom_fields:
-                  temp: "[[[ return states['sensor.atc_310b_temperature'].state + '°C' ]]]"
-                  humidity: "[[[ return states['sensor.atc_310b_humidity'].state + '%' ]]]"
-                styles:
                   custom_fields:
                     temp:
                       - position: "absolute"
@@ -473,6 +472,9 @@ views:
               - type: custom:button-card
                 name: "Office"
                 icon: mdi:thermometer
+                custom_fields:
+                  temp: "[[[ return states['sensor.temperature_humidity_sensor_dca4'].state + '°C' ]]]"
+                  humidity: "[[[ return states['sensor.temperature_humidity_sensor_dca4'].state + '%' ]]]"
                 styles:
                   card:
                     - background: "linear-gradient(135deg, rgba(102, 187, 106, 0.2) 0%, rgba(225, 190, 231, 0.1) 100%)"
@@ -486,10 +488,6 @@ views:
                   icon:
                     - color: "#66BB6A"
                     - size: "24px"
-                custom_fields:
-                  temp: "[[[ return states['sensor.temperature_humidity_sensor_dca4'].state + '°C' ]]]"
-                  humidity: "[[[ return states['sensor.temperature_humidity_sensor_dca4_2'].state + '%' ]]]"
-                styles:
                   custom_fields:
                     temp:
                       - position: "absolute"
@@ -510,6 +508,9 @@ views:
               - type: custom:button-card
                 name: "Garage"
                 icon: mdi:thermometer
+                custom_fields:
+                  temp: "[[[ return states['sensor.temperature_humidity_sensor_2120'].state + '°C' ]]]"
+                  humidity: "[[[ return states['sensor.temperature_humidity_sensor_2120_2'].state + '%' ]]]"
                 styles:
                   card:
                     - background: "linear-gradient(135deg, rgba(255, 152, 0, 0.2) 0%, rgba(225, 190, 231, 0.1) 100%)"
@@ -523,10 +524,6 @@ views:
                   icon:
                     - color: "#FF9800"
                     - size: "24px"
-                custom_fields:
-                  temp: "[[[ return states['sensor.temperature_humidity_sensor_2120'].state + '°C' ]]]"
-                  humidity: "[[[ return states['sensor.temperature_humidity_sensor_2120_2'].state + '%' ]]]"
-                styles:
                   custom_fields:
                     temp:
                       - position: "absolute"
@@ -839,8 +836,8 @@ views:
                     - color: "#42A5F5"
                     - size: "24px"
                 custom_fields:
-                  fridge_temp: "[[[ return states['sensor.refrigerator_fridge_temperature'].state + '°C' ]]]"
-                  freezer_temp: "[[[ return states['sensor.refrigerator_freezer_temperature'].state + '°C' ]]]"
+                  fridge_temp: "[[[ return Math.round(states['sensor.refrigerator_fridge_temperature'].state) + '°C' ]]]"
+                  freezer_temp: "[[[ return Math.round(states['sensor.refrigerator_freezer_temperature'].state) + '°C' ]]]"
                 styles:
                   custom_fields:
                     fridge_temp:
