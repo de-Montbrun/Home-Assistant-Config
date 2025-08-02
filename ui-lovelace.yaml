@@ -36,7 +36,7 @@ views:
           - type: horizontal-stack
             cards:
               - type: weather-forecast
-                entity: weather.charlottetown
+                entity: weather.charlottetown_forecast
                 name: "🌊 Charlottetown"
                 show_forecast: false
                 style: |
@@ -58,7 +58,7 @@ views:
                     backdrop-filter: blur(10px);
                   }
               - type: weather-forecast
-                entity: weather.montreal
+                entity: weather.montreal_forecast
                 name: "🏙️ Montréal"
                 show_forecast: false
                 style: |
@@ -69,7 +69,7 @@ views:
                     backdrop-filter: blur(10px);
                   }
               - type: weather-forecast
-                entity: weather.saint_john
+                entity: weather.saint_john_forecast
                 name: "⚓ Saint John"
                 show_forecast: false
                 style: |
@@ -102,8 +102,8 @@ views:
           - type: horizontal-stack
             cards:
               - type: custom:button-card
-                entity: light.all_lights
-                name: "All Lights"
+                entity: light.indoor_lights
+                name: "Indoor Lights"
                 icon: mdi:lightbulb-group
                 show_state: true
                 styles:
@@ -594,7 +594,7 @@ views:
                   }
               
               - type: media-control
-                entity: media_player.gervais_homepod
+                entity: media_player.gervais_s_homepod
                 name: "💼 Gervais' Office"
                 style: |
                   ha-card {
