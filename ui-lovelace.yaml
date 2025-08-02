@@ -14,7 +14,7 @@ views:
       - type: vertical-stack
         cards:
           - type: custom:button-card
-            name: "Welcome to Your Smart Sanctuary"
+            name: "Smart Home Sanctuary"
             styles:
               card:
                 - background: "linear-gradient(135deg, rgba(156, 39, 176, 0.3) 0%, rgba(225, 190, 231, 0.1) 100%)"
@@ -29,6 +29,9 @@ views:
                 - color: "#F3E5F5"
                 - text-shadow: "0 2px 4px rgba(0,0,0,0.5)"
                 - letter-spacing: "2px"
+                - white-space: "nowrap"
+                - overflow: "visible"
+                - text-overflow: "unset"
             tap_action:
               action: none
           
@@ -48,6 +51,12 @@ views:
                     border-radius: 16px;
                     border: 1px solid rgba(225, 190, 231, 0.3);
                     backdrop-filter: blur(10px);
+                    min-width: 300px;
+                  }
+                  .name {
+                    white-space: nowrap !important;
+                    overflow: visible !important;
+                    text-overflow: unset !important;
                   }
           
           - type: conditional
@@ -65,6 +74,12 @@ views:
                     border-radius: 16px;
                     border: 1px solid rgba(225, 190, 231, 0.3);
                     backdrop-filter: blur(10px);
+                    min-width: 300px;
+                  }
+                  .name {
+                    white-space: nowrap !important;
+                    overflow: visible !important;
+                    text-overflow: unset !important;
                   }
           
           - type: conditional
@@ -82,6 +97,12 @@ views:
                     border-radius: 16px;
                     border: 1px solid rgba(225, 190, 231, 0.3);
                     backdrop-filter: blur(10px);
+                    min-width: 300px;
+                  }
+                  .name {
+                    white-space: nowrap !important;
+                    overflow: visible !important;
+                    text-overflow: unset !important;
                   }
           
           - type: conditional
@@ -99,6 +120,12 @@ views:
                     border-radius: 16px;
                     border: 1px solid rgba(225, 190, 231, 0.3);
                     backdrop-filter: blur(10px);
+                    min-width: 300px;
+                  }
+                  .name {
+                    white-space: nowrap !important;
+                    overflow: visible !important;
+                    text-overflow: unset !important;
                   }
 
       # Lighting Control Center
