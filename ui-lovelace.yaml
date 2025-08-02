@@ -635,6 +635,8 @@ views:
             entity: media_player.plex_plex_for_roku_tv_roomtv
             show_state: true
             show_last_changed: true
+            custom_fields:
+              media_title: "[[[ return entity.attributes.media_title || 'No media playing' ]]]"
             styles:
               card:
                 - background: "linear-gradient(135deg, rgba(233, 30, 99, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%)"
@@ -648,9 +650,6 @@ views:
               state:
                 - color: "#E1BEE7"
                 - font-size: "14px"
-            custom_fields:
-              media_title: "[[[ return entity.attributes.media_title || 'No media playing' ]]]"
-            styles:
               custom_fields:
                 media_title:
                   - position: "absolute"
@@ -823,6 +822,9 @@ views:
               - type: custom:button-card
                 name: "❄️ Refrigerator"
                 icon: mdi:fridge
+                custom_fields:
+                  fridge_temp: "[[[ return Math.round(states['sensor.refrigerator_fridge_temperature'].state) + '°C' ]]]"
+                  freezer_temp: "[[[ return Math.round(states['sensor.refrigerator_freezer_temperature'].state) + '°C' ]]]"
                 styles:
                   card:
                     - background: "linear-gradient(135deg, rgba(66, 165, 245, 0.2) 0%, rgba(156, 39, 176, 0.1) 100%)"
@@ -835,10 +837,6 @@ views:
                   icon:
                     - color: "#42A5F5"
                     - size: "24px"
-                custom_fields:
-                  fridge_temp: "[[[ return Math.round(states['sensor.refrigerator_fridge_temperature'].state) + '°C' ]]]"
-                  freezer_temp: "[[[ return Math.round(states['sensor.refrigerator_freezer_temperature'].state) + '°C' ]]]"
-                styles:
                   custom_fields:
                     fridge_temp:
                       - position: "absolute"
