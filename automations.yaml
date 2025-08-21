@@ -1246,7 +1246,7 @@
       payload_template: '{{ states(''input_select.zigbee2mqtt_log_level'') }}'
       topic: zigbee2mqtt/bridge/config/log_level
 - id: '1705282122548'
-  alias: Lock Volvo
+  alias: "Volvo - Auto Lock After Parking"
   description: ''
   triggers:
   - entity_id:
