@@ -10,46 +10,28 @@
       payload: 'power1 ;power2 ;power3 ;power4 ;power5; dimmer; state '
 - id: ha_notify_ha_update_available
   alias: Update Available Notification
-  description: Notifies when Home Assistant updates are available with version details
-  triggers:
-  - entity_id: binary_sensor.python_package_index_pypi_update_available
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.python_package_index_pypi_update_available
     from: 'off'
     to: 'on'
-    trigger: state
-  conditions: []
-  actions:
-  - data:
-      message: "{% set current_version = states('sensor.current_version') %} {% set
-        latest_version = trigger.to_state.attributes.newest_version %} {% if current_version
-        != 'unknown' and latest_version %}\n  {% set current_parts = current_version.split('.')
-        %}\n  {% set latest_parts = latest_version.split('.') %}\n  {% set update_type
-        = 'patch' %}\n  {% if current_parts[0] != latest_parts[0] %}\n    {% set update_type
-        = 'major' %}\n  {% elif current_parts[1] != latest_parts[1] %}\n    {% set
-        update_type = 'minor' %}\n  {% endif %}\n  \U0001F514 {{ trigger.to_state.attributes.friendly_name
-        }} has a {{ update_type | upper }} update available!\n  \n  Current version:
-        {{ current_version }}\n  New version: {{ latest_version }}\n  \n  {% if update_type
-        == 'major' %}\n  ⚠️ This is a MAJOR update - please review breaking changes
-        before updating!\n  {% elif update_type == 'minor' %}\n  ℹ️ This is a minor
-        update with new features.\n  {% else %}\n  ✅ This is a patch update with bug
-        fixes.\n  {% endif %}\n{% else %}\n  \U0001F514 {{ trigger.to_state.attributes.friendly_name
-        }} has an update available!\n{% endif %}"
+  action:
+    service: notify.zulip
+    data:
+      message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
       title: Home Assistant
-    action: notify.zulip
-  mode: single
 - id: ha_notify_hacs_update_available
   alias: HACS Update Available Notification
-  description: Notifies when HACS updates are available
-  triggers:
-  - value_template: '{{ states("sensor.hacs") | int > 0 }}'
-    trigger: template
-  conditions: []
-  actions:
-  - data:
-      message: "\U0001F514 HACS has {{ states('sensor.hacs') }} update(s) available!\nCheck
-        the HACS panel for details on available updates."
+  initial_state: true
+  trigger:
+    platform: template
+    value_template: '{{ states("sensor.hacs") | int > 0 }}'
+  action:
+    service: notify.zulip
+    data:
+      message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
       title: Home Assistant
-    action: notify.zulip
-  mode: single
 - id: occupancy_alarm_no_one_home_alarm_alarm
   alias: Occupancy - no one home - alarm alarm
   triggers:
@@ -1065,8 +1047,6 @@
 
         '
       title: Weather
-      data:
-        topic: Bots
     action: notify.zulip
   initial_state: true
 - id: notify_current_uv_index
@@ -1139,8 +1119,6 @@
         }}\n**Low:** {{ states(low_temp_entities[closest_city]) }}{{ state_attr(low_temp_entities[closest_city],
         \"unit_of_measurement\") }}\n"
       title: Weather
-      data:
-        topic: Bots
     action: notify.zulip
   initial_state: true
 - id: notify_low_battery
@@ -1884,8 +1862,6 @@
         trigger.to_state.attributes.alert_3 }} ({{ trigger.to_state.attributes.alert_time_3
         }}) {% endif %}'
       title: Weather
-      data:
-        topic: Weather Alerts
     action: notify.zulip
   mode: single
 - id: '1748216683732'
@@ -1965,12 +1941,131 @@
   alias: Change Theme Based on Selector
   description: Automatically change the frontend theme when theme selector changes
   trigger:
-  - platform: state
-    entity_id: input_select.theme_selector
+    - platform: state
+      entity_id: input_select.theme_selector
   action:
-  - service: frontend.set_theme
-    data:
-      name: "{% if states('input_select.theme_selector') == 'default' %}\n  default\n{%
-        else %}\n  {{ states('input_select.theme_selector') }}\n{% endif %}\n"
+    - service: frontend.set_theme
+      data:
+        name: >
+          {% if states('input_select.theme_selector') == 'default' %}
+            default
+          {% else %}
+            {{ states('input_select.theme_selector') }}
+          {% endif %}
   mode: single
   initial_state: true
+
+- id: volvo_doors_windows_open_after_parking
+  alias: "Volvo - Doors/Windows Not Closed After Parking"
+  triggers:
+  - entity_id: binary_sensor.volvo_volvo_engine_status
+    from: 'on'
+    to: 'off'
+    for: '00:15:00'
+    trigger: state
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_door_front_left
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_door_front_right
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_door_rear_left
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_door_rear_right
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_tailgate
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_hood
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_window_front_left
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_window_front_right
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_window_rear_left
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_window_rear_right
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.volvo_volvo_sunroof
+      state: 'on'
+  actions:
+  - data:
+      message: >
+        🚗 Volvo not properly secured 15 minutes after parking!
+        {% set issues = [] %}
+        {% if is_state('binary_sensor.volvo_volvo_door_front_left', 'on') %}{% set issues = issues + ['Front left door'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_door_front_right', 'on') %}{% set issues = issues + ['Front right door'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_door_rear_left', 'on') %}{% set issues = issues + ['Rear left door'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_door_rear_right', 'on') %}{% set issues = issues + ['Rear right door'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_tailgate', 'on') %}{% set issues = issues + ['Tailgate'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_hood', 'on') %}{% set issues = issues + ['Hood'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_window_front_left', 'on') %}{% set issues = issues + ['Front left window'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_window_front_right', 'on') %}{% set issues = issues + ['Front right window'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_window_rear_left', 'on') %}{% set issues = issues + ['Rear left window'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_window_rear_right', 'on') %}{% set issues = issues + ['Rear right window'] %}{% endif %}
+        {% if is_state('binary_sensor.volvo_volvo_sunroof', 'on') %}{% set issues = issues + ['Sunroof'] %}{% endif %}
+        Open: {{ issues | join(', ') }}
+      title: Volvo
+    action: notify.zulip
+  mode: single
+
+- id: volvo_service_warnings
+  alias: "Volvo - Service Warnings"
+  triggers:
+  - entity_id:
+    - binary_sensor.volvo_volvo_service_warning
+    - binary_sensor.volvo_volvo_brake_fluid_level_warning
+    - binary_sensor.volvo_volvo_coolant_level_warning
+    - binary_sensor.volvo_volvo_oil_level_warning
+    - binary_sensor.volvo_volvo_washer_fluid_level_warning
+    to: 'on'
+    trigger: state
+  actions:
+  - data:
+      message: >
+        🔧 Volvo Service Alert: {{ trigger.to_state.attributes.friendly_name }} needs attention!
+        {% if trigger.entity_id == 'binary_sensor.volvo_volvo_service_warning' %}
+        Regular service is due.
+        {% elif trigger.entity_id == 'binary_sensor.volvo_volvo_brake_fluid_level_warning' %}
+        ⚠️ SAFETY CRITICAL: Brake fluid level is low!
+        {% elif trigger.entity_id == 'binary_sensor.volvo_volvo_coolant_level_warning' %}
+        Coolant level is low - engine may overheat.
+        {% elif trigger.entity_id == 'binary_sensor.volvo_volvo_oil_level_warning' %}
+        Oil level is low - check and top up immediately.
+        {% elif trigger.entity_id == 'binary_sensor.volvo_volvo_washer_fluid_level_warning' %}
+        Washer fluid is low - refill when convenient.
+        {% endif %}
+      title: Volvo
+    action: notify.zulip
+  mode: single
+
+- id: volvo_tire_pressure_warning
+  alias: "Volvo - Tire Pressure Warning"
+  triggers:
+  - entity_id:
+    - binary_sensor.volvo_volvo_tyre_front_left
+    - binary_sensor.volvo_volvo_tyre_front_right
+    - binary_sensor.volvo_volvo_tyre_rear_left
+    - binary_sensor.volvo_volvo_tyre_rear_right
+    to: 'on'
+    trigger: state
+  actions:
+  - data:
+      message: >
+        ⚠️ Volvo tire pressure warning: {{ trigger.to_state.attributes.friendly_name }} needs attention.
+        Check tire pressure soon for safety and fuel efficiency.
+        Current fuel: {{ states('sensor.volvo_volvo_fuel_amount') }}L
+      title: Volvo
+    action: notify.zulip
+  mode: single
