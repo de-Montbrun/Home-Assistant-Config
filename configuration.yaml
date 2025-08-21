@@ -480,7 +480,7 @@ input_select:
       - error
     initial: info
     icon: mdi:format-list-bulleted
-  
+
   theme_selector:
     name: Theme Selector
     options:
@@ -719,7 +719,7 @@ sensor:
                 Returning to Dock
               {% endif %}
             {% else -%}
-              Docked
+              docked
             {% endif %}
           {% endif %}
 

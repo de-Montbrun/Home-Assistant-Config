@@ -10,28 +10,46 @@
       payload: 'power1 ;power2 ;power3 ;power4 ;power5; dimmer; state '
 - id: ha_notify_ha_update_available
   alias: Update Available Notification
-  initial_state: true
-  trigger:
-    platform: state
-    entity_id: binary_sensor.python_package_index_pypi_update_available
+  description: Notifies when Home Assistant updates are available with version details
+  triggers:
+  - entity_id: binary_sensor.python_package_index_pypi_update_available
     from: 'off'
     to: 'on'
-  action:
-    service: notify.zulip
-    data:
-      message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
+    trigger: state
+  conditions: []
+  actions:
+  - data:
+      message: "{% set current_version = states('sensor.current_version') %} {% set
+        latest_version = trigger.to_state.attributes.newest_version %} {% if current_version
+        != 'unknown' and latest_version %}\n  {% set current_parts = current_version.split('.')
+        %}\n  {% set latest_parts = latest_version.split('.') %}\n  {% set update_type
+        = 'patch' %}\n  {% if current_parts[0] != latest_parts[0] %}\n    {% set update_type
+        = 'major' %}\n  {% elif current_parts[1] != latest_parts[1] %}\n    {% set
+        update_type = 'minor' %}\n  {% endif %}\n  \U0001F514 {{ trigger.to_state.attributes.friendly_name
+        }} has a {{ update_type | upper }} update available!\n  \n  Current version:
+        {{ current_version }}\n  New version: {{ latest_version }}\n  \n  {% if update_type
+        == 'major' %}\n  ⚠️ This is a MAJOR update - please review breaking changes
+        before updating!\n  {% elif update_type == 'minor' %}\n  ℹ️ This is a minor
+        update with new features.\n  {% else %}\n  ✅ This is a patch update with bug
+        fixes.\n  {% endif %}\n{% else %}\n  \U0001F514 {{ trigger.to_state.attributes.friendly_name
+        }} has an update available!\n{% endif %}"
       title: Home Assistant
+    action: notify.zulip
+  mode: single
 - id: ha_notify_hacs_update_available
   alias: HACS Update Available Notification
-  initial_state: true
-  trigger:
-    platform: template
-    value_template: '{{ states("sensor.hacs") | int > 0 }}'
-  action:
-    service: notify.zulip
-    data:
-      message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
+  description: Notifies when HACS updates are available
+  triggers:
+  - value_template: '{{ states("sensor.hacs") | int > 0 }}'
+    trigger: template
+  conditions: []
+  actions:
+  - data:
+      message: "\U0001F514 HACS has {{ states('sensor.hacs') }} update(s) available!\nCheck
+        the HACS panel for details on available updates."
       title: Home Assistant
+    action: notify.zulip
+  mode: single
 - id: occupancy_alarm_no_one_home_alarm_alarm
   alias: Occupancy - no one home - alarm alarm
   triggers:
@@ -1947,16 +1965,12 @@
   alias: Change Theme Based on Selector
   description: Automatically change the frontend theme when theme selector changes
   trigger:
-    - platform: state
-      entity_id: input_select.theme_selector
+  - platform: state
+    entity_id: input_select.theme_selector
   action:
-    - service: frontend.set_theme
-      data:
-        name: >
-          {% if states('input_select.theme_selector') == 'default' %}
-            default
-          {% else %}
-            {{ states('input_select.theme_selector') }}
-          {% endif %}
+  - service: frontend.set_theme
+    data:
+      name: "{% if states('input_select.theme_selector') == 'default' %}\n  default\n{%
+        else %}\n  {{ states('input_select.theme_selector') }}\n{% endif %}\n"
   mode: single
   initial_state: true
