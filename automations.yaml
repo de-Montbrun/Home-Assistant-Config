@@ -944,13 +944,18 @@
         state: idle
         for:
           minutes: 15
-      - condition: state
-        entity_id: media_player.plex_plex_for_roku_tv_roomtv
-        state: idle
-        for:
-          hours: 0
-          minutes: 15
-          seconds: 0
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: media_player.plex_plex_for_roku_tv_roomtv
+          state: idle
+          for:
+            hours: 0
+            minutes: 15
+            seconds: 0
+        - condition: state
+          entity_id: media_player.plex_plex_for_roku_tv_roomtv
+          state: unavailable
   actions:
   - data:
       command: power
