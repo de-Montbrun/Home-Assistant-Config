@@ -545,8 +545,7 @@ sensor:
         unit_of_measurement: "clients"
         value_template: >
           {{ (states('sensor.spitfire') | int(0)) + (states('sensor.arrow_active_clients') | int(0)) }}
-  - platform: template
-    sensors:  # This "sensors:" key is required
+
       indoor_temperature_average:
         friendly_name: "Indoor Temperature Average"
         unit_of_measurement: "°C"
@@ -572,6 +571,7 @@ sensor:
             states('sensor.temperature_humidity_sensor_dca4_humidity')
           ] | select('is_number') | map('float') | list %}
           {{ (sensors | sum / sensors | length) | round(0) if sensors else 'unknown' }}
+
   - platform: template
     sensors:
       closest_city:
@@ -722,6 +722,32 @@ sensor:
               docked
             {% endif %}
           {% endif %}
+
+  - platform: template
+    sensors:
+      dining_mysa_temperature:
+        friendly_name: "Dining Mysa Temperature"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        value_template: "{{ state_attr('climate.mysa_112908_thermostat', 'current_temperature') }}"
+
+      bedroom_mysa_temperature:
+        friendly_name: "Bedroom Mysa Temperature"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        value_template: "{{ state_attr('climate.mysa_2fa20c_thermostat', 'current_temperature') }}"
+
+      dining_mysa_humidity:
+        friendly_name: "Dining Mysa Humidity"
+        unit_of_measurement: "%"
+        device_class: humidity
+        value_template: "{{ state_attr('climate.mysa_112908_thermostat', 'current_humidity') }}"
+
+      bedroom_mysa_humidity:
+        friendly_name: "Bedroom Mysa Humidity"
+        unit_of_measurement: "%"
+        device_class: humidity
+        value_template: "{{ state_attr('climate.mysa_2fa20c_thermostat', 'current_humidity') }}"
 
 # }}}
 # {{{ Switches
