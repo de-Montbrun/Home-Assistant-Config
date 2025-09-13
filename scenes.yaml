@@ -575,3 +575,120 @@
   metadata:
     light.tv_room_lamps:
       entity_only: true
+- id: '1757801353023'
+  name: ' Heat Away'
+  entities:
+    climate.mysa_2fa20c_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      - cool
+      - heat_cool
+      min_temp: 16
+      max_temp: 30
+      current_temperature: 20
+      temperature: 16
+      current_humidity: 56
+      hvac_action: idle
+      friendly_name: Mysa-2fa20c Thermostat
+      supported_features: 385
+      state: heat
+    climate.mysa_112908_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      - cool
+      - heat_cool
+      min_temp: 16
+      max_temp: 30
+      current_temperature: 20.3
+      temperature: 16
+      current_humidity: 53
+      hvac_action: idle
+      friendly_name: Mysa-112908 Thermostat
+      supported_features: 385
+      state: heat
+  icon: mdi:heat-wave
+  metadata:
+    climate.mysa_2fa20c_thermostat:
+      entity_only: true
+    climate.mysa_112908_thermostat:
+      entity_only: true
+- id: '1757801561919'
+  name: Heat Sleep
+  entities:
+    climate.mysa_2fa20c_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      - cool
+      - heat_cool
+      min_temp: 16
+      max_temp: 30
+      current_temperature: 20.1
+      temperature: 16
+      current_humidity: 56
+      hvac_action: idle
+      friendly_name: Mysa-2fa20c Thermostat
+      supported_features: 385
+      state: heat
+    climate.mysa_112908_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      - cool
+      - heat_cool
+      min_temp: 16
+      max_temp: 30
+      current_temperature: 20.3
+      temperature: 16
+      current_humidity: 53
+      hvac_action: idle
+      friendly_name: Mysa-112908 Thermostat
+      supported_features: 385
+      state: heat
+  icon: mdi:heat-wave
+  metadata:
+    climate.mysa_2fa20c_thermostat:
+      entity_only: true
+    climate.mysa_112908_thermostat:
+      entity_only: true
+- id: '1757801687525'
+  name: Heat Home
+  entities:
+    climate.mysa_2fa20c_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      - cool
+      - heat_cool
+      min_temp: 18
+      max_temp: 30
+      current_temperature: 20.1
+      temperature: 18.5
+      current_humidity: 56
+      hvac_action: idle
+      friendly_name: Mysa-2fa20c Thermostat
+      supported_features: 385
+      state: heat
+    climate.mysa_112908_thermostat:
+      hvac_modes:
+      - 'off'
+      - heat
+      - cool
+      - heat_cool
+      min_temp: 18
+      max_temp: 30
+      current_temperature: 20.3
+      temperature: 18.5
+      current_humidity: 53
+      hvac_action: idle
+      friendly_name: Mysa-112908 Thermostat
+      supported_features: 385
+      state: heat
+  icon: mdi:heat-wave
+  metadata:
+    climate.mysa_2fa20c_thermostat:
+      entity_only: true
+    climate.mysa_112908_thermostat:
+      entity_only: true

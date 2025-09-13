@@ -201,57 +201,82 @@
       entity_id: remote.tv_roomtv
 - id: occupancy_heating_no_one_home_turn_down_heat
   alias: Occupancy - no one home - turn down heat
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - person.gail
     - person.gervais
     - person.cameron
     - person.jennifer
     from: home
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
-    - condition: template
-      value_template: '{{ states("person.gail") != "home" }}'
-    - condition: template
-      value_template: '{{ states("person.gervais") != "home" }}'
-    - condition: template
-      value_template: '{{ states("sensor.season") != "summer" }}'
-    - condition: template
-      value_template: '{{ states("sensor.saint_john_temperature") | int <= 5 }}'
-  action:
-  - service: scene.turn_on
-    metadata: {}
+    - condition: state
+      entity_id: climate.mysa_2fa20c_thermostat
+      state: heat
+    - condition: state
+      entity_id: climate.mysa_112908_thermostat
+      state: heat
+    - condition: numeric_state
+      entity_id: sensor.charlottetown_temperature
+      below: 6
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: sensor.season
+        state: summer
+      - condition: state
+        entity_id: person.gervais
+        state: home
+      - condition: state
+        entity_id: person.gail
+        state: home
+  actions:
+  - metadata: {}
     target:
-      entity_id: scene.heat_away
+      entity_id:
+      - scene.heat_away_2
+    action: scene.turn_on
+    data: {}
   initial_state: true
 - id: occupancy_heating_return_home_turn_up_heat
   alias: Occupancy - return home - turn up heat
-  trigger:
-  - platform: state
-    entity_id:
+  triggers:
+  - entity_id:
     - person.gail
     - group.cam_tracker
     - group.jen_tracker
     - person.gervais
     to: home
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
-    - condition: template
-      value_template: '{{ states("sensor.season") != "summer" }}'
-    - condition: template
-      value_template: '{{ states("sensor.saint_john_temperature") | int <= 5 }}'
     - condition: time
       after: '16:30:00'
-    - condition: time
       before: '23:20:00'
-  action:
-  - service: scene.turn_on
-    metadata: {}
+    - condition: state
+      entity_id: climate.mysa_2fa20c_thermostat
+      state: heat
+    - condition: state
+      entity_id: climate.mysa_112908_thermostat
+      state: heat
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: sensor.season
+        state: summer
+    - condition: numeric_state
+      entity_id: sensor.charlottetown_temperature
+      below: 6
+  actions:
+  - metadata: {}
     target:
-      entity_id: scene.heat_home
+      entity_id:
+      - scene.heat_home_2
+    action: scene.turn_on
+    data: {}
   initial_state: true
 - id: heating_office_heater_off
   alias: 6pm - heater off
@@ -1315,10 +1340,10 @@
 - id: '1708818994369'
   alias: Heat - Turn down at bed time
   description: ''
-  trigger:
-  - platform: time
-    at: '23:00:00'
-  condition:
+  triggers:
+  - at: '23:00:00'
+    trigger: time
+  conditions:
   - condition: and
     conditions:
     - condition: not
@@ -1327,13 +1352,21 @@
         entity_id: sensor.season
         state: summer
     - condition: numeric_state
-      entity_id: sensor.saint_john_temperature
+      entity_id: sensor.charlottetown_temperature
       below: 5
-  action:
-  - service: scene.turn_on
-    metadata: {}
+    - condition: state
+      entity_id: climate.mysa_2fa20c_thermostat
+      state: heat
+    - condition: state
+      entity_id: climate.mysa_112908_thermostat
+      state: heat
+  actions:
+  - metadata: {}
     target:
-      entity_id: scene.heat_sleep
+      entity_id:
+      - scene.heat_sleep_2
+    action: scene.turn_on
+    data: {}
   mode: single
 - id: misc_bed_room_turn_off_tv
   alias: Turn off bed room tv when idle
@@ -1381,25 +1414,36 @@
 - id: '1709693054657'
   alias: Heat - Not workday wake up
   description: ''
-  trigger:
-  - platform: time
-    at: '10:00:00'
-  condition:
+  triggers:
+  - at: '10:00:00'
+    trigger: time
+  conditions:
   - condition: and
     conditions:
-    - condition: template
-      value_template: '{{ states("sensor.season") != "summer" }}'
     - condition: state
       entity_id: binary_sensor.workday_sensor
       state: 'off'
     - condition: numeric_state
-      entity_id: sensor.saint_john_temperature
+      entity_id: sensor.charlottetown_temperature
       below: 5
-  action:
-  - service: scene.turn_on
-    metadata: {}
+    - condition: state
+      entity_id: climate.mysa_2fa20c_thermostat
+      state: heat
+    - condition: state
+      entity_id: climate.mysa_112908_thermostat
+      state: heat
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: sensor.season
+        state: summer
+  actions:
+  - metadata: {}
     target:
-      entity_id: scene.heat_home
+      entity_id:
+      - scene.heat_home_2
+    action: scene.turn_on
+    data: {}
   mode: single
 - id: '1717197737888'
   alias: Fan - turn off
