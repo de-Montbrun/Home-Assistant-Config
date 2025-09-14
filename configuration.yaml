@@ -310,18 +310,23 @@ light:
       - light.foyer3
 
   - platform: group
-    name: Hallway Lights
-    unique_id: hallway_lights_group
-    entities:
-      - light.entryway_lights
-      - light.foyer_lights
-      - light.hallway_lamp
-
-  - platform: group
     name: Gail Office Lights
     unique_id: gail_office_lights_group
     entities:
       - light.gail_office_lamp
+      - light.gail_office_main
+
+  - platform: group
+    name: Hallway Lights
+    unique_id: hallway_lights_group
+    entities:
+      - light.basement_stairs
+      - light.upstairs_hallway
+      - light.entryway_lights
+      - light.foyer_lights
+      - light.hallway_lamp
+      - light.upstairs_hallway
+      - light.main_floor_stairs
 
   - platform: group
     name: Kitchen Lights

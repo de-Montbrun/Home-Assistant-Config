@@ -221,17 +221,14 @@
     - condition: numeric_state
       entity_id: sensor.charlottetown_temperature
       below: 6
+    - condition: numeric_state
+      entity_id: zone.home
+      below: 1
     - condition: not
       conditions:
       - condition: state
         entity_id: sensor.season
         state: summer
-      - condition: state
-        entity_id: person.gervais
-        state: home
-      - condition: state
-        entity_id: person.gail
-        state: home
   actions:
   - metadata: {}
     target:
