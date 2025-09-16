@@ -16,6 +16,17 @@ homeassistant:
 
 default_config:
 
+# Weather integrations
+weather:
+  - platform: nws
+    name: atlanta_forecast
+    latitude: 33.7490
+    longitude: -84.3880
+  - platform: nws
+    name: las_vegas_forecast
+    latitude: 36.1699
+    longitude: -115.1398
+
 # {{{ Alexa
 
 alexa:
@@ -668,7 +679,9 @@ sensor:
               'Charlottetown': 'sensor.charlottetown_current_condition',
               'Fredericton': 'sensor.fredericton_condition',
               'Saint John': 'sensor.saint_john_current_condition',
-              'Montreal': 'sensor.montreal_current_condition'
+              'Montreal': 'sensor.montreal_current_condition',
+              'Atlanta': 'sensor.atlanta_forecast_condition',
+              'Las Vegas': 'sensor.las_vegas_forecast_condition'
             } %}
 
             {{ entities[states('sensor.closest_city')] }}
@@ -677,7 +690,9 @@ sensor:
               'Charlottetown': 'sensor.charlottetown_temperature',
               'Fredericton': 'sensor.fredericton_temperature',
               'Saint John': 'sensor.saint_john_temperature',
-              'Montreal': 'sensor.montreal_temperature'
+              'Montreal': 'sensor.montreal_temperature',
+              'Atlanta': 'sensor.atlanta_forecast_temperature',
+              'Las Vegas': 'sensor.las_vegas_forecast_temperature'
             } %}
 
             {{ entities[states('sensor.closest_city')] }}
