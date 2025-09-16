@@ -16,16 +16,7 @@ homeassistant:
 
 default_config:
 
-# Weather integrations
-weather:
-  - platform: nws
-    name: atlanta_forecast
-    latitude: 33.7490
-    longitude: -84.3880
-  - platform: nws
-    name: las_vegas_forecast
-    latitude: 36.1699
-    longitude: -115.1398
+# Weather integrations configured via UI (Met.no)
 
 # {{{ Alexa
 
@@ -680,8 +671,8 @@ sensor:
               'Fredericton': 'sensor.fredericton_condition',
               'Saint John': 'sensor.saint_john_current_condition',
               'Montreal': 'sensor.montreal_current_condition',
-              'Atlanta': 'sensor.atlanta_forecast_condition',
-              'Las Vegas': 'sensor.las_vegas_forecast_condition'
+              'Atlanta': 'sensor.atlanta_current_condition',
+              'Las Vegas': 'sensor.las_vegas_current_condition'
             } %}
 
             {{ entities[states('sensor.closest_city')] }}
@@ -691,8 +682,8 @@ sensor:
               'Fredericton': 'sensor.fredericton_temperature',
               'Saint John': 'sensor.saint_john_temperature',
               'Montreal': 'sensor.montreal_temperature',
-              'Atlanta': 'sensor.atlanta_forecast_temperature',
-              'Las Vegas': 'sensor.las_vegas_forecast_temperature'
+              'Atlanta': 'sensor.atlanta_temperature',
+              'Las Vegas': 'sensor.las_vegas_temperature'
             } %}
 
             {{ entities[states('sensor.closest_city')] }}
@@ -788,6 +779,60 @@ sensor:
         unit_of_measurement: "%"
         device_class: humidity
         value_template: "{{ state_attr('climate.mysa_2fa20c_thermostat', 'current_humidity') }}"
+
+      # Atlanta weather sensors from Met.no
+      atlanta_current_condition:
+        friendly_name: "Atlanta Current Condition"
+        value_template: "{{ states('weather.forecast_atlanta') }}"
+
+      atlanta_temperature:
+        friendly_name: "Atlanta Temperature"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        value_template: "{{ state_attr('weather.forecast_atlanta', 'temperature') }}"
+
+      atlanta_high_temperature:
+        friendly_name: "Atlanta High Temperature"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        value_template: "{{ state_attr('weather.forecast_atlanta', 'forecast')[0].temperature if state_attr('weather.forecast_atlanta', 'forecast') else none }}"
+
+      atlanta_low_temperature:
+        friendly_name: "Atlanta Low Temperature"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        value_template: "{{ state_attr('weather.forecast_atlanta', 'forecast')[0].templow if state_attr('weather.forecast_atlanta', 'forecast') else none }}"
+
+      atlanta_summary:
+        friendly_name: "Atlanta Summary"
+        value_template: "{{ state_attr('weather.forecast_atlanta', 'forecast')[0].detailed_description if state_attr('weather.forecast_atlanta', 'forecast') else 'No forecast available' }}"
+
+      # Las Vegas weather sensors from Met.no
+      las_vegas_current_condition:
+        friendly_name: "Las Vegas Current Condition"
+        value_template: "{{ states('weather.forecast_las_vegas') }}"
+
+      las_vegas_temperature:
+        friendly_name: "Las Vegas Temperature"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        value_template: "{{ state_attr('weather.forecast_las_vegas', 'temperature') }}"
+
+      las_vegas_high_temperature:
+        friendly_name: "Las Vegas High Temperature"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        value_template: "{{ state_attr('weather.forecast_las_vegas', 'forecast')[0].temperature if state_attr('weather.forecast_las_vegas', 'forecast') else none }}"
+
+      las_vegas_low_temperature:
+        friendly_name: "Las Vegas Low Temperature"
+        unit_of_measurement: "°C"
+        device_class: temperature
+        value_template: "{{ state_attr('weather.forecast_las_vegas', 'forecast')[0].templow if state_attr('weather.forecast_las_vegas', 'forecast') else none }}"
+
+      las_vegas_summary:
+        friendly_name: "Las Vegas Summary"
+        value_template: "{{ state_attr('weather.forecast_las_vegas', 'forecast')[0].detailed_description if state_attr('weather.forecast_las_vegas', 'forecast') else 'No forecast available' }}"
 
 # }}}
 # {{{ Switches
