@@ -590,7 +590,12 @@ sensor:
             'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
             'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
             'Saint John': {'lat': 45.2733, 'lon': -66.0633},
-            'Montreal': {'lat': 45.5017, 'lon': -73.5673}
+            'Montreal': {'lat': 45.5017, 'lon': -73.5673},
+            'Halifax': {'lat': 44.6488, 'lon': -63.5752},
+            'Toronto': {'lat': 43.6532, 'lon': -79.3832},
+            'Calgary': {'lat': 51.0447, 'lon': -114.0719},
+            'Atlanta': {'lat': 33.7490, 'lon': -84.3880},
+            'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}
           } %}
 
           {% set closest_city = namespace(name='', distance=999999) %}
@@ -612,7 +617,12 @@ sensor:
               'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
               'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
               'Saint John': {'lat': 45.2733, 'lon': -66.0633},
-              'Montreal': {'lat': 45.5017, 'lon': -73.5673}
+              'Montreal': {'lat': 45.5017, 'lon': -73.5673},
+              'Halifax': {'lat': 44.6488, 'lon': -63.5752},
+              'Toronto': {'lat': 43.6532, 'lon': -79.3832},
+              'Calgary': {'lat': 51.0447, 'lon': -114.0719},
+              'Atlanta': {'lat': 33.7490, 'lon': -84.3880},
+              'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}
             } %}
 
             {% set closest_city = namespace(name='', distance=999999) %}
@@ -630,7 +640,12 @@ sensor:
               'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
               'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
               'Saint John': {'lat': 45.2733, 'lon': -66.0633},
-              'Montreal': {'lat': 45.5017, 'lon': -73.5673}
+              'Montreal': {'lat': 45.5017, 'lon': -73.5673},
+              'Halifax': {'lat': 44.6488, 'lon': -63.5752},
+              'Toronto': {'lat': 43.6532, 'lon': -79.3832},
+              'Calgary': {'lat': 51.0447, 'lon': -114.0719},
+              'Atlanta': {'lat': 33.7490, 'lon': -84.3880},
+              'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}
             } %}
 
             {{ cities[states('sensor.closest_city')]['lat'] }}
@@ -639,7 +654,12 @@ sensor:
               'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
               'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
               'Saint John': {'lat': 45.2733, 'lon': -66.0633},
-              'Montreal': {'lat': 45.5017, 'lon': -73.5673}
+              'Montreal': {'lat': 45.5017, 'lon': -73.5673},
+              'Halifax': {'lat': 44.6488, 'lon': -63.5752},
+              'Toronto': {'lat': 43.6532, 'lon': -79.3832},
+              'Calgary': {'lat': 51.0447, 'lon': -114.0719},
+              'Atlanta': {'lat': 33.7490, 'lon': -84.3880},
+              'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}
             } %}
 
             {{ cities[states('sensor.closest_city')]['lon'] }}
