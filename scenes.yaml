@@ -4,81 +4,132 @@
     light.dining_room_lamps:
       supported_color_modes:
       - onoff
+      icon: mdi:lightbulb-group
+      friendly_name: Dining Room Lamps
+      supported_features: 0
       color_mode: onoff
       entity_id:
       - light.dining_room_lamp0
       - light.dining_room_lamp1
-      icon: mdi:lightbulb-group
-      friendly_name: Dining room lamps
-      supported_features: 0
-      state: 'on'
-    light.hallway_lights:
-      supported_color_modes:
-      - onoff
-      icon: mdi:lightbulb-group
-      friendly_name: Hallway lights
-      supported_features: 0
       state: 'on'
     light.outdoor_lights:
       supported_color_modes:
       - brightness
+      icon: mdi:lightbulb-group
+      friendly_name: Outdoor Lights
+      supported_features: 44
+      effect_list:
+      - candle
+      - 'off'
+      effect: 'off'
       color_mode: brightness
       brightness: 255
-      icon: mdi:lightbulb-group
-      friendly_name: Outdoor lights
+      entity_id:
+      - light.outdoor_back_door
+      - light.outdoor_driveway
+      - light.outdoor_pots
       state: 'on'
     light.loft_trees:
       supported_color_modes:
       - onoff
+      icon: mdi:lightbulb-group
+      friendly_name: Loft Trees
+      supported_features: 0
       color_mode: onoff
       entity_id:
       - light.loft_tree0
       - light.loft_tree1
-      icon: mdi:lightbulb-group
-      friendly_name: Loft trees
-      supported_features: 0
       state: 'on'
     light.saltlick:
       supported_color_modes:
       - onoff
-      color_mode: onoff
       friendly_name: Livingroom shelves
       supported_features: 0
+      color_mode: onoff
       state: 'on'
     light.gail_office_lamp:
+      supported_color_modes:
+      - xy
+      color_mode: xy
+      brightness: 254
+      hs_color:
+      - 38.222
+      - 52.941
+      rgb_color:
+      - 255
+      - 206
+      - 120
+      xy_color:
+      - 0.458
+      - 0.41001
+      off_with_transition: false
+      off_brightness:
+      friendly_name: Gail Office Lamp
+      supported_features: 40
+      state: 'on'
+    light.livingroom_lamp:
+      supported_color_modes:
+      - onoff
+      friendly_name: Livingroom lamp
+      supported_features: 0
+      color_mode: onoff
+      state: 'on'
+    light.tv_room_lamps:
+      supported_color_modes:
+      - color_temp
+      - rgbw
+      - xy
+      icon: mdi:lightbulb-group
+      friendly_name: TV Room Lamps
+      supported_features: 44
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6535
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - Solid
-      - Wake up
-      - Cycle up
-      - Cycle down
-      - Random
-      supported_color_modes:
-      - color_temp
-      - hs
-      friendly_name: Office Lamp
-      supported_features: 36
-      state: true
-    light.livingroom_lamp:
-      supported_color_modes:
-      - onoff
-      color_mode: onoff
-      friendly_name: Livingroom lamp
-      supported_features: 0
-      state: 'on'
-    light.tv_room_lamps:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      supported_color_modes:
-      - color_temp
-      - rgbw
-      - xy
-      effect: false
+      - Alarm
+      - Bedtime
+      - Candlelight
+      - Christmas
+      - Cool white
+      - Cozy
+      - Daylight
+      - Deep dive
+      - Diwali
+      - Fall
+      - Fireplace
+      - Focus
+      - Forest
+      - Golden white
+      - Halloween
+      - Jungle
+      - Mojito
+      - Night light
+      - Ocean
+      - Party
+      - Pastel colors
+      - Plantgrowth
+      - Pulse
+      - Relax
+      - Rhythm
+      - Romance
+      - Spring
+      - Steampunk
+      - Summer
+      - Sunset
+      - TV time
+      - True colors
+      - Wake-up
+      - Warm white
+      - White
+      - candle
+      - fire
+      - glisten
+      - 'off'
+      - opal
+      - prism
+      - sparkle
+      effect:
       color_mode: color_temp
       brightness: 178
       color_temp_kelvin: 4000
@@ -95,13 +146,9 @@
       - 0.365
       rgbw_color:
       entity_id:
-      - light.lamp0
       - light.lamp1
       - light.lamp2
       - light.bedroom4
-      icon: mdi:lightbulb-group
-      friendly_name: TV Room lamps
-      supported_features: 44
       state: 'on'
     light.livingroom_pots:
       supported_color_modes:
@@ -111,12 +158,61 @@
       friendly_name: Livingroom Pots
       supported_features: 32
       state: 'on'
+    light.main_floor_stairs:
+      supported_color_modes:
+      - onoff
+      friendly_name: Main floor stairs
+      supported_features: 0
+      color_mode: onoff
+      state: 'on'
+    light.foyer_lights:
+      supported_color_modes:
+      - color_temp
+      - hs
+      icon: mdi:lightbulb-group
+      friendly_name: Foyer Lights
+      supported_features: 36
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - Cycle down
+      - Cycle up
+      - Random
+      - Solid
+      - Wake up
+      effect: Solid
+      color_mode: color_temp
+      brightness: 255
+      color_temp_kelvin: 4000
+      color_temp: 250
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 206
+      - 166
+      xy_color:
+      - 0.42
+      - 0.365
+      entity_id:
+      - light.foyer0
+      - light.foyer1
+      - light.foyer2
+      - light.foyer3
+      state: 'on'
   metadata:
     light.gail_office_lamp:
       entity_only: true
     light.tv_room_lamps:
       entity_only: true
     light.livingroom_pots:
+      entity_only: true
+    light.main_floor_stairs:
+      entity_only: true
+    light.foyer_lights:
       entity_only: true
   icon: mdi:weather-sunset
 - id: '1709693520712'

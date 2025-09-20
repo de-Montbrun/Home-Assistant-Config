@@ -373,6 +373,7 @@ light:
       - light.kitchen_lights
       - light.livingroom_lights
       - light.loft_trees
+      - light.main_floor_stairs
       - light.powder_room_light
 
   - platform: group
@@ -409,6 +410,7 @@ light:
       - light.gail_office_lights
       - light.hallway_lamp
       - light.laundry_room_lights
+      - light.upstairs_hallway
 
   - platform: group
     name: TV Room Lamps
@@ -741,13 +743,13 @@ sensor:
         friendly_name: 'Delicious Docked'
         value_template: >-
           {% if states('switch.delicious_paused') == 'on' -%}
-            Paused
+            paused
           {% else %}
             {% if states('binary_sensor.delicious_docked') == 'off' -%}
               {% if states('fan.delicious') == 'on' -%}
-                Vacuuming
+                cleaning
               {% else -%}
-                Returning to Dock
+                returning
               {% endif %}
             {% else -%}
               docked
