@@ -4,23 +4,20 @@
     light.dining_room_lamps:
       supported_color_modes:
       - onoff
-      icon: mdi:lightbulb-group
-      friendly_name: Dining Room Lamps
-      supported_features: 0
       color_mode: onoff
       entity_id:
       - light.dining_room_lamp0
       - light.dining_room_lamp1
+      icon: mdi:lightbulb-group
+      friendly_name: Dining Room Lamps
+      supported_features: 0
       state: 'on'
     light.outdoor_lights:
-      supported_color_modes:
-      - brightness
-      icon: mdi:lightbulb-group
-      friendly_name: Outdoor Lights
-      supported_features: 44
       effect_list:
       - candle
       - 'off'
+      supported_color_modes:
+      - brightness
       effect: 'off'
       color_mode: brightness
       brightness: 255
@@ -28,24 +25,27 @@
       - light.outdoor_back_door
       - light.outdoor_driveway
       - light.outdoor_pots
+      icon: mdi:lightbulb-group
+      friendly_name: Outdoor Lights
+      supported_features: 44
       state: 'on'
     light.loft_trees:
       supported_color_modes:
       - onoff
-      icon: mdi:lightbulb-group
-      friendly_name: Loft Trees
-      supported_features: 0
       color_mode: onoff
       entity_id:
       - light.loft_tree0
       - light.loft_tree1
+      icon: mdi:lightbulb-group
+      friendly_name: Loft Trees
+      supported_features: 0
       state: 'on'
     light.saltlick:
       supported_color_modes:
       - onoff
+      color_mode: onoff
       friendly_name: Livingroom shelves
       supported_features: 0
-      color_mode: onoff
       state: 'on'
     light.gail_office_lamp:
       supported_color_modes:
@@ -70,18 +70,11 @@
     light.livingroom_lamp:
       supported_color_modes:
       - onoff
+      color_mode: onoff
       friendly_name: Livingroom lamp
       supported_features: 0
-      color_mode: onoff
       state: 'on'
     light.tv_room_lamps:
-      supported_color_modes:
-      - color_temp
-      - rgbw
-      - xy
-      icon: mdi:lightbulb-group
-      friendly_name: TV Room Lamps
-      supported_features: 44
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6535
       min_mireds: 153
@@ -129,7 +122,11 @@
       - opal
       - prism
       - sparkle
-      effect:
+      supported_color_modes:
+      - color_temp
+      - rgbw
+      - xy
+      effect: 'off'
       color_mode: color_temp
       brightness: 178
       color_temp_kelvin: 4000
@@ -149,6 +146,9 @@
       - light.lamp1
       - light.lamp2
       - light.bedroom4
+      icon: mdi:lightbulb-group
+      friendly_name: TV Room Lamps
+      supported_features: 44
       state: 'on'
     light.livingroom_pots:
       supported_color_modes:
@@ -161,17 +161,11 @@
     light.main_floor_stairs:
       supported_color_modes:
       - onoff
+      color_mode: onoff
       friendly_name: Main floor stairs
       supported_features: 0
-      color_mode: onoff
       state: 'on'
     light.foyer_lights:
-      supported_color_modes:
-      - color_temp
-      - hs
-      icon: mdi:lightbulb-group
-      friendly_name: Foyer Lights
-      supported_features: 36
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6535
       min_mireds: 153
@@ -182,6 +176,9 @@
       - Random
       - Solid
       - Wake up
+      supported_color_modes:
+      - color_temp
+      - hs
       effect: Solid
       color_mode: color_temp
       brightness: 255
@@ -202,6 +199,43 @@
       - light.foyer1
       - light.foyer2
       - light.foyer3
+      icon: mdi:lightbulb-group
+      friendly_name: Foyer Lights
+      supported_features: 36
+      state: 'on'
+    light.hallway_lamp:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+      friendly_name: Upstairs Hallway Lamp
+      supported_features: 0
+      state: 'on'
+    light.kitchen_sink_2:
+      supported_color_modes:
+      - onoff
+      color_mode: onoff
+      friendly_name: Kitchen Sink
+      supported_features: 0
+      state: 'on'
+    light.entryway_lights:
+      effect_list:
+      - candle
+      - 'off'
+      supported_color_modes:
+      - xy
+      effect: 'off'
+      color_mode: color_temp
+      brightness: 254
+      hs_color:
+      rgb_color:
+      xy_color:
+      entity_id:
+      - light.entryway0
+      - light.entryway1
+      - light.entryway2
+      icon: mdi:lightbulb-group
+      friendly_name: Entryway Lights
+      supported_features: 44
       state: 'on'
   metadata:
     light.gail_office_lamp:
@@ -213,6 +247,12 @@
     light.main_floor_stairs:
       entity_only: true
     light.foyer_lights:
+      entity_only: true
+    light.hallway_lamp:
+      entity_only: true
+    light.kitchen_sink_2:
+      entity_only: true
+    light.entryway_lights:
       entity_only: true
   icon: mdi:weather-sunset
 - id: '1709693520712'

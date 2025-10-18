@@ -23,15 +23,17 @@
       title: Home Assistant
 - id: ha_notify_hacs_update_available
   alias: HACS Update Available Notification
-  initial_state: true
-  trigger:
-    platform: template
-    value_template: '{{ states("sensor.hacs") | int > 0 }}'
-  action:
-    service: notify.zulip
-    data:
+  triggers:
+  - trigger: state
+    entity_id:
+    - update.hacs_update_2
+    to: 'on'
+  actions:
+  - data:
       message: '{{ trigger.to_state.attributes.friendly_name }} has an update available.'
       title: Home Assistant
+    action: notify.zulip
+  initial_state: true
 - id: occupancy_alarm_no_one_home_alarm_alarm
   alias: Occupancy - no one home - alarm alarm
   triggers:
@@ -1117,9 +1119,9 @@
   - condition: template
     value_template: "{% set closest_city = states('sensor.closest_city') %} {% set
       entities = {\n  'Charlottetown': 'weather.charlottetown_forecast',\n  'Fredericton':
-      'weather.fredericton_forecast',\n  'Saint John': 'weather.saint_john_forecast',\n
-      \ 'Montreal': 'weather.montreal_forecast',\n  'Atlanta': 'weather.forecast_atlanta',\n
-      \ 'Las Vegas': 'weather.forecast_las_vegas'\n} %} {{ states(entities[closest_city])
+      'weather.fredericton',\n  'Saint John': 'weather.saint_john_forecast',\n  'Montreal':
+      'weather.montreal_forecast',\n  'Atlanta': 'weather.forecast_atlanta',\n  'Las
+      Vegas': 'weather.forecast_las_vegas'\n} %} {{ states(entities[closest_city])
       != 'unknown' }}"
   - condition: template
     value_template: "{% set closest_city = states('sensor.closest_city') %} {% set
@@ -1140,21 +1142,22 @@
       message: "{% set closest_city = states('sensor.closest_city') %} {% set distance
         = state_attr('sensor.closest_city', 'distance') %}\n{% set summary_entities
         = {\n  'Charlottetown': 'sensor.charlottetown_summary',\n  'Fredericton':
-        'sensor.fredericton_summary',\n  'Saint John': 'sensor.saint_john_summary',\n
+        'sensor.fredericton_forecast',\n  'Saint John': 'sensor.saint_john_summary',\n
         \ 'Montreal': 'sensor.montreal_summary',\n  'Atlanta': 'sensor.atlanta_summary',\n
-        \ 'Las Vegas': 'sensor.las_vegas_summary'\n} %}\n{% set high_temp_entities =
-        {\n  'Charlottetown': 'sensor.charlottetown_high_temperature',\n  'Fredericton':
+        \ 'Las Vegas': 'sensor.las_vegas_summary'\n} %}\n{% set high_temp_entities
+        = {\n  'Charlottetown': 'sensor.charlottetown_high_temperature',\n  'Fredericton':
         'sensor.fredericton_high_temperature',\n  'Saint John': 'sensor.saint_john_high_temperature',\n
         \ 'Montreal': 'sensor.montreal_high_temperature',\n  'Atlanta': 'sensor.atlanta_high_temperature',\n
         \ 'Las Vegas': 'sensor.las_vegas_high_temperature'\n} %}\n{% set low_temp_entities
         = {\n  'Charlottetown': 'sensor.charlottetown_low_temperature',\n  'Fredericton':
         'sensor.fredericton_low_temperature',\n  'Saint John': 'sensor.saint_john_low_temperature',\n
         \ 'Montreal': 'sensor.montreal_low_temperature',\n  'Atlanta': 'sensor.atlanta_low_temperature',\n
-        \ 'Las Vegas': 'sensor.las_vegas_low_temperature'\n} %}\n**Forecast for {{ closest_city
-        }}:**\n{{ states(summary_entities[closest_city]) }}\n**High:** {{ states(high_temp_entities[closest_city])
-        }}{{ state_attr(high_temp_entities[closest_city], \"unit_of_measurement\")
-        }}\n**Low:** {{ states(low_temp_entities[closest_city]) }}{{ state_attr(low_temp_entities[closest_city],
-        \"unit_of_measurement\") }}\n"
+        \ 'Las Vegas': 'sensor.las_vegas_low_temperature'\n} %}\n**Forecast for {{
+        closest_city }}:**\n{{ states(summary_entities[closest_city]) }}\n**High:**
+        {{ states(high_temp_entities[closest_city]) }}{{ state_attr(high_temp_entities[closest_city],
+        \"unit_of_measurement\") }}\n**Low:** {{ states(low_temp_entities[closest_city])
+        }}{{ state_attr(low_temp_entities[closest_city], \"unit_of_measurement\")
+        }}\n"
       title: Weather
     action: notify.zulip
   initial_state: true

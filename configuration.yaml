@@ -36,6 +36,7 @@ alexa:
         - media_player.bedroomtv
         - media_player.tv_roomtv
         - switch.switch1
+        - switch.switch4
 
 # }}}
 # {{{ frontend
