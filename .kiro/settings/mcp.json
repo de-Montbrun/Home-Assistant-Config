@@ -1,26 +1,4 @@
 {
-    "mcpServers": {
-        "aws": {
-            "command": "uvx",
-            "args": [
-                "mcp-server-aws@latest"
-            ],
-            "env": {
-                "FASTMCP_LOG_LEVEL": "ERROR"
-            },
-            "disabled": false,
-            "autoApprove": []
-        },
-        "context7": {
-            "command": "uvx",
-            "args": [
-                "context7-mcp@latest"
-            ],
-            "env": {
-                "FASTMCP_LOG_LEVEL": "ERROR"
-            },
-            "disabled": false,
-            "autoApprove": []
-        }
-    }
+  "mcpServers": {
+  }
 }
