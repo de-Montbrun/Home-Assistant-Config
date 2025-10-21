@@ -33,23 +33,23 @@ daphne_come_out:
     - choose:
         - conditions:
             - condition: state
-              entity_id: vacuum.daphne
+              entity_id: vacuum.robot
               state: "docked"
           sequence:
             - service: vacuum.start
               target:
-                entity_id: vacuum.daphne
+                entity_id: vacuum.robot
             - delay: "00:00:03"
     - service: vacuum.send_command
       target:
-        entity_id: vacuum.daphne
+        entity_id: vacuum.robot
       data:
         command: "app_goto_target"
         params: [26000, 26000]  # Coordinates for pickup spot in hallway - adjust as needed
     - delay: "00:00:15"
     - service: vacuum.pause
       target:
-        entity_id: vacuum.daphne
+        entity_id: vacuum.robot
   mode: single
   icon: mdi:robot-vacuum
 
@@ -60,32 +60,32 @@ daphne_move_to_pickup_spot:
     - choose:
         - conditions:
             - condition: state
-              entity_id: vacuum.daphne
+              entity_id: vacuum.robot
               state: "docked"
           sequence:
             - service: vacuum.start
               target:
-                entity_id: vacuum.daphne
+                entity_id: vacuum.robot
             - delay: "00:00:03"
         - conditions:
             - condition: state
-              entity_id: vacuum.daphne
+              entity_id: vacuum.robot
               state: "cleaning"
           sequence:
             - service: vacuum.pause
               target:
-                entity_id: vacuum.daphne
+                entity_id: vacuum.robot
             - delay: "00:00:02"
     - service: vacuum.send_command
       target:
-        entity_id: vacuum.daphne
+        entity_id: vacuum.robot
       data:
         command: "app_goto_target"
         params: [25500, 25500]  # Adjust these coordinates to your preferred pickup location
     - delay: "00:00:10"
     - service: vacuum.pause
       target:
-        entity_id: vacuum.daphne
+        entity_id: vacuum.robot
   mode: single
   icon: mdi:robot-vacuum-variant
 
@@ -95,11 +95,11 @@ daphne_simple_backup:
   sequence:
     - service: vacuum.start
       target:
-        entity_id: vacuum.daphne
+        entity_id: vacuum.robot
     - delay: "00:00:08"
     - service: vacuum.pause
       target:
-        entity_id: vacuum.daphne
+        entity_id: vacuum.robot
     - delay: "00:00:02"
     - service: notify.mobile_app_iphone
       data:

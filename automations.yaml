@@ -2154,7 +2154,7 @@
   - choose:
       - conditions:
           - condition: state
-            entity_id: vacuum.daphne
+            entity_id: vacuum.robot
             state: "docked"
         sequence:
           - action: script.turn_on
@@ -2162,7 +2162,7 @@
               entity_id: script.daphne_come_out
       - conditions:
           - condition: state
-            entity_id: vacuum.daphne
+            entity_id: vacuum.robot
             state: "cleaning"
         sequence:
           - action: script.turn_on
