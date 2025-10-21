@@ -2143,7 +2143,6 @@
       entity_id: media_player.kitchen
       message: "Moving Daphne out from under the bench so you can pick her up easily"
   mode: single
-  icon: mdi:robot-vacuum
 
 - id: daphne_button_press_come_out
   alias: "Daphne - Button Press Come Out"
@@ -2174,4 +2173,3 @@
         target:
           entity_id: script.daphne_simple_backup
   mode: single
-  icon: mdi:robot-vacuum
