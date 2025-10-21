@@ -2123,53 +2123,6 @@
     action: notify.zulip
   mode: single
 
-- id: daphne_voice_command_come_out
-  alias: "Daphne - Voice Command Come Out"
-  description: "Responds to voice commands to make Daphne come out from under furniture"
-  triggers:
-  - trigger: conversation
-    command:
-    - "Daphne come out"
-    - "Get Daphne out"
-    - "Move Daphne out"
-    - "Daphne backup"
-    - "Daphne move"
-  actions:
-  - action: script.turn_on
-    target:
-      entity_id: script.daphne_come_out
-  - action: tts.speak
-    data:
-      entity_id: media_player.kitchen
-      message: "Moving Daphne out from under the bench so you can pick her up easily"
-  mode: single
 
-- id: daphne_button_press_come_out
-  alias: "Daphne - Button Press Come Out"
-  description: "Responds to button press to make Daphne come out from under furniture"
-  triggers:
-  - trigger: state
-    entity_id: input_button.daphne_come_out_button
-  actions:
-  - choose:
-      - conditions:
-          - condition: state
-            entity_id: vacuum.robot
-            state: "docked"
-        sequence:
-          - action: script.turn_on
-            target:
-              entity_id: script.daphne_come_out
-      - conditions:
-          - condition: state
-            entity_id: vacuum.robot
-            state: "cleaning"
-        sequence:
-          - action: script.turn_on
-            target:
-              entity_id: script.daphne_move_to_pickup_spot
-    default:
-      - action: script.turn_on
-        target:
-          entity_id: script.daphne_simple_backup
-  mode: single
+
+
