@@ -503,6 +503,12 @@ input_select:
     initial: default
     icon: mdi:palette
 
+# Input button for Daphne vacuum control
+input_button:
+  daphne_come_out_button:
+    name: "Get Daphne Out"
+    icon: mdi:robot-vacuum
+
 # Input text to input Zigbee2mqtt friendly_name for scripts
 input_text:
   zigbee2mqtt_old_name:
