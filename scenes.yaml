@@ -798,12 +798,12 @@
       - heat
       - cool
       - heat_cool
-      min_temp: 18
+      min_temp: 16
       max_temp: 30
-      current_temperature: 20.1
-      temperature: 18.5
-      current_humidity: 56
-      hvac_action: idle
+      current_temperature: 17.9
+      temperature: 19
+      current_humidity: 55
+      hvac_action: heating
       friendly_name: Mysa-2fa20c Thermostat
       supported_features: 385
       state: heat
@@ -813,12 +813,12 @@
       - heat
       - cool
       - heat_cool
-      min_temp: 18
+      min_temp: 16
       max_temp: 30
-      current_temperature: 20.3
-      temperature: 18.5
-      current_humidity: 53
-      hvac_action: idle
+      current_temperature: 17.3
+      temperature: 20
+      current_humidity: 50
+      hvac_action: heating
       friendly_name: Mysa-112908 Thermostat
       supported_features: 385
       state: heat

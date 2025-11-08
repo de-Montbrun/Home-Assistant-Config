@@ -390,7 +390,7 @@
       conditions:
       - condition: numeric_state
         entity_id: sensor.kitchen_sensor_light_level
-        below: 5
+        below: 50
       - condition: state
         entity_id: sun.sun
         state: below_horizon
@@ -2122,7 +2122,3 @@
       title: Volvo
     action: notify.zulip
   mode: single
-
-
-
-
