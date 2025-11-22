@@ -185,10 +185,6 @@ light:
     entity_id: switch.garage_lights
 
   - platform: switch
-    name: Hallway Lamp
-    entity_id: switch.switch8
-
-  - platform: switch
     name: Kitchen Counter
     entity_id: switch.kitchen_counter
 
@@ -207,10 +203,6 @@ light:
   - platform: switch
     name: Loft Tree1
     entity_id: switch.switch3
-
-  - platform: switch
-    name: Office Desk Lamp
-    entity_id: switch.switch7
 
   - platform: switch
     name: Outdoor Driveway
@@ -546,6 +538,7 @@ person:
     user_id: 10f174a6c6db401babe419a388e8eaa8
     device_trackers:
       - device_tracker.jennifer
+      - device_tracker.jennifer_old
 # }}}
 # {{{ Sensors
 

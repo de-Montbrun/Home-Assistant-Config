@@ -1343,7 +1343,7 @@
   alias: Heat - Turn down at bed time
   description: ''
   triggers:
-  - at: '23:00:00'
+  - at: 00:30:00
     trigger: time
   conditions:
   - condition: and
@@ -1414,7 +1414,7 @@
   alias: Heat - Not workday wake up
   description: ''
   triggers:
-  - at: '10:00:00'
+  - at: 08:00:00
     trigger: time
   conditions:
   - condition: and
@@ -2114,7 +2114,7 @@
   alias: Heat - Work day wake up
   description: ''
   triggers:
-  - at: 07:00:00
+  - at: 06:00:00
     trigger: time
   conditions:
   - condition: and
@@ -2143,7 +2143,7 @@
     data: {}
   mode: single
 - id: '1762994007830'
-  alias: Heat - Work day turn down bedroom heat
+  alias: Heat - Work day turn down heat
   description: ''
   triggers:
   - at: '10:00:00'
@@ -2173,6 +2173,18 @@
       temperature: 17
     target:
       entity_id: climate.mysa_2fa20c_thermostat
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: person.gail
+      state:
+      - home
+  - action: climate.set_temperature
+    metadata: {}
+    data:
+      temperature: 18
+    target:
+      entity_id: climate.mysa_112908_thermostat
   mode: single
 - id: '1762994207544'
   alias: Heat - Turn up before bed
