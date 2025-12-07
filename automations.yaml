@@ -249,9 +249,6 @@
   conditions:
   - condition: and
     conditions:
-    - condition: time
-      after: '16:30:00'
-      before: '23:20:00'
     - condition: state
       entity_id: climate.mysa_2fa20c_thermostat
       state: heat
