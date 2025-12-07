@@ -529,6 +529,7 @@ person:
     id: cam1995
     device_trackers:
       - device_tracker.cameron_s_s23
+      - device_tracker.cameron2
   - name: Grant
     id: grant1994
     device_trackers:
@@ -538,7 +539,6 @@ person:
     user_id: 10f174a6c6db401babe419a388e8eaa8
     device_trackers:
       - device_tracker.jennifer
-      - device_tracker.jennifer_old
 # }}}
 # {{{ Sensors
 
