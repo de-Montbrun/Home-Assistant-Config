@@ -35,7 +35,7 @@ alexa:
         - media_player.basement_tv
         - media_player.bedroomtv
         - media_player.tv_roomtv
-        - switch.switch1
+        - switch.switch12
         - switch.switch4
 
 # }}}
@@ -540,297 +540,227 @@ person:
     device_trackers:
       - device_tracker.jennifer
 # }}}
-# {{{ Sensors
+# {{{ Templates - Sensors
 
-sensor:
-  - platform: template
-    sensors:
-      total_active_clients:
-        friendly_name: "Total Active Clients"
-        unit_of_measurement: "clients"
-        value_template: >
-          {{ (states('sensor.spitfire') | int(0)) + (states('sensor.arrow_active_clients') | int(0)) }}
+template:
+- sensor:
+  - unique_id: closest_city_sensor
+    default_entity_id: sensor.closest_city
+    attributes:
+      distance: "{% set user_latitude = state_attr('person.gervais', 'latitude') |
+        float %} {% set user_longitude = state_attr('person.gervais', 'longitude')
+        | float %}\n{% set cities = {\n  'Charlottetown': {'lat': 46.2382, 'lon':
+        -63.1311},\n  'Fredericton': {'lat': 45.9636, 'lon': -66.6431},\n  'Saint
+        John': {'lat': 45.2733, 'lon': -66.0633},\n  'Montreal': {'lat': 45.5017,
+        'lon': -73.5673},\n  'Halifax': {'lat': 44.6488, 'lon': -63.5752},\n  'Toronto':
+        {'lat': 43.6532, 'lon': -79.3832},\n  'Calgary': {'lat': 51.0447, 'lon': -114.0719},\n
+        \ 'Atlanta': {'lat': 33.7490, 'lon': -84.3880},\n  'Las Vegas': {'lat': 36.1699,
+        'lon': -115.1398}\n} %}\n{% set closest_city = namespace(name='', distance=999999)
+        %} {% for city_name, city_data in cities.items() %}\n  {% set distance = distance(user_latitude,
+        user_longitude, city_data.lat, city_data.lon) %}\n  {% if distance < closest_city.distance
+        %}\n    {% set closest_city.name = city_name %}\n    {% set closest_city.distance
+        = distance %}\n  {% endif %}\n{% endfor %}\n{{ closest_city.distance | round(1)
+        }}"
+      latitude: "{% set cities = {\n  'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},\n
+        \ 'Fredericton': {'lat': 45.9636, 'lon': -66.6431},\n  'Saint John': {'lat':
+        45.2733, 'lon': -66.0633},\n  'Montreal': {'lat': 45.5017, 'lon': -73.5673},\n
+        \ 'Halifax': {'lat': 44.6488, 'lon': -63.5752},\n  'Toronto': {'lat': 43.6532,
+        'lon': -79.3832},\n  'Calgary': {'lat': 51.0447, 'lon': -114.0719},\n  'Atlanta':
+        {'lat': 33.7490, 'lon': -84.3880},\n  'Las Vegas': {'lat': 36.1699, 'lon':
+        -115.1398}\n} %}\n{{ cities[states('sensor.closest_city')]['lat'] }}"
+      longitude: "{% set cities = {\n  'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},\n
+        \ 'Fredericton': {'lat': 45.9636, 'lon': -66.6431},\n  'Saint John': {'lat':
+        45.2733, 'lon': -66.0633},\n  'Montreal': {'lat': 45.5017, 'lon': -73.5673},\n
+        \ 'Halifax': {'lat': 44.6488, 'lon': -63.5752},\n  'Toronto': {'lat': 43.6532,
+        'lon': -79.3832},\n  'Calgary': {'lat': 51.0447, 'lon': -114.0719},\n  'Atlanta':
+        {'lat': 33.7490, 'lon': -84.3880},\n  'Las Vegas': {'lat': 36.1699, 'lon':
+        -115.1398}\n} %}\n{{ cities[states('sensor.closest_city')]['lon'] }}"
+      condition_entity: "{% set entities = {\n  'Charlottetown': 'sensor.charlottetown_current_condition',\n
+        \ 'Fredericton': 'sensor.fredericton_condition',\n  'Saint John': 'sensor.saint_john_current_condition',\n
+        \ 'Montreal': 'sensor.montreal_current_condition',\n  'Atlanta': 'sensor.atlanta_current_condition',\n
+        \ 'Las Vegas': 'sensor.las_vegas_current_condition'\n} %}\n{{ entities[states('sensor.closest_city')]
+        }}"
+      temperature_entity: "{% set entities = {\n  'Charlottetown': 'sensor.charlottetown_temperature',\n
+        \ 'Fredericton': 'sensor.fredericton_temperature',\n  'Saint John': 'sensor.saint_john_temperature',\n
+        \ 'Montreal': 'sensor.montreal_temperature',\n  'Atlanta': 'sensor.atlanta_temperature',\n
+        \ 'Las Vegas': 'sensor.las_vegas_temperature'\n} %}\n{{ entities[states('sensor.closest_city')]
+        }}"
+      humidex_entity: "{% set entities = {\n  'Charlottetown': 'sensor.charlottetown_humidex',\n
+        \ 'Fredericton': 'sensor.fredericton_humidex',\n  'Saint John': 'sensor.saint_john_humidex',\n
+        \ 'Montreal': 'sensor.montreal_humidex'\n} %}\n{{ entities[states('sensor.closest_city')]
+        }}"
+      uv_index_entity: "{% set entities = {\n  'Charlottetown': 'sensor.charlottetown_uv_index',\n
+        \ 'Fredericton': 'sensor.fredericton_uv_index',\n  'Saint John': 'sensor.saint_john_uv_index',\n
+        \ 'Montreal': 'sensor.montreal_uv_index'\n} %}\n{{ entities[states('sensor.closest_city')]
+        }}"
+      wind_chill_entity: "{% set entities = {\n  'Charlottetown': 'sensor.charlottetown_wind_chill',\n
+        \ 'Fredericton': 'sensor.fredericton_wind_chill',\n  'Saint John': 'sensor.saint_john_wind_chill',\n
+        \ 'Montreal': 'sensor.montreal_wind_chill'\n} %}\n{{ entities[states('sensor.closest_city')]
+        }}"
+      warnings_entity: "{% set entities = {\n  'Charlottetown': 'sensor.charlottetown_warnings',\n
+        \ 'Fredericton': 'sensor.fredericton_warnings',\n  'Saint John': 'sensor.saint_john_warnings',\n
+        \ 'Montreal': 'sensor.montreal_warnings'\n} %}\n{{ entities[states('sensor.closest_city')]
+        }}"
+    name: Closest City
+    state: "{% set user_latitude = state_attr('person.gervais', 'latitude') | float
+      %} {% set user_longitude = state_attr('person.gervais', 'longitude') | float
+      %}\n{% set cities = {\n  'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},\n
+      \ 'Fredericton': {'lat': 45.9636, 'lon': -66.6431},\n  'Saint John': {'lat':
+      45.2733, 'lon': -66.0633},\n  'Montreal': {'lat': 45.5017, 'lon': -73.5673},\n
+      \ 'Halifax': {'lat': 44.6488, 'lon': -63.5752},\n  'Toronto': {'lat': 43.6532,
+      'lon': -79.3832},\n  'Calgary': {'lat': 51.0447, 'lon': -114.0719},\n  'Atlanta':
+      {'lat': 33.7490, 'lon': -84.3880},\n  'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}\n}
+      %}\n{% set closest_city = namespace(name='', distance=999999) %} {% for city_name,
+      city_data in cities.items() %}\n  {% set distance = distance(user_latitude,
+      user_longitude, city_data.lat, city_data.lon) %}\n  {% if distance < closest_city.distance
+      %}\n    {% set closest_city.name = city_name %}\n    {% set closest_city.distance
+      = distance %}\n  {% endif %}\n{% endfor %}\n{{ closest_city.name }}"
 
-      indoor_temperature_average:
-        friendly_name: "Indoor Temperature Average"
-        unit_of_measurement: "°C"
-        value_template: >
-          {% set sensors = [
-            states('sensor.bedroom_sensor_temperature'),
-            states('sensor.dining_room_sensor_temperature'),
-            states('sensor.kitchen_sensor_temperature'),
-            states('sensor.living_room_sensor_temperature'),
-            states('sensor.gail_office_sensor_temperature'),
-            states('sensor.temperature_humidity_sensor_dca4_temperature')
-          ] | select('is_number') | map('float') | list %}
-          {{ (sensors | sum / sensors | length) | round(1) if sensors else 'unknown' }}
+- sensor:
+  - unit_of_measurement: km
+    default_entity_id: sensor.distance_apart
+    name: GandG Apart
+    state: "{% if distance(states.device_tracker.iphone, states.device_tracker.gail_iphone)
+      | int == 0 %}\n  0\n{% elif distance(states.device_tracker.iphone, states.device_tracker.gail_iphone)
+      | round(2) < 0.09 %}\n  0\n{% else %}\n  {{ distance(states.device_tracker.iphone,
+      states.device_tracker.gail_iphone) | round(2) }}\n{% endif %}"
 
-      indoor_humidity_average:
-        friendly_name: "Indoor Humidity Average"
-        unit_of_measurement: "%"
-        value_template: >
-          {% set sensors = [
-            states('sensor.bedroom_sensor_humidity'),
-            states('sensor.dining_room_sensor_humidity'),
-            states('sensor.gail_office_sensor_humidity'),
-            states('sensor.temperature_humidity_sensor_dca4_humidity')
-          ] | select('is_number') | map('float') | list %}
-          {{ (sensors | sum / sensors | length) | round(0) if sensors else 'unknown' }}
+- sensor:
+  - unique_id: delicious_docked_sensor
+    default_entity_id: sensor.delicious_docked
+    name: Delicious Docked
+    state: "{% if states('switch.delicious_paused') == 'on' -%}\n  paused\n{% else
+      %}\n  {% if states('binary_sensor.delicious_docked') == 'off' -%}\n    {% if
+      states('fan.delicious') == 'on' -%}\n      cleaning\n    {% else -%}\n      returning\n
+      \   {% endif %}\n  {% else -%}\n    docked\n  {% endif %}\n{% endif %}"
 
-  - platform: template
-    sensors:
-      closest_city:
-        unique_id: closest_city_sensor
-        friendly_name: "Closest City"
-        value_template: >-
-          {% set user_latitude = state_attr('person.gervais', 'latitude') | float %}
-          {% set user_longitude = state_attr('person.gervais', 'longitude') | float %}
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.dining_mysa_temperature
+    name: Dining Mysa Temperature
+    state: '{{ state_attr(''climate.mysa_112908_thermostat'', ''current_temperature'')
+      }}'
 
-          {% set cities = {
-            'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
-            'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
-            'Saint John': {'lat': 45.2733, 'lon': -66.0633},
-            'Montreal': {'lat': 45.5017, 'lon': -73.5673},
-            'Halifax': {'lat': 44.6488, 'lon': -63.5752},
-            'Toronto': {'lat': 43.6532, 'lon': -79.3832},
-            'Calgary': {'lat': 51.0447, 'lon': -114.0719},
-            'Atlanta': {'lat': 33.7490, 'lon': -84.3880},
-            'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}
-          } %}
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.bedroom_mysa_temperature
+    name: Bedroom Mysa Temperature
+    state: '{{ state_attr(''climate.mysa_2fa20c_thermostat'', ''current_temperature'')
+      }}'
 
-          {% set closest_city = namespace(name='', distance=999999) %}
-          {% for city_name, city_data in cities.items() %}
-            {% set distance = distance(user_latitude, user_longitude, city_data.lat, city_data.lon) %}
-            {% if distance < closest_city.distance %}
-              {% set closest_city.name = city_name %}
-              {% set closest_city.distance = distance %}
-            {% endif %}
-          {% endfor %}
+- sensor:
+  - unit_of_measurement: '%'
+    device_class: humidity
+    default_entity_id: sensor.dining_mysa_humidity
+    name: Dining Mysa Humidity
+    state: '{{ state_attr(''climate.mysa_112908_thermostat'', ''current_humidity'')
+      }}'
 
-          {{ closest_city.name }}
-        attribute_templates:
-          distance: >-
-            {% set user_latitude = state_attr('person.gervais', 'latitude') | float %}
-            {% set user_longitude = state_attr('person.gervais', 'longitude') | float %}
+- sensor:
+  - unit_of_measurement: '%'
+    device_class: humidity
+    default_entity_id: sensor.bedroom_mysa_humidity
+    name: Bedroom Mysa Humidity
+    state: '{{ state_attr(''climate.mysa_2fa20c_thermostat'', ''current_humidity'')
+      }}'
 
-            {% set cities = {
-              'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
-              'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
-              'Saint John': {'lat': 45.2733, 'lon': -66.0633},
-              'Montreal': {'lat': 45.5017, 'lon': -73.5673},
-              'Halifax': {'lat': 44.6488, 'lon': -63.5752},
-              'Toronto': {'lat': 43.6532, 'lon': -79.3832},
-              'Calgary': {'lat': 51.0447, 'lon': -114.0719},
-              'Atlanta': {'lat': 33.7490, 'lon': -84.3880},
-              'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}
-            } %}
+- sensor:
+  - default_entity_id: sensor.atlanta_current_condition
+    name: Atlanta Current Condition
+    state: '{{ states(''weather.forecast_atlanta'') }}'
 
-            {% set closest_city = namespace(name='', distance=999999) %}
-            {% for city_name, city_data in cities.items() %}
-              {% set distance = distance(user_latitude, user_longitude, city_data.lat, city_data.lon) %}
-              {% if distance < closest_city.distance %}
-                {% set closest_city.name = city_name %}
-                {% set closest_city.distance = distance %}
-              {% endif %}
-            {% endfor %}
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.atlanta_temperature
+    name: Atlanta Temperature
+    state: '{{ state_attr(''weather.forecast_atlanta'', ''temperature'') }}'
 
-            {{ closest_city.distance | round(1) }}
-          latitude: >-
-            {% set cities = {
-              'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
-              'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
-              'Saint John': {'lat': 45.2733, 'lon': -66.0633},
-              'Montreal': {'lat': 45.5017, 'lon': -73.5673},
-              'Halifax': {'lat': 44.6488, 'lon': -63.5752},
-              'Toronto': {'lat': 43.6532, 'lon': -79.3832},
-              'Calgary': {'lat': 51.0447, 'lon': -114.0719},
-              'Atlanta': {'lat': 33.7490, 'lon': -84.3880},
-              'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}
-            } %}
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.atlanta_high_temperature
+    name: Atlanta High Temperature
+    state: '{{ state_attr(''weather.forecast_atlanta'', ''forecast'')[0].temperature
+      if state_attr(''weather.forecast_atlanta'', ''forecast'') else none }}'
 
-            {{ cities[states('sensor.closest_city')]['lat'] }}
-          longitude: >-
-            {% set cities = {
-              'Charlottetown': {'lat': 46.2382, 'lon': -63.1311},
-              'Fredericton': {'lat': 45.9636, 'lon': -66.6431},
-              'Saint John': {'lat': 45.2733, 'lon': -66.0633},
-              'Montreal': {'lat': 45.5017, 'lon': -73.5673},
-              'Halifax': {'lat': 44.6488, 'lon': -63.5752},
-              'Toronto': {'lat': 43.6532, 'lon': -79.3832},
-              'Calgary': {'lat': 51.0447, 'lon': -114.0719},
-              'Atlanta': {'lat': 33.7490, 'lon': -84.3880},
-              'Las Vegas': {'lat': 36.1699, 'lon': -115.1398}
-            } %}
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.atlanta_low_temperature
+    name: Atlanta Low Temperature
+    state: '{{ state_attr(''weather.forecast_atlanta'', ''forecast'')[0].templow if
+      state_attr(''weather.forecast_atlanta'', ''forecast'') else none }}'
 
-            {{ cities[states('sensor.closest_city')]['lon'] }}
-          condition_entity: >-
-            {% set entities = {
-              'Charlottetown': 'sensor.charlottetown_current_condition',
-              'Fredericton': 'sensor.fredericton_condition',
-              'Saint John': 'sensor.saint_john_current_condition',
-              'Montreal': 'sensor.montreal_current_condition',
-              'Atlanta': 'sensor.atlanta_current_condition',
-              'Las Vegas': 'sensor.las_vegas_current_condition'
-            } %}
+- sensor:
+  - default_entity_id: sensor.atlanta_summary
+    name: Atlanta Summary
+    state: '{{ state_attr(''weather.forecast_atlanta'', ''forecast'')[0].detailed_description
+      if state_attr(''weather.forecast_atlanta'', ''forecast'') else ''No forecast
+      available'' }}'
 
-            {{ entities[states('sensor.closest_city')] }}
-          temperature_entity: >-
-            {% set entities = {
-              'Charlottetown': 'sensor.charlottetown_temperature',
-              'Fredericton': 'sensor.fredericton_temperature',
-              'Saint John': 'sensor.saint_john_temperature',
-              'Montreal': 'sensor.montreal_temperature',
-              'Atlanta': 'sensor.atlanta_temperature',
-              'Las Vegas': 'sensor.las_vegas_temperature'
-            } %}
+- sensor:
+  - default_entity_id: sensor.las_vegas_current_condition
+    name: Las Vegas Current Condition
+    state: '{{ states(''weather.forecast_las_vegas'') }}'
 
-            {{ entities[states('sensor.closest_city')] }}
-          humidex_entity: >-
-            {% set entities = {
-              'Charlottetown': 'sensor.charlottetown_humidex',
-              'Fredericton': 'sensor.fredericton_humidex',
-              'Saint John': 'sensor.saint_john_humidex',
-              'Montreal': 'sensor.montreal_humidex'
-            } %}
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.las_vegas_temperature
+    name: Las Vegas Temperature
+    state: '{{ state_attr(''weather.forecast_las_vegas'', ''temperature'') }}'
 
-            {{ entities[states('sensor.closest_city')] }}
-          uv_index_entity: >-
-            {% set entities = {
-              'Charlottetown': 'sensor.charlottetown_uv_index',
-              'Fredericton': 'sensor.fredericton_uv_index',
-              'Saint John': 'sensor.saint_john_uv_index',
-              'Montreal': 'sensor.montreal_uv_index'
-            } %}
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.las_vegas_high_temperature
+    name: Las Vegas High Temperature
+    state: '{{ state_attr(''weather.forecast_las_vegas'', ''forecast'')[0].temperature
+      if state_attr(''weather.forecast_las_vegas'', ''forecast'') else none }}'
 
-            {{ entities[states('sensor.closest_city')] }}
-          wind_chill_entity: >-
-            {% set entities = {
-              'Charlottetown': 'sensor.charlottetown_wind_chill',
-              'Fredericton': 'sensor.fredericton_wind_chill',
-              'Saint John': 'sensor.saint_john_wind_chill',
-              'Montreal': 'sensor.montreal_wind_chill'
-            } %}
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.las_vegas_low_temperature
+    name: Las Vegas Low Temperature
+    state: '{{ state_attr(''weather.forecast_las_vegas'', ''forecast'')[0].templow
+      if state_attr(''weather.forecast_las_vegas'', ''forecast'') else none }}'
 
-            {{ entities[states('sensor.closest_city')] }}
-          warnings_entity: >-
-            {% set entities = {
-              'Charlottetown': 'sensor.charlottetown_warnings',
-              'Fredericton': 'sensor.fredericton_warnings',
-              'Saint John': 'sensor.saint_john_warnings',
-              'Montreal': 'sensor.montreal_warnings'
-            } %}
+- sensor:
+  - default_entity_id: sensor.las_vegas_summary
+    name: Las Vegas Summary
+    state: '{{ state_attr(''weather.forecast_las_vegas'', ''forecast'')[0].detailed_description
+      if state_attr(''weather.forecast_las_vegas'', ''forecast'') else ''No forecast
+      available'' }}'
 
-            {{ entities[states('sensor.closest_city')] }}
+- sensor:
+  - unit_of_measurement: clients
+    default_entity_id: sensor.total_active_clients
+    name: Total Active Clients
+    state: '{{ (states(''sensor.spitfire'') | int(0)) + (states(''sensor.arrow_active_clients'')
+      | int(0)) }}'
 
-      distance_apart:
-        friendly_name: 'GandG Apart'
-        value_template: >-
-          {% if distance(states.device_tracker.iphone, states.device_tracker.gail_iphone) | int == 0 %}
-            0
-          {% elif distance(states.device_tracker.iphone, states.device_tracker.gail_iphone) | round(2) < 0.09 %}
-            0
-          {% else %}
-            {{ distance(states.device_tracker.iphone, states.device_tracker.gail_iphone) | round(2) }}
-          {% endif %}
-        unit_of_measurement: 'km'
+- sensor:
+  - unit_of_measurement: °C
+    default_entity_id: sensor.indoor_temperature_average
+    name: Indoor Temperature Average
+    state: "{% set sensors = [\n  states('sensor.bedroom_sensor_temperature'),\n  states('sensor.dining_room_sensor_temperature'),\n
+      \ states('sensor.kitchen_sensor_temperature'),\n  states('sensor.living_room_sensor_temperature'),\n
+      \ states('sensor.gail_office_sensor_temperature'),\n  states('sensor.temperature_humidity_sensor_dca4_temperature')\n]
+      | select('is_number') | map('float') | list %} {{ (sensors | sum / sensors |
+      length) | round(1) if sensors else 'unknown' }}"
 
-      delicious_docked:
-        unique_id: delicious_docked_sensor
-        friendly_name: 'Delicious Docked'
-        value_template: >-
-          {% if states('switch.delicious_paused') == 'on' -%}
-            paused
-          {% else %}
-            {% if states('binary_sensor.delicious_docked') == 'off' -%}
-              {% if states('fan.delicious') == 'on' -%}
-                cleaning
-              {% else -%}
-                returning
-              {% endif %}
-            {% else -%}
-              docked
-            {% endif %}
-          {% endif %}
-
-  - platform: template
-    sensors:
-      dining_mysa_temperature:
-        friendly_name: "Dining Mysa Temperature"
-        unit_of_measurement: "°C"
-        device_class: temperature
-        value_template: "{{ state_attr('climate.mysa_112908_thermostat', 'current_temperature') }}"
-
-      bedroom_mysa_temperature:
-        friendly_name: "Bedroom Mysa Temperature"
-        unit_of_measurement: "°C"
-        device_class: temperature
-        value_template: "{{ state_attr('climate.mysa_2fa20c_thermostat', 'current_temperature') }}"
-
-      dining_mysa_humidity:
-        friendly_name: "Dining Mysa Humidity"
-        unit_of_measurement: "%"
-        device_class: humidity
-        value_template: "{{ state_attr('climate.mysa_112908_thermostat', 'current_humidity') }}"
-
-      bedroom_mysa_humidity:
-        friendly_name: "Bedroom Mysa Humidity"
-        unit_of_measurement: "%"
-        device_class: humidity
-        value_template: "{{ state_attr('climate.mysa_2fa20c_thermostat', 'current_humidity') }}"
-
-      # Atlanta weather sensors from Met.no
-      atlanta_current_condition:
-        friendly_name: "Atlanta Current Condition"
-        value_template: "{{ states('weather.forecast_atlanta') }}"
-
-      atlanta_temperature:
-        friendly_name: "Atlanta Temperature"
-        unit_of_measurement: "°C"
-        device_class: temperature
-        value_template: "{{ state_attr('weather.forecast_atlanta', 'temperature') }}"
-
-      atlanta_high_temperature:
-        friendly_name: "Atlanta High Temperature"
-        unit_of_measurement: "°C"
-        device_class: temperature
-        value_template: "{{ state_attr('weather.forecast_atlanta', 'forecast')[0].temperature if state_attr('weather.forecast_atlanta', 'forecast') else none }}"
-
-      atlanta_low_temperature:
-        friendly_name: "Atlanta Low Temperature"
-        unit_of_measurement: "°C"
-        device_class: temperature
-        value_template: "{{ state_attr('weather.forecast_atlanta', 'forecast')[0].templow if state_attr('weather.forecast_atlanta', 'forecast') else none }}"
-
-      atlanta_summary:
-        friendly_name: "Atlanta Summary"
-        value_template: "{{ state_attr('weather.forecast_atlanta', 'forecast')[0].detailed_description if state_attr('weather.forecast_atlanta', 'forecast') else 'No forecast available' }}"
-
-      # Las Vegas weather sensors from Met.no
-      las_vegas_current_condition:
-        friendly_name: "Las Vegas Current Condition"
-        value_template: "{{ states('weather.forecast_las_vegas') }}"
-
-      las_vegas_temperature:
-        friendly_name: "Las Vegas Temperature"
-        unit_of_measurement: "°C"
-        device_class: temperature
-        value_template: "{{ state_attr('weather.forecast_las_vegas', 'temperature') }}"
-
-      las_vegas_high_temperature:
-        friendly_name: "Las Vegas High Temperature"
-        unit_of_measurement: "°C"
-        device_class: temperature
-        value_template: "{{ state_attr('weather.forecast_las_vegas', 'forecast')[0].temperature if state_attr('weather.forecast_las_vegas', 'forecast') else none }}"
-
-      las_vegas_low_temperature:
-        friendly_name: "Las Vegas Low Temperature"
-        unit_of_measurement: "°C"
-        device_class: temperature
-        value_template: "{{ state_attr('weather.forecast_las_vegas', 'forecast')[0].templow if state_attr('weather.forecast_las_vegas', 'forecast') else none }}"
-
-      las_vegas_summary:
-        friendly_name: "Las Vegas Summary"
-        value_template: "{{ state_attr('weather.forecast_las_vegas', 'forecast')[0].detailed_description if state_attr('weather.forecast_las_vegas', 'forecast') else 'No forecast available' }}"
+- sensor:
+  - unit_of_measurement: '%'
+    default_entity_id: sensor.indoor_humidity_average
+    name: Indoor Humidity Average
+    state: "{% set sensors = [\n  states('sensor.bedroom_sensor_humidity'),\n  states('sensor.dining_room_sensor_humidity'),\n
+      \ states('sensor.gail_office_sensor_humidity'),\n  states('sensor.temperature_humidity_sensor_dca4_humidity')\n]
+      | select('is_number') | map('float') | list %} {{ (sensors | sum / sensors |
+      length) | round(0) if sensors else 'unknown' }}"
 
 # }}}
 # {{{ Switches

@@ -292,195 +292,6 @@
       - Ocean
       - Party
       - Pastel colors
-      - Pulse
-      - Relax
-      - Rhythm
-      - Romance
-      - Spring
-      - Steampunk
-      - Summer
-      - Sunset
-      - TV time
-      - True colors
-      - Wake-up
-      - Warm white
-      - White
-      - candle
-      - fire
-      - glisten
-      - 'off'
-      - opal
-      - prism
-      - sparkle
-      supported_color_modes:
-      - color_temp
-      - hs
-      - rgbw
-      - xy
-      effect:
-      color_mode:
-      brightness:
-      color_temp_kelvin:
-      color_temp:
-      hs_color:
-      rgb_color:
-      xy_color:
-      rgbw_color:
-      entity_id:
-      - light.basement_stairs
-      - light.basement_bathroom
-      - light.basement_shower
-      - light.basement_storage
-      - light.office_lights
-      - light.tv_room_lights
-      icon: mdi:lightbulb-group
-      friendly_name: Basement Lights
-      supported_features: 44
-      state: 'off'
-    light.main_floor_lights:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - Cycle down
-      - Cycle up
-      - Random
-      - Solid
-      - Wake up
-      - candle
-      - 'off'
-      supported_color_modes:
-      - color_temp
-      - hs
-      - xy
-      effect:
-      color_mode:
-      brightness:
-      color_temp_kelvin:
-      color_temp:
-      hs_color:
-      rgb_color:
-      xy_color:
-      entity_id:
-      - light.dining_room_lights
-      - light.entryway_lights
-      - light.foyer_lights
-      - light.garage_lights
-      - light.kitchen_lights
-      - light.livingroom_lights
-      - light.loft_trees
-      - light.powder_room_light
-      icon: mdi:lightbulb-group
-      friendly_name: Main Floor Lights
-      supported_features: 44
-      state: 'off'
-    light.outdoor_lights:
-      effect_list:
-      - candle
-      - 'off'
-      supported_color_modes:
-      - brightness
-      effect:
-      color_mode:
-      brightness:
-      entity_id:
-      - light.outdoor_back_door
-      - light.outdoor_driveway
-      - light.outdoor_pots
-      icon: mdi:lightbulb-group
-      friendly_name: Outdoor Lights
-      supported_features: 44
-      state: 'off'
-    light.second_floor_lights:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - candle
-      - fire
-      - glisten
-      - 'off'
-      - opal
-      - prism
-      - sparkle
-      supported_color_modes:
-      - color_temp
-      - xy
-      effect:
-      color_mode:
-      brightness:
-      color_temp_kelvin:
-      color_temp:
-      hs_color:
-      rgb_color:
-      xy_color:
-      entity_id:
-      - light.bathroom_lights
-      - light.bedroom_lights
-      - light.dressing_room_lights
-      - light.gail_office_lights
-      - light.hallway_lamp
-      - light.laundry_room_lights
-      icon: mdi:lightbulb-group
-      friendly_name: Second Floor Lights
-      supported_features: 44
-      state: 'off'
-    switch.powder_room_fan:
-      icon: mdi:fan
-      friendly_name: Powder Room Fan
-      state: 'off'
-    lock.garage_door_lock_lock_mechanism:
-      friendly_name: Garage Door Lock
-      supported_features: 0
-      state: locked
-    lock.front_door_lock_lock_mechanism:
-      friendly_name: Front Door Lock
-      supported_features: 0
-      state: locked
-  icon: mdi:bed
-  metadata:
-    light.main_floor_lights:
-      entity_only: true
-    light.outdoor_lights:
-      entity_only: true
-    light.second_floor_lights:
-      entity_only: true
-    lock.garage_door_lock_lock_mechanism:
-      entity_only: true
-    lock.front_door_lock_lock_mechanism:
-      entity_only: true
-- id: '1741651027535'
-  name: tv_room_dim
-  entities:
-    light.tv_room_lamps:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - Alarm
-      - Bedtime
-      - Candlelight
-      - Christmas
-      - Cool white
-      - Cozy
-      - Daylight
-      - Deep dive
-      - Diwali
-      - Fall
-      - Fireplace
-      - Focus
-      - Forest
-      - Golden white
-      - Halloween
-      - Jungle
-      - Mojito
-      - Night light
-      - Ocean
-      - Party
-      - Pastel colors
       - Plantgrowth
       - Pulse
       - Relax
@@ -504,11 +315,206 @@
       - sparkle
       supported_color_modes:
       - color_temp
+      - hs
       - rgbw
       - xy
-      effect: 'off'
+      icon: mdi:lightbulb-group
+      friendly_name: Basement Lights
+      supported_features: 44
+      effect:
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      rgbw_color:
+      entity_id:
+      - light.basement_stairs
+      - light.basement_bathroom
+      - light.basement_shower
+      - light.basement_storage
+      - light.office_lights
+      - light.tv_room_lights
+      state: 'off'
+    light.main_floor_lights:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - Cycle down
+      - Cycle up
+      - Random
+      - Solid
+      - Wake up
+      - candle
+      - 'off'
+      supported_color_modes:
+      - color_temp
+      - hs
+      - xy
+      icon: mdi:lightbulb-group
+      friendly_name: Main Floor Lights
+      supported_features: 44
+      effect:
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      entity_id:
+      - light.dining_room_lights
+      - light.entryway_lights
+      - light.foyer_lights
+      - light.garage_lights
+      - light.kitchen_lights
+      - light.livingroom_lights
+      - light.loft_trees
+      - light.main_floor_stairs
+      - light.powder_room_light
+      state: 'off'
+    light.outdoor_lights:
+      effect_list:
+      - candle
+      - 'off'
+      supported_color_modes:
+      - brightness
+      icon: mdi:lightbulb-group
+      friendly_name: Outdoor Lights
+      supported_features: 44
+      effect:
+      color_mode:
+      brightness:
+      entity_id:
+      - light.outdoor_back_door
+      - light.outdoor_driveway
+      - light.outdoor_pots
+      state: 'off'
+    light.second_floor_lights:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - candle
+      - fire
+      - glisten
+      - 'off'
+      - opal
+      - prism
+      - sparkle
+      supported_color_modes:
+      - color_temp
+      - xy
+      icon: mdi:lightbulb-group
+      friendly_name: Second Floor Lights
+      supported_features: 44
+      effect:
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      entity_id:
+      - light.bathroom_lights
+      - light.bedroom_lights
+      - light.dressing_room_lights
+      - light.gail_office_lights
+      - light.hallway_lamp
+      - light.laundry_room_lights
+      - light.upstairs_hallway
+      state: 'off'
+    switch.powder_room_fan:
+      icon: mdi:fan
+      friendly_name: Powder Room Fan
+      state: 'off'
+    lock.garage_door_lock_lock_mechanism:
+      friendly_name: Garage Door Lock
+      supported_features: 0
+      state: locked
+    lock.front_door_lock_lock_mechanism:
+      friendly_name: Front Door Lock
+      supported_features: 0
+      state: locked
+    switch.switch12:
+      friendly_name: switch12
+      state: 'off'
+  icon: mdi:bed
+  metadata:
+    light.main_floor_lights:
+      entity_only: true
+    light.outdoor_lights:
+      entity_only: true
+    light.second_floor_lights:
+      entity_only: true
+    lock.garage_door_lock_lock_mechanism:
+      entity_only: true
+    lock.front_door_lock_lock_mechanism:
+      entity_only: true
+- id: '1741651027535'
+  name: tv_room_dim
+  entities:
+    light.tv_room_pots:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      friendly_name: TV Room Pots
+      supported_features: 32
+      state: 'off'
+    light.lamp1:
+      min_color_temp_kelvin: 2200
+      max_color_temp_kelvin: 6500
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - Alarm
+      - Bedtime
+      - Candlelight
+      - Christmas
+      - Cozy
+      - Cool white
+      - Daylight
+      - Diwali
+      - Deep dive
+      - Fall
+      - Fireplace
+      - Forest
+      - Focus
+      - Golden white
+      - Halloween
+      - Jungle
+      - Mojito
+      - Night light
+      - Ocean
+      - Party
+      - Pulse
+      - Pastel colors
+      - Plantgrowth
+      - Romance
+      - Relax
+      - Sunset
+      - Spring
+      - Summer
+      - Steampunk
+      - True colors
+      - TV time
+      - White
+      - Wake-up
+      - Warm white
+      - Rhythm
+      supported_color_modes:
+      - color_temp
+      - rgbw
+      effect:
       color_mode: color_temp
-      brightness: 75
+      brightness: 26
       color_temp_kelvin: 4000
       color_temp: 250
       hs_color:
@@ -522,26 +528,78 @@
       - 0.42
       - 0.365
       rgbw_color:
-      entity_id:
-      - light.lamp1
-      - light.lamp2
-      - light.bedroom4
-      icon: mdi:lightbulb-group
-      friendly_name: TV Room Lamps
-      supported_features: 44
+      friendly_name: Lamp1
+      supported_features: 4
       state: 'on'
-    light.tv_room_pots:
+    light.lamp2:
+      min_color_temp_kelvin: 2200
+      max_color_temp_kelvin: 6500
+      min_mireds: 153
+      max_mireds: 454
+      effect_list:
+      - Alarm
+      - Bedtime
+      - Candlelight
+      - Christmas
+      - Cozy
+      - Cool white
+      - Daylight
+      - Diwali
+      - Deep dive
+      - Fall
+      - Fireplace
+      - Forest
+      - Focus
+      - Golden white
+      - Halloween
+      - Jungle
+      - Mojito
+      - Night light
+      - Ocean
+      - Party
+      - Pulse
+      - Pastel colors
+      - Plantgrowth
+      - Romance
+      - Relax
+      - Sunset
+      - Spring
+      - Summer
+      - Steampunk
+      - True colors
+      - TV time
+      - White
+      - Wake-up
+      - Warm white
+      - Rhythm
       supported_color_modes:
-      - brightness
-      color_mode:
-      brightness:
-      friendly_name: TV Room Pots
-      supported_features: 32
-      state: 'off'
+      - color_temp
+      - rgbw
+      effect:
+      color_mode: color_temp
+      brightness: 74
+      color_temp_kelvin: 4000
+      color_temp: 250
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 206
+      - 166
+      xy_color:
+      - 0.42
+      - 0.365
+      rgbw_color:
+      friendly_name: Lamp2
+      supported_features: 4
+      state: 'on'
   metadata:
-    light.tv_room_lamps:
-      entity_only: true
     light.tv_room_pots:
+      entity_only: true
+    light.lamp1:
+      entity_only: true
+    light.lamp2:
       entity_only: true
 - id: '1741651107996'
   name: tv_room_normal

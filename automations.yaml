@@ -270,27 +270,25 @@
   initial_state: true
 - id: heating_office_heater_off
   alias: 6pm - heater off
-  trigger:
-  - platform: time
-    at: '19:00:00'
-  condition:
+  triggers:
+  - at: '19:00:00'
+    trigger: time
+  conditions:
   - condition: and
     conditions:
     - condition: template
       value_template: '{{ states("sensor.season") != "summer" }}'
-  action:
-  - service: switch.turn_off
-    entity_id: switch.switch1
+  actions:
+  - action: switch.turn_off
+    data: {}
   - delay:
       hours: 0
       minutes: 1
       seconds: 0
       milliseconds: 0
-  - service: switch.turn_on
-    metadata: {}
+  - metadata: {}
     data: {}
-    target:
-      entity_id: switch.switch1
+    action: switch.turn_on
   initial_state: true
 - id: occupancy_heating_gail_away_heater_off
   alias: Gail away - toggle Gail office switch
@@ -308,8 +306,6 @@
   actions:
   - metadata: {}
     data: {}
-    target:
-      entity_id: switch.switch1
     action: switch.turn_off
   - delay:
       hours: 0
@@ -318,8 +314,6 @@
       milliseconds: 0
   - metadata: {}
     data: {}
-    target:
-      entity_id: switch.switch1
     action: switch.turn_on
   initial_state: true
 - id: occupancy_bedroom_gang_not_home
@@ -574,9 +568,6 @@
       - condition: state
         entity_id: binary_sensor.workday_sensor
         state: 'on'
-      - condition: time
-        after: 08:00:00
-        before: '20:00:00'
       - condition: state
         entity_id: light.office_lights
         state: 'off'
@@ -889,21 +880,23 @@
       entity_id: light.outdoor_lights
 - id: sunset
   alias: Sunset - Lights on
-  trigger:
-  - platform: sun
-    event: sunset
+  triggers:
+  - event: sunset
     offset: -00:30:00
-  condition: []
-  action:
-  - service: scene.turn_on
-    target:
+    trigger: sun
+  conditions: []
+  actions:
+  - target:
       entity_id: scene.sunset
     data: {}
-  - service: switch.turn_on
-    metadata: {}
+    action: scene.turn_on
+  - metadata: {}
     data: {}
     target:
-      entity_id: switch.switch3
+      entity_id:
+      - switch.switch3
+      - switch.switch12
+    action: switch.turn_on
   initial_state: true
 - id: misc_sabnzb_speed_limit
   alias: Set sabnzb speed limit
@@ -980,22 +973,27 @@
   initial_state: true
 - id: notify_home_presence
   alias: Home presence notification
-  trigger:
-    platform: state
-    entity_id: group.cam_tracker,group.jen_tracker,group.grant_tracker
-  condition:
-    condition: template
+  triggers:
+  - entity_id:
+    - person.grant
+    - person.cameron
+    - person.jennifer
+    trigger: state
+    to:
+    - home
+  conditions:
+  - condition: template
     value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state)
       | int > 5 }}'
-  action:
-    service: notify.zulip
-    data_template:
+  actions:
+  - data_template:
       message: ':{{ trigger.to_state.attributes.friendly_name | lower }}: {{ trigger.to_state.attributes.friendly_name
         }} has {%- if trigger.to_state.state == ''home'' %} entered {%- else %} exited
         {%- endif %} home.
 
         '
       title: Family Location
+    action: notify.zulip
 - id: notify_phone_presence
   alias: Phones presence notification
   trigger:
@@ -1283,8 +1281,9 @@
   description: ''
   triggers:
   - entity_id:
-    - binary_sensor.volvo_volvo_engine_status
-    to: 'off'
+    - binary_sensor.volvo_xc40_engine_status
+    to:
+    - 'off'
     for:
       hours: 0
       minutes: 30
@@ -1292,14 +1291,16 @@
     trigger: state
   conditions:
   - condition: state
-    entity_id: lock.volvo_volvo_lock
-    state: unlocked
+    entity_id: lock.volvo_xc40_lock
+    state:
+    - unlocked
   actions:
   - metadata: {}
     data: {}
     action: lock.lock
     target:
-      entity_id: lock.volvo_volvo_lock
+      entity_id:
+      - lock.volvo_xc40_lock
   mode: single
 - id: notify_door_unlocked_away
   alias: Notify if doors unlocked when away
@@ -1326,16 +1327,17 @@
       message: "\U0001F513 {{ trigger.to_state.attributes.friendly_name }} was unlocked
         while no one is home!"
       title: Security Alert
-  - action: notify.mobile_app_gail_iphone
-    data:
-      message: "\U0001F513 {{ trigger.to_state.attributes.friendly_name }} was unlocked
-        while no one is home!"
-      title: Security Alert
   - action: notify.mobile_app_iphone
     data:
       message: "\U0001F513 {{ trigger.to_state.attributes.friendly_name }} was unlocked
         while no one is home!"
       title: Security Alert
+  - action: notify.mobile_app_gail_iphone
+    data:
+      message: "\U0001F513 {{ trigger.to_state.attributes.friendly_name }} was unlocked
+        while no one is home!"
+      title: Security Alert
+    enabled: false
 - id: '1708818994369'
   alias: Heat - Turn down at bed time
   description: ''
@@ -1509,10 +1511,6 @@
     - switch.switch4
     to: 'off'
     trigger: state
-  - entity_id:
-    - switch.switch1
-    to: 'off'
-    trigger: state
   - trigger: state
     entity_id:
     - switch.office_main
@@ -1529,7 +1527,6 @@
     target:
       entity_id:
       - switch.switch4
-      - switch.switch1
       - switch.office_main
     action: switch.turn_on
   mode: restart
@@ -1999,64 +1996,81 @@
 - id: volvo_doors_windows_open_after_parking
   alias: Volvo - Doors/Windows Not Closed After Parking
   triggers:
-  - entity_id: binary_sensor.volvo_volvo_engine_status
-    from: 'on'
-    to: 'off'
-    for: 00:15:00
+  - entity_id:
+    - binary_sensor.volvo_xc40_engine_status
+    from:
+    - 'on'
+    to:
+    - 'off'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
     trigger: state
   conditions:
   - condition: or
     conditions:
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_door_front_left
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_door_front_left
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_door_front_right
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_door_front_right
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_door_rear_left
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_door_rear_left
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_door_rear_right
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_door_rear_right
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_tailgate
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_tailgate
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_hood
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_hood
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_window_front_left
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_window_front_left
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_window_front_right
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_window_front_right
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_window_rear_left
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_window_rear_left
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_window_rear_right
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_window_rear_right
+      state:
+      - 'on'
     - condition: state
-      entity_id: binary_sensor.volvo_volvo_sunroof
-      state: 'on'
+      entity_id: binary_sensor.volvo_xc40_sunroof
+      state:
+      - 'on'
   actions:
   - data:
       message: "\U0001F697 Volvo not properly secured 15 minutes after parking! {%
-        set issues = [] %} {% if is_state('binary_sensor.volvo_volvo_door_front_left',
-        'on') %}{% set issues = issues + ['Front left door'] %}{% endif %} {% if is_state('binary_sensor.volvo_volvo_door_front_right',
+        set issues = [] %} {% if is_state('binary_sensor.volvo_xc40_door_front_left',
+        'on') %}{% set issues = issues + ['Front left door'] %}{% endif %} {% if is_state('binary_sensor.volvo_xc40_door_front_right',
         'on') %}{% set issues = issues + ['Front right door'] %}{% endif %} {% if
-        is_state('binary_sensor.volvo_volvo_door_rear_left', 'on') %}{% set issues
-        = issues + ['Rear left door'] %}{% endif %} {% if is_state('binary_sensor.volvo_volvo_door_rear_right',
-        'on') %}{% set issues = issues + ['Rear right door'] %}{% endif %} {% if is_state('binary_sensor.volvo_volvo_tailgate',
-        'on') %}{% set issues = issues + ['Tailgate'] %}{% endif %} {% if is_state('binary_sensor.volvo_volvo_hood',
-        'on') %}{% set issues = issues + ['Hood'] %}{% endif %} {% if is_state('binary_sensor.volvo_volvo_window_front_left',
+        is_state('binary_sensor.volvo_xc40_door_rear_left', 'on') %}{% set issues
+        = issues + ['Rear left door'] %}{% endif %} {% if is_state('binary_sensor.volvo_xc40_door_rear_right',
+        'on') %}{% set issues = issues + ['Rear right door'] %}{% endif %} {% if is_state('binary_sensor.volvo_xc40_tailgate',
+        'on') %}{% set issues = issues + ['Tailgate'] %}{% endif %} {% if is_state('binary_sensor.volvo_xc40_hood',
+        'on') %}{% set issues = issues + ['Hood'] %}{% endif %} {% if is_state('binary_sensor.volvo_xc40_window_front_left',
         'on') %}{% set issues = issues + ['Front left window'] %}{% endif %} {% if
-        is_state('binary_sensor.volvo_volvo_window_front_right', 'on') %}{% set issues
-        = issues + ['Front right window'] %}{% endif %} {% if is_state('binary_sensor.volvo_volvo_window_rear_left',
+        is_state('binary_sensor.volvo_xc40_window_front_right', 'on') %}{% set issues
+        = issues + ['Front right window'] %}{% endif %} {% if is_state('binary_sensor.volvo_xc40_window_rear_left',
         'on') %}{% set issues = issues + ['Rear left window'] %}{% endif %} {% if
-        is_state('binary_sensor.volvo_volvo_window_rear_right', 'on') %}{% set issues
-        = issues + ['Rear right window'] %}{% endif %} {% if is_state('binary_sensor.volvo_volvo_sunroof',
+        is_state('binary_sensor.volvo_xc40_window_rear_right', 'on') %}{% set issues
+        = issues + ['Rear right window'] %}{% endif %} {% if is_state('binary_sensor.volvo_xc40_sunroof',
         'on') %}{% set issues = issues + ['Sunroof'] %}{% endif %} Open: {{ issues
         | join(', ') }}\n"
       title: Volvo
@@ -2066,24 +2080,35 @@
   alias: Volvo - Service Warnings
   triggers:
   - entity_id:
-    - binary_sensor.volvo_volvo_service_warning
-    - binary_sensor.volvo_volvo_brake_fluid_level_warning
-    - binary_sensor.volvo_volvo_coolant_level_warning
-    - binary_sensor.volvo_volvo_oil_level_warning
-    - binary_sensor.volvo_volvo_washer_fluid_level_warning
+    - binary_sensor.volvo_xc40_brake_fluid
+    - binary_sensor.volvo_xc40_coolant_level
+    - binary_sensor.volvo_xc40_oil_level
+    - binary_sensor.volvo_xc40_washer_fluid
     to: 'on'
     trigger: state
+  - trigger: state
+    entity_id:
+    - sensor.volvo_xc40_service
+    from:
+    - no_warning
+  conditions:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.volvo_xc40_service
+      state:
+      - unavailable
   actions:
   - data:
       message: "\U0001F527 Volvo Service Alert: {{ trigger.to_state.attributes.friendly_name
-        }} needs attention! {% if trigger.entity_id == 'binary_sensor.volvo_volvo_service_warning'
-        %} Regular service is due. {% elif trigger.entity_id == 'binary_sensor.volvo_volvo_brake_fluid_level_warning'
+        }} needs attention! {% if trigger.entity_id == 'sensor.volvo_xc40_service'
+        %} Regular service is due. {% elif trigger.entity_id == 'binary_sensor.volvo_xc40_brake_fluid'
         %} ⚠️ SAFETY CRITICAL: Brake fluid level is low! {% elif trigger.entity_id
-        == 'binary_sensor.volvo_volvo_coolant_level_warning' %} Coolant level is low
-        - engine may overheat. {% elif trigger.entity_id == 'binary_sensor.volvo_volvo_oil_level_warning'
+        == 'binary_sensor.volvo_xc40_coolant_level' %} Coolant level is low - engine
+        may overheat. {% elif trigger.entity_id == 'binary_sensor.volvo_xc40_oil_level'
         %} Oil level is low - check and top up immediately. {% elif trigger.entity_id
-        == 'binary_sensor.volvo_volvo_washer_fluid_level_warning' %} Washer fluid
-        is low - refill when convenient. {% endif %}\n"
+        == 'binary_sensor.volvo_xc40_washer_fluid' %} Washer fluid is low - refill
+        when convenient. {% endif %}\n"
       title: Volvo
     action: notify.zulip
   mode: single
@@ -2091,17 +2116,19 @@
   alias: Volvo - Tire Pressure Warning
   triggers:
   - entity_id:
-    - binary_sensor.volvo_volvo_tyre_front_left
-    - binary_sensor.volvo_volvo_tyre_front_right
-    - binary_sensor.volvo_volvo_tyre_rear_left
-    - binary_sensor.volvo_volvo_tyre_rear_right
-    to: 'on'
+    - binary_sensor.volvo_xc40_tire_front_left
+    - binary_sensor.volvo_xc40_tire_front_right
+    - binary_sensor.volvo_xc40_tire_rear_left
+    - binary_sensor.volvo_xc40_tire_rear_right
+    to:
+    - 'on'
     trigger: state
   actions:
   - data:
       message: '⚠️ Volvo tire pressure warning: {{ trigger.to_state.attributes.friendly_name
         }} needs attention. Check tire pressure soon for safety and fuel efficiency.
-        Current fuel: {{ states(''sensor.volvo_volvo_fuel_amount'') }}L
+        Current fuel: {{ states(''sensor.volvo_xc40_trip_manual_average_fuel_consumption'')
+        }}L/100 km
 
         '
       title: Volvo
