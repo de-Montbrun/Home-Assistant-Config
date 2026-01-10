@@ -356,6 +356,13 @@ light:
       - light.loft_tree1
 
   - platform: group
+    name: Main Bath Lights
+    unique_id: main_bath_lights_group
+    entities:
+      - light.main_bathroom
+      - light.main_shower
+
+  - platform: group
     name: Main Floor Lights
     unique_id: main_floor_lights_group
     entities:
@@ -403,6 +410,7 @@ light:
       - light.gail_office_lights
       - light.hallway_lamp
       - light.laundry_room_lights
+      - light.main_bath_lights
       - light.upstairs_hallway
 
   - platform: group

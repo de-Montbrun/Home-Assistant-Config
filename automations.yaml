@@ -979,12 +979,16 @@
     - person.cameron
     - person.jennifer
     trigger: state
-    to:
+    from:
     - home
+    - not_home
   conditions:
   - condition: template
     value_template: '{{ as_timestamp(now()) - as_timestamp(states.sensor.hass_uptime.state)
       | int > 5 }}'
+  - condition: template
+    value_template: "{{ trigger.from_state.state in ['home', 'not_home'] and \n   trigger.to_state.state
+      in ['home', 'not_home'] }}"
   actions:
   - data_template:
       message: ':{{ trigger.to_state.attributes.friendly_name | lower }}: {{ trigger.to_state.attributes.friendly_name
@@ -2245,3 +2249,24 @@
     action: scene.turn_on
     data: {}
   mode: single
+- id: '1768078297132'
+  alias: Sync Main Bathroom
+  description: ''
+  triggers:
+  - entity_id:
+    - light.main_bathroom
+    trigger: state
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+  conditions: []
+  actions:
+  - action: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.main_shower
+  mode: single
+  initial_state: true

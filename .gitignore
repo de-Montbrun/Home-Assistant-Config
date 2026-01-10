@@ -46,3 +46,5 @@ lutron_caseta-*.pem
 alexa_media.gervais@demontbrun.com.pickle
 withings.json
 emulated_hue_ids.json
+
+.ha_run.lock
