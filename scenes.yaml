@@ -442,9 +442,6 @@
       friendly_name: Front Door Lock
       supported_features: 0
       state: locked
-    switch.switch12:
-      friendly_name: switch12
-      state: 'off'
   icon: mdi:bed
   metadata:
     light.main_floor_lights:

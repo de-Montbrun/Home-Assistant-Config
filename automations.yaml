@@ -895,7 +895,6 @@
     target:
       entity_id:
       - switch.switch3
-      - switch.switch12
     action: switch.turn_on
   initial_state: true
 - id: misc_sabnzb_speed_limit

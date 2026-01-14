@@ -35,7 +35,6 @@ alexa:
         - media_player.basement_tv
         - media_player.bedroomtv
         - media_player.tv_roomtv
-        - switch.switch12
         - switch.switch4
 
 # }}}
