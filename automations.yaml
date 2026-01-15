@@ -81,6 +81,8 @@
     - person.gail
     - person.gervais
     to: home
+    from:
+    - not_home
     trigger: state
   actions:
   - target:
@@ -1968,6 +1970,8 @@
     - person.jennifer
     - person.cameron
     from: home
+    to:
+    - not_home
     trigger: state
   conditions:
   - condition: template
