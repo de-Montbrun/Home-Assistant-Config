@@ -92,65 +92,6 @@ rest_command:
       #    # Optional - available models: alexa, hey jarvis, hey mycroft, ok google
 
 # }}}
-#  {{{ InfluxDB
-
-influxdb:
-  api_version: 2
-  host: blackbird.dem
-  port: 8086
-  ssl: false
-  verify_ssl: false
-  token: !secret influxdb_token
-  organization: 6338b4c35d8af0a9
-  bucket: homeassistant
-  tags:
-    source: ha
-  tags_attributes:
-    - friendly_name
-  max_retries: 3
-  default_measurement: units
-  include:
-    domains:
-      - binary_sensor
-      - sensor
-  exclude:
-    entities:
-      - sensor.displays
-      - sensor.frontmost_app
-      - sensor.python_package_index_pypi
-      - sensor.last_update_trigger
-      - sensor.season
-    entity_globs:
-      - binary_sensor.*_detections_motion
-      - binary_sensor.*_detections_motion
-      - binary_sensor.*_hdr_mode
-      - binary_sensor.*_is_dark
-      - binary_sensor.*_motion
-      - binary_sensor.*_overlay_show_bitrate
-      - binary_sensor.*_overlay_show_date
-      - binary_sensor.*_overlay_show_logo
-      - binary_sensor.*_overlay_show_name
-      - binary_sensor.*_status_light_on
-      - sensor.*_infrared_mode
-      - sensor.*_recording_mode
-      - sensor.*_energy_factor
-      - sensor.*_energy_totalstarttime
-      - sensor.*_last_restart_time
-      - sensor.*_mqtt_connect_count
-      - sensor.*_restart_reason
-      - sensor.*_ssid
-      - sensor.*_wifi_connect_count
-      - sensor.*_steps
-      - sensor.*_last_restart_time_2
-      - sensor.*_mqtt_connect_count_2
-      - sensor.*_restart_reason_2
-      - sensor.*_ssid_2
-      - sensor.*_wifi_connect_count_2
-      - sensor.active_*
-      - sensor.primary_display_*
-      - sensor.sun_*
-
-# }}}
 # {{{ Lights
 
 light:
@@ -319,7 +260,6 @@ light:
       - light.entryway_lights
       - light.foyer_lights
       - light.hallway_lamp
-      - light.upstairs_hallway
       - light.main_floor_stairs
 
   - platform: group
@@ -416,9 +356,9 @@ light:
     name: TV Room Lamps
     unique_id: tv_rooms_lamps_group
     entities:
+      - light.lamp0
       - light.lamp1
       - light.lamp2
-      - light.bedroom4
 
   - platform: group
     name: TV Room Lights
@@ -536,7 +476,7 @@ person:
     id: cam1995
     device_trackers:
       - device_tracker.cameron_s_s23
-      - device_tracker.cameron2
+      - device_tracker.unifi_default_fe_57_44_7c_97_23
   - name: Grant
     id: grant1994
     device_trackers:

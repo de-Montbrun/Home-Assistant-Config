@@ -10,6 +10,7 @@ householdmembers:
     - person.gervais
     - person.gail
     - person.jennifer
+    - person.cameron
   icon: mdi:account-multiple
 
 # }}}

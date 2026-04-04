@@ -651,11 +651,13 @@
             entity_id: binary_sensor.workday_sensor
             state: 'off'
     - condition: state
-      entity_id: binary_sensor.audio_input_in_use_greenapple
-      state: 'off'
+      entity_id: sensor.greenapple_active_audio_input
+      state:
+      - 'off'
     - condition: state
-      entity_id: binary_sensor.active_greenapple
-      state: 'off'
+      entity_id: binary_sensor.greenapple_active
+      state:
+      - 'off'
       for:
         hours: 0
         minutes: 10
@@ -1539,15 +1541,11 @@
   alias: On Air
   description: ''
   triggers:
-  - type: turned_on
-    device_id: 58ed6404dd328113e9eba60ee42f700d
-    entity_id: 436f65b6469bf468c896827d5557574c
-    domain: binary_sensor
-    trigger: device
-    for:
-      hours: 0
-      minutes: 2
-      seconds: 0
+  - trigger: state
+    entity_id:
+    - binary_sensor.greenapple_camera_in_use
+    to:
+    - 'on'
   - type: turned_on
     device_id: 9e702f0b6d26018028c93f6658692ddd
     entity_id: 497ce5a50e7f79011fdf7b3ae97f53a7
@@ -1559,33 +1557,39 @@
       seconds: 0
   - trigger: state
     entity_id:
-    - sensor.frontmost_app_greenapple
+    - sensor.greenapple_frontmost_app
     - sensor.frontmost_app
-    to: zoom.us
+    to:
+    - zoom.us
   - trigger: state
     entity_id:
-    - sensor.frontmost_app_greenapple
+    - sensor.greenapple_frontmost_app
     - sensor.frontmost_app
-    to: Slack
+    to:
+    - Slack
   - trigger: state
     entity_id:
-    - sensor.frontmost_app_greenapple
+    - sensor.greenapple_frontmost_app
     - sensor.frontmost_app
-    to: Messenger
+    to:
+    - Messenger
   conditions:
   - condition: and
     conditions:
     - condition: or
       conditions:
       - condition: state
-        entity_id: sensor.frontmost_app_greenapple
-        state: zoom.us
+        entity_id: sensor.greenapple_frontmost_app
+        state:
+        - zoom.us
       - condition: state
-        entity_id: sensor.frontmost_app_greenapple
-        state: Slack
+        entity_id: sensor.greenapple_frontmost_app
+        state:
+        - Slack
       - condition: state
-        entity_id: sensor.frontmost_app_greenapple
-        state: Messenger
+        entity_id: sensor.greenapple_frontmost_app
+        state:
+        - Messenger
       - condition: state
         entity_id: sensor.frontmost_app
         state: zoom.us
@@ -1598,8 +1602,9 @@
     - condition: or
       conditions:
       - condition: state
-        entity_id: binary_sensor.camera_in_use_greenapple
-        state: 'on'
+        entity_id: binary_sensor.greenapple_camera_in_use
+        state:
+        - 'on'
         for:
           hours: 0
           minutes: 2
@@ -2273,3 +2278,101 @@
       entity_id: light.main_shower
   mode: single
   initial_state: true
+- id: '1769049259423'
+  alias: Occupancy - Dressing room lights
+  description: ''
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.dressing_room_occupancy
+      light_target:
+        entity_id: light.dressing_room_lights
+      no_motion_wait: 120
+- id: '1771890364803'
+  alias: Toggle Main Bathroom Motion Sensor
+  description: ''
+  triggers:
+  - trigger: time
+    at: '23:45:00'
+  - trigger: time
+    at: 07:45:00
+  conditions: []
+  actions:
+  - if:
+    - condition: time
+      after: '23:44:00'
+    then:
+    - action: switch.turn_off
+      target:
+        entity_id: switch.main_bathroom_motion_sensor
+    else:
+    - action: switch.turn_on
+      target:
+        entity_id: switch.main_bathroom_motion_sensor
+  mode: single
+- id: '1772319050560'
+  alias: RAM arrives home
+  description: Refresh Uconnect data when RAM arrives home
+  triggers:
+  - trigger: zone
+    entity_id: device_tracker.ram_ram_location
+    zone: zone.home
+    event: enter
+  conditions: []
+  actions:
+  - delay:
+      seconds: 30
+  - action: uconnect.update
+    metadata: {}
+    data:
+      device_id: b1e0017f2acc83601942846b02d31a58
+  mode: single
+- id: '1773539925604'
+  alias: RAM - Tire Pressure Warning
+  description: ''
+  triggers:
+  - entity_id:
+    - binary_sensor.ram_ram_tire_pressure_front_left_warning
+    - binary_sensor.ram_ram_tire_pressure_front_right_warning
+    - binary_sensor.ram_ram_tire_pressure_rear_left_warning
+    - binary_sensor.ram_ram_tire_pressure_rear_right_warning
+    to: 'on'
+    trigger: state
+  actions:
+  - data:
+      message: '⚠️ RAM tire pressure warning: {{ trigger.to_state.attributes.friendly_name
+        }} needs attention. Check tire pressure soon for safety and fuel efficiency.
+        Current range: {{ states(''sensor.ram_ram_driving_range'') }} km
+
+        '
+      title: RAM 1500
+    action: notify.zulip
+  mode: single
+- id: '1773540286983'
+  alias: RAM - Service Warnings
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.ram_ram_low_fuel
+    to: 'on'
+  - trigger: numeric_state
+    entity_id: sensor.ram_ram_oil_level
+    below: 20
+  conditions:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.ram_ram_oil_level
+      state: unavailable
+  actions:
+  - data:
+      message: "\U0001F527 RAM Service Alert: {{ trigger.to_state.attributes.friendly_name
+        }} needs attention! {% if trigger.entity_id == 'binary_sensor.ram_ram_low_fuel'
+        %} ⛽ Fuel is low - current driving range is {{ states('sensor.ram_ram_driving_range')
+        }} km. {% elif trigger.entity_id == 'sensor.ram_ram_oil_level' %} \U0001F6E2️
+        Oil level is low at {{ states('sensor.ram_ram_oil_level') }}% - check and
+        top up soon. {% endif %}\n"
+      title: RAM 1500
+    action: notify.zulip
+  mode: single
