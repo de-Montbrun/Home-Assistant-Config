@@ -50,6 +50,7 @@ http:
   use_x_forwarded_for: true
   trusted_proxies:
     - 192.168.10.80
+    - fda9:40c4:72e9::2bf
 
 # }}}
 # {{{ Homekit
@@ -393,6 +394,7 @@ history:
 # Setup recorder and logbook
 recorder:
   db_url: !secret db_url
+  commit_interval: 3
 logbook:
   exclude:
     domains:
