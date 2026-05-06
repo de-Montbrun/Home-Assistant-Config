@@ -371,8 +371,9 @@
         entity_id: light.entryway_lights
         state: 'off'
       - condition: state
-        entity_id: light.kitchen_lights
-        state: 'off'
+        entity_id: light.kitchen_pots
+        state:
+        - 'off'
     - condition: or
       conditions:
       - condition: numeric_state
@@ -411,6 +412,7 @@
       conditions:
       - condition: sun
         before: sunset
+        before_offset: '20'
       - condition: state
         entity_id: binary_sensor.kitchen_sensor_motion
         for:
@@ -623,9 +625,15 @@
   conditions:
   - condition: and
     conditions:
-    - condition: state
-      entity_id: binary_sensor.audio_input_in_use
-      state: 'off'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.audio_input_in_use
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.audio_input_in_use
+        state:
+        - Inactive
     - condition: or
       conditions:
       - condition: not
@@ -650,10 +658,16 @@
           - condition: state
             entity_id: binary_sensor.workday_sensor
             state: 'off'
-    - condition: state
-      entity_id: sensor.greenapple_active_audio_input
-      state:
-      - 'off'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: sensor.greenapple_active_audio_input
+        state:
+        - 'off'
+      - condition: state
+        entity_id: sensor.greenapple_active_audio_input
+        state:
+        - Inactive
     - condition: state
       entity_id: binary_sensor.greenapple_active
       state:
@@ -663,8 +677,10 @@
         minutes: 10
         seconds: 0
   actions:
-  - entity_id: light.office_lights
-    action: light.turn_off
+  - action: light.turn_off
+    data: {}
+    target:
+      entity_id: light.office_lights
 - id: movement_front_door_timed_lights
   alias: Timed lights - Movement Front Door
   initial_state: false
@@ -856,7 +872,6 @@
   - data: {}
     target:
       entity_id:
-      - switch.switch0
       - switch.switch3
     action: switch.turn_off
   - data: {}
@@ -1546,6 +1561,15 @@
     - binary_sensor.greenapple_camera_in_use
     to:
     - 'on'
+  - type: turned_on
+    device_id: 5e7f0aaa62627066b96c315ac493b830
+    entity_id: dc8c00afd9f40a28a72072a3a904bfb5
+    domain: binary_sensor
+    trigger: device
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
   - type: turned_on
     device_id: 9e702f0b6d26018028c93f6658692ddd
     entity_id: 497ce5a50e7f79011fdf7b3ae97f53a7
