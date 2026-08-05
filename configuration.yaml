@@ -36,6 +36,8 @@ alexa:
         - media_player.bedroomtv
         - media_player.tv_roomtv
         - switch.switch4
+      exclude_entities:
+        - light.tv_backlight_kit
 
 # }}}
 # {{{ frontend
@@ -43,14 +45,6 @@ alexa:
 # Enables the frontend
 frontend:
   themes: !include_dir_merge_named themes/
-
-# Lovelace UI configuration removed - will be configured via UI
-
-http:
-  use_x_forwarded_for: true
-  trusted_proxies:
-    - 192.168.10.80
-    - fda9:40c4:72e9::2bf
 
 # }}}
 # {{{ Homekit

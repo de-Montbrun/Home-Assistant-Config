@@ -562,8 +562,6 @@
     - binary_sensor.basement_sensor_motion
     to: 'on'
     trigger: state
-  - at: 09:00:00
-    trigger: time
   conditions:
   - condition: or
     conditions:
@@ -1214,7 +1212,8 @@
     conditions:
     - condition: state
       entity_id: vacuum.consuela
-      state: docked
+      state:
+      - docked
     - condition: state
       entity_id: fan.delicious
       state: 'off'
@@ -1230,10 +1229,10 @@
   - data: {}
     target:
       entity_id:
-      - vacuum.consuela
       - vacuum.robot_2
       - vacuum.robot
       - vacuum.robot_4
+      - vacuum.consuela
     action: vacuum.start
   - action: fan.set_percentage
     metadata: {}
@@ -1243,12 +1242,14 @@
       entity_id: fan.delicious
 - id: mop_start
   alias: Mop Start
-  trigger:
-    platform: state
-    entity_id: vacuum.consuela
-    to: docked
-  condition:
-    condition: and
+  triggers:
+  - entity_id:
+    - vacuum.consuela
+    to:
+    - docked
+    trigger: state
+  conditions:
+  - condition: and
     conditions:
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_start"
@@ -1256,10 +1257,10 @@
     - condition: template
       value_template: '{{ as_timestamp(now()) - as_timestamp(state_attr("automation.vacuum_stop",
         "last_triggered")) | int > 1800 }}'
-  action:
-    service: vacuum.start
-    data: {}
+  actions:
+  - data: {}
     entity_id: vacuum.alice
+    action: vacuum.start
 - id: vacuum_stop
   alias: Vacuum Stop
   triggers:
@@ -1274,7 +1275,8 @@
       state: cleaning
     - condition: state
       entity_id: vacuum.consuela
-      state: cleaning
+      state:
+      - cleaning
     - condition: state
       entity_id: fan.delicious
       state: 'on'
@@ -1585,17 +1587,7 @@
     - sensor.frontmost_app
     to:
     - zoom.us
-  - trigger: state
-    entity_id:
-    - sensor.greenapple_frontmost_app
-    - sensor.frontmost_app
-    to:
     - Slack
-  - trigger: state
-    entity_id:
-    - sensor.greenapple_frontmost_app
-    - sensor.frontmost_app
-    to:
     - Messenger
   conditions:
   - condition: and
@@ -1605,24 +1597,17 @@
       - condition: state
         entity_id: sensor.greenapple_frontmost_app
         state:
-        - zoom.us
-      - condition: state
-        entity_id: sensor.greenapple_frontmost_app
-        state:
         - Slack
       - condition: state
         entity_id: sensor.greenapple_frontmost_app
         state:
-        - Messenger
+        - zoom.us
       - condition: state
         entity_id: sensor.frontmost_app
         state: zoom.us
       - condition: state
         entity_id: sensor.frontmost_app
         state: Slack
-      - condition: state
-        entity_id: sensor.frontmost_app
-        state: Messenger
     - condition: or
       conditions:
       - condition: state
