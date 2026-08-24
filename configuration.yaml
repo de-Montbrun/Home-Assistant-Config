@@ -13,7 +13,6 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Halifax
   customize: !include customize.yaml
-cities: !include city_data.yaml
 
 default_config:
 

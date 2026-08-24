@@ -51,9 +51,6 @@ cities:
   Regina:
     lat: 50.4463
     lon: -104.6083
-  Saskatoon:
-    lat: 52.1282
-    lon: -106.6446
   Lethbridge:
     lat: 49.7025
     lon: -112.8208
@@ -74,8 +71,8 @@ cities:
     lat: 44.9778
     lon: -93.2650
   Saint Paul:
-    lat: 44.9778
-    lon: -93.2650
+    lat: 44.9537
+    lon: -93.0900
   Des Moines:
     lat: 41.5868
     lon: -93.6250
@@ -109,9 +106,6 @@ cities:
   Boston:
     lat: 42.3601
     lon: -71.0589
-  New York City:
-    lat: 40.7128
-    lon: -74.0060
   Baltimore:
     lat: 39.2904
     lon: -76.6122
