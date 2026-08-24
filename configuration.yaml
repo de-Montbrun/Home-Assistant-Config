@@ -672,6 +672,41 @@ template:
       available'' }}'
 
 - sensor:
+  - default_entity_id: sensor.boston_current_condition
+    name: Boston Current Condition
+    state: '{{ states(''weather.forecast_boston'') }}'
+
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.boston_temperature
+    name: Boston Temperature
+    state: '{{ state_attr(''weather.forecast_boston'', ''temperature'') }}'
+
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.boston_high_temperature
+    name: Boston High Temperature
+    state: '{{ state_attr(''weather.forecast_boston'', ''forecast'')[0].temperature
+      if state_attr(''weather.forecast_boston'', ''forecast'') else none }}'
+
+- sensor:
+  - unit_of_measurement: °C
+    device_class: temperature
+    default_entity_id: sensor.boston_low_temperature
+    name: Boston Low Temperature
+    state: '{{ state_attr(''weather.forecast_boston'', ''forecast'')[0].templow if
+      state_attr(''weather.forecast_boston'', ''forecast'') else none }}'
+
+- sensor:
+  - default_entity_id: sensor.boston_summary
+    name: Boston Summary
+    state: '{{ state_attr(''weather.forecast_boston'', ''forecast'')[0].detailed_description
+      if state_attr(''weather.forecast_boston'', ''forecast'') else ''No forecast
+      available'' }}'
+
+- sensor:
   - unit_of_measurement: clients
     default_entity_id: sensor.total_active_clients
     name: Total Active Clients
