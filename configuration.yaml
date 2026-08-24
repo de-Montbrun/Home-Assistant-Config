@@ -13,6 +13,7 @@ homeassistant:
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: America/Halifax
   customize: !include customize.yaml
+cities: !include city_data.yaml
 
 default_config:
 
@@ -492,7 +493,7 @@ template:
     attributes:
       distance: "{% set user_latitude = state_attr('person.gervais', 'latitude') |
         float %} {% set user_longitude = state_attr('person.gervais', 'longitude') | float %}
-{% include 'city_data.yaml' %} {% set closest_city = namespace(name='', distance=999999) %} {% for city_name, city_data in cities.items() %}
+ {% set closest_city = namespace(name='', distance=999999) %} {% for city_name, city_data in cities.items() %}
   {% set dist = distance(user_latitude, user_longitude, city_data.lat, city_data.lon) %}
   {% if dist < closest_city.distance %}
     {% set closest_city.name = city_name %}
@@ -510,7 +511,7 @@ template:
       warnings_entity: "{{ entities[states('sensor.closest_city')] }}"
     name: Closest City
     state: "{% set user_latitude = state_attr('person.gervais', 'latitude') | float
-      %} {% include 'city_data.yaml' %} {% set closest_city = namespace(name='', distance=999999) %} {% for city_name,
+      %}  {% set closest_city = namespace(name='', distance=999999) %} {% for city_name,
       city_data in cities.items() %}
   {% set distance = distance(user_latitude,
       user_longitude, city_data.lat, city_data.lon) %}
