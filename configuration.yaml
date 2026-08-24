@@ -510,8 +510,7 @@ template:
         {% endfor %}
         {{ ns.name }}
       {% endif %}
-      {% endset %}
-      {{ result | trim }}
+      {% endset %}{{ result | trim }}
     attributes:
       distance: >-
         {% set result %}
@@ -532,24 +531,23 @@ template:
           {% endfor %}
           {{ ns.distance | round(1) if ns.name else 'unknown' }}
         {% endif %}
-        {% endset %}
-        {{ result | trim }}
+        {% endset %}{{ result | trim }}
       latitude: >-
-        {% from 'cities.jinja' import closest_cities %}{{ cities.get(states('sensor.closest_city'), {}).get('lat') }}
+        {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('lat') }}
       longitude: >-
-        {% from 'cities.jinja' import closest_cities %}{{ cities.get(states('sensor.closest_city'), {}).get('lon') }}
+        {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('lon') }}
       condition_entity: >-
-        {% from 'cities.jinja' import closest_cities %}{{ cities.get(states('sensor.closest_city'), {}).get('condition', 'unknown') }}
+        {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('condition', 'unknown') }}
       temperature_entity: >-
-        {% from 'cities.jinja' import closest_cities %}{{ cities.get(states('sensor.closest_city'), {}).get('temperature', 'unknown') }}
+        {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('temperature', 'unknown') }}
       humidex_entity: >-
-        {% from 'cities.jinja' import closest_cities %}{{ cities.get(states('sensor.closest_city'), {}).get('humidex', 'unknown') }}
+        {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('humidex', 'unknown') }}
       uv_index_entity: >-
-        {% from 'cities.jinja' import closest_cities %}{{ cities.get(states('sensor.closest_city'), {}).get('uv_index', 'unknown') }}
+        {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('uv_index', 'unknown') }}
       wind_chill_entity: >-
-        {% from 'cities.jinja' import closest_cities %}{{ cities.get(states('sensor.closest_city'), {}).get('wind_chill', 'unknown') }}
+        {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('wind_chill', 'unknown') }}
       warnings_entity: >-
-        {% from 'cities.jinja' import closest_cities %}{{ cities.get(states('sensor.closest_city'), {}).get('warnings', 'unknown') }}
+        {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('warnings', 'unknown') }}
 
 - sensor:
   - unit_of_measurement: km
