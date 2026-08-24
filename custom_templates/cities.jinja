@@ -30,9 +30,103 @@
                 to 'unknown'
 #}
 {% macro closest_cities() -%}
-{{ {
+{{
+{
+  "Vancouver": {
+    "lat": 49.2827,
+    "lon": -123.1207
+  },
+  "Victoria": {
+    "lat": 48.4284,
+    "lon": -123.3656
+  },
+  "Calgary": {
+    "lat": 51.0447,
+    "lon": -114.0719,
+    "weather": "weather.calgary_forecast",
+    "condition": "sensor.calgary_current_condition",
+    "temperature": "sensor.calgary_temperature",
+    "high": "sensor.calgary_high_temperature",
+    "low": "sensor.calgary_low_temperature",
+    "summary": "sensor.calgary_summary",
+    "humidex": "sensor.calgary_humidex",
+    "uv_index": "sensor.calgary_uv_index",
+    "wind_chill": "sensor.calgary_wind_chill",
+    "warnings": "sensor.calgary_warnings"
+  },
+  "Edmonton": {
+    "lat": 53.5444,
+    "lon": -113.4923
+  },
+  "Saskatoon": {
+    "lat": 52.1282,
+    "lon": -106.6446
+  },
+  "Winnipeg": {
+    "lat": 49.8937,
+    "lon": -97.1375
+  },
+  "Thunder Bay": {
+    "lat": 48.3798,
+    "lon": -89.2468
+  },
+  "Toronto": {
+    "lat": 43.6532,
+    "lon": -79.3832,
+    "weather": "weather.toronto_forecast",
+    "condition": "sensor.toronto_current_condition",
+    "temperature": "sensor.toronto_temperature",
+    "high": "sensor.toronto_high_temperature",
+    "low": "sensor.toronto_low_temperature",
+    "summary": "sensor.toronto_summary",
+    "humidex": "sensor.toronto_humidex",
+    "uv_index": "sensor.toronto_uv_index",
+    "wind_chill": "sensor.toronto_wind_chill",
+    "warnings": "sensor.toronto_warnings"
+  },
+  "Ottawa": {
+    "lat": 45.4215,
+    "lon": -75.6972
+  },
+  "Montreal": {
+    "lat": 45.5017,
+    "lon": -73.5673,
+    "weather": "weather.montreal_forecast",
+    "condition": "sensor.montreal_current_condition",
+    "temperature": "sensor.montreal_temperature",
+    "high": "sensor.montreal_high_temperature",
+    "low": "sensor.montreal_low_temperature",
+    "summary": "sensor.montreal_summary",
+    "humidex": "sensor.montreal_humidex",
+    "uv_index": "sensor.montreal_uv_index",
+    "wind_chill": "sensor.montreal_wind_chill",
+    "warnings": "sensor.montreal_warnings"
+  },
+  "Quebec City": {
+    "lat": 46.8139,
+    "lon": -71.2142
+  },
+  "Halifax": {
+    "lat": 44.6488,
+    "lon": -63.5752,
+    "weather": "weather.halifax_forecast",
+    "condition": "sensor.halifax_current_condition",
+    "temperature": "sensor.halifax_temperature",
+    "high": "sensor.halifax_high_temperature",
+    "low": "sensor.halifax_low_temperature",
+    "summary": "sensor.halifax_summary",
+    "humidex": "sensor.halifax_humidex",
+    "uv_index": "sensor.halifax_uv_index",
+    "wind_chill": "sensor.halifax_wind_chill",
+    "warnings": "sensor.halifax_warnings"
+  },
+  "St. John's": {
+    "lat": 47.5615,
+    "lon": -52.7126
+  },
   "Charlottetown": {
-    "lat": 46.2382, "lon": -63.1311,
+    "lat": 46.2382,
+    "lon": -63.1311,
     "weather": "weather.charlottetown_forecast",
     "condition": "sensor.charlottetown_current_condition",
     "temperature": "sensor.charlottetown_temperature",
@@ -45,7 +139,8 @@
     "warnings": "sensor.charlottetown_warnings"
   },
   "Fredericton": {
-    "lat": 45.9636, "lon": -66.6431,
+    "lat": 45.9636,
+    "lon": -66.6431,
     "weather": "weather.fredericton",
     "condition": "sensor.fredericton_condition",
     "temperature": "sensor.fredericton_temperature",
@@ -58,7 +153,8 @@
     "warnings": "sensor.fredericton_warnings"
   },
   "Saint John": {
-    "lat": 45.2733, "lon": -66.0633,
+    "lat": 45.2733,
+    "lon": -66.0633,
     "weather": "weather.saint_john_forecast",
     "condition": "sensor.saint_john_current_condition",
     "temperature": "sensor.saint_john_temperature",
@@ -70,60 +166,99 @@
     "wind_chill": "sensor.saint_john_wind_chill",
     "warnings": "sensor.saint_john_warnings"
   },
-  "Montreal": {
-    "lat": 45.5017, "lon": -73.5673,
-    "weather": "weather.montreal_forecast",
-    "condition": "sensor.montreal_current_condition",
-    "temperature": "sensor.montreal_temperature",
-    "high": "sensor.montreal_high_temperature",
-    "low": "sensor.montreal_low_temperature",
-    "summary": "sensor.montreal_summary",
-    "humidex": "sensor.montreal_humidex",
-    "uv_index": "sensor.montreal_uv_index",
-    "wind_chill": "sensor.montreal_wind_chill",
-    "warnings": "sensor.montreal_warnings"
+  "Regina": {
+    "lat": 50.4463,
+    "lon": -104.6083
   },
-  "Halifax": {
-    "lat": 44.6488, "lon": -63.5752,
-    "weather": "weather.halifax_forecast",
-    "condition": "sensor.halifax_current_condition",
-    "temperature": "sensor.halifax_temperature",
-    "high": "sensor.halifax_high_temperature",
-    "low": "sensor.halifax_low_temperature",
-    "summary": "sensor.halifax_summary",
-    "humidex": "sensor.halifax_humidex",
-    "uv_index": "sensor.halifax_uv_index",
-    "wind_chill": "sensor.halifax_wind_chill",
-    "warnings": "sensor.halifax_warnings"
+  "Lethbridge": {
+    "lat": 49.7025,
+    "lon": -112.8208
   },
-  "Toronto": {
-    "lat": 43.6532, "lon": -79.3832,
-    "weather": "weather.toronto_forecast",
-    "condition": "sensor.toronto_current_condition",
-    "temperature": "sensor.toronto_temperature",
-    "high": "sensor.toronto_high_temperature",
-    "low": "sensor.toronto_low_temperature",
-    "summary": "sensor.toronto_summary",
-    "humidex": "sensor.toronto_humidex",
-    "uv_index": "sensor.toronto_uv_index",
-    "wind_chill": "sensor.toronto_wind_chill",
-    "warnings": "sensor.toronto_warnings"
+  "Kelowna": {
+    "lat": 49.8835,
+    "lon": -119.4958
   },
-  "Calgary": {
-    "lat": 51.0447, "lon": -114.0719,
-    "weather": "weather.calgary_forecast",
-    "condition": "sensor.calgary_current_condition",
-    "temperature": "sensor.calgary_temperature",
-    "high": "sensor.calgary_high_temperature",
-    "low": "sensor.calgary_low_temperature",
-    "summary": "sensor.calgary_summary",
-    "humidex": "sensor.calgary_humidex",
-    "uv_index": "sensor.calgary_uv_index",
-    "wind_chill": "sensor.calgary_wind_chill",
-    "warnings": "sensor.calgary_warnings"
+  "Seattle": {
+    "lat": 47.6062,
+    "lon": -122.3321
+  },
+  "Spokane": {
+    "lat": 47.6588,
+    "lon": -117.4262
+  },
+  "Boise": {
+    "lat": 43.6187,
+    "lon": -116.2146
+  },
+  "Minneapolis": {
+    "lat": 44.9778,
+    "lon": -93.265
+  },
+  "Saint Paul": {
+    "lat": 44.9537,
+    "lon": -93.09
+  },
+  "Des Moines": {
+    "lat": 41.5868,
+    "lon": -93.625
+  },
+  "Kansas City": {
+    "lat": 39.0997,
+    "lon": -94.5786
+  },
+  "St. Louis": {
+    "lat": 38.627,
+    "lon": -90.1994
+  },
+  "Chicago": {
+    "lat": 41.8781,
+    "lon": -87.6298
+  },
+  "Indianapolis": {
+    "lat": 39.7684,
+    "lon": -86.1581
+  },
+  "Detroit": {
+    "lat": 42.3314,
+    "lon": -83.0458
+  },
+  "Cleveland": {
+    "lat": 41.4993,
+    "lon": -81.6944
+  },
+  "Pittsburgh": {
+    "lat": 40.4406,
+    "lon": -79.9959
+  },
+  "Philadelphia": {
+    "lat": 39.9526,
+    "lon": -75.1652
+  },
+  "New York": {
+    "lat": 40.7128,
+    "lon": -74.006
+  },
+  "Boston": {
+    "lat": 42.3601,
+    "lon": -71.0589,
+    "weather": "weather.forecast_boston",
+    "condition": "sensor.boston_current_condition",
+    "temperature": "sensor.boston_temperature",
+    "high": "sensor.boston_high_temperature",
+    "low": "sensor.boston_low_temperature",
+    "summary": "sensor.boston_summary"
+  },
+  "Baltimore": {
+    "lat": 39.2904,
+    "lon": -76.6122
+  },
+  "Washington DC": {
+    "lat": 38.9072,
+    "lon": -77.0369
   },
   "Atlanta": {
-    "lat": 33.7490, "lon": -84.3880,
+    "lat": 33.749,
+    "lon": -84.388,
     "weather": "weather.forecast_atlanta",
     "condition": "sensor.atlanta_current_condition",
     "temperature": "sensor.atlanta_temperature",
@@ -131,23 +266,48 @@
     "low": "sensor.atlanta_low_temperature",
     "summary": "sensor.atlanta_summary"
   },
+  "Miami": {
+    "lat": 25.7617,
+    "lon": -80.1918
+  },
+  "Dallas": {
+    "lat": 32.7767,
+    "lon": -96.797
+  },
+  "Houston": {
+    "lat": 29.7604,
+    "lon": -95.3698
+  },
+  "Austin": {
+    "lat": 30.2672,
+    "lon": -97.7431
+  },
+  "Phoenix": {
+    "lat": 33.4484,
+    "lon": -112.074
+  },
+  "Tucson": {
+    "lat": 32.2226,
+    "lon": -110.9747
+  },
+  "Denver": {
+    "lat": 39.7385,
+    "lon": -104.9857
+  },
+  "Albuquerque": {
+    "lat": 35.0844,
+    "lon": -106.6504
+  },
   "Las Vegas": {
-    "lat": 36.1699, "lon": -115.1398,
+    "lat": 36.1699,
+    "lon": -115.1398,
     "weather": "weather.forecast_las_vegas",
     "condition": "sensor.las_vegas_current_condition",
     "temperature": "sensor.las_vegas_temperature",
     "high": "sensor.las_vegas_high_temperature",
     "low": "sensor.las_vegas_low_temperature",
     "summary": "sensor.las_vegas_summary"
-  },
-  "Boston": {
-    "lat": 42.3601, "lon": -71.0589,
-    "weather": "weather.forecast_boston",
-    "condition": "sensor.boston_current_condition",
-    "temperature": "sensor.boston_temperature",
-    "high": "sensor.boston_high_temperature",
-    "low": "sensor.boston_low_temperature",
-    "summary": "sensor.boston_summary"
   }
-} | tojson }}
+}
+ | tojson }}
 {%- endmacro %}
