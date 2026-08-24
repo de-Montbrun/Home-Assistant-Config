@@ -1,0 +1,150 @@
+cities:
+  # Major Canadian cities
+  Vancouver:
+    lat: 49.2827
+    lon: -123.1207
+  Victoria:
+    lat: 48.4284
+    lon: -123.3656
+  Calgary:
+    lat: 51.0447
+    lon: -114.0719
+  Edmonton:
+    lat: 53.5444
+    lon: -113.4923
+  Saskatoon:
+    lat: 52.1282
+    lon: -106.6446
+  Winnipeg:
+    lat: 49.8937
+    lon: -97.1375
+  Thunder Bay:
+    lat: 48.3798
+    lon: -89.2468
+  Toronto:
+    lat: 43.6532
+    lon: -79.3832
+  Ottawa:
+    lat: 45.4215
+    lon: -75.6972
+  Montreal:
+    lat: 45.5017
+    lon: -73.5673
+  Quebec City:
+    lat: 46.8139
+    lon: -71.2142
+  Halifax:
+    lat: 44.6488
+    lon: -63.5752
+  St. John's:
+    lat: 47.5615
+    lon: -52.7126
+  Charlottetown:
+    lat: 46.2382
+    lon: -63.1311
+  Fredericton:
+    lat: 45.9636
+    lon: -66.6431
+  Saint John:
+    lat: 45.2733
+    lon: -66.0633
+  Regina:
+    lat: 50.4463
+    lon: -104.6083
+  Saskatoon:
+    lat: 52.1282
+    lon: -106.6446
+  Lethbridge:
+    lat: 49.7025
+    lon: -112.8208
+  Kelowna:
+    lat: 49.8835
+    lon: -119.4958
+  # Major US cities
+  Seattle:
+    lat: 47.6062
+    lon: -122.3321
+  Spokane:
+    lat: 47.6588
+    lon: -117.4262
+  Boise:
+    lat: 43.6187
+    lon: -116.2146
+  Minneapolis:
+    lat: 44.9778
+    lon: -93.2650
+  Saint Paul:
+    lat: 44.9778
+    lon: -93.2650
+  Des Moines:
+    lat: 41.5868
+    lon: -93.6250
+  Kansas City:
+    lat: 39.0997
+    lon: -94.5786
+  St. Louis:
+    lat: 38.6270
+    lon: -90.1994
+  Chicago:
+    lat: 41.8781
+    lon: -87.6298
+  Indianapolis:
+    lat: 39.7684
+    lon: -86.1581
+  Detroit:
+    lat: 42.3314
+    lon: -83.0458
+  Cleveland:
+    lat: 41.4993
+    lon: -81.6944
+  Pittsburgh:
+    lat: 40.4406
+    lon: -79.9959
+  Philadelphia:
+    lat: 39.9526
+    lon: -75.1652
+  New York:
+    lat: 40.7128
+    lon: -74.0060
+  Boston:
+    lat: 42.3601
+    lon: -71.0589
+  New York City:
+    lat: 40.7128
+    lon: -74.0060
+  Baltimore:
+    lat: 39.2904
+    lon: -76.6122
+  Washington DC:
+    lat: 38.9072
+    lon: -77.0369
+  Atlanta:
+    lat: 33.7490
+    lon: -84.3880
+  Miami:
+    lat: 25.7617
+    lon: -80.1918
+  Dallas:
+    lat: 32.7767
+    lon: -96.7970
+  Houston:
+    lat: 29.7604
+    lon: -95.3698
+  Austin:
+    lat: 30.2672
+    lon: -97.7431
+  Phoenix:
+    lat: 33.4484
+    lon: -112.0740
+  Tucson:
+    lat: 32.2226
+    lon: -110.9747
+  Denver:
+    lat: 39.7385
+    lon: -104.9857
+  Albuquerque:
+    lat: 35.0844
+    lon: -106.6504
+  Las Vegas:
+    lat: 36.1699
+    lon: -115.1398
