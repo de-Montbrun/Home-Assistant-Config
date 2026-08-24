@@ -9,25 +9,50 @@
   After editing this file, reload without restarting Home Assistant:
       Developer Tools > Actions > homeassistant.reload_custom_templates
 
-  To add a city you need, in this order:
-    1. A weather source for it (Settings > Devices > Add integration,
-       e.g. Environment Canada or Met.no) - creates weather.* and
-       sensor.<city>_* entities.
-    2. For Met.no US cities only: derived sensors in configuration.yaml
-       (clone the Atlanta block).
-    3. One entry below.
+  The macro body must stay a single valid JSON object (it is piped
+  through | tojson and consumed with from_json). No comments inside it.
 
-  Fields per city:
+  ============================================================
+  HOW TO ADD A CITY
+  ============================================================
+
+  CASE A - city already listed below with lat/lon only
+  (~37 of the entries: detection works, weather shows 'unknown'):
+
+    1. UI: Settings > Devices & Services > Add Integration
+       - Canada: "Environment Canada" -> creates weather.<city>_forecast
+         AND all sensor.<city>_* entities automatically.
+       - Elsewhere: "Met.no" -> creates ONLY weather.forecast_<city>.
+    2. Here: add the entity keys to that city's entry (see field list).
+    3. CASE CANADA ONLY - you are done.
+       CASE MET.NO ONLY: also clone the Boston block of derived sensors
+       in configuration.yaml (sensor.boston_current_condition etc.) and
+       adjust names to the new city.
+    4. Reload Custom Templates (+ Template Entities if you added
+       derived sensors). Weather fields light up automatically;
+       sensor.closest_city needs no other change.
+
+  CASE B - brand-new city (not in the list at all):
+
+    1. Add the weather integration as above.
+    2. (Met.no: derived sensors as above.)
+    3. Add a full entry below with curated coordinates.
+       Curated coords are deliberate: coordinates stored by some
+       integrations are wrong/unreliable.
+
+  ============================================================
+  FIELDS PER CITY
+  ============================================================
     lat/lon     coordinates used for nearest-city detection
-                (curated here on purpose - the coordinates stored by
-                some integrations are unreliable)
     weather     weather.* entity id
     condition / temperature / high / low / summary
-                available for every covered city
+                present once a weather source exists
     humidex / uv_index / wind_chill / warnings
-                Canadian (Environment Canada) cities only;
-                omit keys that do not exist and consumers fall back
-                to 'unknown'
+                Environment Canada cities only
+
+    Omit any key that does not exist yet - every consumer falls
+    back to 'unknown', and weather automations skip 'unknown'
+    cities silently.
 #}
 {% macro closest_cities() -%}
 {{
