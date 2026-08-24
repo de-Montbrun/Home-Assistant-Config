@@ -1047,6 +1047,9 @@
     - sensor.saint_john_current_condition
     - sensor.atlanta_current_condition
     - sensor.las_vegas_current_condition
+    - sensor.calgary_current_condition
+    - sensor.halifax_current_condition
+    - sensor.toronto_current_condition
     trigger: state
   conditions:
   - condition: and
@@ -1096,8 +1099,9 @@
   description: ''
   triggers:
   - trigger: template
-    value_template: '{{ states(state_attr(''sensor.closest_city'', ''uv_index_entity''))
-      | float > 4 }}'
+    value_template: >-
+      {% set uv = states(state_attr('sensor.closest_city', 'uv_index_entity')) %}
+      {{ is_number(uv) and uv | float(0) > 4 }}
   conditions:
   - condition: and
     conditions:
@@ -1126,50 +1130,33 @@
     at: '18:00:00'
   conditions:
   - condition: template
-    value_template: "{% set closest_city = states('sensor.closest_city') %} {% set
-      entities = {\n  'Charlottetown': 'weather.charlottetown_forecast',\n  'Fredericton':
-      'weather.fredericton',\n  'Saint John': 'weather.saint_john_forecast',\n  'Montreal':
-      'weather.montreal_forecast',\n  'Atlanta': 'weather.forecast_atlanta',\n  'Las
-      Vegas': 'weather.forecast_las_vegas'\n} %} {{ states(entities[closest_city])
-      != 'unknown' }}"
+    value_template: >-
+      {% from 'cities.jinja' import closest_cities %}
+      {% set e = (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('weather') %}
+      {{ e is not none and states(e) != 'unknown' }}
   - condition: template
-    value_template: "{% set closest_city = states('sensor.closest_city') %} {% set
-      entities = {\n  'Charlottetown': 'sensor.charlottetown_high_temperature',\n
-      \ 'Fredericton': 'sensor.fredericton_high_temperature',\n  'Saint John': 'sensor.saint_john_high_temperature',\n
-      \ 'Montreal': 'sensor.montreal_high_temperature',\n  'Atlanta': 'sensor.atlanta_high_temperature',\n
-      \ 'Las Vegas': 'sensor.las_vegas_high_temperature'\n} %} {{ states(entities[closest_city])
-      != 'unknown' }}"
+    value_template: >-
+      {% from 'cities.jinja' import closest_cities %}
+      {% set e = (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('high') %}
+      {{ e is not none and states(e) != 'unknown' }}
   - condition: template
-    value_template: "{% set closest_city = states('sensor.closest_city') %} {% set
-      entities = {\n  'Charlottetown': 'sensor.charlottetown_low_temperature',\n  'Fredericton':
-      'sensor.fredericton_low_temperature',\n  'Saint John': 'sensor.saint_john_low_temperature',\n
-      \ 'Montreal': 'sensor.montreal_low_temperature',\n  'Atlanta': 'sensor.atlanta_low_temperature',\n
-      \ 'Las Vegas': 'sensor.las_vegas_low_temperature'\n} %} {{ states(entities[closest_city])
-      != 'unknown' }}"
+    value_template: >-
+      {% from 'cities.jinja' import closest_cities %}
+      {% set e = (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('low') %}
+      {{ e is not none and states(e) != 'unknown' }}
   actions:
   - data:
-      message: "{% set closest_city = states('sensor.closest_city') %} {% set distance
-        = state_attr('sensor.closest_city', 'distance') %}\n{% set summary_entities
-        = {\n  'Charlottetown': 'sensor.charlottetown_summary',\n  'Fredericton':
-        'sensor.fredericton_forecast',\n  'Saint John': 'sensor.saint_john_summary',\n
-        \ 'Montreal': 'sensor.montreal_summary',\n  'Atlanta': 'sensor.atlanta_summary',\n
-        \ 'Las Vegas': 'sensor.las_vegas_summary'\n} %}\n{% set high_temp_entities
-        = {\n  'Charlottetown': 'sensor.charlottetown_high_temperature',\n  'Fredericton':
-        'sensor.fredericton_high_temperature',\n  'Saint John': 'sensor.saint_john_high_temperature',\n
-        \ 'Montreal': 'sensor.montreal_high_temperature',\n  'Atlanta': 'sensor.atlanta_high_temperature',\n
-        \ 'Las Vegas': 'sensor.las_vegas_high_temperature'\n} %}\n{% set low_temp_entities
-        = {\n  'Charlottetown': 'sensor.charlottetown_low_temperature',\n  'Fredericton':
-        'sensor.fredericton_low_temperature',\n  'Saint John': 'sensor.saint_john_low_temperature',\n
-        \ 'Montreal': 'sensor.montreal_low_temperature',\n  'Atlanta': 'sensor.atlanta_low_temperature',\n
-        \ 'Las Vegas': 'sensor.las_vegas_low_temperature'\n} %}\n**Forecast for {{
-        closest_city }}:**\n{{ states(summary_entities[closest_city]) }}\n**High:**
-        {{ states(high_temp_entities[closest_city]) }}{{ state_attr(high_temp_entities[closest_city],
-        \"unit_of_measurement\") }}\n**Low:** {{ states(low_temp_entities[closest_city])
-        }}{{ state_attr(low_temp_entities[closest_city], \"unit_of_measurement\")
-        }}\n"
       title: Weather
+      message: |-
+        {% from 'cities.jinja' import closest_cities %}
+        {% set c = (closest_cities() | from_json).get(states('sensor.closest_city'), {}) %}
+        **Forecast for {{ states('sensor.closest_city') }}:**
+        {{ states(c.get('summary')) }}
+        **High:** {{ states(c.get('high')) }}{{ state_attr(c.get('high'), 'unit_of_measurement') }}
+        **Low:** {{ states(c.get('low')) }}{{ state_attr(c.get('low'), 'unit_of_measurement') }}
     action: notify.zulip
   initial_state: true
+
 - id: notify_low_battery
   alias: Low battery level detection & notification for all battery sensors
   initial_state: true
