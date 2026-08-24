@@ -1,0 +1,144 @@
+{#
+  Single source of truth for closest-city weather data.
+
+  Consumers: closest_city_sensor (configuration.yaml) and automations.
+  Usage in any template:
+      {% from 'cities.jinja' import closest_cities %}
+      {% set cities = closest_cities() | from_json %}
+
+  After editing this file, reload without restarting Home Assistant:
+      Developer Tools > Actions > homeassistant.reload_custom_templates
+
+  To add a city you need, in this order:
+    1. A weather source for it (Settings > Devices > Add integration,
+       e.g. Environment Canada or Met.no) - creates weather.* and
+       sensor.<city>_* entities.
+    2. For Met.no US cities only: derived sensors in configuration.yaml
+       (clone the Atlanta block).
+    3. One entry below.
+
+  Fields per city:
+    lat/lon     coordinates used for nearest-city detection
+                (curated here on purpose - the coordinates stored by
+                some integrations are unreliable)
+    weather     weather.* entity id
+    condition / temperature / high / low / summary
+                available for every covered city
+    humidex / uv_index / wind_chill / warnings
+                Canadian (Environment Canada) cities only;
+                omit keys that do not exist and consumers fall back
+                to 'unknown'
+#}
+{% macro closest_cities() -%}
+{{ {
+  "Charlottetown": {
+    "lat": 46.2382, "lon": -63.1311,
+    "weather": "weather.charlottetown_forecast",
+    "condition": "sensor.charlottetown_current_condition",
+    "temperature": "sensor.charlottetown_temperature",
+    "high": "sensor.charlottetown_high_temperature",
+    "low": "sensor.charlottetown_low_temperature",
+    "summary": "sensor.charlottetown_summary",
+    "humidex": "sensor.charlottetown_humidex",
+    "uv_index": "sensor.charlottetown_uv_index",
+    "wind_chill": "sensor.charlottetown_wind_chill",
+    "warnings": "sensor.charlottetown_warnings"
+  },
+  "Fredericton": {
+    "lat": 45.9636, "lon": -66.6431,
+    "weather": "weather.fredericton",
+    "condition": "sensor.fredericton_condition",
+    "temperature": "sensor.fredericton_temperature",
+    "high": "sensor.fredericton_high_temperature",
+    "low": "sensor.fredericton_low_temperature",
+    "summary": "sensor.fredericton_forecast",
+    "humidex": "sensor.fredericton_humidex",
+    "uv_index": "sensor.fredericton_uv_index",
+    "wind_chill": "sensor.fredericton_wind_chill",
+    "warnings": "sensor.fredericton_warnings"
+  },
+  "Saint John": {
+    "lat": 45.2733, "lon": -66.0633,
+    "weather": "weather.saint_john_forecast",
+    "condition": "sensor.saint_john_current_condition",
+    "temperature": "sensor.saint_john_temperature",
+    "high": "sensor.saint_john_high_temperature",
+    "low": "sensor.saint_john_low_temperature",
+    "summary": "sensor.saint_john_summary",
+    "humidex": "sensor.saint_john_humidex",
+    "uv_index": "sensor.saint_john_uv_index",
+    "wind_chill": "sensor.saint_john_wind_chill",
+    "warnings": "sensor.saint_john_warnings"
+  },
+  "Montreal": {
+    "lat": 45.5017, "lon": -73.5673,
+    "weather": "weather.montreal_forecast",
+    "condition": "sensor.montreal_current_condition",
+    "temperature": "sensor.montreal_temperature",
+    "high": "sensor.montreal_high_temperature",
+    "low": "sensor.montreal_low_temperature",
+    "summary": "sensor.montreal_summary",
+    "humidex": "sensor.montreal_humidex",
+    "uv_index": "sensor.montreal_uv_index",
+    "wind_chill": "sensor.montreal_wind_chill",
+    "warnings": "sensor.montreal_warnings"
+  },
+  "Halifax": {
+    "lat": 44.6488, "lon": -63.5752,
+    "weather": "weather.halifax_forecast",
+    "condition": "sensor.halifax_current_condition",
+    "temperature": "sensor.halifax_temperature",
+    "high": "sensor.halifax_high_temperature",
+    "low": "sensor.halifax_low_temperature",
+    "summary": "sensor.halifax_summary",
+    "humidex": "sensor.halifax_humidex",
+    "uv_index": "sensor.halifax_uv_index",
+    "wind_chill": "sensor.halifax_wind_chill",
+    "warnings": "sensor.halifax_warnings"
+  },
+  "Toronto": {
+    "lat": 43.6532, "lon": -79.3832,
+    "weather": "weather.toronto_forecast",
+    "condition": "sensor.toronto_current_condition",
+    "temperature": "sensor.toronto_temperature",
+    "high": "sensor.toronto_high_temperature",
+    "low": "sensor.toronto_low_temperature",
+    "summary": "sensor.toronto_summary",
+    "humidex": "sensor.toronto_humidex",
+    "uv_index": "sensor.toronto_uv_index",
+    "wind_chill": "sensor.toronto_wind_chill",
+    "warnings": "sensor.toronto_warnings"
+  },
+  "Calgary": {
+    "lat": 51.0447, "lon": -114.0719,
+    "weather": "weather.calgary_forecast",
+    "condition": "sensor.calgary_current_condition",
+    "temperature": "sensor.calgary_temperature",
+    "high": "sensor.calgary_high_temperature",
+    "low": "sensor.calgary_low_temperature",
+    "summary": "sensor.calgary_summary",
+    "humidex": "sensor.calgary_humidex",
+    "uv_index": "sensor.calgary_uv_index",
+    "wind_chill": "sensor.calgary_wind_chill",
+    "warnings": "sensor.calgary_warnings"
+  },
+  "Atlanta": {
+    "lat": 33.7490, "lon": -84.3880,
+    "weather": "weather.forecast_atlanta",
+    "condition": "sensor.atlanta_current_condition",
+    "temperature": "sensor.atlanta_temperature",
+    "high": "sensor.atlanta_high_temperature",
+    "low": "sensor.atlanta_low_temperature",
+    "summary": "sensor.atlanta_summary"
+  },
+  "Las Vegas": {
+    "lat": 36.1699, "lon": -115.1398,
+    "weather": "weather.forecast_las_vegas",
+    "condition": "sensor.las_vegas_current_condition",
+    "temperature": "sensor.las_vegas_temperature",
+    "high": "sensor.las_vegas_high_temperature",
+    "low": "sensor.las_vegas_low_temperature",
+    "summary": "sensor.las_vegas_summary"
+  }
+} }}
+{%- endmacro %}
