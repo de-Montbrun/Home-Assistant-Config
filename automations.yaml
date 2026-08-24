@@ -1563,77 +1563,19 @@
     - binary_sensor.greenapple_camera_in_use
     to:
     - 'on'
-  - type: turned_on
-    device_id: 5e7f0aaa62627066b96c315ac493b830
-    entity_id: dc8c00afd9f40a28a72072a3a904bfb5
-    domain: binary_sensor
-    trigger: device
     for:
       hours: 0
       minutes: 2
       seconds: 0
-  - type: turned_on
-    device_id: 9e702f0b6d26018028c93f6658692ddd
-    entity_id: 497ce5a50e7f79011fdf7b3ae97f53a7
-    domain: binary_sensor
-    trigger: device
-    for:
-      hours: 0
-      minutes: 2
-      seconds: 0
-  - trigger: state
-    entity_id:
-    - sensor.greenapple_frontmost_app
-    - sensor.frontmost_app
-    to:
-    - zoom.us
-    - Slack
-    - Messenger
-  conditions:
-  - condition: and
-    conditions:
-    - condition: or
-      conditions:
-      - condition: state
-        entity_id: sensor.greenapple_frontmost_app
-        state:
-        - Slack
-      - condition: state
-        entity_id: sensor.greenapple_frontmost_app
-        state:
-        - zoom.us
-      - condition: state
-        entity_id: sensor.frontmost_app
-        state: zoom.us
-      - condition: state
-        entity_id: sensor.frontmost_app
-        state: Slack
-    - condition: or
-      conditions:
-      - condition: state
-        entity_id: binary_sensor.greenapple_camera_in_use
-        state:
-        - 'on'
-        for:
-          hours: 0
-          minutes: 2
-          seconds: 0
-      - condition: state
-        entity_id: binary_sensor.camera_in_use
-        state: 'on'
-        for:
-          hours: 0
-          minutes: 2
-          seconds: 0
+  conditions: []
   actions:
   - action: light.turn_on
     metadata: {}
     data:
       rgb_color:
       - 0
-      - 46
-      - 122
-      brightness_pct: 100
+      - 0
+      - 255
     target:
       entity_id:
       - light.office_ceiling_light

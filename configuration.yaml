@@ -535,7 +535,7 @@ template:
     default_entity_id: sensor.delicious_docked
     name: Delicious Docked
     state: "{% if states('switch.delicious_paused') == 'on' -%}\n  paused\n{% else
-      %}\n  {% if states('binary_sensor.delicious_docked') == 'off' -%}\n    {% if
+      %}\n  {% if states('binary_sensor.delicious_docked') == 'closed' -%}\n    {% if
       states('fan.delicious') == 'on' -%}\n      cleaning\n    {% else -%}\n      returning\n
       \   {% endif %}\n  {% else -%}\n    docked\n  {% endif %}\n{% endif %}"
 
