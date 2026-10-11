@@ -1540,7 +1540,6 @@
     target:
       entity_id:
       - switch.switch4
-      - switch.office_main
     action: switch.turn_on
   mode: restart
 - id: '1738108426886'
