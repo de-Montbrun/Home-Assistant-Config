@@ -588,6 +588,7 @@
       entity_id:
       - light.office_desk_lights
       - light.office_desk_lamp
+      - light.office_floor_lamp
   - condition: and
     conditions:
     - condition: state
@@ -603,7 +604,6 @@
       entity_id:
       - light.office_main
       - light.office_ceiling_light
-      - light.office_floor_lamp
 - id: turn_off_lights_office
   alias: 'Occupancy - Turn off lights no one in Office '
   description: ''
