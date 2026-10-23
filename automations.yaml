@@ -243,10 +243,9 @@
   triggers:
   - entity_id:
     - person.gail
-    - group.cam_tracker
-    - group.jen_tracker
     - person.gervais
-    to: home
+    to:
+    - home
     trigger: state
   conditions:
   - condition: and

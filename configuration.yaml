@@ -318,6 +318,7 @@ light:
       - light.office_ceiling_light
       - light.office_floor_lamp
       - light.office_desk_lights
+      - light.office_table_lamp
 
   - platform: group
     name: Back Door Lights
