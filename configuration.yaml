@@ -551,6 +551,28 @@ template:
         {% from 'cities.jinja' import closest_cities %}{{ (closest_cities() | from_json).get(states('sensor.closest_city'), {}).get('warnings', 'unknown') }}
 
 - sensor:
+  # Used by the Occupancy heating automations (away > 3 km, approaching < 2 km)
+  - unique_id: gervais_distance_from_home
+    default_entity_id: sensor.gervais_distance_from_home
+    name: Gervais Distance From Home
+    unit_of_measurement: km
+    state_class: measurement
+    icon: mdi:map-marker-distance
+    state: >-
+      {% set d = distance('person.gervais') %}
+      {{ d | round(2) if d is not none else 'unknown' }}
+
+  - unique_id: gail_distance_from_home
+    default_entity_id: sensor.gail_distance_from_home
+    name: Gail Distance From Home
+    unit_of_measurement: km
+    state_class: measurement
+    icon: mdi:map-marker-distance
+    state: >-
+      {% set d = distance('person.gail') %}
+      {{ d | round(2) if d is not none else 'unknown' }}
+
+- sensor:
   - unit_of_measurement: km
     default_entity_id: sensor.distance_apart
     name: GandG Apart

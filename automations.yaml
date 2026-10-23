@@ -206,13 +206,13 @@
 - id: occupancy_heating_no_one_home_turn_down_heat
   alias: Occupancy - no one home - turn down heat
   triggers:
-  - entity_id:
-    - person.gail
-    - person.gervais
-    - person.cameron
-    - person.jennifer
-    from: home
-    trigger: state
+  - trigger: numeric_state
+    entity_id:
+    - sensor.gervais_distance_from_home
+    - sensor.gail_distance_from_home
+    above: 3
+    for:
+      minutes: 5
   conditions:
   - condition: and
     conditions:
@@ -225,6 +225,14 @@
     - condition: numeric_state
       entity_id: zone.home
       below: 1
+    - condition: template
+      value_template: >-
+        {% set gail = states('sensor.gail_distance_from_home') %}
+        {% set gervais = states('sensor.gervais_distance_from_home') %}
+        {{ not is_state('person.gail', 'home')
+           and (not (gail | is_number) or gail | float > 3)
+           and not is_state('person.gervais', 'home')
+           and (not (gervais | is_number) or gervais | float > 3) }}
     - condition: not
       conditions:
       - condition: state
@@ -241,12 +249,13 @@
 - id: occupancy_heating_return_home_turn_up_heat
   alias: Occupancy - return home - turn up heat
   triggers:
-  - entity_id:
-    - person.gail
-    - person.gervais
-    to:
-    - home
-    trigger: state
+  - trigger: numeric_state
+    entity_id:
+    - sensor.gervais_distance_from_home
+    - sensor.gail_distance_from_home
+    below: 2
+    for:
+      minutes: 1
   conditions:
   - condition: and
     conditions:
