@@ -226,13 +226,10 @@
       entity_id: zone.home
       below: 1
     - condition: template
-      value_template: >-
-        {% set gail = states('sensor.gail_distance_from_home') %}
-        {% set gervais = states('sensor.gervais_distance_from_home') %}
-        {{ not is_state('person.gail', 'home')
-           and (not (gail | is_number) or gail | float > 3)
-           and not is_state('person.gervais', 'home')
-           and (not (gervais | is_number) or gervais | float > 3) }}
+      value_template: "{% set gail = states('sensor.gail_distance_from_home') %} {%
+        set gervais = states('sensor.gervais_distance_from_home') %} {{ not is_state('person.gail',
+        'home')\n   and (not (gail | is_number) or gail | float > 3)\n   and not is_state('person.gervais',
+        'home')\n   and (not (gervais | is_number) or gervais | float > 3) }}"
     - condition: not
       conditions:
       - condition: state
@@ -612,6 +609,7 @@
       entity_id:
       - light.office_main
       - light.office_ceiling_light
+      - light.office_table_lamp
 - id: turn_off_lights_office
   alias: 'Occupancy - Turn off lights no one in Office '
   description: ''
@@ -1557,13 +1555,18 @@
   - trigger: state
     entity_id:
     - binary_sensor.greenapple_camera_in_use
+    - binary_sensor.camera_in_use
     to:
     - 'on'
     for:
       hours: 0
       minutes: 2
       seconds: 0
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: light.office_lights
+    state:
+    - 'on'
   actions:
   - action: light.turn_on
     metadata: {}
@@ -1575,6 +1578,18 @@
     target:
       entity_id:
       - light.office_ceiling_light
+  - action: light.turn_on
+    metadata: {}
+    target:
+      device_id: 21a9952b187012a30f54a921b701d7a4
+    data:
+      effect: Accumulation
+  - action: light.turn_on
+    metadata: {}
+    target:
+      entity_id: light.office_table_lamp
+    data:
+      effect: Uranus
   mode: single
 - id: '1738458067745'
   alias: Sync TV Backlight Kit to TV state
@@ -2326,4 +2341,50 @@
         top up soon. {% endif %}\n"
       title: RAM 1500
     action: notify.zulip
+  mode: single
+- id: '1792802684038'
+  alias: Off Air
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.greenapple_camera_in_use
+    - binary_sensor.camera_in_use
+    to:
+    - 'off'
+    for:
+      hours: 0
+      minutes: 2
+      seconds: 0
+  conditions:
+  - condition: state
+    entity_id: light.office_lights
+    state:
+    - 'on'
+  actions:
+  - action: light.turn_on
+    metadata: {}
+    data:
+      rgb_color:
+      - 255
+      - 255
+      - 255
+    target:
+      entity_id:
+      - light.office_ceiling_light
+  - action: light.turn_on
+    metadata: {}
+    target:
+      device_id: 21a9952b187012a30f54a921b701d7a4
+    data:
+      rgb_color:
+      - 255
+      - 255
+      - 255
+  - action: light.turn_on
+    metadata: {}
+    target:
+      entity_id: light.office_table_lamp
+    data:
+      effect: Uranus
   mode: single
