@@ -208,9 +208,9 @@
   triggers:
   - trigger: numeric_state
     entity_id:
-    - sensor.gervais_distance_from_home
-    - sensor.gail_distance_from_home
-    above: 3
+    - sensor.home_gervais_distance
+    - sensor.home_gail_distance
+    above: 3000
     for:
       minutes: 5
   conditions:
@@ -225,11 +225,22 @@
     - condition: numeric_state
       entity_id: zone.home
       below: 1
+    # Fail safe: only conclude "away" when the tracker is actually reporting.
+    # An unavailable tracker or an unknown distance counts as "maybe home"
+    # and keeps the heat on, instead of dropping it on a phantom away-state.
     - condition: template
-      value_template: "{% set gail = states('sensor.gail_distance_from_home') %} {%
-        set gervais = states('sensor.gervais_distance_from_home') %} {{ not is_state('person.gail',
-        'home')\n   and (not (gail | is_number) or gail | float > 3)\n   and not is_state('person.gervais',
-        'home')\n   and (not (gervais | is_number) or gervais | float > 3) }}"
+      value_template: >-
+        {% set ns = namespace(all_away=true) %}
+        {% for who in ['gail', 'gervais'] %}
+          {% set dist = states('sensor.home_' ~ who ~ '_distance') %}
+          {% if is_state('person.' ~ who, 'home')
+                or is_state('sensor.home_' ~ who ~ '_direction_of_travel', 'towards')
+                or not (dist | is_number)
+                or (dist | float) <= 3000 %}
+            {% set ns.all_away = false %}
+          {% endif %}
+        {% endfor %}
+        {{ ns.all_away }}
     - condition: not
       conditions:
       - condition: state
@@ -248,9 +259,9 @@
   triggers:
   - trigger: numeric_state
     entity_id:
-    - sensor.gervais_distance_from_home
-    - sensor.gail_distance_from_home
-    below: 2
+    - sensor.home_gervais_distance
+    - sensor.home_gail_distance
+    below: 2000
     for:
       minutes: 1
   conditions:
@@ -262,6 +273,11 @@
     - condition: state
       entity_id: climate.mysa_112908_thermostat
       state: heat
+    # Only heat up when actually heading home, not when driving past at 1.9 km
+    - condition: template
+      value_template: >-
+        {% set who = 'gail' if 'gail' in trigger.entity_id else 'gervais' %}
+        {{ is_state('sensor.home_' ~ who ~ '_direction_of_travel', 'towards') }}
     - condition: not
       conditions:
       - condition: state
@@ -274,6 +290,49 @@
       - scene.heat_home_2
     action: scene.turn_on
     data: {}
+  initial_state: true
+- id: occupancy_almost_home_zulip
+  alias: Occupancy - almost home - Zulip notification
+  triggers:
+  - trigger: numeric_state
+    entity_id:
+    - sensor.home_gervais_distance
+    - sensor.home_gail_distance
+    below: 5000
+    above: 500
+  - trigger: state
+    entity_id:
+    - sensor.home_gervais_direction_of_travel
+    - sensor.home_gail_direction_of_travel
+    to: towards
+  conditions:
+  - condition: template
+    value_template: >-
+      {% set who = 'gail' if 'gail' in trigger.entity_id else 'gervais' %}
+      {% set dist = states('sensor.home_' ~ who ~ '_distance') %}
+      {{ is_state('sensor.home_' ~ who ~ '_direction_of_travel', 'towards')
+         and dist | is_number
+         and (dist | float) > 500
+         and (dist | float) < 5000
+         and not is_state('person.' ~ who, 'home') }}
+  # Cooldown so GPS jitter across the 5 km line cannot re-notify.
+  # Uses `this` rather than the automation's entity_id, so renaming the
+  # alias cannot silently break it.
+  - condition: template
+    value_template: >-
+      {{ as_timestamp(now(), 0)
+         - as_timestamp(this.attributes.last_triggered, 0) > 1800 }}
+  actions:
+  - variables:
+      name: "{{ 'Gail' if 'gail' in trigger.entity_id else 'Gervais' }}"
+  - action: notify.zulip
+    data:
+      title: Family Location
+      message: >-
+        {% set who = 'gail' if 'gail' in trigger.entity_id else 'gervais' %}
+        {% set dist = states('sensor.home_' ~ who ~ '_distance') | float(0) %}
+        :house_with_garden: {{ name }} is {{ (dist / 1000) | round(1) }} km out and heading home.
+  mode: single
   initial_state: true
 - id: heating_office_heater_off
   alias: 6pm - heater off
