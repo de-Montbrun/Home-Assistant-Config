@@ -47,6 +47,20 @@ frontend:
   themes: !include_dir_merge_named themes/
 
 # }}}
+# {{{ Lovelace
+
+# "Home v2" is a YAML copy of the existing dashboard with the Glass theme.
+# It sits alongside the current dashboard so it can be tested before swapping.
+lovelace:
+  dashboards:
+    home-v2:
+      mode: yaml
+      title: Home v2
+      icon: mdi:home-analytics
+      show_in_sidebar: true
+      filename: dashboards/home.yaml
+
+# }}}
 # {{{ Homekit
 
 homekit:
