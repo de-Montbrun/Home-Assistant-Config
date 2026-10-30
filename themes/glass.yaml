@@ -1,0 +1,85 @@
+---
+# Dark, translucent "glass" theme used by dashboards/home.yaml.
+# Select it per-dashboard (the dashboard sets `theme: Glass` on each view),
+# or globally from your user profile.
+Glass:
+  # {{{ Palette
+  primary-color: "#7dd3fc"
+  accent-color: "#7dd3fc"
+  dark-primary-color: "#38bdf8"
+  light-primary-color: "#bae6fd"
+  primary-background-color: "#0b1020"
+  secondary-background-color: "#0b1020"
+  primary-text-color: "#e9eefb"
+  secondary-text-color: "#9dabc7"
+  disabled-text-color: "rgba(157, 171, 199, 0.45)"
+  divider-color: "rgba(255, 255, 255, 0.08)"
+  error-color: "#fb7185"
+  warning-color: "#fbbf24"
+  success-color: "#34d399"
+  info-color: "#7dd3fc"
+  # }}}
+  # {{{ Cards
+  card-background-color: "rgba(20, 28, 48, 0.72)"
+  ha-card-background: "rgba(20, 28, 48, 0.72)"
+  paper-card-background-color: "rgba(20, 28, 48, 0.72)"
+  ha-card-border-width: "1px"
+  ha-card-border-color: "rgba(255, 255, 255, 0.07)"
+  ha-card-border-radius: "22px"
+  ha-card-box-shadow: "0 18px 40px rgba(0, 0, 0, 0.35)"
+  ha-card-header-font-size: "18px"
+  # }}}
+  # {{{ Background
+  # Two soft light sources over a near-black gradient. Combined with the
+  # translucent card background this reads as glass without needing card-mod.
+  lovelace-background: >-
+    radial-gradient(at 12% 0%, rgba(56, 189, 248, 0.20) 0px, transparent 55%),
+    radial-gradient(at 88% 8%, rgba(167, 139, 250, 0.16) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(52, 211, 153, 0.08) 0px, transparent 55%),
+    linear-gradient(160deg, #0b1020 0%, #0a0f1c 45%, #070b14 100%)
+  # }}}
+  # {{{ App chrome
+  app-header-background-color: "rgba(11, 16, 32, 0.85)"
+  app-header-text-color: "#e9eefb"
+  sidebar-background-color: "#0a0f1c"
+  sidebar-icon-color: "#8ea2c6"
+  sidebar-text-color: "#c7d3ea"
+  sidebar-selected-icon-color: "#7dd3fc"
+  sidebar-selected-text-color: "#e9eefb"
+  # }}}
+  # {{{ Icons and states
+  paper-item-icon-color: "#8ea2c6"
+  paper-item-icon-active-color: "#fbbf24"
+  state-icon-color: "#8ea2c6"
+  state-icon-active-color: "#fbbf24"
+  state-active-color: "#fbbf24"
+  state-inactive-color: "#8ea2c6"
+  state-unavailable-color: "#5b6784"
+  state-icon-unavailable-color: "#5b6784"
+  # }}}
+  # {{{ Controls
+  paper-slider-knob-color: "#7dd3fc"
+  paper-slider-knob-start-color: "#7dd3fc"
+  paper-slider-pin-color: "#7dd3fc"
+  paper-slider-active-color: "#7dd3fc"
+  paper-slider-container-color: "rgba(255, 255, 255, 0.12)"
+  paper-slider-secondary-color: "rgba(125, 211, 252, 0.35)"
+  paper-toggle-button-checked-button-color: "#7dd3fc"
+  paper-toggle-button-checked-bar-color: "#7dd3fc"
+  switch-checked-color: "#7dd3fc"
+  switch-checked-button-color: "#7dd3fc"
+  switch-checked-track-color: "rgba(125, 211, 252, 0.35)"
+  # }}}
+  # {{{ Charts
+  graph-colors: "#7dd3fc, #a78bfa, #34d399, #fbbf24, #fb7185"
+  history-unknown-color: "#5b6784"
+  # }}}
+  # {{{ Energy (used by the built-in energy dashboard)
+  energy-grid-consumption-color: "#7dd3fc"
+  energy-grid-return-color: "#a78bfa"
+  energy-solar-color: "#fbbf24"
+  energy-battery-in-color: "#34d399"
+  energy-battery-out-color: "#fb7185"
+  energy-gas-color: "#f97316"
+  energy-water-color: "#38bdf8"
+  # }}}

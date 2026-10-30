@@ -47,6 +47,20 @@ frontend:
   themes: !include_dir_merge_named themes/
 
 # }}}
+# {{{ Lovelace
+
+# UI-managed dashboards are kept as-is. "Home v2" is an extra, YAML-managed
+# dashboard (see dashboards/home.yaml) so the existing dashboard is untouched.
+lovelace:
+  dashboards:
+    home-v2:
+      mode: yaml
+      title: Home v2
+      icon: mdi:home-analytics
+      show_in_sidebar: true
+      filename: dashboards/home.yaml
+
+# }}}
 # {{{ Homekit
 
 homekit:

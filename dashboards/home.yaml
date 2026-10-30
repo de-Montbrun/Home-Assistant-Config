@@ -1,0 +1,1960 @@
+# Home v2 - desktop-first, glass dark redesign.
+# Install: see dashboards/README.md. URL: /home-v2/overview
+title: Home v2
+views:
+  # {{{ Overview
+  - title: Overview
+    path: overview
+    icon: mdi:home-analytics
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 2
+        cards:
+          - type: markdown
+            content: |
+              # {{ 'Good morning' if now().hour < 12 else ('Good afternoon' if now().hour < 18 else 'Good evening') }}
+              **{{ now().strftime('%A, %B %d') }}** · {{ states.person | selectattr('state', 'eq', 'home') | list | count }} home · {{ states('alarm_control_panel.alarmo') | replace('_', ' ') | title }}
+          - type: grid
+            columns: 2
+            cards:
+              - type: custom:button-card
+                template: person
+                entity: person.gervais
+                name: Gervais
+              - type: custom:button-card
+                template: person
+                entity: person.gail
+                name: Gail
+              - type: custom:button-card
+                template: person
+                entity: person.jennifer
+                name: Jennifer
+              - type: custom:button-card
+                template: person
+                entity: person.cameron
+                name: Cameron
+      - type: grid
+        column_span: 1
+        cards:
+          - type: custom:button-card
+            template: weather_hero
+      - type: grid
+        column_span: 1
+        cards:
+          - type: custom:button-card
+            template: alarm
+          - type: tile
+            entity: lock.front_door_lock_lock_mechanism
+            name: Front door
+            features:
+              - type: lock-commands
+          - type: tile
+            entity: lock.garage_door_lock_lock_mechanism
+            name: Garage door
+            features:
+              - type: lock-commands
+
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Quick lights
+            heading_style: title
+            icon: mdi:lightbulb-group
+          - type: grid
+            columns: 3
+            cards:
+              - type: tile
+                entity: light.indoor_lights
+                name: Indoor
+                icon: mdi:home-lightbulb
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.outdoor_lights
+                name: Outdoor
+                icon: mdi:outdoor-lamp
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.main_floor_lights
+                name: Main floor
+                icon: mdi:floor-plan
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.second_floor_lights
+                name: Second floor
+                icon: mdi:floor-plan
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.basement_lights
+                name: Basement
+                icon: mdi:floor-plan
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.garage_lights
+                name: Garage
+                icon: mdi:garage
+                color: amber
+                features:
+                  - type: light-brightness
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Climate
+            heading_style: title
+            icon: mdi:thermostat
+          - type: grid
+            columns: 2
+            cards:
+              - type: thermostat
+                entity: climate.mysa_112908_thermostat
+                name: Dining room
+                show_current_as_primary: false
+                features:
+                  - type: climate-hvac-modes
+              - type: thermostat
+                entity: climate.mysa_2fa20c_thermostat
+                name: Bedroom
+                show_current_as_primary: false
+                features:
+                  - type: climate-hvac-modes
+
+      - type: grid
+        column_span: 4
+        cards:
+          - type: heading
+            heading: At a glance
+            heading_style: title
+            icon: mdi:gauge
+          - type: grid
+            columns: 4
+            cards:
+              - type: tile
+                entity: sensor.living_room_sensor_temperature
+                name: Living room
+                icon: mdi:sofa
+                color: cyan
+              - type: tile
+                entity: sensor.kitchen_sensor_temperature
+                name: Kitchen
+                icon: mdi:chef-hat
+                color: cyan
+              - type: tile
+                entity: sensor.bedroom_mysa_temperature
+                name: Bedroom
+                icon: mdi:bed
+                color: cyan
+              - type: tile
+                entity: sensor.bedroom_sensor_temperature
+                name: Basement
+                icon: mdi:stairs-down
+                color: cyan
+              - type: tile
+                entity: sensor.dining_room_sensor_humidity
+                name: Dining humidity
+                icon: mdi:water-percent
+                color: blue
+              - type: tile
+                entity: sensor.apc0_battery_charge
+                name: UPS
+                icon: mdi:battery-charging
+                color: green
+              - type: tile
+                entity: sensor.total_active_clients
+                name: Network
+                icon: mdi:lan-connect
+                color: purple
+              - type: tile
+                entity: sensor.distance_apart
+                name: Apart
+                icon: mdi:map-marker-distance
+                color: pink
+
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Rooms
+            heading_style: title
+            icon: mdi:door-open
+          - type: grid
+            columns: 3
+            cards:
+              - type: custom:button-card
+                template: room
+                entity: light.livingroom_lights
+                name: Living room
+                icon: mdi:sofa
+              - type: custom:button-card
+                template: room
+                entity: light.kitchen_lights
+                name: Kitchen
+                icon: mdi:chef-hat
+              - type: custom:button-card
+                template: room
+                entity: light.dining_room_lights
+                name: Dining
+                icon: mdi:silverware-fork-knife
+              - type: custom:button-card
+                template: room
+                entity: light.bedroom_lights
+                name: Bedroom
+                icon: mdi:bed
+              - type: custom:button-card
+                template: room
+                entity: light.office_lights
+                name: Office
+                icon: mdi:desk
+              - type: custom:button-card
+                template: room
+                entity: light.tv_room_lights
+                name: TV room
+                icon: mdi:television
+      - type: grid
+        column_span: 1
+        cards:
+          - type: heading
+            heading: Now playing
+            heading_style: title
+            icon: mdi:play-circle
+          - type: tile
+            entity: media_player.tv_roomtv
+            name: TV room
+            icon: mdi:television
+            color: purple
+            state_content:
+              - state
+              - media_title
+            features:
+              - type: media-player-playback-controls
+          - type: tile
+            entity: media_player.bedroomtv
+            name: Bedroom
+            icon: mdi:bed
+            color: purple
+            state_content:
+              - state
+              - media_title
+            features:
+              - type: media-player-playback-controls
+      - type: grid
+        column_span: 1
+        cards:
+          - type: heading
+            heading: Robots
+            heading_style: title
+            icon: mdi:robot-vacuum
+          - type: grid
+            columns: 2
+            cards:
+              - type: tile
+                entity: vacuum.robot
+                name: Daphne
+                state_content:
+                  - state
+                  - battery_level
+                color: teal
+              - type: tile
+                entity: vacuum.robot_2
+                name: Rosie
+                state_content:
+                  - state
+                  - battery_level
+                color: teal
+              - type: tile
+                entity: vacuum.robot_4
+                name: Mrs Garrett
+                state_content:
+                  - state
+                  - battery_level
+                color: teal
+              - type: tile
+                entity: vacuum.alice
+                name: Alice
+                state_content:
+                  - state
+                  - battery_level
+                color: teal
+              - type: tile
+                entity: vacuum.consuela
+                name: Consuela
+                state_content:
+                  - state
+                  - battery_level
+                color: teal
+              - type: tile
+                entity: fan.delicious
+                name: Delicious
+                color: purple
+  # }}}
+  # {{{ Lights
+  - title: Lights
+    path: lights
+    icon: mdi:lightbulb-group
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: heading
+            heading: Whole home
+            heading_style: title
+            icon: mdi:home-lightbulb
+          - type: grid
+            columns: 5
+            cards:
+              - type: tile
+                entity: light.indoor_lights
+                name: Indoor
+                icon: mdi:home-lightbulb
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.outdoor_lights
+                name: Outdoor
+                icon: mdi:outdoor-lamp
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.main_floor_lights
+                name: Main floor
+                icon: mdi:floor-plan
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.second_floor_lights
+                name: Second floor
+                icon: mdi:floor-plan
+                color: amber
+                features:
+                  - type: light-brightness
+              - type: tile
+                entity: light.basement_lights
+                name: Basement
+                icon: mdi:floor-plan
+                color: amber
+                features:
+                  - type: light-brightness
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Main floor
+            heading_style: title
+            icon: mdi:floor-plan
+          - type: grid
+            columns: 2
+            cards:
+              - type: custom:button-card
+                template: room
+                entity: light.livingroom_lights
+                name: Living room
+                icon: mdi:sofa
+              - type: custom:button-card
+                template: room
+                entity: light.kitchen_lights
+                name: Kitchen
+                icon: mdi:chef-hat
+              - type: custom:button-card
+                template: room
+                entity: light.dining_room_lights
+                name: Dining room
+                icon: mdi:silverware-fork-knife
+              - type: custom:button-card
+                template: room
+                entity: light.hallway_lights
+                name: Hallways
+                icon: mdi:floor-plan
+              - type: custom:button-card
+                template: room
+                entity: light.garage_lights
+                name: Garage
+                icon: mdi:garage
+              - type: custom:button-card
+                template: room
+                entity: light.laundry_room_lights
+                name: Laundry
+                icon: mdi:washing-machine
+              - type: custom:button-card
+                template: room
+                entity: light.office_lights
+                name: Office
+                icon: mdi:desk
+              - type: custom:button-card
+                template: room
+                entity: light.powder_room_light
+                name: Powder room
+                icon: mdi:toilet
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Second floor
+            heading_style: title
+            icon: mdi:floor-plan
+          - type: grid
+            columns: 2
+            cards:
+              - type: custom:button-card
+                template: room
+                entity: light.bedroom_lights
+                name: Bedroom
+                icon: mdi:bed
+              - type: custom:button-card
+                template: room
+                entity: light.bathroom_lights
+                name: Bathroom
+                icon: mdi:shower
+              - type: custom:button-card
+                template: room
+                entity: light.main_bath_lights
+                name: Main bath
+                icon: mdi:shower-head
+              - type: custom:button-card
+                template: room
+                entity: light.dressing_room_lights
+                name: Dressing room
+                icon: mdi:wardrobe
+              - type: custom:button-card
+                template: room
+                entity: light.gail_office_lights
+                name: Gail's office
+                icon: mdi:desk
+              - type: custom:button-card
+                template: room
+                entity: light.spare_room_lights
+                name: Spare room
+                icon: mdi:bed-empty
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Outdoor and basement
+            heading_style: title
+            icon: mdi:tree
+          - type: grid
+            columns: 2
+            cards:
+              - type: custom:button-card
+                template: room
+                entity: light.outdoor_lights
+                name: Outdoor
+                icon: mdi:outdoor-lamp
+              - type: custom:button-card
+                template: room
+                entity: light.back_door_lights
+                name: Back door
+                icon: mdi:door
+              - type: custom:button-card
+                template: room
+                entity: light.basement_lights
+                name: Basement
+                icon: mdi:stairs-down
+              - type: custom:button-card
+                template: room
+                entity: light.tv_room_lights
+                name: TV room
+                icon: mdi:television
+              - type: custom:button-card
+                template: room
+                entity: light.basement_storage
+                name: Storage
+                icon: mdi:package-variant
+              - type: custom:button-card
+                template: room
+                entity: light.loft_trees
+                name: Loft trees
+                icon: mdi:tree
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Scenes
+            heading_style: title
+            icon: mdi:palette
+          - type: grid
+            columns: 3
+            cards:
+              - type: tile
+                entity: scene.sunset
+                name: Sunset
+                icon: mdi:weather-sunset
+                color: orange
+                tap_action:
+                  action: toggle
+              - type: tile
+                entity: scene.goodnight
+                name: Goodnight
+                icon: mdi:weather-night
+                color: indigo
+                tap_action:
+                  action: toggle
+              - type: tile
+                entity: scene.heat_home
+                name: Heat home
+                icon: mdi:home-thermometer
+                color: red
+                tap_action:
+                  action: toggle
+              - type: tile
+                entity: scene.heat_sleep
+                name: Heat sleep
+                icon: mdi:power-sleep
+                color: red
+                tap_action:
+                  action: toggle
+              - type: tile
+                entity: scene.heat_away
+                name: Heat away
+                icon: mdi:home-export-outline
+                color: red
+                tap_action:
+                  action: toggle
+              - type: tile
+                entity: scene.tv_room_dim
+                name: TV dim
+                icon: mdi:television-ambient-light
+                color: purple
+                tap_action:
+                  action: toggle
+  # }}}
+  # {{{ Climate
+  - title: Climate
+    path: climate
+    icon: mdi:thermostat
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Thermostats
+            heading_style: title
+            icon: mdi:thermostat
+          - type: grid
+            columns: 2
+            cards:
+              - type: thermostat
+                entity: climate.mysa_112908_thermostat
+                name: Dining room
+                show_current_as_primary: false
+                features:
+                  - type: climate-hvac-modes
+              - type: thermostat
+                entity: climate.mysa_2fa20c_thermostat
+                name: Bedroom
+                show_current_as_primary: false
+                features:
+                  - type: climate-hvac-modes
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Comfort
+            heading_style: title
+            icon: mdi:home-thermometer
+          - type: markdown
+            content: |
+              {% set ids = [
+                'sensor.living_room_sensor_temperature',
+                'sensor.kitchen_sensor_temperature',
+                'sensor.bedroom_mysa_temperature',
+                'sensor.dining_room_sensor_temperature',
+                'sensor.gail_office_sensor_temperature',
+                'sensor.temperature_humidity_sensor_dca4_temperature',
+                'sensor.bedroom_sensor_temperature'
+              ] %}
+              {% set ns = namespace(total=0, n=0) %}
+              {% for e in ids %}
+                {% if states(e) not in ['unknown', 'unavailable'] %}
+                  {% set ns.total = ns.total + states(e) | float %}
+                  {% set ns.n = ns.n + 1 %}
+                {% endif %}
+              {% endfor %}
+              # {{ (ns.total / ns.n) | round(1) if ns.n else '–' }}°C
+              Average across {{ ns.n }} rooms
+          - type: grid
+            columns: 2
+            cards:
+              - type: tile
+                entity: sensor.dining_mysa_humidity
+                name: Dining humidity
+                icon: mdi:water-percent
+                color: blue
+              - type: tile
+                entity: sensor.bedroom_mysa_humidity
+                name: Bedroom humidity
+                icon: mdi:water-percent
+                color: blue
+              - type: tile
+                entity: climate.mysa_112908_thermostat
+                name: Dining setpoint
+                icon: mdi:thermometer
+                color: teal
+              - type: tile
+                entity: climate.mysa_2fa20c_thermostat
+                name: Bedroom setpoint
+                icon: mdi:thermometer
+                color: teal
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Temperatures
+            heading_style: title
+            icon: mdi:thermometer
+          - type: grid
+            columns: 3
+            cards:
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.living_room_sensor_temperature
+                name: Living
+                icon: mdi:sofa
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.kitchen_sensor_temperature
+                name: Kitchen
+                icon: mdi:chef-hat
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.dining_room_sensor_temperature
+                name: Dining
+                icon: mdi:silverware-fork-knife
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.bedroom_mysa_temperature
+                name: Bedroom
+                icon: mdi:bed
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.gail_office_sensor_temperature
+                name: Gail office
+                icon: mdi:desk
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.temperature_humidity_sensor_dca4_temperature
+                name: G-desk
+                icon: mdi:laptop
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.lywsd03mmc_310b_temperature
+                name: Spare
+                icon: mdi:bed-empty
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.temperature_humidity_sensor_727f_temperature
+                name: Laundry
+                icon: mdi:washing-machine
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.temperature_humidity_sensor_2120_temperature
+                name: Garage
+                icon: mdi:garage
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.bedroom_sensor_temperature
+                name: Basement
+                icon: mdi:stairs-down
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.dining_mysa_temperature
+                name: Dining Mysa
+                icon: mdi:thermostat
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Humidity
+            heading_style: title
+            icon: mdi:water-percent
+          - type: grid
+            columns: 3
+            cards:
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.dining_room_sensor_humidity
+                name: Dining
+                icon: mdi:silverware-fork-knife
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.bedroom_mysa_humidity
+                name: Bedroom
+                icon: mdi:bed
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.dining_room_sensor_humidity
+                name: Dining
+                icon: mdi:silverware-fork-knife
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.gail_office_sensor_humidity
+                name: Gail office
+                icon: mdi:desk
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.temperature_humidity_sensor_dca4_humidity
+                name: G-desk
+                icon: mdi:laptop
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.lywsd03mmc_310b_humidity
+                name: Spare
+                icon: mdi:bed-empty
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.temperature_humidity_sensor_727f_humidity
+                name: Laundry
+                icon: mdi:washing-machine
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.temperature_humidity_sensor_2120_humidity
+                name: Garage
+                icon: mdi:garage
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.bedroom_sensor_humidity
+                name: Basement
+                icon: mdi:stairs-down
+              - type: custom:button-card
+                template: sensor
+                entity: sensor.dining_mysa_humidity
+                name: Dining Mysa
+                icon: mdi:thermostat
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Temperature trend
+            heading_style: title
+            icon: mdi:chart-line
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: sensor.living_room_sensor_temperature
+                name: Living
+              - entity: sensor.kitchen_sensor_temperature
+                name: Kitchen
+              - entity: sensor.bedroom_mysa_temperature
+                name: Bedroom
+              - entity: sensor.gail_office_sensor_temperature
+                name: Gail office
+              - entity: sensor.bedroom_sensor_temperature
+                name: Basement
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Humidity trend
+            heading_style: title
+            icon: mdi:chart-line
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: sensor.dining_room_sensor_humidity
+                name: Dining
+              - entity: sensor.bedroom_mysa_humidity
+                name: Bedroom
+              - entity: sensor.gail_office_sensor_humidity
+                name: Gail office
+              - entity: sensor.bedroom_sensor_humidity
+                name: Basement
+  # }}}
+  # {{{ Weather
+  - title: Weather
+    path: weather
+    icon: mdi:weather-partly-cloudy
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 2
+        cards:
+          - type: custom:button-card
+            template: weather_hero
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Alerts
+            heading_style: title
+            icon: mdi:alert-outline
+          - type: markdown
+            content: |
+              {% set a = state_attr('sensor.closest_city', 'warnings_entity') %}
+              {% set city = states('sensor.closest_city') %}
+              {% set warnings = states(a) if a else 'unknown' %}
+              {% if warnings not in ['unknown', 'unavailable', 'none', '', 'None'] %}
+                **⚠️ Active warning for {{ city }}:** {{ warnings }}
+              {% else %}
+                🟢 No active weather alerts for **{{ city }}**.
+              {% endif %}
+          - type: markdown
+            content: |
+              {% set a = state_attr('sensor.closest_city', 'humidex_entity') %}
+              {% set u = state_attr('sensor.closest_city', 'uv_index_entity') %}
+              {% set w = state_attr('sensor.closest_city', 'wind_chill_entity') %}
+              | Measure | Value |
+              |---|---|
+              | 🌡️ Humidex | {{ states(a) if a else '–' }} |
+              | ☀️ UV index | {{ states(u) if u else '–' }} |
+              | 🥶 Wind chill | {{ states(w) if w else '–' }} |
+              | 🌅 Sunrise | {{ as_timestamp(state_attr('sun.sun', 'next_dawn')) | timestamp_custom('%-I:%M %p') }} |
+              | 🌇 Sunset | {{ as_timestamp(state_attr('sun.sun', 'next_dusk')) | timestamp_custom('%-I:%M %p') }} |
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Closest city forecast
+            heading_style: title
+            icon: mdi:weather-partly-cloudy
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Charlottetown
+            card:
+              type: weather-forecast
+              entity: weather.charlottetown_forecast
+              forecast_type: daily
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Fredericton
+            card:
+              type: weather-forecast
+              entity: weather.fredericton
+              forecast_type: daily
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Saint John
+            card:
+              type: weather-forecast
+              entity: weather.saint_john_forecast
+              forecast_type: daily
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Montreal
+            card:
+              type: weather-forecast
+              entity: weather.montreal_forecast
+              forecast_type: daily
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Halifax
+            card:
+              type: weather-forecast
+              entity: weather.halifax_forecast
+              forecast_type: daily
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Toronto
+            card:
+              type: weather-forecast
+              entity: weather.toronto_forecast
+              forecast_type: daily
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Calgary
+            card:
+              type: weather-forecast
+              entity: weather.calgary_forecast
+              forecast_type: daily
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Atlanta
+            card:
+              type: weather-forecast
+              entity: weather.forecast_atlanta
+              forecast_type: daily
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: sensor.closest_city
+                state: Las Vegas
+            card:
+              type: weather-forecast
+              entity: weather.forecast_las_vegas
+              forecast_type: daily
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Other cities
+            heading_style: title
+            icon: mdi:city-variant-outline
+          - type: grid
+            columns: 2
+            cards:
+              - type: tile
+                entity: weather.charlottetown_forecast
+                name: Charlottetown
+                icon: mdi:city
+                color: cyan
+                state_content:
+                  - state
+                  - temperature
+              - type: tile
+                entity: weather.fredericton
+                name: Fredericton
+                icon: mdi:city
+                color: cyan
+                state_content:
+                  - state
+                  - temperature
+              - type: tile
+                entity: weather.saint_john_forecast
+                name: Saint John
+                icon: mdi:city
+                color: cyan
+                state_content:
+                  - state
+                  - temperature
+              - type: tile
+                entity: weather.montreal_forecast
+                name: Montreal
+                icon: mdi:city
+                color: cyan
+                state_content:
+                  - state
+                  - temperature
+              - type: tile
+                entity: weather.halifax_forecast
+                name: Halifax
+                icon: mdi:city
+                color: cyan
+                state_content:
+                  - state
+                  - temperature
+              - type: tile
+                entity: weather.toronto_forecast
+                name: Toronto
+                icon: mdi:city
+                color: cyan
+                state_content:
+                  - state
+                  - temperature
+              - type: tile
+                entity: weather.calgary_forecast
+                name: Calgary
+                icon: mdi:city
+                color: cyan
+                state_content:
+                  - state
+                  - temperature
+              - type: tile
+                entity: weather.forecast_atlanta
+                name: Atlanta
+                icon: mdi:city
+                color: cyan
+                state_content:
+                  - state
+                  - temperature
+  # }}}
+  # {{{ Robots
+  - title: Robots
+    path: robots
+    icon: mdi:robot-vacuum
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: heading
+            heading: Robot fleet
+            heading_style: title
+            icon: mdi:robot-vacuum
+          - type: markdown
+            content: |
+              {% set ns = namespace(cleaning=0, docked=0, other=0) %}
+              {% for v in ['vacuum.robot', 'vacuum.robot_2', 'vacuum.robot_4', 'vacuum.alice', 'vacuum.consuela'] %}
+                {% if states(v) == 'cleaning' %}
+                  {% set ns.cleaning = ns.cleaning + 1 %}
+                {% elif states(v) == 'docked' %}
+                  {% set ns.docked = ns.docked + 1 %}
+                {% else %}
+                  {% set ns.other = ns.other + 1 %}
+                {% endif %}
+              {% endfor %}
+              **{{ ns.docked }} docked** · **{{ ns.cleaning }} cleaning** · {{ ns.other }} idle or returning
+          - type: grid
+            columns: 3
+            cards:
+              - type: tile
+                entity: vacuum.robot
+                name: Daphne
+                icon: mdi:robot-vacuum
+                color: teal
+                vertical: true
+                state_content:
+                  - state
+                  - battery_level
+                features:
+                  - type: vacuum-commands
+              - type: tile
+                entity: vacuum.robot_2
+                name: Rosie
+                icon: mdi:robot-vacuum
+                color: teal
+                vertical: true
+                state_content:
+                  - state
+                  - battery_level
+                features:
+                  - type: vacuum-commands
+              - type: tile
+                entity: vacuum.robot_4
+                name: Mrs Garrett
+                icon: mdi:robot-vacuum
+                color: teal
+                vertical: true
+                state_content:
+                  - state
+                  - battery_level
+                features:
+                  - type: vacuum-commands
+              - type: tile
+                entity: vacuum.alice
+                name: Alice
+                icon: mdi:robot-vacuum
+                color: teal
+                vertical: true
+                state_content:
+                  - state
+                  - battery_level
+                features:
+                  - type: vacuum-commands
+              - type: tile
+                entity: vacuum.consuela
+                name: Consuela
+                icon: mdi:robot-vacuum
+                color: teal
+                vertical: true
+                state_content:
+                  - state
+                  - battery_level
+                features:
+                  - type: vacuum-commands
+              - type: tile
+                entity: fan.delicious
+                name: Delicious
+                icon: mdi:fan
+                color: purple
+                vertical: true
+                state_content:
+                  - state
+                  - percentage
+                features:
+                  - type: fan-speed
+      - type: grid
+        column_span: 4
+        cards:
+          - type: heading
+            heading: Battery
+            heading_style: title
+            icon: mdi:battery-heart-variant
+          - type: grid
+            columns: 6
+            cards:
+              - type: custom:button-card
+                template: battery
+                entity: sensor.robot_battery
+                name: Daphne
+              - type: custom:button-card
+                template: battery
+                entity: sensor.robot_2_battery
+                name: Rosie
+              - type: custom:button-card
+                template: battery
+                entity: sensor.robot_4_battery
+                name: Mrs Garrett
+              - type: custom:button-card
+                template: battery
+                entity: sensor.alice_battery
+                name: Alice
+              - type: custom:button-card
+                template: battery
+                entity: sensor.consuela_battery
+                name: Consuela
+  # }}}
+  # {{{ Media
+  - title: Media
+    path: media
+    icon: mdi:play-circle
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: TV room
+            heading_style: title
+            icon: mdi:television
+          - type: media-control
+            entity: media_player.tv_roomtv
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: media_player.plex_plex_for_roku_tv_roomtv
+                state: playing
+            card:
+              type: media-control
+              entity: media_player.plex_plex_for_roku_tv_roomtv
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Bedroom
+            heading_style: title
+            icon: mdi:bed
+          - type: media-control
+            entity: media_player.bedroomtv
+          - type: conditional
+            conditions:
+              - condition: state
+                entity: media_player.plex_plex_for_roku_bedroomtv
+                state: playing
+            card:
+              type: media-control
+              entity: media_player.plex_plex_for_roku_bedroomtv
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Network activity
+            heading_style: title
+            icon: mdi:lan-connect
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.total_active_clients
+                name: Total
+              - entity: sensor.arrow_active_clients
+                name: Arrow
+              - entity: sensor.spitfire
+                name: Spitfire
+            hours_to_show: 24
+            points_per_hour: 30
+            line_width: 2
+            animate: true
+            font_size: 70
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Active clients
+            heading_style: title
+            icon: mdi:devices
+          - type: grid
+            columns: 3
+            cards:
+              - type: tile
+                entity: sensor.total_active_clients
+                name: Total
+                icon: mdi:devices
+                color: purple
+              - type: tile
+                entity: sensor.arrow_active_clients
+                name: Arrow
+                icon: mdi:router-wireless
+                color: cyan
+              - type: tile
+                entity: sensor.spitfire
+                name: Spitfire
+                icon: mdi:router-wireless
+                color: cyan
+  # }}}
+  # {{{ Vehicle
+  - title: Vehicle
+    path: vehicle
+    icon: mdi:car
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 3
+        cards:
+          - type: heading
+            heading: Volvo XC40
+            heading_style: title
+            icon: mdi:car
+          - type: picture-elements
+            image: /api/image/serve/aa8aa1f5e943bc2cadb0cdf8b475242f/512x512
+            dark_mode_image: /api/image/serve/d691a1e280f92c069ad7c61926c3bb5f/512x512
+            elements:
+              - type: state-label
+                entity: sensor.volvo_xc40_fuel_amount
+                style:
+                  top: 88%
+                  left: 25%
+                  font-size: 20px
+                  font-weight: bold
+                  color: white
+                  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85)
+              - type: state-label
+                entity: sensor.volvo_xc40_odometer
+                style:
+                  top: 88%
+                  left: 75%
+                  font-size: 20px
+                  font-weight: bold
+                  color: white
+                  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.85)
+      - type: grid
+        column_span: 1
+        cards:
+          - type: heading
+            heading: Status
+            heading_style: title
+            icon: mdi:gauge
+          - type: tile
+            entity: sensor.volvo_xc40_fuel_amount
+            name: Fuel
+            icon: mdi:gas-station
+            color: orange
+          - type: tile
+            entity: sensor.volvo_xc40_distance_to_empty_tank
+            name: Range
+            icon: mdi:map-marker-distance
+            color: teal
+          - type: tile
+            entity: sensor.volvo_xc40_odometer
+            name: Odometer
+            icon: mdi:counter
+            color: blue
+          - type: tile
+            entity: sensor.volvo_xc40_time_to_service
+            name: Service due
+            icon: mdi:wrench-clock
+            color: purple
+      - type: grid
+        column_span: 4
+        cards:
+          - type: heading
+            heading: Remote
+            heading_style: title
+            icon: mdi:car-key
+          - type: grid
+            columns: 5
+            cards:
+              - type: tile
+                entity: lock.volvo_xc40_lock
+                name: Lock
+                icon: mdi:car-key
+                color: green
+                features:
+                  - type: lock-commands
+              - type: tile
+                entity: button.volvo_xc40_start_engine
+                name: Start
+                icon: mdi:engine
+                color: red
+                tap_action:
+                  action: perform-action
+                  perform_action: button.press
+                  target:
+                    entity_id: button.volvo_xc40_start_engine
+              - type: tile
+                entity: button.volvo_xc40_flash
+                name: Flash
+                icon: mdi:car-light-high
+                color: amber
+                tap_action:
+                  action: perform-action
+                  perform_action: button.press
+                  target:
+                    entity_id: button.volvo_xc40_flash
+              - type: tile
+                entity: button.volvo_xc40_honk
+                name: Honk
+                icon: mdi:bullhorn
+                color: amber
+                tap_action:
+                  action: perform-action
+                  perform_action: button.press
+                  target:
+                    entity_id: button.volvo_xc40_honk
+              - type: tile
+                entity: button.volvo_xc40_honk_flash
+                name: Both
+                icon: mdi:car-emergency
+                color: amber
+                tap_action:
+                  action: perform-action
+                  perform_action: button.press
+                  target:
+                    entity_id: button.volvo_xc40_honk_flash
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Details
+            heading_style: title
+            icon: mdi:information-outline
+          - type: entities
+            entities:
+              - type: custom:multiple-entity-row
+                entity: sensor.volvo_xc40_fuel_amount
+                name: Fuel
+                icon: mdi:gas-station
+                entities:
+                  - entity: sensor.volvo_xc40_distance_to_empty_tank
+                    name: Range
+              - type: custom:multiple-entity-row
+                entity: sensor.volvo_xc40_odometer
+                name: Odometer
+                icon: mdi:counter
+                entities:
+                  - entity: sensor.volvo_xc40_trip_manual_average_fuel_consumption
+                    name: Avg L/100km
+              - type: custom:multiple-entity-row
+                entity: binary_sensor.volvo_xc40_engine_status
+                name: Engine
+                icon: mdi:engine
+                entities:
+                  - entity: sensor.volvo_xc40_time_to_service
+                    name: Service due
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Doors and windows
+            heading_style: title
+            icon: mdi:car-door
+          - type: glance
+            columns: 4
+            entities:
+              - entity: binary_sensor.volvo_xc40_door_front_left
+                name: FL door
+              - entity: binary_sensor.volvo_xc40_door_front_right
+                name: FR door
+              - entity: binary_sensor.volvo_xc40_door_rear_left
+                name: RL door
+              - entity: binary_sensor.volvo_xc40_door_rear_right
+                name: RR door
+              - entity: binary_sensor.volvo_xc40_window_front_left
+                name: FL window
+              - entity: binary_sensor.volvo_xc40_window_front_right
+                name: FR window
+              - entity: binary_sensor.volvo_xc40_window_rear_left
+                name: RL window
+              - entity: binary_sensor.volvo_xc40_window_rear_right
+                name: RR window
+              - entity: binary_sensor.volvo_xc40_hood
+                name: Hood
+              - entity: binary_sensor.volvo_xc40_tailgate
+                name: Tailgate
+              - entity: binary_sensor.volvo_xc40_sunroof
+                name: Sunroof
+          - type: conditional
+            conditions:
+              - condition: or
+                conditions:
+                  - condition: state
+                    entity: sensor.volvo_xc40_service
+                    state_not: No warning
+                  - condition: state
+                    entity: binary_sensor.volvo_xc40_oil_level
+                    state: 'on'
+                  - condition: state
+                    entity: binary_sensor.volvo_xc40_brake_fluid
+                    state: 'on'
+                  - condition: state
+                    entity: binary_sensor.volvo_xc40_coolant_level
+                    state: 'on'
+                  - condition: state
+                    entity: binary_sensor.volvo_xc40_washer_fluid
+                    state: 'on'
+            card:
+              type: entities
+              title: Maintenance alerts
+              entities:
+                - entity: sensor.volvo_xc40_service
+                - entity: binary_sensor.volvo_xc40_oil_level
+                - entity: binary_sensor.volvo_xc40_brake_fluid
+                - entity: binary_sensor.volvo_xc40_coolant_level
+                - entity: binary_sensor.volvo_xc40_washer_fluid
+              state_color: true
+  # }}}
+  # {{{ Batteries
+  - title: Batteries
+    path: batteries
+    icon: mdi:battery-heart-variant
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 4
+        cards:
+          - type: heading
+            heading: Battery health
+            heading_style: title
+            icon: mdi:battery-heart-variant
+          - type: markdown
+            content: |
+              {% set ns = namespace(low='–', lowv=101, count=0) %}
+              {% for s in states.sensor if s.attributes.device_class == 'battery' and s.state not in ['unknown', 'unavailable'] %}
+                {% set v = s.state | float(101) %}
+                {% if v < 20 %}
+                  {% set ns.count = ns.count + 1 %}
+                {% endif %}
+                {% if v < ns.lowv %}
+                  {% set ns.lowv = v %}
+                  {% set ns.low = s.name %}
+                {% endif %}
+              {% endfor %}
+              {% if ns.count > 0 %}
+                #### ⚠️ {{ ns.count }} device{{ 's' if ns.count > 1 else '' }} below 20%
+              {% else %}
+                #### 🟢 Everything above 20%
+              {% endif %}
+              Lowest: **{{ ns.low }} at {{ ns.lowv | round(0) }}%**
+      - type: grid
+        column_span: 1
+        cards:
+          - type: heading
+            heading: Vacuums
+            heading_style: title
+            icon: mdi:robot-vacuum
+          - type: grid
+            columns: 1
+            cards:
+              - type: custom:button-card
+                template: battery
+                entity: sensor.robot_battery
+                name: Daphne
+              - type: custom:button-card
+                template: battery
+                entity: sensor.robot_2_battery
+                name: Rosie
+              - type: custom:button-card
+                template: battery
+                entity: sensor.robot_4_battery
+                name: Mrs Garrett
+              - type: custom:button-card
+                template: battery
+                entity: sensor.alice_battery
+                name: Alice
+              - type: custom:button-card
+                template: battery
+                entity: sensor.consuela_battery
+                name: Consuela
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Sensors
+            heading_style: title
+            icon: mdi:thermometer
+          - type: grid
+            columns: 2
+            cards:
+              - type: custom:button-card
+                template: battery
+                entity: sensor.bedroom_sensor_battery
+                name: Basement storage
+              - type: custom:button-card
+                template: battery
+                entity: sensor.dining_room_sensor_battery
+                name: Dining room
+              - type: custom:button-card
+                template: battery
+                entity: sensor.temperature_humidity_sensor_dca4_battery
+                name: G-desk
+              - type: custom:button-card
+                template: battery
+                entity: sensor.gail_office_sensor_battery
+                name: Gail office
+              - type: custom:button-card
+                template: battery
+                entity: sensor.temperature_humidity_sensor_2120_battery
+                name: Garage
+              - type: custom:button-card
+                template: battery
+                entity: sensor.hue_outdoor_motion_sensor_1_battery
+                name: Outdoor motion
+              - type: custom:button-card
+                template: battery
+                entity: sensor.lywsd03mmc_310b_battery
+                name: Spare room
+              - type: custom:button-card
+                template: battery
+                entity: sensor.temperature_humidity_sensor_727f_battery
+                name: Laundry
+              - type: custom:button-card
+                template: battery
+                entity: sensor.kitchen_sensor_battery
+                name: Kitchen
+              - type: custom:button-card
+                template: battery
+                entity: sensor.living_room_sensor_battery
+                name: Living room
+              - type: custom:button-card
+                template: battery
+                entity: sensor.basement_sensor_battery
+                name: Office
+              - type: custom:button-card
+                template: battery
+                entity: sensor.tv_room_occupancy_battery
+                name: TV room
+      - type: grid
+        column_span: 1
+        cards:
+          - type: heading
+            heading: Locks and UPS
+            heading_style: title
+            icon: mdi:lock
+          - type: grid
+            columns: 1
+            cards:
+              - type: custom:button-card
+                template: battery
+                entity: sensor.front_door_lock_battery_service
+                name: Front door lock
+              - type: custom:button-card
+                template: battery
+                entity: sensor.garage_door_lock_battery_service
+                name: Garage door lock
+              - type: custom:button-card
+                template: battery
+                entity: sensor.apc0_battery_charge
+                name: APC UPS 0
+              - type: custom:button-card
+                template: battery
+                entity: sensor.apc1_battery_charge
+                name: APC UPS 1
+  # }}}
+  # {{{ Security
+  - title: Security
+    path: security
+    icon: mdi:shield-home
+    theme: Glass
+    type: sections
+    max_columns: 4
+    dense_section_placement: true
+    sections:
+      - type: grid
+        column_span: 1
+        cards:
+          - type: heading
+            heading: Alarm
+            heading_style: title
+            icon: mdi:shield-home
+          - type: alarm-panel
+            entity: alarm_control_panel.alarmo
+            states:
+              - arm_home
+              - arm_away
+      - type: grid
+        column_span: 2
+        cards:
+          - type: heading
+            heading: Cameras
+            heading_style: title
+            icon: mdi:cctv
+          - type: grid
+            columns: 2
+            cards:
+              - type: picture-glance
+                title: Garage
+                camera_image: camera.garage_medium_resolution_channel
+                camera_view: auto
+                entities:
+                  - entity: binary_sensor.rack_motion
+                  - entity: light.garage_lights
+              - type: picture-glance
+                title: Storage
+                camera_image: camera.rack_medium_resolution_channel
+                camera_view: auto
+                entities:
+                  - entity: switch.basement_storage_motion_sensor
+                  - entity: light.basement_storage
+      - type: grid
+        column_span: 1
+        cards:
+          - type: heading
+            heading: Entry points
+            heading_style: title
+            icon: mdi:door-closed-lock
+          - type: tile
+            entity: lock.front_door_lock_lock_mechanism
+            name: Front door
+            features:
+              - type: lock-commands
+          - type: tile
+            entity: lock.garage_door_lock_lock_mechanism
+            name: Garage door
+            features:
+              - type: lock-commands
+          - type: tile
+            entity: binary_sensor.rack_motion
+            name: Rack motion
+            icon: mdi:motion-sensor
+            color: red
+          - type: tile
+            entity: switch.basement_storage_motion_sensor
+            name: Storage motion
+            icon: mdi:motion-sensor
+            color: red
+      - type: grid
+        column_span: 4
+        cards:
+          - type: heading
+            heading: Where is everyone
+            heading_style: title
+            icon: mdi:map-marker-account
+          - type: map
+            entities:
+              - entity: person.gervais
+              - entity: person.gail
+              - entity: person.jennifer
+              - entity: person.cameron
+            default_zoom: 12
+            aspect_ratio: '21:9'
+            hours_to_show: 1
+  # }}}
+button_card_templates:
+  glass:
+    color_type: card
+    styles:
+      card:
+        - border-radius: var(--ha-card-border-radius, 22px)
+        - border: 1px solid var(--ha-card-border-color, rgba(255, 255, 255, 0.07))
+        - box-shadow: var(--ha-card-box-shadow, 0 18px 40px rgba(0, 0, 0, 0.35))
+        - background-color: var(--card-background-color)
+        - backdrop-filter: blur(16px) saturate(140%)
+        - -webkit-backdrop-filter: blur(16px) saturate(140%)
+  room:
+    template: glass
+    show_name: true
+    show_state: false
+    show_label: true
+    size: 34px
+    tap_action:
+      action: toggle
+    hold_action:
+      action: more-info
+    label: |
+      [[[
+        if (entity.state !== 'on') return 'Off';
+        const b = entity.attributes.brightness;
+        return b ? Math.round(b / 2.55) + '% brightness' : 'On';
+      ]]]
+    styles:
+      card:
+        - padding: 16px
+        - height: 104px
+      grid:
+        - grid-template-areas: '"i n" "i l"'
+        - grid-template-columns: 46px 1fr
+        - grid-template-rows: 1fr 1fr
+        - column-gap: 12px
+      icon:
+        - grid-area: i
+        - width: 38px
+        - height: 38px
+        - align-self: center
+      name:
+        - grid-area: n
+        - justify-self: start
+        - align-self: end
+        - font-size: 14px
+        - font-weight: 600
+      label:
+        - grid-area: l
+        - justify-self: start
+        - align-self: start
+        - font-size: 12px
+        - color: var(--secondary-text-color)
+    state:
+      - value: 'on'
+        styles:
+          card:
+            - background: linear-gradient(145deg, rgba(251, 191, 36, 0.20), rgba(251, 191, 36, 0.05))
+            - border-color: rgba(251, 191, 36, 0.35)
+          icon:
+            - color: '#fbbf24'
+  person:
+    template: glass
+    show_name: true
+    show_state: true
+    show_icon: true
+    show_entity_picture: true
+    size: 42px
+    tap_action:
+      action: more-info
+    styles:
+      card:
+        - padding: 14px
+        - height: 84px
+      grid:
+        - grid-template-areas: '"i n" "i s"'
+        - grid-template-columns: 48px 1fr
+        - column-gap: 12px
+      img_cell:
+        - grid-area: i
+        - width: 42px
+        - height: 42px
+        - align-self: center
+      icon:
+        - grid-area: i
+        - width: 42px
+        - height: 42px
+        - align-self: center
+      name:
+        - grid-area: n
+        - justify-self: start
+        - align-self: end
+        - font-size: 14px
+        - font-weight: 600
+      state:
+        - grid-area: s
+        - justify-self: start
+        - align-self: start
+        - font-size: 12px
+        - color: var(--secondary-text-color)
+    state:
+      - value: home
+        styles:
+          state:
+            - color: '#34d399'
+      - value: not_home
+        styles:
+          state:
+            - color: var(--secondary-text-color)
+  alarm:
+    template: glass
+    entity: alarm_control_panel.alarmo
+    show_name: true
+    show_state: true
+    show_label: false
+    icon: mdi:shield-home
+    tap_action:
+      action: navigate
+      navigation_path: /home-v2/security
+    state_display: |
+      [[[
+        return entity.state.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      ]]]
+    styles:
+      card:
+        - padding: 14px
+        - height: 84px
+      grid:
+        - grid-template-areas: '"i n" "i s"'
+        - grid-template-columns: 40px 1fr
+        - column-gap: 12px
+      icon:
+        - grid-area: i
+        - width: 34px
+        - height: 34px
+        - align-self: center
+        - color: |
+            [[[
+              if (entity.state === 'triggered') return '#fb7185';
+              return entity.state.startsWith('armed') ? '#34d399' : '#fbbf24';
+            ]]]
+      name:
+        - grid-area: n
+        - justify-self: start
+        - align-self: end
+        - font-size: 14px
+        - font-weight: 600
+      state:
+        - grid-area: s
+        - justify-self: start
+        - align-self: start
+        - font-size: 12px
+        - color: var(--secondary-text-color)
+  battery:
+    template: glass
+    show_name: true
+    show_state: true
+    show_label: false
+    size: 26px
+    tap_action:
+      action: more-info
+    state_display: |
+      [[[
+        const v = parseFloat(entity.state);
+        return isNaN(v) ? entity.state : Math.round(v) + '%';
+      ]]]
+    icon: |
+      [[[
+        const v = parseFloat(entity.state);
+        if (isNaN(v)) return 'mdi:battery-unknown';
+        if (v >= 95) return 'mdi:battery';
+        return 'mdi:battery-' + Math.max(10, Math.floor(v / 10) * 10);
+      ]]]
+    styles:
+      card:
+        - padding: 12px 14px
+        - height: 74px
+      grid:
+        - grid-template-areas: '"i n" "i s"'
+        - grid-template-columns: 30px 1fr
+        - column-gap: 10px
+      icon:
+        - grid-area: i
+        - align-self: center
+        - width: 26px
+        - height: 26px
+        - color: |
+            [[[
+              const v = parseFloat(entity.state);
+              if (isNaN(v)) return 'var(--disabled-text-color)';
+              return v < 20 ? '#fb7185' : (v < 40 ? '#fbbf24' : '#34d399');
+            ]]]
+      name:
+        - grid-area: n
+        - justify-self: start
+        - align-self: end
+        - font-size: 12px
+        - color: var(--secondary-text-color)
+        - white-space: nowrap
+        - overflow: hidden
+        - text-overflow: ellipsis
+      state:
+        - grid-area: s
+        - justify-self: start
+        - align-self: start
+        - font-size: 16px
+        - font-weight: 600
+  sensor:
+    template: glass
+    show_name: true
+    show_state: true
+    tap_action:
+      action: more-info
+    styles:
+      card:
+        - padding: 14px
+        - height: 92px
+      grid:
+        - grid-template-areas: '"i n" "s s"'
+        - grid-template-columns: 1fr auto
+        - row-gap: 4px
+      icon:
+        - grid-area: i
+        - justify-self: start
+        - width: 22px
+        - height: 22px
+        - color: var(--state-icon-color)
+      name:
+        - grid-area: n
+        - justify-self: end
+        - align-self: center
+        - font-size: 12px
+        - color: var(--secondary-text-color)
+      state:
+        - grid-area: s
+        - justify-self: start
+        - font-size: 22px
+        - font-weight: 600
+  weather_hero:
+    template: glass
+    entity: sensor.closest_city
+    show_icon: false
+    show_name: false
+    show_state: false
+    tap_action:
+      action: navigate
+      navigation_path: /home-v2/weather
+    custom_fields:
+      content: |
+        [[[
+          const cityEntity = states['sensor.closest_city'];
+          const a = (cityEntity && cityEntity.attributes) || {};
+          const condEntity = a.condition_entity && states[a.condition_entity];
+          const condition = condEntity ? condEntity.state : 'unknown';
+          const tempEntity = a.temperature_entity && states[a.temperature_entity];
+          const temp = tempEntity && tempEntity.state !== 'unknown' ? tempEntity.state : '–';
+          const city = cityEntity ? cityEntity.state : 'Weather';
+          const warnEntity = a.warnings_entity && states[a.warnings_entity];
+          const warn = warnEntity && !['unknown', 'unavailable', 'none', 'None', ''].includes(warnEntity.state);
+          const map = {
+            'clear-night': 'mdi:weather-night',
+            'cloudy': 'mdi:weather-cloudy',
+            'exceptional': 'mdi:alert-circle-outline',
+            'fog': 'mdi:weather-fog',
+            'hail': 'mdi:weather-hail',
+            'lightning': 'mdi:weather-lightning',
+            'lightning-rainy': 'mdi:weather-lightning-rainy',
+            'partlycloudy': 'mdi:weather-partly-cloudy',
+            'pouring': 'mdi:weather-pouring',
+            'rainy': 'mdi:weather-rainy',
+            'snowy': 'mdi:weather-snowy',
+            'snowy-rainy': 'mdi:weather-snowy-rainy',
+            'sunny': 'mdi:weather-sunny',
+            'windy': 'mdi:weather-windy',
+            'windy-variant': 'mdi:weather-windy-variant'
+          };
+          const label = condition.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+          const icon = map[condition] || 'mdi:weather-partly-cloudy';
+          return `
+            <div style="display:flex;align-items:center;gap:20px;text-align:left;width:100%">
+              <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:center;width:76px;height:76px;border-radius:24px;background:radial-gradient(circle at 30% 25%, rgba(125,211,252,0.35), rgba(125,211,252,0.06));border:1px solid rgba(125,211,252,0.25)">
+                <ha-icon icon="${icon}" style="color:#7dd3fc;--mdc-icon-size:44px"></ha-icon>
+              </div>
+              <div style="min-width:0">
+                <div style="font-size:42px;font-weight:700;line-height:1;letter-spacing:-1.5px">${temp}<span style="font-size:20px;font-weight:500;vertical-align:top;color:var(--secondary-text-color)">°C</span></div>
+                <div style="color:var(--secondary-text-color);font-size:14px;margin-top:6px">${label} · ${city}</div>
+                ${warn ? '<div style="margin-top:8px;display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(251,113,133,0.18);border:1px solid rgba(251,113,133,0.35);color:#fb7185;font-size:12px">Weather alert</div>' : ''}
+              </div>
+            </div>`;
+        ]]]
+    styles:
+      card:
+        - padding: 22px
+        - height: 100%
+        - min-height: 176px
+      custom_fields:
+        content:
+          - width: 100%
