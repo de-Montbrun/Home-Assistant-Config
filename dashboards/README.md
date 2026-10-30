@@ -1,18 +1,22 @@
 # Home v2
 
-A copy of the existing dashboard with the **Glass** theme applied, registered
-as a second YAML dashboard so it can be tested before anything is swapped.
+Your current dashboard, unchanged, plus the **Glass** theme. Registered as a
+second YAML dashboard so it can be tested before anything is swapped.
 
 ## What it is
 
-- `dashboards/home.yaml` - the current dashboard's cards, unchanged apart from
-  one `theme: Glass` line per view. Generated from
-  `backups/dashboard-old.yaml` (Jan 2026 export).
-- `themes/glass.yaml` - the theme: graphite surfaces, soft periwinkle accent,
-  amber for "on" states, backdrop blur on cards.
+- `dashboards/home.yaml` - the live dashboard copied verbatim (11 views:
+  Dashboard, Lights and Switches, Robots, Climate-control, Climate, Weather,
+  Media Players, Vehicle, RAM 1500, Security, Alarm), plus one `theme: Glass`
+  line per view and the `button_card_templates` block.
+- `themes/glass.yaml` - frosted graphite theme: translucent cards with a real
+  backdrop blur, soft periwinkle accent, amber for "on" states.
 - `configuration.yaml` - registers `home-v2` (sidebar: **Home v2**).
 
-URL: `/home-v2/dashboard` (and `/home-v2/lights`, `/home-v2/robots`, ...).
+URL: `/home-v2/dashboard`, `/home-v2/lights`, `/home-v2/robots`, ...
+
+Only intentional deviation from the source dashboard: the Security quick-action
+button navigates to `/home-v2/security` instead of `/lovelace/security`.
 
 ## Install / test
 
@@ -20,27 +24,29 @@ URL: `/home-v2/dashboard` (and `/home-v2/lights`, `/home-v2/robots`, ...).
 2. Restart Home Assistant (required, new dashboard was registered).
 3. Open **Home v2** in the sidebar. The existing dashboard is untouched.
 
-After the first restart, edits to `dashboards/home.yaml` only need
-**Refresh** from the dashboard's three-dot menu.
+After that, edits to `dashboards/home.yaml` only need **Refresh** from the
+dashboard's three-dot menu.
 
 ## Swap it in for the real dashboard
 
-When you're happy with it:
-
-1. Rename the dashboard key/title/icon in `configuration.yaml` if you want it
-   to read as "Home".
+1. In `configuration.yaml`, rename the key/title/icon if you want it to read
+   as "Home" instead of "Home v2".
 2. Remove the old UI-managed dashboard in **Settings > Dashboards**.
 3. Optionally set Home v2 as the default dashboard.
 
-## If your live dashboard has changed since Jan 2026
+If you rename the key, also update the Security button's
+`navigation_path` to `/<new-key>/security`.
 
-The file was built from the January export. To refresh it from the live one:
+## Keeping it in sync with the live dashboard
 
-1. Open the current dashboard > **Edit** > three dots > **Raw configuration
-   editor** > copy everything.
-2. Paste it over `dashboards/home.yaml`, then add `theme: Glass` under each
-   view (one line, same indentation as `path:`).
-3. Commit/push, then Refresh the Home v2 dashboard.
+The live dashboard is UI-managed (stored in `.storage/`, not in git). When you
+change it there, refresh this copy:
+
+1. Open the dashboard > **Edit** > three dots > **Raw configuration editor**.
+2. Copy everything.
+3. Paste over `dashboards/home.yaml` and add `theme: Glass` under each view
+   (one line, same indentation as `path:`).
+4. Commit/push, then Refresh the Home v2 dashboard.
 
 ## Rollback
 

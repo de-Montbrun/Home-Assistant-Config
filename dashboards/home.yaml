@@ -73,7 +73,7 @@ views:
                 name: Security
                 tap_action:
                   action: navigate
-                  navigation_path: /lovelace/security
+                  navigation_path: /home-v2/security
                 template: nav_button
           - type: conditional
             conditions:
@@ -1078,10 +1078,10 @@ views:
                       card:
                         - height: 60px
                         - background-color: transparent
-  - title: Thermostats
+  - title: Climate-control
     theme: Glass
     path: thermostats
-    icon: mdi:thermostat
+    icon: mdi:devices
     type: masonry
     badges: []
     cards:
@@ -1100,6 +1100,10 @@ views:
                 name: Bedroom
                 features:
                   - type: climate-hvac-modes
+              - type: humidifier
+                entity: humidifier.150633095966071_humidifier
+                features:
+                  - type: humidifier-toggle
   - title: Climate
     theme: Glass
     path: climate
@@ -1290,65 +1294,6 @@ views:
           ['unknown', 'unavailable', 'none', ''] %}
             No active weather alerts for {{ city }}.
           {% endif %}
-  - type: sections
-    theme: Glass
-    max_columns: 4
-    title: Battery Levels
-    path: levels
-    icon: mdi:battery-70
-    sections:
-      - type: grid
-        cards:
-          - type: heading
-            heading_style: title
-          - type: entities
-            title: All Battery Levels
-            entities:
-              - entity: sensor.alice_battery
-                name: Alice (Vacuum)
-              - entity: sensor.consuela_battery
-                name: Consuela (Vacuum)
-              - entity: sensor.robot_battery
-                name: Daphne (Vacuum)
-              - entity: sensor.robot_2_battery
-                name: Rosie (Vacuum)
-              - entity: sensor.robot_4_battery
-                name: Mrs Garrett (Vacuum)
-              - entity: sensor.bedroom_sensor_battery
-                name: Basement Storage Sensor
-              - entity: sensor.dining_room_sensor_battery
-                name: Dining Room Sensor
-              - entity: sensor.temperature_humidity_sensor_dca4_battery
-                name: G-Desk Sensor
-              - entity: sensor.gail_office_sensor_battery
-                name: Gail Office Sensor
-              - entity: sensor.temperature_humidity_sensor_2120_battery
-                name: Garage Sensor
-              - entity: sensor.hue_outdoor_motion_sensor_1_battery
-                name: Outdoor Motion Sensor
-              - entity: sensor.lywsd03mmc_310b_battery
-                name: Spare Room Sensor
-              - entity: sensor.temperature_humidity_sensor_727f_battery
-                name: Laundry Sensor
-              - entity: sensor.kitchen_sensor_battery
-                name: Kitchen Sensor
-              - entity: sensor.living_room_sensor_battery
-                name: Living Room Sensor
-              - entity: sensor.basement_sensor_battery
-                name: Office Sensor
-              - entity: sensor.tv_room_occupancy_battery
-                name: TV Room Sensor
-              - entity: sensor.front_door_lock_battery_service
-                name: Front Door Lock
-              - entity: sensor.garage_door_lock_battery_service
-                name: Garage Door Lock
-              - entity: sensor.apc0_battery_charge
-                name: APC UPS 0
-              - entity: sensor.apc1_battery_charge
-                name: APC UPS 1
-            show_header_toggle: false
-            state_color: true
-    cards: []
   - badges: []
     theme: Glass
     cards:
@@ -1379,14 +1324,6 @@ views:
             card:
               type: media-control
               entity: media_player.plex_plex_for_roku_tv_roomtv
-          - type: conditional
-            conditions:
-              - condition: state
-                entity: media_player.tv_room_tv
-                state: playing
-            card:
-              type: media-control
-              entity: media_player.tv_room_tv
           - type: media-control
             entity: media_player.bedroomtv
           - type: conditional
@@ -1552,6 +1489,86 @@ views:
             - entity: binary_sensor.volvo_xc40_brake_fluid
             - entity: binary_sensor.volvo_xc40_coolant_level
             - entity: binary_sensor.volvo_xc40_washer_fluid
+          state_color: true
+    type: masonry
+  - title: RAM 1500
+    theme: Glass
+    path: ram-1500
+    icon: mdi:truck-flatbed
+    badges: []
+    cards:
+      - type: picture-elements
+        image: /api/image/serve/44581c8762f5a3b8b1fb66d07c5309c7/512x512
+        elements: []
+      - type: entities
+        title: Tire Pressures
+        entities:
+          - entity: sensor.ram_ram_front_left_tire_pressure
+            name: Front Left
+            icon: mdi:tire
+          - entity: sensor.ram_ram_front_right_tire_pressure
+            name: Front Right
+            icon: mdi:tire
+          - entity: sensor.ram_ram_rear_left_tire_pressure
+            name: Rear Left
+            icon: mdi:tire
+          - entity: sensor.ram_ram_rear_right_tire_pressure
+            name: Rear Right
+            icon: mdi:tire
+      - type: entities
+        title: Vehicle Status
+        entities:
+          - entity: sensor.ram_ram_fuel_remaining
+            name: Fuel
+            icon: mdi:fuel
+          - entity: sensor.ram_ram_driving_range
+            name: Driving Range
+            icon: mdi:road-variant
+          - entity: sensor.ram_ram_odometer
+            name: Odometer
+            icon: mdi:counter
+          - entity: sensor.ram_ram_oil_level
+            name: Oil Level
+            icon: mdi:oil
+          - entity: sensor.ram_ram_12v_battery
+            name: 12V Battery
+            icon: mdi:car-battery
+          - entity: sensor.ram_ram_last_info_update_at
+            name: Last Updated
+            icon: mdi:update
+      - type: conditional
+        conditions:
+          - condition: or
+            conditions:
+              - condition: state
+                entity: binary_sensor.ram_ram_low_fuel
+                state: 'on'
+              - condition: state
+                entity: binary_sensor.ram_ram_tire_pressure_front_left_warning
+                state: 'on'
+              - condition: state
+                entity: binary_sensor.ram_ram_tire_pressure_front_right_warning
+                state: 'on'
+              - condition: state
+                entity: binary_sensor.ram_ram_tire_pressure_rear_left_warning
+                state: 'on'
+              - condition: state
+                entity: binary_sensor.ram_ram_tire_pressure_rear_right_warning
+                state: 'on'
+        card:
+          type: entities
+          title: Warnings
+          entities:
+            - entity: binary_sensor.ram_ram_low_fuel
+              name: Low Fuel
+            - entity: binary_sensor.ram_ram_tire_pressure_front_left_warning
+              name: Front Left Tire
+            - entity: binary_sensor.ram_ram_tire_pressure_front_right_warning
+              name: Front Right Tire
+            - entity: binary_sensor.ram_ram_tire_pressure_rear_left_warning
+              name: Rear Left Tire
+            - entity: binary_sensor.ram_ram_tire_pressure_rear_right_warning
+              name: Rear Right Tire
           state_color: true
     type: masonry
   - icon: mdi:cctv
