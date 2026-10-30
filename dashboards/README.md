@@ -54,6 +54,23 @@ change it there, refresh this copy:
    (one line, same indentation as `path:`).
 4. Commit/push, then Refresh the Home v2 dashboard.
 
+## Getting the new buttons on your existing dashboard
+
+`button_card_templates` belong to a dashboard, not to a theme. Selecting Glass
+in your profile restyles everything the theme controls (surfaces, colours,
+spacing) but leaves the old quick-action buttons alone, because their styling
+is written in the dashboard's own templates.
+
+To match Home v2:
+
+1. Open your dashboard > **Edit** > three dots > **Raw configuration editor**.
+2. Replace the `button_card_templates:` block at the very bottom with the one
+   at the end of `dashboards/home.yaml`.
+3. Save. No restart, no theme reload needed.
+
+The block uses literal colour fallbacks (`var(--x, #hex)`) so it still looks
+right if you switch to a theme that does not define the Glass variables.
+
 ## Rollback
 
 Delete `dashboards/home.yaml`, remove the `lovelace:` block from
