@@ -80,11 +80,9 @@ Glass:
   # {{{ Stateful buttons (custom:button-card quick actions)
   # A solid amber slab behind white text was unreadable, so "on"/"locked"
   # is a tinted surface with a coloured icon and normal light text. "Alert"
-  # is the same treatment in red. Change these four values to retune it.
+  # is the same treatment in red. Change these two values to retune it.
   state-active-card-background: "rgba(245, 201, 123, 0.14)"
-  state-active-card-border: "rgba(245, 201, 123, 0.45)"
   state-alert-card-background: "rgba(242, 135, 155, 0.16)"
-  state-alert-card-border: "rgba(242, 135, 155, 0.5)"
   # }}}
   # {{{ Controls
   paper-slider-knob-color: "#8fb4ff"

@@ -1596,7 +1596,6 @@ views:
         entity: alarm_control_panel.alarmo
 button_card_templates:
   light_button:
-    color_type: card
     size: 50px
     show_state: true
     styles:
@@ -1614,7 +1613,6 @@ button_card_templates:
         styles:
           card:
             - background-color: var(--state-active-card-background)
-            - border-color: var(--state-active-card-border)
           icon:
             - color: var(--state-icon-active-color)
           state:
@@ -1623,6 +1621,8 @@ button_card_templates:
         styles:
           card:
             - background-color: var(--paper-card-background-color)
+          icon:
+            - color: var(--paper-item-icon-color)
   lock_button:
     template: light_button
     state:
@@ -1631,7 +1631,6 @@ button_card_templates:
         styles:
           card:
             - background-color: var(--state-active-card-background)
-            - border-color: var(--state-active-card-border)
           icon:
             - color: var(--state-icon-active-color)
           state:
@@ -1641,13 +1640,11 @@ button_card_templates:
         styles:
           card:
             - background-color: var(--state-alert-card-background)
-            - border-color: var(--state-alert-card-border)
           icon:
             - color: var(--error-color)
           state:
             - color: var(--error-color)
   nav_button:
-    color_type: card
     size: 50px
     styles:
       card:
@@ -1656,6 +1653,7 @@ button_card_templates:
         - background-color: var(--paper-card-background-color)
       name:
         - font-size: 14px
+        - color: var(--primary-text-color)
   section_header:
     color_type: label-card
     styles:
