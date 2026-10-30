@@ -174,66 +174,58 @@ views:
     icon: mdi:lightbulb
     badges: []
     cards:
-
-      # Top row: Floor buttons
-      - type: horizontal-stack
-        cards:
-          - type: button
-            name: Outdoor
-            icon: mdi:weather-sunny
-            entity: light.outdoor_lights
-            tap_action:
-              action: toggle
-              entity: light.outdoor_lights
-            hold_action:
-              action: more-info
-              entity: light.outdoor_lights
-            show_state: true
-            state_color: true
-
-          - type: button
-            name: Main Floor
-            icon: mdi:floor-plan
-            entity: light.main_floor_lights
-            tap_action:
-              action: toggle
-              entity: light.main_floor_lights
-            hold_action:
-              action: more-info
-              entity: light.main_floor_lights
-            show_state: true
-            state_color: true
-
-          - type: button
-            name: Second Floor
-            icon: mdi:floor-plan
-            entity: light.second_floor_lights
-            tap_action:
-              action: toggle
-              entity: light.second_floor_lights
-            hold_action:
-              action: more-info
-              entity: light.second_floor_lights
-            show_state: true
-            state_color: true
-
-          - type: button
-            name: Basement
-            icon: mdi:floor-plan
-            entity: light.basement_lights
-            tap_action:
-              action: toggle
-              entity: light.basement_lights
-            hold_action:
-              action: more-info
-              entity: light.basement_lights
-            show_state: true
-            state_color: true
-
-      # Room buttons below in rows
       - type: vertical-stack
         cards:
-
+          - type: horizontal-stack
+            cards:
+              - type: button
+                name: Outdoor
+                icon: mdi:weather-sunny
+                entity: light.outdoor_lights
+                tap_action:
+                  action: toggle
+                  entity: light.outdoor_lights
+                hold_action:
+                  action: more-info
+                  entity: light.outdoor_lights
+                show_state: true
+                state_color: true
+              - type: button
+                name: Main Floor
+                icon: mdi:floor-plan
+                entity: light.main_floor_lights
+                tap_action:
+                  action: toggle
+                  entity: light.main_floor_lights
+                hold_action:
+                  action: more-info
+                  entity: light.main_floor_lights
+                show_state: true
+                state_color: true
+              - type: button
+                name: Second Floor
+                icon: mdi:floor-plan
+                entity: light.second_floor_lights
+                tap_action:
+                  action: toggle
+                  entity: light.second_floor_lights
+                hold_action:
+                  action: more-info
+                  entity: light.second_floor_lights
+                show_state: true
+                state_color: true
+              - type: button
+                name: Basement
+                icon: mdi:floor-plan
+                entity: light.basement_lights
+                tap_action:
+                  action: toggle
+                  entity: light.basement_lights
+                hold_action:
+                  action: more-info
+                  entity: light.basement_lights
+                show_state: true
+                state_color: true
           - type: horizontal-stack
             cards:
               - type: button
@@ -248,7 +240,6 @@ views:
                   entity: light.bathroom_lights
                 show_state: true
                 state_color: true
-
               - type: button
                 name: Bedroom
                 icon: mdi:bed
@@ -261,7 +252,6 @@ views:
                   entity: light.bedroom_lights
                 show_state: true
                 state_color: true
-
               - type: button
                 name: Dining Room
                 icon: mdi:silverware-fork-knife
@@ -274,7 +264,6 @@ views:
                   entity: light.dining_room_lights
                 show_state: true
                 state_color: true
-
           - type: horizontal-stack
             cards:
               - type: button
@@ -289,7 +278,6 @@ views:
                   entity: light.garage_lights
                 show_state: true
                 state_color: true
-
               - type: button
                 name: Hallways
                 icon: mdi:floor-plan
@@ -302,7 +290,6 @@ views:
                   entity: light.hallway_lights
                 show_state: true
                 state_color: true
-
               - type: button
                 name: Kitchen
                 icon: mdi:chef-hat
@@ -315,7 +302,6 @@ views:
                   entity: light.kitchen_lights
                 show_state: true
                 state_color: true
-
           - type: horizontal-stack
             cards:
               - type: button
@@ -330,7 +316,6 @@ views:
                   entity: light.laundry_room_lights
                 show_state: true
                 state_color: true
-
               - type: button
                 name: Living Room
                 icon: mdi:sofa
@@ -343,7 +328,6 @@ views:
                   entity: light.livingroom_lights
                 show_state: true
                 state_color: true
-
               - type: button
                 name: Main Bathroom
                 icon: mdi:shower-head
@@ -356,7 +340,6 @@ views:
                   entity: light.main_bath_lights
                 show_state: true
                 state_color: true
-
           - type: horizontal-stack
             cards:
               - type: button
@@ -371,17 +354,28 @@ views:
                   entity: light.office_lights
                 show_state: true
                 state_color: true
-
               - type: button
-                name: Spare Room
-                icon: mdi:bed-empty
-                entity: light.spare_room_lights
+                name: TV Room
+                icon: mdi:television-classic
+                entity: light.tv_room_lights
                 tap_action:
                   action: toggle
-                  entity: light.spare_room_lights
+                  entity: light.tv_room_lights
                 hold_action:
                   action: more-info
-                  entity: light.spare_room_lights
+                  entity: light.tv_room_lights
+                show_state: true
+                state_color: true
+              - type: button
+                name: Gail Office
+                icon: mdi:desk
+                entity: light.gail_office_lights
+                tap_action:
+                  action: toggle
+                  entity: light.gail_office_lights
+                hold_action:
+                  action: more-info
+                  entity: light.gail_office_lights
                 show_state: true
                 state_color: true
   - title: Robots
