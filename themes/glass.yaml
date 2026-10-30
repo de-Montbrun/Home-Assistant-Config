@@ -1,7 +1,6 @@
 ---
-# Dark, translucent "glass" theme used by dashboards/home.yaml.
-# Select it per-dashboard (the dashboard sets `theme: Glass` on each view),
-# or globally from your user profile.
+# Dark, translucent "glass" theme for the main dashboard.
+# Applies per-view with `theme: Glass`, or globally from User profile > Appearance.
 Glass:
   # {{{ Palette
   primary-color: "#7dd3fc"
