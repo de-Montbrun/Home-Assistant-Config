@@ -18,6 +18,12 @@ URL: `/home-v2/dashboard`, `/home-v2/lights`, `/home-v2/robots`, ...
 Only intentional deviation from the source dashboard: the Security quick-action
 button navigates to `/home-v2/security` instead of `/lovelace/security`.
 
+> **Themes are set per view, not per dashboard.** A `theme:` key at the top of a
+> dashboard config (next to `views:`) is silently ignored by Home Assistant.
+> It has to go inside each view, as a sibling of `path:`/`cards:`. The only
+> dashboard-wide alternative is the per-user theme in
+> **User profile > Appearance > Theme**.
+
 ## Install / test
 
 1. `git pull`
