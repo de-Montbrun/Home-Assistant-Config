@@ -225,22 +225,13 @@
     - condition: numeric_state
       entity_id: zone.home
       below: 1
-    # Fail safe: only conclude "away" when the tracker is actually reporting.
-    # An unavailable tracker or an unknown distance counts as "maybe home"
-    # and keeps the heat on, instead of dropping it on a phantom away-state.
     - condition: template
-      value_template: >-
-        {% set ns = namespace(all_away=true) %}
-        {% for who in ['gail', 'gervais'] %}
-          {% set dist = states('sensor.home_' ~ who ~ '_distance') %}
-          {% if is_state('person.' ~ who, 'home')
-                or is_state('sensor.home_' ~ who ~ '_direction_of_travel', 'towards')
-                or not (dist | is_number)
-                or (dist | float) <= 3000 %}
-            {% set ns.all_away = false %}
-          {% endif %}
-        {% endfor %}
-        {{ ns.all_away }}
+      value_template: "{% set ns = namespace(all_away=true) %} {% for who in ['gail',
+        'gervais'] %}\n  {% set dist = states('sensor.home_' ~ who ~ '_distance')
+        %}\n  {% if is_state('person.' ~ who, 'home')\n        or is_state('sensor.home_'
+        ~ who ~ '_direction_of_travel', 'towards')\n        or not (dist | is_number)\n
+        \       or (dist | float) <= 3000 %}\n    {% set ns.all_away = false %}\n
+        \ {% endif %}\n{% endfor %} {{ ns.all_away }}"
     - condition: not
       conditions:
       - condition: state
@@ -273,11 +264,10 @@
     - condition: state
       entity_id: climate.mysa_112908_thermostat
       state: heat
-    # Only heat up when actually heading home, not when driving past at 1.9 km
     - condition: template
-      value_template: >-
-        {% set who = 'gail' if 'gail' in trigger.entity_id else 'gervais' %}
-        {{ is_state('sensor.home_' ~ who ~ '_direction_of_travel', 'towards') }}
+      value_template: '{% set who = ''gail'' if ''gail'' in trigger.entity_id else
+        ''gervais'' %} {{ is_state(''sensor.home_'' ~ who ~ ''_direction_of_travel'',
+        ''towards'') }}'
     - condition: not
       conditions:
       - condition: state
@@ -307,31 +297,24 @@
     to: towards
   conditions:
   - condition: template
-    value_template: >-
-      {% set who = 'gail' if 'gail' in trigger.entity_id else 'gervais' %}
-      {% set dist = states('sensor.home_' ~ who ~ '_distance') %}
-      {{ is_state('sensor.home_' ~ who ~ '_direction_of_travel', 'towards')
-         and dist | is_number
-         and (dist | float) > 500
-         and (dist | float) < 5000
-         and not is_state('person.' ~ who, 'home') }}
-  # Cooldown so GPS jitter across the 5 km line cannot re-notify.
-  # Uses `this` rather than the automation's entity_id, so renaming the
-  # alias cannot silently break it.
+    value_template: "{% set who = 'gail' if 'gail' in trigger.entity_id else 'gervais'
+      %} {% set dist = states('sensor.home_' ~ who ~ '_distance') %} {{ is_state('sensor.home_'
+      ~ who ~ '_direction_of_travel', 'towards')\n   and dist | is_number\n   and
+      (dist | float) > 500\n   and (dist | float) < 5000\n   and not is_state('person.'
+      ~ who, 'home') }}"
   - condition: template
-    value_template: >-
-      {{ as_timestamp(now(), 0)
-         - as_timestamp(this.attributes.last_triggered, 0) > 1800 }}
+    value_template: "{{ as_timestamp(now(), 0)\n   - as_timestamp(this.attributes.last_triggered,
+      0) > 1800 }}"
   actions:
   - variables:
-      name: "{{ 'Gail' if 'gail' in trigger.entity_id else 'Gervais' }}"
+      name: '{{ ''Gail'' if ''gail'' in trigger.entity_id else ''Gervais'' }}'
   - action: notify.zulip
     data:
       title: Family Location
-      message: >-
-        {% set who = 'gail' if 'gail' in trigger.entity_id else 'gervais' %}
-        {% set dist = states('sensor.home_' ~ who ~ '_distance') | float(0) %}
-        :house_with_garden: {{ name }} is {{ (dist / 1000) | round(1) }} km out and heading home.
+      message: '{% set who = ''gail'' if ''gail'' in trigger.entity_id else ''gervais''
+        %} {% set dist = states(''sensor.home_'' ~ who ~ ''_distance'') | float(0)
+        %} :house: {{ name }} is {{ (dist / 1000) | round(1) }} km out and heading
+        home.'
   mode: single
   initial_state: true
 - id: heating_office_heater_off
