@@ -1733,7 +1733,7 @@
     - condition: numeric_state
       entity_id: sensor.hue_outdoor_motion_sensor_1_illuminance
       attribute: light_level
-      below: 10000
+      below: 12000
   actions:
   - action: light.turn_on
     metadata: {}
@@ -2430,3 +2430,49 @@
     data:
       effect: Uranus
   mode: single
+- id: '1793544397472'
+  alias: Turn off garage room tv when idle
+  description: ''
+  triggers:
+  - minutes: /20
+    seconds: 0
+    trigger: time_pattern
+  conditions:
+  - condition: and
+    conditions:
+    - condition: template
+      value_template: '{{ states("media_player.garage_garagetv") != "standby" }}'
+    - condition: template
+      value_template: '{{ states("media_player.garage_garagetv") != "unavailable"
+        }}'
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.hue_outdoor_motion_sensor_1_motion
+        state:
+        - 'off'
+        for:
+          minutes: 15
+      - condition: state
+        entity_id: media_player.garage_garagetv
+        state: idle
+        for:
+          minutes: 15
+      - condition: state
+        entity_id: media_player.garage_garagetv
+        state: home
+        for:
+          minutes: 15
+      - condition: state
+        entity_id: media_player.garage_garagetv
+        state: 'on'
+        for:
+          minutes: 15
+  actions:
+  - data:
+      command: power
+    target:
+      entity_id: remote.garage_garagetv
+    action: remote.send_command
+  mode: single
+  initial_state: true

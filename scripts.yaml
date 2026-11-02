@@ -1,29 +1,34 @@
 learn_garage:
   sequence:
-  - service: remote.learn_command
-    data:
+  - data:
       command:
       - power
-      - timer
+      - flame_light
       - heat_lvl
-      device: kitchen_fireplace
+      - temp_down
+      - temp_up
+      - palette
+      - brightness
+      - timer
+      device: livingroom_fireplace
       command_type: ir
     target:
       device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
-  alias: eRemote Dining Room Learn Script
+    action: remote.learn_command
+  alias: eRemote Living Room Learn Script
   mode: single
   icon: mdi:remote
 eremote_garage_forget_script:
-  alias: eRemote Dining Room Forget Script
+  alias: eRemote Living Room Forget Script
   sequence:
-  - service: remote.delete_command
-    data:
-      device: fan
+  - data:
+      device: livingroom_fireplace
       command:
-      - med
+      - power
+      - heat_lvl
+      - timer
     target:
       device_id: 3323fa71fdf8cef9787ac53a2a2b12f3
+    action: remote.delete_command
   mode: single
   icon: mdi:remote
-
-
